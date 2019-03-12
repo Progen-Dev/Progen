@@ -36,7 +36,7 @@ public class Stats extends CommandHandler {
 
             MessageEmbed msg = new EmbedBuilder()
                     .setTitle("Statistics - " + fortniteUser.getUsername())
-                    .setDescription("These are the statistics of the user " + fortniteUser.getUsername() + ". Are you good?")
+                    .setDescription("These are the statistics of the user " + fortniteUser.getUsername() + ".")
                     .addField("Overall Score", String.valueOf(stats.getOverallScore()), false)
                     .addField("Overall Kills", String.valueOf(stats.getOverallKills()), false)
                     .addField("Overall First Place", String.valueOf(stats.getOverallPlaceTop1()), false)
