@@ -1,5 +1,7 @@
 package de.progen_bot.command;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -120,6 +122,11 @@ public class CommandManager extends ListenerAdapter {
 		 */
 		public String[] getArgs() {
 			return args;
+		}
+
+		public ArrayList<String> getArgsAsList() {
+
+			return new ArrayList<>(Arrays.asList(args));
 		}
 	}
 }

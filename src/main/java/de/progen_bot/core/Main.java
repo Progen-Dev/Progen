@@ -2,6 +2,7 @@ package de.progen_bot.core;
 
 import javax.security.auth.login.LoginException;
 
+import de.mtorials.fortnite.core.Fortnite;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
 import de.progen_bot.commands.music.Music;
@@ -24,6 +25,8 @@ public class Main {
 
 	private static MySQL sql;
 
+	private static Fortnite fortnite;
+
 	private static CommandManager commandManager;
 
 	/**
@@ -31,6 +34,8 @@ public class Main {
 	 */
 	public Main() {
 		Settings.loadSettings();
+
+		fortnite = new Fortnite();
 
 		MySQL.connect();
 
@@ -100,6 +105,8 @@ public class Main {
 	public static MySQL getSQL() {
 		return sql;
 	}
+
+	public static Fortnite getFortnite() { return fortnite; }
 	
 	public static CommandManager getCommandManager() {
 		return commandManager;
