@@ -694,7 +694,7 @@ public class MySQL {
 
 			PreparedStatement ps = connection.prepareStatement(
 
-					"INSERT INTO `viergame (messageid,opponentid,challengerid,heigh,width,channelid) VALUES(?,?,?,?,?,?)");
+					"INSERT INTO viergame (messageid,opponentid,challengerid,heigh,width,channelid) VALUES(?,?,?,?,?,?)");
 
 			ps.setString(1, game.getMessageId());
 
