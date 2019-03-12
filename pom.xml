@@ -169,7 +169,7 @@
 
                             <classpathPrefix>lib/</classpathPrefix>
 
-                            <mainClass>core.Main</mainClass>
+                            <mainClass>de.progen_bot.core.Main</mainClass>
 
                         </manifest>
 
