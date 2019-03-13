@@ -15,14 +15,8 @@ import java.io.IOException;
 
 public class Stats extends CommandHandler {
 
-    /**
-     * Instantiates a new de.progen_bot.command handler.
-     *
-     * @param invokeString the invoke string
-     * @param commandUsage the de.progen_bot.command usage
-     * @param description  the description
-     */
-    public Stats(String invokeString, String commandUsage, String description) {
+
+    public Stats() {
         super("stats", "stats <fortnite player name>", "A simple command to get stats and the player data of fortnite players.");
     }
 

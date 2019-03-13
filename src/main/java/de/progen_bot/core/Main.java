@@ -2,6 +2,7 @@ package de.progen_bot.core;
 
 import javax.security.auth.login.LoginException;
 
+import de.mtorials.commands.Stats;
 import de.mtorials.fortnite.core.Fortnite;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
@@ -59,7 +60,7 @@ public class Main {
 		commandManager.setupCommandHandlers(new GuildInfo());
 		commandManager.setupCommandHandlers(new Ping());
 		commandManager.setupCommandHandlers(new Say());
-		commandManager.setupCommandHandlers(new UserInfo());
+		commandManager.setupCommandHandlers(new CommandUserInfo());
 		commandManager.setupCommandHandlers(new Warn());
 		commandManager.setupCommandHandlers(new Mute());
 		commandManager.setupCommandHandlers(new UnMute());
@@ -73,6 +74,7 @@ public class Main {
 		commandManager.setupCommandHandlers(new XP());
 		commandManager.setupCommandHandlers(new XPNotify());
 		commandManager.setupCommandHandlers(new Music());
+		commandManager.setupCommandHandlers(new Stats());
 	}
 
 	/**
