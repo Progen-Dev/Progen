@@ -1,6 +1,8 @@
 package de.mtorials.webinterface.httpapi;
 
-import java.util.HashMap;
+import net.dv8tion.jda.core.entities.Member;
+
+import java.util.Map;
 
 public abstract class APICommand {
 
@@ -10,7 +12,7 @@ public abstract class APICommand {
         this.invoke = invoke;
     }
 
-    public abstract void execute(HashMap<String, String> params);
+    public abstract void execute(Map<String, String> params, Member member);
 
     public String getInvoke() {
         return invoke;

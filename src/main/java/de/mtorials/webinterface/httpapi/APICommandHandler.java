@@ -5,7 +5,6 @@ import com.sun.net.httpserver.HttpHandler;
 import de.mtorials.webinterface.exceptions.APICommandNotFoundException;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -15,23 +14,27 @@ import java.util.Map;
 public class APICommandHandler implements HttpHandler {
 
     private ArrayList<APICommand> registeredCommands;
+    private APITokenManager tokenManager;
 
-    public APICommandHandler(ArrayList<APICommand> commands) {
+    public APICommandHandler(ArrayList<APICommand> commands, APITokenManager tokenManager) {
 
         this.registeredCommands = commands;
+        this.tokenManager = tokenManager;
     }
 
     public void handle(HttpExchange exchange) throws IOException {
 
-        Map<String, String> params = parseQueryString(exchange.getRequestURI().toString().split("\\?", 2)[1]);
-        String currentInvoke = exchange.getRequestURI().toString().split("/")[2];
+        Map<String, String> params = parseQueryString(exchange.getRequestURI().toString().split("\\?", 2)[2]);
+        String currentInvoke = exchange.getRequestURI().toString().split("/")[1];
+
+        String response;
 
         boolean commandNotFound = true;
         for (APICommand command : registeredCommands) {
 
             if (currentInvoke.equals(command.getInvoke())) {
 
-                command.execute();
+                command.execute(params, tokenManager.getMember(params.get("token")));
                 commandNotFound = false;
             }
         }
@@ -60,5 +63,4 @@ public class APICommandHandler implements HttpHandler {
         }
         return result;
     }
-
 }
