@@ -1,4 +1,4 @@
 package de.mtorials.webinterface.exceptions;
 
-public class APIUserNotRegistered extends RuntimeException {
+public class APIUserNotRegistered extends APIException {
 }
