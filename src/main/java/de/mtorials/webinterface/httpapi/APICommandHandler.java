@@ -40,7 +40,6 @@ public class APICommandHandler implements HttpHandler {
         }
 
         if (commandNotFound) throw new APICommandNotFoundException();
-
     }
 
     private static Map<String, String> parseQueryString(String qs) {

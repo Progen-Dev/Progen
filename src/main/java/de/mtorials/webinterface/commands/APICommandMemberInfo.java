@@ -6,16 +6,15 @@ import net.dv8tion.jda.core.entities.Member;
 
 import java.util.Map;
 
-public class GetUserInfo extends APICommand {
+public class APICommandMemberInfo extends APICommand {
 
-    public GetUserInfo() {
+    public APICommandMemberInfo() {
         super("getUserInfo");
     }
 
     @Override
-    public void execute(Map<String, String> params, Member member) {
+    public Object execute(Map<String, String> params, Member member) {
 
-        MemberInfo info = new MemberInfo(member);
-
+        return new MemberInfo(member);
     }
 }

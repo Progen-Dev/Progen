@@ -1,7 +1,6 @@
 package de.mtorials.webinterface.httpapi;
 
 import de.mtorials.webinterface.exceptions.APIUserNotRegistered;
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Member;
 
 import java.nio.charset.Charset;
@@ -10,13 +9,7 @@ import java.util.Random;
 
 public class APITokenManager {
 
-    private JDA jda;
     private HashMap<String, Member> membersByToken = new HashMap<>();
-
-    public APITokenManager(JDA jda) {
-
-        this.jda = jda;
-    }
 
     public String register(Member member) {
 

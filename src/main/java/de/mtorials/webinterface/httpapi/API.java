@@ -1,9 +1,7 @@
 package de.mtorials.webinterface.httpapi;
 
-
 import com.sun.net.httpserver.HttpServer;
-import de.mtorials.webinterface.commands.GetUserInfo;
-import de.progen_bot.core.Main;
+import de.mtorials.webinterface.commands.APICommandMemberInfo;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -15,12 +13,12 @@ public class API {
 
     API(int port) throws IOException {
 
-        tokenManager = new APITokenManager(Main.getJda());
+        tokenManager = new APITokenManager();
 
         this.httpServer = HttpServer.create(new InetSocketAddress(port), 0);
         httpServer.createContext("/api", new APICommandHandlerBuilder()
                 .setTokenManager(tokenManager)
-                .addCommand(new GetUserInfo())
+                .addCommand(new APICommandMemberInfo())
                 .build()
         );
         httpServer.setExecutor(null);
