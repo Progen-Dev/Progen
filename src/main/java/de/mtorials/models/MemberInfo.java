@@ -1,12 +1,19 @@
 package de.mtorials.models;
 
+import de.mtorials.exceptions.UserHasNoRoleExceotion;
+import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.Role;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberInfo {
 
     private Member member;
+
 
     public MemberInfo(Member member) {
 
@@ -49,5 +56,20 @@ public class MemberInfo {
     public String getOnlineStatus() {
 
         return member.getOnlineStatus().name();
+    }
+
+    public List<Role> getRoles() {
+
+        return member.getRoles();
+    }
+
+    public ArrayList<String> getRolesAsMention() {
+
+        if (member.getRoles().size() == 0) throw new UserHasNoRoleExceotion();
+        ArrayList<String> s = new ArrayList<>();
+        for (Role r : member.getRoles()) {
+            s.add(r.getAsMention());
+        }
+        return s;
     }
 }
