@@ -10,9 +10,9 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import de.progen_bot.util.Settings;
 
-public class Help extends CommandHandler {
+public class CommandHelp extends CommandHandler {
 
-	public Help() {
+	public CommandHelp() {
 		super("help", "help", "get some help");
 		// TODO Auto-generated constructor stub
 	}

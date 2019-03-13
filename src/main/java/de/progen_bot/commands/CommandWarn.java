@@ -10,9 +10,9 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Warn extends CommandHandler {
+public class CommandWarn extends CommandHandler {
 
-	public Warn() {
+	public CommandWarn() {
 		super("warn","warn <user> <reason>","warned a user");
 	}
 

@@ -8,9 +8,9 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 
-public class AddUserToPrivateVoiceChannel extends CommandHandler {
+public class CommandAddUserToPrivateVoiceChannel extends CommandHandler {
 
-    public AddUserToPrivateVoiceChannel() {
+    public CommandAddUserToPrivateVoiceChannel() {
         super("AddUserToPrivateVoiceChannel","","add a user to your private channel");
         //TODO add usage
     }

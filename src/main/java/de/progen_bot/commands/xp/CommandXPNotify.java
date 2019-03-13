@@ -11,12 +11,12 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 /**
  * The Class XPNotify.
  */
-public class XPNotify extends CommandHandler {
+public class CommandXPNotify extends CommandHandler {
 
 	/**
 	 * Instantiates a new XP notify.
 	 */
-	public XPNotify() {
+	public CommandXPNotify() {
 		super("xpnotify","xpnotify","disable or enable the lvl up notification");
 	}
 

@@ -22,8 +22,8 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Music extends CommandHandler {
-    public Music() {super("music" , "pb!music play [LINK], pb!music stop" , "music");
+public class CommandMusic extends CommandHandler {
+    public CommandMusic() {super("music" , "pb!music play [LINK], pb!music stop" , "music");
             AudioSourceManagers.registerRemoteSources(MANAGER);}
 
 

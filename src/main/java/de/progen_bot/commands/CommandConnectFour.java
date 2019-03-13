@@ -11,8 +11,8 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import de.progen_bot.util.Settings;
 
-public class ConnectFour extends CommandHandler {
-	public ConnectFour() {
+public class CommandConnectFour extends CommandHandler {
+	public CommandConnectFour() {
 		super("cf", "cf", "cf");
 	}
 

@@ -13,9 +13,9 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class GuildInfo extends CommandHandler {
+public class CommandGuildInfo extends CommandHandler {
 
-	public GuildInfo() {
+	public CommandGuildInfo() {
 		super("guildinfo","guildinfo","get the guildinfo");
 	}
 

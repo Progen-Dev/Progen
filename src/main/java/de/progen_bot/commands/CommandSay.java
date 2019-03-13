@@ -4,9 +4,9 @@ import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Say extends CommandHandler {
+public class CommandSay extends CommandHandler {
 
-	public Say() {
+	public CommandSay() {
 		super("say","say <text>","let the bot write a message");
 	}
 

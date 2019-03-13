@@ -7,9 +7,9 @@ import de.progen_bot.command.CommandManager.ParsedCommandString;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Ping extends CommandHandler {
+public class CommandPing extends CommandHandler {
 
-	public Ping() {
+	public CommandPing() {
 		super("ping","ping","get the bot ping");
 	}
 

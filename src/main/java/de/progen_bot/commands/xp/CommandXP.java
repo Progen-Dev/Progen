@@ -12,12 +12,12 @@ import de.progen_bot.util.Level;
 /**
  * The Class XP.
  */
-public class XP extends CommandHandler {
+public class CommandXP extends CommandHandler {
 
 	/**
 	 * Instantiates a new xp.
 	 */
-	public XP() {
+	public CommandXP() {
 		super("xp", "xp <username>", "Get the xp");
 	}
 

@@ -10,8 +10,8 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 
-public class UnMute extends CommandHandler {
-    public UnMute(){
+public class CommandUnMute extends CommandHandler {
+    public CommandUnMute(){
         super("unmute","unmute <user>","unmute a muted user");
     }
     @Override

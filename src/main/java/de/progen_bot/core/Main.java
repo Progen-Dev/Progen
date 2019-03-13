@@ -1,8 +1,6 @@
 package de.progen_bot.core;
 
 import javax.security.auth.login.LoginException;
-
-import de.mtorials.fortnite.core.Fortnite;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
 import de.progen_bot.commands.music.Music;
@@ -10,6 +8,7 @@ import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
 import de.progen_bot.db.MySQL;
+import de.progen_bot.game.FortniteStats;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -25,7 +24,7 @@ public class Main {
 
 	private static MySQL sql;
 
-	private static Fortnite fortnite;
+	private static FortniteStats fortnite;
 
 	private static CommandManager commandManager;
 
@@ -35,7 +34,7 @@ public class Main {
 	public Main() {
 		Settings.loadSettings();
 
-		fortnite = new Fortnite();
+		fortnite = new FortniteStats();
 
 		MySQL.connect();
 
@@ -85,9 +84,7 @@ public class Main {
 
 		try {
 			jda = builder.buildBlocking();
-		} catch (LoginException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (LoginException | InterruptedException e) {
 			e.printStackTrace();
 		}
 
@@ -106,7 +103,7 @@ public class Main {
 		return sql;
 	}
 
-	public static Fortnite getFortnite() { return fortnite; }
+	public static FortniteStats getFortnite() { return fortnite; }
 	
 	public static CommandManager getCommandManager() {
 		return commandManager;

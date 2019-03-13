@@ -10,8 +10,8 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.awt.*;
 import java.util.List;
 
-public class XPrank extends CommandHandler {
-    public XPrank() {
+public class CommandXPrank extends CommandHandler {
+    public CommandXPrank() {
         super("xprank","xprank","xprank");
     }
 

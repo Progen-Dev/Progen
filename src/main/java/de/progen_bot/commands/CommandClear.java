@@ -13,9 +13,9 @@ import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageHistory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Clear extends CommandHandler {
+public class CommandClear extends CommandHandler {
 
-	public Clear() {
+	public CommandClear() {
 		super("clear","clear <anzahl>","clear some messages");
 	}
 

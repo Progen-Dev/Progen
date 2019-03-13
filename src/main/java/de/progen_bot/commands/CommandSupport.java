@@ -4,8 +4,8 @@ import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Support extends CommandHandler {
-    public Support() {
+public class CommandSupport extends CommandHandler {
+    public CommandSupport() {
         super("support","support","Join the Support Server");
     }
 
