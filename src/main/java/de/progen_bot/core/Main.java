@@ -2,7 +2,9 @@ package de.progen_bot.core;
 
 import javax.security.auth.login.LoginException;
 
+import de.mtorials.commands.Stats;
 import de.mtorials.fortnite.core.Fortnite;
+import de.mtorials.webinterface.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
 import de.progen_bot.commands.music.Music;
@@ -14,6 +16,8 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import de.progen_bot.util.Settings;
+
+import java.io.IOException;
 
 /**
  * The Class Main.
@@ -27,13 +31,18 @@ public class Main {
 
 	private static Fortnite fortnite;
 
+	private static API httpapi;
+
 	private static CommandManager commandManager;
 
 	/**
 	 * Instantiates a new main.
 	 */
-	public Main() {
+	public Main() throws IOException {
 		Settings.loadSettings();
+
+		httpapi = new API(80);
+		httpapi.start();
 
 		fortnite = new Fortnite();
 
@@ -59,7 +68,7 @@ public class Main {
 		commandManager.setupCommandHandlers(new GuildInfo());
 		commandManager.setupCommandHandlers(new Ping());
 		commandManager.setupCommandHandlers(new Say());
-		commandManager.setupCommandHandlers(new UserInfo());
+		commandManager.setupCommandHandlers(new CommandUserInfo());
 		commandManager.setupCommandHandlers(new Warn());
 		commandManager.setupCommandHandlers(new Mute());
 		commandManager.setupCommandHandlers(new UnMute());
@@ -73,6 +82,8 @@ public class Main {
 		commandManager.setupCommandHandlers(new XP());
 		commandManager.setupCommandHandlers(new XPNotify());
 		commandManager.setupCommandHandlers(new Music());
+		commandManager.setupCommandHandlers(new Stats());
+		commandManager.setupCommandHandlers(new CommandRegisterAPI());
 	}
 
 	/**
@@ -85,12 +96,9 @@ public class Main {
 
 		try {
 			jda = builder.buildBlocking();
-		} catch (LoginException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (LoginException | InterruptedException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -118,7 +126,7 @@ public class Main {
 	 * @param args
 	 *            the arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		new Main();
 	}
 }

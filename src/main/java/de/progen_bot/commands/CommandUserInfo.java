@@ -11,9 +11,9 @@ import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class UserInfo extends CommandHandler {
+public class CommandUserInfo extends CommandHandler {
 
-	public UserInfo() {
+	public CommandUserInfo() {
 		super("userinfo","userinfo <user>","get userinfos");
 	}
 
