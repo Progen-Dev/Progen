@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class APICommandHandlerBuilder {
 
-    private ArrayList<APICommand> commands;
+    private ArrayList<APICommand> commands = new ArrayList<>();
     private APITokenManager tokenManager;
 
     public APICommandHandlerBuilder addCommand(APICommand command) {

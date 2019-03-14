@@ -1,5 +1,6 @@
 package de.mtorials.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.mtorials.exceptions.UserHasNoRoleExceotion;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Role;
@@ -17,6 +18,7 @@ public class MemberInfo {
         this.member = member;
     }
 
+    @JsonIgnore
     public Member getMember() {
         return member;
     }
@@ -62,7 +64,7 @@ public class MemberInfo {
 
     public ArrayList<String> getRolesAsMention() {
 
-        if (member.getRoles().size() == 0) throw new UserHasNoRoleExceotion();
+        //if (member.getRoles().size() == 0) throw new UserHasNoRoleExceotion();
         ArrayList<String> s = new ArrayList<>();
         for (Role r : member.getRoles()) {
             s.add(r.getAsMention());

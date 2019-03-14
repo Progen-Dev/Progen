@@ -2,6 +2,7 @@ package de.mtorials.webinterface.commands;
 
 import de.mtorials.models.MemberInfo;
 import de.mtorials.webinterface.httpapi.APICommand;
+import de.mtorials.webinterface.httpapi.APIResponseObject;
 import net.dv8tion.jda.core.entities.Member;
 
 import java.util.Map;
@@ -13,8 +14,10 @@ public class APICommandMemberInfo extends APICommand {
     }
 
     @Override
-    public Object execute(Map<String, String> params, Member member) {
+    public APIResponseObject execute(Map<String, String> params, Member member) {
 
-        return new MemberInfo(member);
+        System.out.println("Command Usre info");
+
+        return new APIResponseObject(200, new MemberInfo(member));
     }
 }
