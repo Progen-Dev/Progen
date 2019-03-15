@@ -1,10 +1,15 @@
 package de.mtorials.webinterface.httpapi;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import de.mtorials.webinterface.exceptions.APICommandNotFoundException;
+import de.mtorials.webinterface.exceptions.APIException;
+import net.dv8tion.jda.core.entities.Member;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -22,24 +27,53 @@ public class APICommandHandler implements HttpHandler {
         this.tokenManager = tokenManager;
     }
 
-    public void handle(HttpExchange exchange) throws IOException {
+    public void handle(HttpExchange exchange) throws IOException{
 
-        Map<String, String> params = parseQueryString(exchange.getRequestURI().toString().split("\\?", 2)[2]);
-        String currentInvoke = exchange.getRequestURI().toString().split("/")[1];
+        System.out.println("Get Request");
 
-        String response;
+        String uri = exchange.getRequestURI().toString();
+        Map<String, String> params = parseQueryString(uri.split("\\?", 2)[1]);
+        String currentInvoke = uri.split("/")[1].split("\\?")[0];
+
+        String response = "";
+        int rCode;
+
+        try {
+
+            APIResponseObject responseObject = handleCommands(currentInvoke, params);
+            response = toJSON(responseObject.getObject());
+            rCode = responseObject.getrCode();
+
+        } catch (APIException e) {
+
+            rCode = 500;
+            response = "ERROR";
+        }
+
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+        exchange.sendResponseHeaders(rCode, response.getBytes().length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(response.getBytes());
+        os.flush();
+        os.close();
+
+    }
+
+    private APIResponseObject handleCommands(String currentInvoke, Map<String, String> params) {
 
         boolean commandNotFound = true;
+        APIResponseObject returnObject = null;
         for (APICommand command : registeredCommands) {
 
             if (currentInvoke.equals(command.getInvoke())) {
 
-                command.execute(params, tokenManager.getMember(params.get("token")));
+                Member member = tokenManager.getMember(params.get("token"));
+                returnObject = command.execute(params, member);
                 commandNotFound = false;
             }
         }
-
         if (commandNotFound) throw new APICommandNotFoundException();
+        return returnObject;
     }
 
     private static Map<String, String> parseQueryString(String qs) {
@@ -61,5 +95,17 @@ public class APICommandHandler implements HttpHandler {
             last = next + 1;
         }
         return result;
+    }
+
+    private static String toJSON(Object o) {
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(o);
+        } catch (JsonProcessingException e) {
+            System.out.println("JSON Parser exeption");
+            e.printStackTrace();
+            return "ERRORJSON";
+        }
     }
 }

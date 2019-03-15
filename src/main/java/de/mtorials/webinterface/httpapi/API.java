@@ -11,12 +11,12 @@ public class API {
     private HttpServer httpServer;
     private static APITokenManager tokenManager;
 
-    API(int port) throws IOException {
+    public API(int port) throws IOException {
 
         tokenManager = new APITokenManager();
 
         this.httpServer = HttpServer.create(new InetSocketAddress(port), 0);
-        httpServer.createContext("/api", new APICommandHandlerBuilder()
+        httpServer.createContext("/", new APICommandHandlerBuilder()
                 .setTokenManager(tokenManager)
                 .addCommand(new APICommandMemberInfo())
                 .build()

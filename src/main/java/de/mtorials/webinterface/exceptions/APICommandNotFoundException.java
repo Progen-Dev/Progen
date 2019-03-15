@@ -1,8 +1,8 @@
 package de.mtorials.webinterface.exceptions;
 
-public class APICommandNotFoundException extends RuntimeException{
+public class APICommandNotFoundException extends APIException{
 
-    APICommandNotFoundExceptionObject commandNotFoundExceptionObject = new APICommandNotFoundExceptionObject();
+    private APICommandNotFoundExceptionObject commandNotFoundExceptionObject = new APICommandNotFoundExceptionObject();
 
     @Override
     public String getMessage(){

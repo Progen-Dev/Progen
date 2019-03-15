@@ -12,7 +12,7 @@ public abstract class APICommand {
         this.invoke = invoke;
     }
 
-    public abstract Object execute(Map<String, String> params, Member member);
+    public abstract APIResponseObject execute(Map<String, String> params, Member member);
 
     public String getInvoke() {
         return invoke;
