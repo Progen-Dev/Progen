@@ -26,7 +26,8 @@ votes: <a href="https://discordbots.org/bot/495293590503817237" >
 Libery: <a href="https://discordbots.org/bot/495293590503817237" >
   <img src="https://discordbots.org/api/widget/lib/495293590503817237.svg" alt="Progen" />
 </a>
-<a href="https://discordbots.org/bot/495293590503817237" >
+
+Owner: <a href="https://discordbots.org/bot/495293590503817237" >
   <img src="https://discordbots.org/api/widget/owner/495293590503817237.svg" alt="Progen" />
 </a>
 
