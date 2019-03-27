@@ -31,6 +31,8 @@ Owner: <a href="https://discordbots.org/bot/495293590503817237" >
   <img src="https://discordbots.org/api/widget/owner/495293590503817237.svg" alt="Progen" />
 </a>
 
+Version: https://img.shields.io/github/:which(release|release-pre)/:user/:repo.svg
+
 ## Features
 1. Moderation
 2. Gaming
