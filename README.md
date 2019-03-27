@@ -1,3 +1,4 @@
+
 ## ProgenBot
 
 ## Index
@@ -25,10 +26,37 @@ votes: <a href="https://discordbots.org/bot/495293590503817237" >
 Libery: <a href="https://discordbots.org/bot/495293590503817237" >
   <img src="https://discordbots.org/api/widget/lib/495293590503817237.svg" alt="Progen" />
 </a>
-
-Owner: <a href="https://discordbots.org/bot/495293590503817237" >
+<a href="https://discordbots.org/bot/495293590503817237" >
   <img src="https://discordbots.org/api/widget/owner/495293590503817237.svg" alt="Progen" />
 </a>
+
+## Features
+1. Moderation
+2. Gaming
+3. Fun
+4. Music
+5. Overwatch
+6. Fortnite
+7. Minecraft 
+8. Leveling
+
+## Comands
+pb!help
+or use: https://www.Progen-Bot.de/Commands
+
+## Invite
+Invite Progen https://discordbots.org/bot/495293590503817237
+
+## Team
+Owner: ShowMeYourSkil#5698
+Developer: ShowMeYourSkil#5698
+Designer: Deckel#8136
+Manager: BabaGumbShrims#7600
+
+## Support and Infos
+Visit: https://progen-bot.de
+Official Support Server: https://discord.gg/xH2NMUn
+
 
 ## Features
 1. Moderation
