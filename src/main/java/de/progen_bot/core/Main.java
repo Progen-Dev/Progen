@@ -84,6 +84,7 @@ public class Main {
 		commandManager.setupCommandHandlers(new Music());
 		commandManager.setupCommandHandlers(new Stats());
 		commandManager.setupCommandHandlers(new CommandRegisterAPI());
+		commandManager.setupCommandHandlers(new WarnList());
 	}
 
 	/**
