@@ -29,6 +29,12 @@ public class Warn extends CommandHandler {
 			return;
 		}
 
+		if(parsedCommand.getArgs().length <= 1){
+			event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.red).setDescription("No reason found").build())
+					.queue();
+			return;
+		}
+
 		String reason = String.join(" ", parsedCommand.getArgs()).replace(parsedCommand.getArgs()[0] + " ", "");
 
 		int warnCount = MySQL.loadWarnCount(warned.getId());
@@ -37,7 +43,7 @@ public class Warn extends CommandHandler {
 
 		event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setTitle("warn")
 				.setDescription(
-						warned.getAsMention() + " wurde von " + event.getAuthor().getAsMention() + " verwarndt!")
+						warned.getAsMention() + " wurde von " + event.getAuthor().getAsMention() + " verwarnt!")
 				.addField("Grund:", "```" + reason + "```", false)
 				.setFooter(warned.getName() + " wurde zum " + (warnCount+1) + " mal verwarnt!", null).build())
 				.queue();
