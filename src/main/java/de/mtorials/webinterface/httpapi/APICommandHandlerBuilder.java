@@ -1,6 +1,5 @@
 package de.mtorials.webinterface.httpapi;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class APICommandHandlerBuilder {
