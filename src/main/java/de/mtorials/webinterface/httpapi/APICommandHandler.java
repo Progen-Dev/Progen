@@ -36,11 +36,13 @@ public class APICommandHandler implements HttpHandler {
         String currentInvoke = uri.split("/")[1].split("\\?")[0];
 
         String response = "";
-        int rCode = 200;
+        int rCode;
 
         try {
 
-            response = toJSON(handleCommands(currentInvoke, params).getObject());
+            APIResponseObject responseObject = handleCommands(currentInvoke, params);
+            response = toJSON(responseObject.getObject());
+            rCode = responseObject.getrCode();
 
         } catch (APIException e) {
 
