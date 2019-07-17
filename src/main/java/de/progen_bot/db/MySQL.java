@@ -69,7 +69,7 @@ public class MySQL {
 
 		generateWarnTable();
 
-		generateWarnTable();
+		generateWarnCountTable();
 
 		generatePollTable();
 
@@ -297,7 +297,7 @@ public class MySQL {
 
 			}
 
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO `warn (userid,reason) VALUES(?,?)");
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO `warn` (userid,reason) VALUES(?,?)");
 
 			ps.setString(1, username);
 
@@ -397,6 +397,29 @@ public class MySQL {
 
 		return 0;
 
+	}
+
+	public static List<String> loadWarnList(String userId) {
+		try {
+			if (connection.isClosed()) {
+				connect();
+			}
+
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM `warn` WHERE `userid` = ?");
+			ps.setString(1, userId);
+
+			ResultSet rs = ps.executeQuery();
+			List<String> warnTable = new ArrayList<>();
+
+			while (rs.next()) {
+				warnTable.add(rs.getString(3));
+			}
+
+			return warnTable;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 
@@ -808,7 +831,7 @@ public class MySQL {
 
 			PreparedStatement ps = connection.prepareStatement(
 
-					"CREATE TABLE IF NOT EXISTS warncount ( `userid` VARCHAR(50) NOT NULL, `count` INT(11) NOT NULL, "
+					"CREATE TABLE IF NOT EXISTS reportcount ( `userid` VARCHAR(50) NOT NULL, `count` INT(11) NOT NULL, "
 
 							+ "PRIMARY KEY(`userid`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8");
 
