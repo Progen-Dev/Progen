@@ -18,7 +18,5 @@ public class WarnBoard extends CommandHandler {
     }
 
     @Override
-    public String help() {
-        return null;
-    }
+    public String help() {return null;}
 }

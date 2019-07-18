@@ -1,0 +1,47 @@
+package de.progen_bot.commands.Moderator;
+
+import de.progen_bot.command.CommandHandler;
+import de.progen_bot.command.CommandManager;
+import de.progen_bot.core.PermissionCore;
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+
+import java.awt.*;
+
+public class UnMute extends CommandHandler {
+    public UnMute(){
+        super("unmute","unmute <user>","unmute a muted user");
+    }
+    @Override
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+        if (PermissionCore.check(1,event))return;
+
+        EmbedBuilder error = new EmbedBuilder().setColor(Color.RED).setTitle("Error");
+        Guild guild = event.getGuild();
+
+        if (!event.getMember().hasPermission(Permission.MESSAGE_MANAGE)) {
+            error.setDescription("Keine berechtigung");
+            event.getTextChannel().sendMessage(error.build()).queue();
+            return;
+        }
+
+        if (event.getMessage().getMentionedMembers().size() != 1) {
+            error.setDescription("Du musst einen User mentionen");
+            event.getTextChannel().sendMessage(error.build()).queue();
+            return;
+        }
+
+        guild.getController().removeRolesFromMember(event.getMessage().getMentionedMembers().get(0), guild.getRolesByName("blue-muted", false).get(0)).complete();
+
+        event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.green).setTitle("Erfolgreich").setDescription("User "+ event.getMessage().getMentionedMembers().get(0).getAsMention()+ " erfolgreich entmutet").build()).queue();
+
+    }
+
+    @Override
+    public String help() {
+        return null;
+    }
+
+}
