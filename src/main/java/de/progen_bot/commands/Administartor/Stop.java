@@ -1,4 +1,4 @@
-package de.progen_bot.commands;
+package de.progen_bot.commands.Administartor;
 
 import java.awt.Color;
 import java.util.Timer;
