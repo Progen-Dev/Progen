@@ -15,7 +15,7 @@ public class DAOWarnList extends DAO {
     @Override
     public void generateTables() {
 
-        super.getMySQLConnection().update("CREATE TABLE IF NOT EXISTS reportcount ( `userid` VARCHAR(50) NOT NULL, `count` INT(11) NOT NULL, " +
+        super.getMySQLConnection().update("CREATE TABLE IF NOT EXISTS reportcount ( `userid` VARCHAR(50) NOT NULL,`guildid` VARCHAR(50) NOT NULL, `count` INT(11) NOT NULL, " +
                 "PRIMARY KEY(`userid`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8");
     }
 
@@ -52,7 +52,7 @@ public class DAOWarnList extends DAO {
     public HashMap<Member, ArrayList<Warn>> getWarnsByMembersForGuild(Guild guild) {
 
         ArrayList<String> warnedUserIDs = new ArrayList<>();
-        ResultSet rs = super.getMySQLConnection().query("SELECT 'userid' FROM 'warn' WHERE 'guildid' = '" + guild.getId() + "'");
+        ResultSet rs = super.getMySQLConnection().query("SELECT 'userid' FROM warn WHERE 'guildid' = '" + guild.getId() + "'");
         try {
             while (rs.next()) {
 

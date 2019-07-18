@@ -10,6 +10,15 @@ import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.webinterface.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
+import de.progen_bot.commands.Administartor.Stop;
+import de.progen_bot.commands.Fun.ConnectFour;
+import de.progen_bot.commands.Moderator.AddUserToPrivateVoiceChannel;
+import de.progen_bot.commands.Moderator.Clear;
+import de.progen_bot.commands.Moderator.Mute;
+import de.progen_bot.commands.Moderator.UnMute;
+import de.progen_bot.commands.User.GuildInfo;
+import de.progen_bot.commands.User.Ping;
+import de.progen_bot.commands.User.Say;
 import de.progen_bot.commands.music.Music;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
@@ -19,6 +28,7 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import de.progen_bot.util.Settings;
+import net.dv8tion.jda.core.entities.Invite;
 
 import java.io.IOException;
 
@@ -31,7 +41,7 @@ public class Main {
 	private static JDA jda;
 
 	private static MySQL sql;
-	private static MySQLConnection mySQLConnection = new MySQLConnection("", "", "", "");
+	private static MySQLConnection mySQLConnection = new MySQLConnection("localhost", "test", "root", "");
 
 	private static Fortnite fortnite;
 
@@ -49,8 +59,8 @@ public class Main {
 	public Main() throws IOException {
 		Settings.loadSettings();
 
-		httpapi = new API(80);
-		httpapi.start();
+		//httpapi = new API(80);
+		//httpapi.start();
 
 		fortnite = new Fortnite();
 
@@ -88,8 +98,6 @@ public class Main {
 		//commandManager.setupCommandHandlers(new VierGewinnt());
 		commandManager.setupCommandHandlers(new Help());
 		commandManager.setupCommandHandlers(new ConnectFour());
-		commandManager.setupCommandHandlers(new Invite());
-		commandManager.setupCommandHandlers(new Support());
 		commandManager.setupCommandHandlers(new XPrank());
 		commandManager.setupCommandHandlers(new XP());
 		commandManager.setupCommandHandlers(new XPNotify());
@@ -97,6 +105,7 @@ public class Main {
 		commandManager.setupCommandHandlers(new Stats());
 		commandManager.setupCommandHandlers(new CommandRegisterAPI());
 		commandManager.setupCommandHandlers(new WarnList());
+		commandManager.setupCommandHandlers(new WarnBoard());
 	}
 
 	/**
