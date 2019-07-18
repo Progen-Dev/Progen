@@ -1,18 +1,28 @@
 package de.progen_bot.core;
 
 import javax.security.auth.login.LoginException;
+
+import de.mtorials.commands.Stats;
+import de.mtorials.fortnite.core.Fortnite;
+import de.mtorials.webinterface.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
+import de.progen_bot.commands.Administartor.CommandRegisterAPI;
+import de.progen_bot.commands.Administartor.Stop;
+import de.progen_bot.commands.Fun.ConnectFour;
+import de.progen_bot.commands.Moderator.*;
+import de.progen_bot.commands.User.*;
 import de.progen_bot.commands.music.Music;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
 import de.progen_bot.db.MySQL;
-import de.progen_bot.game.FortniteStats;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import de.progen_bot.util.Settings;
+
+import java.io.IOException;
 
 /**
  * The Class Main.
@@ -24,17 +34,22 @@ public class Main {
 
 	private static MySQL sql;
 
-	private static FortniteStats fortnite;
+	private static Fortnite fortnite;
+
+	private static API httpapi;
 
 	private static CommandManager commandManager;
 
 	/**
 	 * Instantiates a new main.
 	 */
-	public Main() {
+	public Main() throws IOException {
 		Settings.loadSettings();
 
-		fortnite = new FortniteStats();
+		httpapi = new API(80);
+		httpapi.start();
+
+		fortnite = new Fortnite();
 
 		MySQL.connect();
 
@@ -58,7 +73,7 @@ public class Main {
 		commandManager.setupCommandHandlers(new GuildInfo());
 		commandManager.setupCommandHandlers(new Ping());
 		commandManager.setupCommandHandlers(new Say());
-		commandManager.setupCommandHandlers(new UserInfo());
+		commandManager.setupCommandHandlers(new CommandUserInfo());
 		commandManager.setupCommandHandlers(new Warn());
 		commandManager.setupCommandHandlers(new Mute());
 		commandManager.setupCommandHandlers(new UnMute());
@@ -72,6 +87,9 @@ public class Main {
 		commandManager.setupCommandHandlers(new XP());
 		commandManager.setupCommandHandlers(new XPNotify());
 		commandManager.setupCommandHandlers(new Music());
+		commandManager.setupCommandHandlers(new Stats());
+		commandManager.setupCommandHandlers(new CommandRegisterAPI());
+		commandManager.setupCommandHandlers(new WarnList());
 	}
 
 	/**
@@ -87,7 +105,6 @@ public class Main {
 		} catch (LoginException | InterruptedException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -103,7 +120,7 @@ public class Main {
 		return sql;
 	}
 
-	public static FortniteStats getFortnite() { return fortnite; }
+	public static Fortnite getFortnite() { return fortnite; }
 	
 	public static CommandManager getCommandManager() {
 		return commandManager;
@@ -115,7 +132,7 @@ public class Main {
 	 * @param args
 	 *            the arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		new Main();
 	}
 }
