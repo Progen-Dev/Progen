@@ -2,16 +2,13 @@ package de.progen_bot.core;
 
 import javax.security.auth.login.LoginException;
 
+import com.mysql.cj.MysqlConnection;
 import de.mtorials.commands.Stats;
+import de.mtorials.db.MySQLConnection;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.webinterface.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
-import de.progen_bot.commands.Administartor.CommandRegisterAPI;
-import de.progen_bot.commands.Administartor.Stop;
-import de.progen_bot.commands.Fun.ConnectFour;
-import de.progen_bot.commands.Moderator.*;
-import de.progen_bot.commands.User.*;
 import de.progen_bot.commands.music.Music;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
@@ -33,6 +30,7 @@ public class Main {
 	private static JDA jda;
 
 	private static MySQL sql;
+	private static MySQLConnection mySQLConnection = new MySQLConnection("", "", "", "");
 
 	private static Fortnite fortnite;
 
@@ -124,6 +122,11 @@ public class Main {
 	
 	public static CommandManager getCommandManager() {
 		return commandManager;
+	}
+
+	public static MySQLConnection getMysqlConnection() {
+
+		return mySQLConnection;
 	}
 
 	/**
