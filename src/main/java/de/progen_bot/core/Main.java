@@ -2,9 +2,10 @@ package de.progen_bot.core;
 
 import javax.security.auth.login.LoginException;
 
-import com.mysql.cj.MysqlConnection;
 import de.mtorials.commands.Stats;
 import de.mtorials.db.MySQLConnection;
+import de.mtorials.db.dao.DAO;
+import de.mtorials.db.dao.DAOWarnList;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.webinterface.httpapi.API;
 import de.progen_bot.command.CommandManager;
@@ -38,6 +39,10 @@ public class Main {
 
 	private static CommandManager commandManager;
 
+	//DAOs
+
+	private static DAOWarnList warnList = new DAOWarnList();
+
 	/**
 	 * Instantiates a new main.
 	 */
@@ -57,6 +62,10 @@ public class Main {
 		initCommandHandlers(commandManager);
 
 		MySQL.loadPollTimer();
+
+		//DAOs
+
+		warnList.generateTables();
 	}
 
 	/**
@@ -127,6 +136,11 @@ public class Main {
 	public static MySQLConnection getMysqlConnection() {
 
 		return mySQLConnection;
+	}
+
+	public static DAOWarnList getDAOWarnList() {
+
+		return warnList;
 	}
 
 	/**

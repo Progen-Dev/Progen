@@ -7,7 +7,7 @@ public abstract class DAO {
 
     private MySQLConnection mySQLConnection = Main.getMysqlConnection();
 
-    public abstract void generateTable();
+    public abstract void generateTables();
 
     public MySQLConnection getMySQLConnection() {
         return mySQLConnection;

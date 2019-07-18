@@ -14,7 +14,7 @@ public class WarnBoard extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
 
-        Main.getDbHandler().getWrappings().
+
     }
 
     @Override
