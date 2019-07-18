@@ -4,9 +4,11 @@ import java.awt.Color;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
+import de.progen_bot.core.Main;
 import de.progen_bot.core.PermissionCore;
 import de.progen_bot.db.MySQL;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -20,9 +22,9 @@ public class Warn extends CommandHandler {
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
 		if (PermissionCore.check(3,event))return;
 
-		User warned = null;
+		Member warned = null;
 		if (event.getMessage().getMentionedUsers().size() == 1) {
-			warned = event.getMessage().getMentionedUsers().get(0);
+			warned = event.getMessage().getMentionedMembers().get(0);
 		} else {
 			event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.red).setDescription("No user found").build())
 					.queue();
@@ -37,15 +39,14 @@ public class Warn extends CommandHandler {
 
 		String reason = String.join(" ", parsedCommand.getArgs()).replace(parsedCommand.getArgs()[0] + " ", "");
 
-		int warnCount = MySQL.loadWarnCount(warned.getId());
-		MySQL.insertWarnCount(warned.getId(), warnCount + 1);
-		MySQL.insertWarn(warned.getId(), reason);
+		int warnCount = Main.getDAOWarnList().getWarnsByMember(warned).size();
+		Main.getDAOWarnList().addWarnForMember(warned, reason);
 
 		event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setTitle("warn")
 				.setDescription(
 						warned.getAsMention() + " wurde von " + event.getAuthor().getAsMention() + " verwarnt!")
 				.addField("Grund:", "```" + reason + "```", false)
-				.setFooter(warned.getName() + " wurde zum " + (warnCount+1) + " mal verwarnt!", null).build())
+				.setFooter(warned.getNickname() + " wurde zum " + (warnCount+1) + " mal verwarnt!", null).build())
 				.queue();
 		
 	}

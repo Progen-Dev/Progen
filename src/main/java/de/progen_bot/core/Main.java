@@ -4,7 +4,6 @@ import javax.security.auth.login.LoginException;
 
 import de.mtorials.commands.Stats;
 import de.mtorials.db.MySQLConnection;
-import de.mtorials.db.dao.DAO;
 import de.mtorials.db.dao.DAOWarnList;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.webinterface.httpapi.API;
@@ -28,7 +27,6 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import de.progen_bot.util.Settings;
-import net.dv8tion.jda.core.entities.Invite;
 
 import java.io.IOException;
 

@@ -1,12 +1,15 @@
 package de.progen_bot.commands;
 
+import de.mtorials.models.Warn;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.core.Main;
 import de.progen_bot.db.MySQL;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WarnList extends CommandHandler {
@@ -20,8 +23,13 @@ public class WarnList extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
         if (event.getMessage().getMentionedMembers().size() == 1) {
-            List<String> warnTable =
-                    MySQL.loadWarnList(event.getMessage().getMentionedMembers().get(0).getUser().getId());
+            List<String> warnTable = new ArrayList<>();
+
+            for (Warn w : Main.getDAOWarnList().getWarnsByMember(event.getMessage().getMentionedMembers().get(0))) {
+
+                warnTable.add(w.getReason());
+            }
+
             if (!warnTable.isEmpty()) {
                 StringBuilder sb = new StringBuilder();
                 EmbedBuilder eb = new EmbedBuilder().setTitle("WarnTable von " + event.getMember().getEffectiveName());

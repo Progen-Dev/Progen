@@ -72,8 +72,15 @@ public class DAOWarnList extends DAO {
         return warnsByMembers;
     }
 
-    public void deleteWarnsForMember(Member member) {
+    // CRUD
+
+    public void deleteWarnForMember(Member member) {
 
         super.getMySQLConnection().update("DELETE FROM 'warns' WHERE 'guildid' = '" + member.getGuild().getId() + "' AND 'userid' = '" + member.getUser().getId() + "'");
+    }
+
+    public void addWarnForMember(Member member, String reason) {
+
+        super.getMySQLConnection().update("INSERT INTO 'warns' ('userid', 'guildid', 'reason') VALUES ('"+ member.getUser().getId() + "', '" + member.getGuild().getId() + "', '" + reason + "')");
     }
 }
