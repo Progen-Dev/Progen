@@ -28,7 +28,7 @@ public class WarnBoard extends CommandHandler {
             msg.append(m.getNickname()).append(": ").append(x.get(m).size()).append("\n");
         }
 
-        event.getMessage().getTextChannel().sendMessage(msg);
+        event.getMessage().getTextChannel().sendMessage(msg).queue();
     }
 
     @Override
