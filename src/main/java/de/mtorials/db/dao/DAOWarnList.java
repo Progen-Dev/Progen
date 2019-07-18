@@ -15,6 +15,8 @@ public class DAOWarnList extends DAO {
     @Override
     public void generateTables() {
 
+        super.getMySQLConnection().update("CREATE TABLE IF NOT EXISTS reportcount ( `userid` VARCHAR(50) NOT NULL, `count` INT(11) NOT NULL, " +
+                "PRIMARY KEY(`userid`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8");
     }
 
     public HashMap<String, Warn> getWarnsByID() {

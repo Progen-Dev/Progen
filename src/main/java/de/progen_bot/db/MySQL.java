@@ -69,7 +69,7 @@ public class MySQL {
 
 		generateWarnTable();
 
-		generateWarnCountTable();
+		//generateWarnCountTable();
 
 		generatePollTable();
 
