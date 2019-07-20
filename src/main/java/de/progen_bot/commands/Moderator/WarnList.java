@@ -41,7 +41,7 @@ public class WarnList extends CommandHandler {
                 }
                 event.getTextChannel().sendMessage(eb.setDescription(sb.toString()).build()).queue();
             } else {
-                event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.red)
+                event.getChannel().sendMessage(new EmbedBuilder(error)
                         .setDescription("The user has no warns yet").build()).queue();
             }
         } else {
