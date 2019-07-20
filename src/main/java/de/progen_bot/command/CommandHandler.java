@@ -12,10 +12,21 @@ import java.awt.*;
  * The Class CommandHandler.
  */
 public abstract class CommandHandler {
+
 	/**
 	 * The error.
 	 */
-	public static EmbedBuilder error = new EmbedBuilder().setColor(Color.HSBtoRGB(85 , 1 , 100));
+	public static EmbedBuilder error = new EmbedBuilder().setColor(Color.red);
+
+	/**
+	 * The warning
+	 */
+	public static EmbedBuilder warning = new EmbedBuilder().setColor(Color.yellow);
+
+	/**
+	 * Right
+	 */
+	public static EmbedBuilder right = new EmbedBuilder().setColor(Color.green);
 
 	/**
 	 * The invoke string.
