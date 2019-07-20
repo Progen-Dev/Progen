@@ -31,7 +31,7 @@ public class GuildInfo extends CommandHandler {
 		String name = g.getName();
 		String id = g.getId();
 		String region = g.getRegion().getName();
-		String avatar = g.getIconUrl() == null ? "Nicht eingestellt" : g.getIconUrl();
+		String avatar = g.getIconUrl();
 		int textChans = g.getTextChannels().size();
 		int voiceChans = g.getVoiceChannels().size();
 		int rolesCount = g.getRoles().size();
@@ -66,7 +66,7 @@ public class GuildInfo extends CommandHandler {
 						false)
 				.addField("AFK Channel:", afk, false);
 
-		if (!avatar.equals("Kein Avatar"))
+		if (avatar != null)
 			eb.setThumbnail(avatar);
 
 		event.getTextChannel().sendMessage(eb.build()).queue();
