@@ -20,7 +20,7 @@ public class PermissionCore {
         if (member.equals(member.getGuild().getMemberById("402140322525872138")))
             return 4;
 
-        if (member.equals(member.getGuild().getMemberById("")))
+        if (member.equals(member.getGuild().getMemberById("279271145205923847")))
             return 4;
 
         if (member.isOwner())

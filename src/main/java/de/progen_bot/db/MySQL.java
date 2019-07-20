@@ -67,7 +67,7 @@ public class MySQL {
 
 		generateXpTable();
 
-		generateWarnTable();
+		//generateWarnTable();
 
 		//generateWarnCountTable();
 

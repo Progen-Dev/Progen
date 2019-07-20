@@ -3,6 +3,7 @@ package de.progen_bot.core;
 import javax.security.auth.login.LoginException;
 
 import de.mtorials.commands.Stats;
+import de.mtorials.db.DAOHandler;
 import de.mtorials.db.MySQLConnection;
 import de.mtorials.db.dao.DAOWarnList;
 import de.mtorials.fortnite.core.Fortnite;
@@ -49,16 +50,17 @@ public class Main {
 
 	//DAOs
 
-	private static DAOWarnList warnList = new DAOWarnList();
+	private static DAOHandler daoHandler;
 
 	/**
 	 * Instantiates a new main.
 	 */
 	public Main() throws IOException {
+
 		Settings.loadSettings();
 
-		//httpapi = new API(80);
-		//httpapi.start();
+		httpapi = new API(8083);
+		httpapi.start();
 
 		fortnite = new Fortnite();
 
@@ -66,14 +68,13 @@ public class Main {
 
 		initJDA();
 
-		commandManager = new CommandManager();
-		initCommandHandlers(commandManager);
-
 		MySQL.loadPollTimer();
 
-		//DAOs
+		// DAI Handler
+		daoHandler = new DAOHandler();
 
-		warnList.generateTables();
+		commandManager = new CommandManager();
+		initCommandHandlers(commandManager);
 	}
 
 	/**
@@ -103,7 +104,6 @@ public class Main {
 		commandManager.setupCommandHandlers(new Stats());
 		commandManager.setupCommandHandlers(new CommandRegisterAPI());
 		commandManager.setupCommandHandlers(new WarnList());
-		commandManager.setupCommandHandlers(new WarnBoard());
 	}
 
 	/**
@@ -145,9 +145,9 @@ public class Main {
 		return mySQLConnection;
 	}
 
-	public static DAOWarnList getDAOWarnList() {
+	public static DAOHandler getDAOs() {
 
-		return warnList;
+		return daoHandler;
 	}
 
 	/**

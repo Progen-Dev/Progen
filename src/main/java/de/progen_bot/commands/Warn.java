@@ -20,9 +20,9 @@ public class Warn extends CommandHandler {
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
-		if (PermissionCore.check(3,event))return;
+		if (PermissionCore.check(3,event)) return;
 
-		Member warned = null;
+		Member warned;
 		if (event.getMessage().getMentionedUsers().size() == 1) {
 			warned = event.getMessage().getMentionedMembers().get(0);
 		} else {
@@ -39,14 +39,14 @@ public class Warn extends CommandHandler {
 
 		String reason = String.join(" ", parsedCommand.getArgs()).replace(parsedCommand.getArgs()[0] + " ", "");
 
-		int warnCount = Main.getDAOWarnList().getWarnsByMember(warned).size();
-		Main.getDAOWarnList().addWarnForMember(warned, reason);
+		int warnCount = super.getDAOs().getWarnList().getWarnsByMember(warned).size();
+		super.getDAOs().getWarnList().addWarnForMember(warned, reason);
 
 		event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setTitle("warn")
 				.setDescription(
 						warned.getAsMention() + " wurde von " + event.getAuthor().getAsMention() + " verwarnt!")
 				.addField("Grund:", "```" + reason + "```", false)
-				.setFooter(warned.getNickname() + " wurde zum " + (warnCount+1) + " mal verwarnt!", null).build())
+				.setFooter(warned.getEffectiveName() + " wurde zum " + (warnCount+1) + " mal verwarnt!", null).build())
 				.queue();
 		
 	}

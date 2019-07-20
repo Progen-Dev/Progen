@@ -16,7 +16,7 @@ public class APICommandMemberInfo extends APICommand {
     @Override
     public APIResponseObject execute(Map<String, String> params, Member member) {
 
-        System.out.println("Command Usre info");
+        System.out.println("Command Member info");
 
         return new APIResponseObject(200, new MemberInfo(member));
     }

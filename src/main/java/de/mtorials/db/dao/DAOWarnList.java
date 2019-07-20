@@ -15,8 +15,7 @@ public class DAOWarnList extends DAO {
     @Override
     public void generateTables() {
 
-        super.getMySQLConnection().update("CREATE TABLE IF NOT EXISTS reportcount ( `userid` VARCHAR(50) NOT NULL,`guildid` VARCHAR(50) NOT NULL, `count` INT(11) NOT NULL, " +
-                "PRIMARY KEY(`userid`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8");
+        super.getMySQLConnection().update("CREATE TABLE `warn` ( `id` INT NOT NULL AUTO_INCREMENT , `guildid` VARCHAR(18) NOT NULL , `userid` VARCHAR(18) NOT NULL , `reason` VARCHAR(100) NOT NULL , UNIQUE (`id`)) ENGINE = InnoDB;");
     }
 
     public HashMap<String, Warn> getWarnsByID() {
@@ -37,7 +36,7 @@ public class DAOWarnList extends DAO {
     public ArrayList<Warn> getWarnsByMember(Member member) {
 
         ArrayList<Warn> warns = new ArrayList<>();
-        ResultSet rs = super.getMySQLConnection().query("SELECT 'reason' FROM 'warn' WHERE 'userid' = '" + member.getUser().getId() + "' AND 'guildid' = '" + member.getGuild().getId() + "'");
+        ResultSet rs = super.getMySQLConnection().query("SELECT reason FROM `warn` WHERE userid = '" + member.getUser().getId() + "' AND guildid = '" + member.getGuild().getId() + "'");
         try {
             while (rs.next()) {
 
@@ -52,7 +51,7 @@ public class DAOWarnList extends DAO {
     public HashMap<Member, ArrayList<Warn>> getWarnsByMembersForGuild(Guild guild) {
 
         ArrayList<String> warnedUserIDs = new ArrayList<>();
-        ResultSet rs = super.getMySQLConnection().query("SELECT 'userid' FROM warn WHERE 'guildid' = '" + guild.getId() + "'");
+        ResultSet rs = super.getMySQLConnection().query("SELECT userid FROM warn WHERE guildid = '" + guild.getId() + "'");
         try {
             while (rs.next()) {
 
@@ -76,11 +75,11 @@ public class DAOWarnList extends DAO {
 
     public void deleteWarnForMember(Member member) {
 
-        super.getMySQLConnection().update("DELETE FROM 'warns' WHERE 'guildid' = '" + member.getGuild().getId() + "' AND 'userid' = '" + member.getUser().getId() + "'");
+        super.getMySQLConnection().update("DELETE FROM 'warn' WHERE 'guildid' = '" + member.getGuild().getId() + "' AND 'userid' = '" + member.getUser().getId() + "'");
     }
 
     public void addWarnForMember(Member member, String reason) {
 
-        super.getMySQLConnection().update("INSERT INTO 'warns' ('userid', 'guildid', 'reason') VALUES ('"+ member.getUser().getId() + "', '" + member.getGuild().getId() + "', '" + reason + "')");
+        super.getMySQLConnection().update("INSERT INTO warn (userid, guildid, reason) VALUES ('" + member.getUser().getId() + "', '" + member.getGuild().getId() + "', '" + reason + "')");
     }
 }

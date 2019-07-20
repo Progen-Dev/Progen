@@ -1,5 +1,8 @@
 package de.progen_bot.command;
 
+import de.mtorials.db.DAOHandler;
+import de.mtorials.db.dao.DAOWarnList;
+import de.progen_bot.core.Main;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -28,6 +31,11 @@ public abstract class CommandHandler {
 	 * The description.
 	 */
 	private String description;
+
+	/**
+	 * The DAO handling class
+	 */
+	private DAOHandler daoHandler = Main.getDAOs();
 
 	/**
 	 * Instantiates a new de.progen_bot.command handler.
@@ -75,6 +83,10 @@ public abstract class CommandHandler {
 	 */
 	public String getDescription() {
 		return description;
+	}
+
+	public DAOHandler getDAOs() {
+		return daoHandler;
 	}
 
 	public abstract String help();
