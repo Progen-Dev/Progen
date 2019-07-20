@@ -14,7 +14,7 @@ public class GuildConfiguration {
 
     GuildConfiguration() {}
 
-    GuildConfiguration(String prefix, String logChannelID, String[] permissionGroup1RoleNames, String tempChannelCatergoryID) {
+    GuildConfiguration(String prefix, String logChannelID, String tempChannelCatergoryID) {
 
         this.prefix = prefix;
         this.logChannelID = logChannelID;

@@ -55,8 +55,9 @@ public class Configuration {
 
             String contents = null;
             try {
-                contents = new String(Files.readAllBytes(Paths.get("guilds/" + g.getName() + ".json")));
+                contents = new String(Files.readAllBytes(Paths.get("guilds/" + g.getId() + ".json")));
                 guildConfiguratiosByGuild.put(g, new ObjectMapper().readValue(contents, GuildConfiguration.class));
+                System.out.println("Wrote guild " + g.getId());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -78,7 +79,8 @@ public class Configuration {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            mapper.writeValue(new File("guilds/" + g.getName() + ".json"), guildConfiguration);
+            mapper.writeValue(new File("guilds/" + g.getId() + ".json"), guildConfiguration);
+            guildConfiguratiosByGuild.put(g, guildConfiguration);
         } catch (IOException e) {
             e.printStackTrace();
         }

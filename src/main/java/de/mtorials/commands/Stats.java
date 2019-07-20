@@ -1,5 +1,6 @@
 package de.mtorials.commands;
 
+import de.mtorials.config.GuildConfiguration;
 import de.mtorials.fortnite.core.Statistics;
 import de.mtorials.fortnite.exeptions.NotEnoughtDetailsException;
 import de.mtorials.fortnite.exeptions.UserNotFoundExeption;
@@ -21,7 +22,7 @@ public class Stats extends CommandHandler {
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
         try {
 

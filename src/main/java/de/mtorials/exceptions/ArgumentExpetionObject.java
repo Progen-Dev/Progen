@@ -1,7 +1,5 @@
 package de.mtorials.exceptions;
 
-import de.mtorials.config.LANG;
-
 public class ArgumentExpetionObject {
 
     private String discordMessage;
@@ -11,10 +9,10 @@ public class ArgumentExpetionObject {
         switch (a) {
 
             case 1:
-                this.discordMessage = LANG.EXPETION_TOO_LESS_ARGS;
+                this.discordMessage = "TOO_LESS_ARGUMENTS";
 
             case 2:
-                this.discordMessage = LANG.EXPETION_TOO_MUCH_ARGS;
+                this.discordMessage = "TOO_MUCH_ARGUMENTS";
         }
     }
 

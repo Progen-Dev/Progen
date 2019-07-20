@@ -1,7 +1,7 @@
 package de.progen_bot.command;
 
+import de.mtorials.config.GuildConfiguration;
 import de.mtorials.db.DAOHandler;
-import de.mtorials.db.dao.DAOWarnList;
 import de.progen_bot.core.Main;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -52,11 +52,11 @@ public abstract class CommandHandler {
 
 	/**
 	 * Execute.
-	 *
-	 * @param parsedCommand the parsed de.progen_bot.command
+	 *  @param parsedCommand the parsed de.progen_bot.command
 	 * @param event         the event
+	 * @param configuration
 	 */
-	public abstract void execute(CommandManager.ParsedCommandString parsedCommand , MessageReceivedEvent event);
+	public abstract void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration);
 
 	/**
 	 * Gets the invoke string.

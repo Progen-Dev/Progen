@@ -6,8 +6,16 @@ public class GuildConfigurationBuilder {
 
     private String preifx;
     private String logChannelID;
-    private ArrayList<String> permissionGroup1RoleNames = new ArrayList<>();
     private String tempChannelCatergoryID;
+
+    public GuildConfigurationBuilder setGuildConfig(GuildConfiguration configuration) {
+
+        this.logChannelID = configuration.getLogChannelID();
+        this.preifx = configuration.getPrefix();
+        this.tempChannelCatergoryID = configuration.getTempChannelCatergoryID();
+
+        return this;
+    }
 
     public GuildConfigurationBuilder setPrefix(String prefix) {
         this.preifx = prefix;
@@ -19,17 +27,12 @@ public class GuildConfigurationBuilder {
         return this;
     }
 
-    public GuildConfigurationBuilder addPermissionGroup1RoleNames(String permissionGroup1RoleNames) {
-        this.permissionGroup1RoleNames.add(permissionGroup1RoleNames);
-        return this;
-    }
-
     public GuildConfigurationBuilder setTempChannelCatergoryID(String tempChannelCatergoryID) {
         this.tempChannelCatergoryID = tempChannelCatergoryID;
         return this;
     }
 
     public GuildConfiguration build() {
-        return new GuildConfiguration(this.preifx, this.logChannelID, (String[])this.permissionGroup1RoleNames.toArray(), this.tempChannelCatergoryID);
+        return new GuildConfiguration(this.preifx, this.logChannelID, this.tempChannelCatergoryID);
     }
 }

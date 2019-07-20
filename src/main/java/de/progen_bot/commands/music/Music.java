@@ -9,6 +9,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
+import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -172,7 +173,7 @@ public class Music extends CommandHandler {
 
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand , MessageReceivedEvent event) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         guild = event.getGuild();
         if (parsedCommand.getArgs().length < 1) {
             sendErrorMsg(event, help());

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.core.PermissionCore;
@@ -18,7 +19,7 @@ public class Stop extends CommandHandler {
 	}
 
 	@Override
-	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
 		if (PermissionCore.check(4,event))return;
 

@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+import de.mtorials.config.GuildConfiguration;
+import de.mtorials.config.GuildConfigurationBuilder;
+import de.mtorials.exceptions.GuildHasNoConfigException;
+import de.progen_bot.core.Main;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import de.progen_bot.util.Settings;
@@ -20,14 +24,28 @@ public class CommandManager extends ListenerAdapter {
 
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-		ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw());
+
+		GuildConfiguration guildConfiguration;
+		try {
+			guildConfiguration = Main.getConfiguration().getGuildConfiguration(event.getGuild());
+		} catch (GuildHasNoConfigException e) {
+			guildConfiguration = new GuildConfigurationBuilder()
+					.setLogChannelID(null)
+					.setPrefix("pb!")
+					.setTempChannelCatergoryID(null)
+					.build();
+
+			Main.configuration.writeGuildConfiguration(event.getGuild(), guildConfiguration);
+		}
+
+		ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.getPrefix());
 
 		if (!event.getAuthor().isBot() && !event.getAuthor().isFake() && parsedMessage != null
 				&& event.getChannelType().isGuild()) {
 			CommandHandler commandHandler = commandAssociations.get(parsedMessage.getCommand());
 
 			if (commandHandler != null) {
-				commandHandler.execute(parsedMessage, event);
+				commandHandler.execute(parsedMessage, event, guildConfiguration);
 				return;
 			}
 		} else {
@@ -72,9 +90,9 @@ public class CommandManager extends ListenerAdapter {
 	 *            the message
 	 * @return the parsed de.progen_bot.command string
 	 */
-	private ParsedCommandString parse(String message) {
-		if (message.startsWith(Settings.PREFIX)) {
-			String beheaded = message.replaceFirst(Pattern.quote(Settings.PREFIX), "");
+	private ParsedCommandString parse(String message, String prefix) {
+		if (message.startsWith(prefix)) {
+			String beheaded = message.replaceFirst(Pattern.quote(prefix), "");
 			String[] args = beheaded.split("\\s+");
 			String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
 			return new ParsedCommandString(args[0], newArgs);

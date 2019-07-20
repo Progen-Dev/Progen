@@ -3,6 +3,7 @@ package de.progen_bot.commands;
 import java.awt.Color;
 import java.time.format.DateTimeFormatter;
 
+import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.core.PermissionCore;
@@ -18,7 +19,7 @@ public class CommandUserInfo extends CommandHandler {
 	}
 
 	@Override
-	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 		Member memb;
 
 		if (event.getMessage().getMentionedUsers().size() == 1) {

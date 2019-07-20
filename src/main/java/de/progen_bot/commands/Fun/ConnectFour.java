@@ -1,5 +1,6 @@
 package de.progen_bot.commands.Fun;
 
+import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.core.Main;
@@ -17,7 +18,7 @@ public class ConnectFour extends CommandHandler {
 	}
 
 	@Override
-	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 		JDA jda = Main.getJda();
 		String[] args = parsedCommand.getArgs();
 

@@ -1,5 +1,6 @@
 package de.progen_bot.commands.Moderator;
 
+import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -16,7 +17,7 @@ public class AddUserToPrivateVoiceChannel extends CommandHandler {
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         EmbedBuilder error =  new EmbedBuilder().setColor(Color.RED).setTitle("Error");
         EmbedBuilder ok = new EmbedBuilder().setColor(Color.green).setTitle("Erfolgreich");
         if (event.getMessage().getMentionedMembers().size() != 0){

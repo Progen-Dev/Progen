@@ -1,5 +1,6 @@
 package de.progen_bot.commands;
 
+import de.mtorials.config.GuildConfiguration;
 import de.mtorials.webinterface.httpapi.API;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
@@ -12,7 +13,7 @@ public class CommandRegisterAPI extends CommandHandler {
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
         String token = API.getTokenManager().register(event.getMember());
         event.getMember().getUser().openPrivateChannel().complete().sendMessage("This is your new token: " + token).queue();
