@@ -10,7 +10,7 @@ import java.util.Map;
 public class APICommandMemberInfo extends APICommand {
 
     public APICommandMemberInfo() {
-        super("getUserInfo");
+        super("getMemberInfo");
     }
 
     @Override

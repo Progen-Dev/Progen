@@ -1,32 +1,51 @@
 package de.mtorials.webinterface.httpapi;
 
 import de.mtorials.webinterface.exceptions.APIUserNotRegistered;
+import de.progen_bot.core.Main;
 import net.dv8tion.jda.core.entities.Member;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class APITokenManager {
 
-    private HashMap<String, Member> membersByToken = new HashMap<>();
+    private TokenManagerDAO dao = new TokenManagerDAO();
+
+    public APITokenManager() {
+
+        dao.generateTables();
+    }
 
     public String register(Member member) {
 
         String randomString = generateRandomString();
-        if (this.membersByToken.containsKey(randomString)) return register(member);
-        this.membersByToken.put(randomString, member);
+        try {
+            if (dao.keyExists(randomString)) return register(member);
+            if (dao.memberExists(member)) dao.deleteMember(member);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }
+        dao.addMember(randomString, member);
         return randomString;
     }
 
     public Member getMember(String token) {
 
-        if (!this.membersByToken.containsKey(token)) throw new APIUserNotRegistered();
-        return membersByToken.get(token);
+        try {
+            if (!dao.keyExists(token)) throw new APIUserNotRegistered();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            return dao.getMember(token);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public HashMap<String, Member> getMembers() {
-        return this.membersByToken;
-    }
-
+    // Not mine
     private String generateRandomString() {
 
         int n = 10;
@@ -54,5 +73,4 @@ public class APITokenManager {
 
         return sb.toString();
     }
-
 }

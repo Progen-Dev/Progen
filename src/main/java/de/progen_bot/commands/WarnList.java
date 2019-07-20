@@ -35,7 +35,7 @@ public class WarnList extends CommandHandler {
 
             if (!warnTable.isEmpty()) {
                 StringBuilder sb = new StringBuilder();
-                EmbedBuilder eb = new EmbedBuilder().setTitle("WarnTable of " + event.getMember().getEffectiveName());
+                EmbedBuilder eb = new EmbedBuilder().setTitle("WarnTable of " + event.getMember().getEffectiveName()).setColor(Color.ORANGE);
                 int count = 1;
                 for (String reason : warnTable) {
                     sb.append(count + ". " + reason + "\n");
