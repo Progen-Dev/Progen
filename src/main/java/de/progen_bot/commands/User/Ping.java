@@ -2,7 +2,6 @@ package de.progen_bot.commands.User;
 
 import java.awt.Color;
 
-import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -15,7 +14,7 @@ public class Ping extends CommandHandler {
 	}
 
 	@Override
-	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
 		event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.green)
 				.setDescription("Ping: " + event.getJDA().getPing() + "").build()).queue();
 	}

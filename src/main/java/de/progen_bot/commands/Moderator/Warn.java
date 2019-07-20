@@ -2,12 +2,14 @@ package de.progen_bot.commands;
 
 import java.awt.Color;
 
-import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
+import de.progen_bot.core.Main;
 import de.progen_bot.core.PermissionCore;
+import de.progen_bot.db.MySQL;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Warn extends CommandHandler {
@@ -17,7 +19,7 @@ public class Warn extends CommandHandler {
 	}
 
 	@Override
-	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
 		if (PermissionCore.check(3,event)) return;
 
 		Member warned;

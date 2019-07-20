@@ -15,7 +15,7 @@ public class DAOWarnList extends DAO {
     @Override
     public void generateTables() {
 
-        super.getMySQLConnection().update("CREATE TABLE `warn` ( `id` INT NOT NULL AUTO_INCREMENT , `guildid` VARCHAR(18) NOT NULL , `userid` VARCHAR(18) NOT NULL , `reason` VARCHAR(100) NOT NULL , UNIQUE (`id`)) ENGINE = InnoDB;");
+        super.getMySQLConnection().update(" CREATE TABLE IF NOT EXISTS warn ( id INT NOT NULL AUTO_INCREMENT , guildid VARCHAR(18) NOT NULL , userid VARCHAR(18) NOT NULL , reason VARCHAR(100) NOT NULL , UNIQUE (id)) ENGINE = InnoDB;");
     }
 
     public HashMap<String, Warn> getWarnsByID() {
@@ -75,7 +75,7 @@ public class DAOWarnList extends DAO {
 
     public void deleteWarnForMember(Member member) {
 
-        super.getMySQLConnection().update("DELETE FROM 'warn' WHERE 'guildid' = '" + member.getGuild().getId() + "' AND 'userid' = '" + member.getUser().getId() + "'");
+        super.getMySQLConnection().update("DELETE FROM warn WHERE guildid = '" + member.getGuild().getId() + "' AND userid = '" + member.getUser().getId() + "'");
     }
 
     public void addWarnForMember(Member member, String reason) {

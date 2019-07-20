@@ -1,6 +1,5 @@
 package de.progen_bot.commands.Moderator;
 
-import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.PermissionCore;
@@ -16,7 +15,7 @@ public class UnMute extends CommandHandler {
         super("unmute","unmute <user>","unmute a muted user");
     }
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
         if (PermissionCore.check(1,event))return;
 
         EmbedBuilder error = new EmbedBuilder().setColor(Color.RED).setTitle("Error");

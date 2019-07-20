@@ -3,7 +3,6 @@
  */
 package de.progen_bot.commands.xp;
 
-import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.db.UserData;
@@ -29,7 +28,7 @@ public class XPNotify extends CommandHandler {
 	 * net.dv8tion.jda.de.progen_bot.core.events.message.MessageReceivedEvent)
 	 */
 	@Override
-	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
 		UserData data = UserData.fromId(event.getAuthor().getId());
 
 		if (data.getLvlupNotify()) {

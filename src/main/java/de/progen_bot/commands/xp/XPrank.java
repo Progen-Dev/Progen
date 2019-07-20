@@ -1,6 +1,5 @@
 package de.progen_bot.commands.xp;
 
-import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.MySQL;
@@ -17,7 +16,7 @@ public class XPrank extends CommandHandler {
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
 
             List<String> top10Ids = MySQL.getTop10Ranks();
 

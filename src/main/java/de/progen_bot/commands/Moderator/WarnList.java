@@ -1,11 +1,13 @@
 package de.progen_bot.commands;
 
-import de.mtorials.config.GuildConfiguration;
 import de.mtorials.models.Warn;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.core.Main;
+import de.progen_bot.db.MySQL;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
@@ -22,7 +24,7 @@ public class WarnList extends CommandHandler {
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
         if (event.getMessage().getMentionedMembers().size() == 1) {
             List<String> warnTable = new ArrayList<>();
 
