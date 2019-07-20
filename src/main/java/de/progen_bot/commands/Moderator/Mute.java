@@ -1,5 +1,6 @@
 package de.progen_bot.commands.Moderator;
 
+import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.PermissionCore;
@@ -17,7 +18,7 @@ public class Mute extends CommandHandler {
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration guildConfiguration) {
 
         if (PermissionCore.check(1,event))return;
 
@@ -43,6 +44,7 @@ public class Mute extends CommandHandler {
                 ok.setDescription("User "+ event.getMessage().getMentionedMembers().get(0).getAsMention() + " Wurde erfolgreich gemuted");
                 event.getTextChannel().sendMessage(ok.build()).queue();
             }
+
 
     @Override
     public String help() {

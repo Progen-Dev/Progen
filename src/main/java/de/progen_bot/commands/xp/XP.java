@@ -2,6 +2,7 @@ package de.progen_bot.commands.xp;
 
 import java.awt.Color;
 
+import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.db.UserData;
@@ -29,7 +30,7 @@ public class XP extends CommandHandler {
 	 * net.dv8tion.jda.de.progen_bot.core.events.message.MessageReceivedEvent)
 	 */
 	@Override
-	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 		String id = "";
 		if (parsedCommand.getArgs().length == 0) {
 			id = event.getAuthor().getId();

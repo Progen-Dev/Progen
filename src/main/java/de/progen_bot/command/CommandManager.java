@@ -1,6 +1,5 @@
 package de.progen_bot.command;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import de.mtorials.exceptions.GuildHasNoConfigException;
 import de.progen_bot.core.Main;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import de.progen_bot.util.Settings;
 
 /**
  * The Class CommandManager.
@@ -35,7 +33,7 @@ public class CommandManager extends ListenerAdapter {
 					.setTempChannelCatergoryID(null)
 					.build();
 
-			Main.configuration.writeGuildConfiguration(event.getGuild(), guildConfiguration);
+			Main.getConfiguration().writeGuildConfiguration(event.getGuild(), guildConfiguration);
 		}
 
 		ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.getPrefix());

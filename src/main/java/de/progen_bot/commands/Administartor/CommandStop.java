@@ -12,7 +12,7 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Stop extends CommandHandler {
+class Stop extends CommandHandler {
 
 	public Stop() {
 		super("stop","stop","stops the bot");

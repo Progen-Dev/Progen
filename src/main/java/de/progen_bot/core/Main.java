@@ -2,7 +2,9 @@ package de.progen_bot.core;
 
 import javax.security.auth.login.LoginException;
 
+import de.mtorials.commands.ChangePrefix;
 import de.mtorials.commands.Stats;
+import de.mtorials.config.Configuration;
 import de.mtorials.db.DAOHandler;
 import de.mtorials.db.MySQLConnection;
 import de.mtorials.db.dao.DAOWarnList;
@@ -10,15 +12,14 @@ import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.webinterface.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
-import de.progen_bot.commands.Administartor.Stop;
+import de.progen_bot.commands.Administartor.CommandAddConfig;
 import de.progen_bot.commands.Fun.ConnectFour;
-import de.progen_bot.commands.Moderator.AddUserToPrivateVoiceChannel;
-import de.progen_bot.commands.Moderator.Clear;
-import de.progen_bot.commands.Moderator.Mute;
-import de.progen_bot.commands.Moderator.UnMute;
+import de.progen_bot.commands.Moderator.*;
 import de.progen_bot.commands.User.GuildInfo;
 import de.progen_bot.commands.User.Ping;
 import de.progen_bot.commands.User.Say;
+import de.progen_bot.commands.Warn;
+import de.progen_bot.commands.WarnList;
 import de.progen_bot.commands.music.Music;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
@@ -40,6 +41,8 @@ public class Main {
 	private static JDA jda;
 
 	private static MySQL sql;
+
+	private static Configuration configuration = new Configuration("config.json");
 	private static MySQLConnection mySQLConnection = new MySQLConnection("localhost", "test", "root", "");
 
 	private static Fortnite fortnite;
@@ -87,7 +90,6 @@ public class Main {
 	 */
 	private void initCommandHandlers(CommandManager commandManager) {
 		commandManager.setupCommandHandlers(new Clear());
-		commandManager.setupCommandHandlers(new CommandStop());
 		commandManager.setupCommandHandlers(new GuildInfo());
 		commandManager.setupCommandHandlers(new Ping());
 		commandManager.setupCommandHandlers(new Say());
@@ -155,6 +157,11 @@ public class Main {
 	public static DAOHandler getDAOs() {
 
 		return daoHandler;
+	}
+
+	public static Configuration getConfiguration() {
+
+		return configuration;
 	}
 
 	/**

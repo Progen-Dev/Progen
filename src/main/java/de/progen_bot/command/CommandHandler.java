@@ -52,7 +52,7 @@ public abstract class CommandHandler {
 
 	/**
 	 * Execute.
-	 *  @param parsedCommand the parsed de.progen_bot.command
+	 * @param parsedCommand the parsed de.progen_bot.command
 	 * @param event         the event
 	 * @param configuration
 	 */
