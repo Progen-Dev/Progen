@@ -59,3 +59,4 @@ public class Help extends CommandHandler {
 		return null;
 	}
 }
+
