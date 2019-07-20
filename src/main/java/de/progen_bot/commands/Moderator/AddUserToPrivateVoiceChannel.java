@@ -17,6 +17,7 @@ public class AddUserToPrivateVoiceChannel extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+        System.out.println("[Info] pb!addusertoprivatevoicechannel wird ausgeführt!");
         EmbedBuilder error =  new EmbedBuilder().setColor(Color.RED).setTitle("Error");
         EmbedBuilder ok = new EmbedBuilder().setColor(Color.green).setTitle("Erfolgreich");
         if (event.getMessage().getMentionedMembers().size() != 0){

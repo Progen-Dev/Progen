@@ -19,6 +19,7 @@ public class Help extends CommandHandler {
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[Info] Command pb!help wird ausgeführt!");
 		EmbedBuilder builder = new EmbedBuilder();
 		if (parsedCommand.getArgs().length == 0) {
 			StringBuilder commandList = new StringBuilder();

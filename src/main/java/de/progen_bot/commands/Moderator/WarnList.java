@@ -1,4 +1,4 @@
-package de.progen_bot.commands;
+package de.progen_bot.commands.Moderator;
 
 import de.mtorials.models.Warn;
 import de.progen_bot.command.CommandHandler;
@@ -25,6 +25,7 @@ public class WarnList extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+        System.out.println("[Info] Command pb!warnlist wird ausgeführt!");
         if (event.getMessage().getMentionedMembers().size() == 1) {
             List<String> warnTable = new ArrayList<>();
 

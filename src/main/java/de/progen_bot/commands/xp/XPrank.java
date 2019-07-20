@@ -17,6 +17,7 @@ public class XPrank extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+        System.out.println("[Info] Command pB!xprank wird ausgeführt");
 
             List<String> top10Ids = MySQL.getTop10Ranks();
 

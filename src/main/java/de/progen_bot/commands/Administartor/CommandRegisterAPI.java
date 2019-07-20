@@ -13,6 +13,7 @@ public class CommandRegisterAPI extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+        System.out.println("[Info] Command pb!register wird ausgeführt!");
 
         String token = API.getTokenManager().register(event.getMember());
         event.getMember().getUser().openPrivateChannel().complete().sendMessage("This is your new token: " + token).queue();

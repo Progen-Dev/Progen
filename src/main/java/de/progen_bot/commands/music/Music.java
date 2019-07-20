@@ -173,6 +173,8 @@ public class Music extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand , MessageReceivedEvent event) {
+        System.out.println("[Info] Command pb!music wird ausgeführt!");
+        System.out.println("[Info] Streaming startet nun!");
         guild = event.getGuild();
         if (parsedCommand.getArgs().length < 1) {
             sendErrorMsg(event, help());

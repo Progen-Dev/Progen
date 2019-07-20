@@ -30,6 +30,7 @@ public class XP extends CommandHandler {
 	 */
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[Info] Command pb!xp wird ausgeführt!");
 		String id = "";
 		if (parsedCommand.getArgs().length == 0) {
 			id = event.getAuthor().getId();

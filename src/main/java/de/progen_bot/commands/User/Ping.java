@@ -15,6 +15,7 @@ public class Ping extends CommandHandler {
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[Info] Command pb!ping wird ausgeführt!");
 		event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.green)
 				.setDescription("Ping: " + event.getJDA().getPing() + "").build()).queue();
 	}

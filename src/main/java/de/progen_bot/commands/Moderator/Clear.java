@@ -30,6 +30,7 @@ public class Clear extends CommandHandler {
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[INFO] Command pb!clear wird ausgeführt!");
 
 		if (PermissionCore.check(1,event))return;
 

@@ -18,6 +18,7 @@ public class ConnectFour extends CommandHandler {
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[Info] Command pb!connectfour wird ausgeführt!");
 		JDA jda = Main.getJda();
 		String[] args = parsedCommand.getArgs();
 

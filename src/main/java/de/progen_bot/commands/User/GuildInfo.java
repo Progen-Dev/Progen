@@ -21,6 +21,7 @@ public class GuildInfo extends CommandHandler {
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[Info] Command pb!userinfo wird ausgeführt!");
 		Guild g = event.getGuild();
 
 		List<Member> l = g.getMembers();

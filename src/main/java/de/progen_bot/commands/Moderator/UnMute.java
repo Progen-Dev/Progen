@@ -16,6 +16,7 @@ public class UnMute extends CommandHandler {
     }
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+        System.out.println("[Info] Command pb!unmute");
         if (PermissionCore.check(1,event))return;
 
         EmbedBuilder error = new EmbedBuilder().setColor(Color.RED).setTitle("Error");

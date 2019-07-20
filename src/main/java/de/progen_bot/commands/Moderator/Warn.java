@@ -1,4 +1,4 @@
-package de.progen_bot.commands;
+package de.progen_bot.commands.Moderator;
 
 import java.awt.Color;
 
@@ -20,6 +20,7 @@ public class Warn extends CommandHandler {
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[Info] pb!warn wird ausgeführt!");
 		if (PermissionCore.check(3,event)) return;
 
 		Member warned;

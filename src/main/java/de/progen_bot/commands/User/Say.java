@@ -12,6 +12,7 @@ public class Say extends CommandHandler {
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[Info] Command pb!say wird ausgeführt ");
 	    String out = " ";
         for ( String s : parsedCommand.getArgs()) {
             out += s + " ";

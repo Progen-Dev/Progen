@@ -32,6 +32,7 @@ public class Vote extends CommandHandler implements Serializable {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand , MessageReceivedEvent event) {
+        System.out.println("[Info] Command pb!vote wird ausführt!");
         if (PermissionCore.check(2, event));
 
     }

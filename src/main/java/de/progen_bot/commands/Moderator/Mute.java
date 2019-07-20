@@ -18,6 +18,7 @@ public class Mute extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+        System.out.println("[Info] Command pb!mute wird ausgeführt!");
 
         if (PermissionCore.check(1,event))return;
 

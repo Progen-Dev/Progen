@@ -19,6 +19,7 @@ public class CommandUserInfo extends CommandHandler {
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[Info] Command pb!userinfo wird ausgeführt!");
 		Member memb;
 
 		if (event.getMessage().getMentionedUsers().size() == 1) {

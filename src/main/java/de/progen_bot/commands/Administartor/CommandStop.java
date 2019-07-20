@@ -11,14 +11,16 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class Stop extends CommandHandler {
+public class CommandStop extends CommandHandler {
 
-	public Stop() {
+	public CommandStop() {
 		super("stop","stop","stops the bot");
 	}
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[Info] Command pb!stop wird ausgeführt!");
+		System.out.println("[Info] Progen wird heruntergefahren!");
 
 		if (PermissionCore.check(4,event))return;
 

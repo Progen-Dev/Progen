@@ -5,17 +5,15 @@ import javax.security.auth.login.LoginException;
 import de.mtorials.commands.Stats;
 import de.mtorials.db.DAOHandler;
 import de.mtorials.db.MySQLConnection;
-import de.mtorials.db.dao.DAOWarnList;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.webinterface.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
-import de.progen_bot.commands.Administartor.Stop;
+import de.progen_bot.commands.Administartor.CommandRegisterAPI;
+import de.progen_bot.commands.Administartor.CommandStop;
 import de.progen_bot.commands.Fun.ConnectFour;
-import de.progen_bot.commands.Moderator.AddUserToPrivateVoiceChannel;
-import de.progen_bot.commands.Moderator.Clear;
-import de.progen_bot.commands.Moderator.Mute;
-import de.progen_bot.commands.Moderator.UnMute;
+import de.progen_bot.commands.Moderator.*;
+import de.progen_bot.commands.User.CommandUserInfo;
 import de.progen_bot.commands.User.GuildInfo;
 import de.progen_bot.commands.User.Ping;
 import de.progen_bot.commands.User.Say;
@@ -85,7 +83,7 @@ public class Main {
 	 */
 	private void initCommandHandlers(CommandManager commandManager) {
 		commandManager.setupCommandHandlers(new Clear());
-		commandManager.setupCommandHandlers(new Stop());
+		commandManager.setupCommandHandlers(new CommandStop());
 		commandManager.setupCommandHandlers(new GuildInfo());
 		commandManager.setupCommandHandlers(new Ping());
 		commandManager.setupCommandHandlers(new Say());
@@ -94,7 +92,6 @@ public class Main {
 		commandManager.setupCommandHandlers(new Mute());
 		commandManager.setupCommandHandlers(new UnMute());
 		commandManager.setupCommandHandlers(new AddUserToPrivateVoiceChannel());
-		//commandManager.setupCommandHandlers(new VierGewinnt());
 		commandManager.setupCommandHandlers(new Help());
 		commandManager.setupCommandHandlers(new ConnectFour());
 		commandManager.setupCommandHandlers(new XPrank());
@@ -104,6 +101,8 @@ public class Main {
 		commandManager.setupCommandHandlers(new Stats());
 		commandManager.setupCommandHandlers(new CommandRegisterAPI());
 		commandManager.setupCommandHandlers(new WarnList());
+		commandManager.setupCommandHandlers(new WarnDelete());
+		commandManager.setupCommandHandlers(new Vote());
 	}
 
 	/**

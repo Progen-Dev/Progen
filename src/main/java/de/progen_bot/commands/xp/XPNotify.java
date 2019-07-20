@@ -29,6 +29,7 @@ public class XPNotify extends CommandHandler {
 	 */
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event) {
+		System.out.println("[Info] Command pb!xpnotify wird ausgeführt");
 		UserData data = UserData.fromId(event.getAuthor().getId());
 
 		if (data.getLvlupNotify()) {
