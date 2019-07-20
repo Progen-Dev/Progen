@@ -4,6 +4,8 @@ import de.mtorials.config.GuildConfiguration;
 import de.mtorials.db.DAOHandler;
 import de.progen_bot.core.Main;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
@@ -16,7 +18,14 @@ public abstract class CommandHandler {
 	/**
 	 * The error.
 	 */
-	public static EmbedBuilder error = new EmbedBuilder().setColor(Color.red);
+	public static MessageEmbed generateErrorMsg(String error) {
+
+		return new EmbedBuilder()
+				.setColor(Color.RED)
+				.setTitle("ERROR")
+				.setDescription(error)
+				.build();
+	}
 
 	/**
 	 * The warning
