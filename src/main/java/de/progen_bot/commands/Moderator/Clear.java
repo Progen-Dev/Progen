@@ -38,8 +38,7 @@ public class Clear extends CommandHandler {
 		int numb = getInt(args[0]);
 
 		if (args.length < 1) {
-			event.getTextChannel().sendMessage(error
-					.setDescription("Bitte benutze die Anzahl von Nachrichten, welche gelöscht werden sollen").build())
+			event.getTextChannel().sendMessage(new EmbedBuilder(generateErrorMsg("Please use the number of message to delete")).build())
 					.queue();
 		}
 
@@ -81,7 +80,7 @@ public class Clear extends CommandHandler {
 			}
 		} else {
 			event.getTextChannel()
-					.sendMessage(error.setDescription("Bitte benutze eine Zahl zwischen 2 und 100!").build()).queue();
+					.sendMessage(new EmbedBuilder(generateErrorMsg("Please use a number between 2 and 100")).build()).queue();
 		}
 	}
 

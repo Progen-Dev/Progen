@@ -6,6 +6,7 @@ import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.core.Main;
 import de.progen_bot.db.GameData;
 import de.progen_bot.db.MySQL;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.User;
@@ -24,9 +25,8 @@ public class ConnectFour extends CommandHandler {
 
 		if (args.length < 3) {
 
-			event.getTextChannel().sendMessage(error.setDescription("Bitte benutze den Befehl so: " + Settings.PREFIX
-					+ "cf <Breite(7-8)> <Höhe(Um 1 kleiner als die Breite)> <Gegenspieler>").build()).queue();
-			return;
+			event.getTextChannel().sendMessage(new EmbedBuilder(generateErrorMsg("Please Use:" + Settings.PREFIX +
+					"cf <Width(7-8)> <Height(1 smaller than the width)> <Opponent>")).build()).queue();
 		}
 
 		int width = Integer.parseInt(args[0]);
@@ -38,13 +38,13 @@ public class ConnectFour extends CommandHandler {
 		if (event.getGuild().getMembersByName(opponent, true).size() == 0) {
 			event.getTextChannel()
 					.sendMessage(
-							error.setDescription("Der User " + opponent + " konnte nicht gefunden werden!").build())
+							new EmbedBuilder(generateErrorMsg("The user " + opponent + " could be found!")).build())
 					.queue();
 			return;
 		}
 		if (event.getGuild().getMembersByName(opponent, true).get(0).getOnlineStatus() != OnlineStatus.ONLINE) {
 			event.getTextChannel()
-					.sendMessage(error.setDescription("Der User " + opponent + " ist nicht online!").build()).queue();
+					.sendMessage(new EmbedBuilder(generateErrorMsg("The User " + opponent + " is not online")).build()).queue();
 			return;
 		}
 
@@ -69,18 +69,18 @@ public class ConnectFour extends CommandHandler {
 					});
 				} else {
 					event.getTextChannel()
-							.sendMessage(error.setDescription("Du kannst dich nicht selbst herausfordern!").build())
+							.sendMessage(new EmbedBuilder(generateErrorMsg("You can't challenge yourself!")).build())
 							.queue();
 					return;
 				}
 			} else {
 				event.getTextChannel()
-						.sendMessage(error.setDescription("Die Höhe muss um 1 kleiner sein als die Breite!").build())
+						.sendMessage(new EmbedBuilder(generateWarningMsg("The height must be 1 less than the width!")).build())
 						.queue();
 				return;
 			}
 		} else {
-			event.getTextChannel().sendMessage(error.setDescription("Die Breite muss zwischen 7 und 8 liegen!").build())
+			event.getTextChannel().sendMessage(new EmbedBuilder(generateErrorMsg("The width must be between 7 and 8!")).build())
 					.queue();
 			return;
 		}
