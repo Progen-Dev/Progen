@@ -18,12 +18,21 @@ public abstract class CommandHandler {
 	/**
 	 * The error.
 	 */
-	public static MessageEmbed generateErrorMsg(String error) {
+	public MessageEmbed generateErrorMsg(String error) {
 
 		return new EmbedBuilder()
 				.setColor(Color.RED)
 				.setTitle("ERROR")
 				.setDescription(error)
+				.build();
+	}
+
+	public MessageEmbed generateErrorMsgWrongInput() {
+
+		return new EmbedBuilder()
+				.setColor(Color.RED)
+				.setTitle("ERROR")
+				.setDescription(help())
 				.build();
 	}
 

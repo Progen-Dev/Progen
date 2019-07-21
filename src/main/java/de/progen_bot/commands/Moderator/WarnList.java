@@ -1,4 +1,4 @@
-package de.progen_bot.commands;
+package de.progen_bot.commands.Moderator;
 
 import de.mtorials.config.GuildConfiguration;
 import de.mtorials.models.Warn;
@@ -41,8 +41,7 @@ public class WarnList extends CommandHandler {
                 }
                 event.getTextChannel().sendMessage(eb.setDescription(sb.toString()).build()).queue();
             } else {
-                event.getChannel().sendMessage(new EmbedBuilder(error)
-                        .setDescription("The user has no warns yet").build()).queue();
+                event.getChannel().sendMessage(super.generateErrorMsg("No Warns")).queue();
             }
         } else {
 

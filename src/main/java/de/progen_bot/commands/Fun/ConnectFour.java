@@ -24,8 +24,7 @@ public class ConnectFour extends CommandHandler {
 
 		if (args.length < 3) {
 
-			event.getTextChannel().sendMessage(error.setDescription("Bitte benutze den Befehl so: " + Settings.PREFIX
-					+ "cf <Breite(7-8)> <Höhe(Um 1 kleiner als die Breite)> <Gegenspieler>").build()).queue();
+			event.getTextChannel().sendMessage(super.generateErrorMsgWrongInput()).queue();
 			return;
 		}
 
@@ -38,13 +37,13 @@ public class ConnectFour extends CommandHandler {
 		if (event.getGuild().getMembersByName(opponent, true).size() == 0) {
 			event.getTextChannel()
 					.sendMessage(
-							error.setDescription("Der User " + opponent + " konnte nicht gefunden werden!").build())
+							super.generateErrorMsgWrongInput())
 					.queue();
 			return;
 		}
 		if (event.getGuild().getMembersByName(opponent, true).get(0).getOnlineStatus() != OnlineStatus.ONLINE) {
 			event.getTextChannel()
-					.sendMessage(error.setDescription("Der User " + opponent + " ist nicht online!").build()).queue();
+					.sendMessage(super.generateErrorMsg("User not Online")).queue();
 			return;
 		}
 
@@ -69,18 +68,18 @@ public class ConnectFour extends CommandHandler {
 					});
 				} else {
 					event.getTextChannel()
-							.sendMessage(error.setDescription("Du kannst dich nicht selbst herausfordern!").build())
+							.sendMessage(super.generateErrorMsg("You can't challenge yourself!"))
 							.queue();
 					return;
 				}
 			} else {
 				event.getTextChannel()
-						.sendMessage(error.setDescription("Die Höhe muss um 1 kleiner sein als die Breite!").build())
+						.sendMessage(super.generateErrorMsg("The Height must be 1 smaller then the width."))
 						.queue();
 				return;
 			}
 		} else {
-			event.getTextChannel().sendMessage(error.setDescription("Die Breite muss zwischen 7 und 8 liegen!").build())
+			event.getTextChannel().sendMessage(super.generateErrorMsg("The width has to be between 7 and 8."))
 					.queue();
 			return;
 		}
