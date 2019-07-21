@@ -57,6 +57,7 @@ public class MemberInfo {
         return member.getOnlineStatus().name();
     }
 
+    @JsonIgnore
     public List<Role> getRoles() {
 
         return member.getRoles();

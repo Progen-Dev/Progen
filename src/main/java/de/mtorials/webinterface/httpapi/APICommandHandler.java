@@ -41,7 +41,7 @@ public class APICommandHandler implements HttpHandler {
         try {
 
             APIResponseObject responseObject = handleCommands(currentInvoke, params);
-            response = toJSON(responseObject.getObject());
+            response = toJSON(responseObject);
             rCode = responseObject.getrCode();
 
         } catch (APIException e) {
