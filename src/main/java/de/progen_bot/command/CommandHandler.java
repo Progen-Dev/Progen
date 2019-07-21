@@ -37,7 +37,7 @@ public abstract class CommandHandler {
 	/**
 	 * The warning
 	 */
-	public static MessageEmbed generateWarningMsg (String warning){
+	public  MessageEmbed generateWarningMsg (String warning){
 		return new EmbedBuilder()
 				.setColor(Color.YELLOW)
 				.setTitle("WARNING")
@@ -48,7 +48,7 @@ public abstract class CommandHandler {
 	/**
 	 * Right
 	 */
-	public static MessageEmbed generateRighrMsg(String right){
+	public  MessageEmbed generateRighrMsg(String right){
 		return new EmbedBuilder()
 				.setColor(Color.GREEN)
 				.setTitle("RIGHT")
