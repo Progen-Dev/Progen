@@ -4,7 +4,6 @@ import de.mtorials.config.GuildConfiguration;
 import de.mtorials.db.DAOHandler;
 import de.progen_bot.core.Main;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -22,8 +21,7 @@ public abstract class CommandHandler {
 
 		return new EmbedBuilder()
 				.setColor(Color.RED)
-				.setTitle("ERROR")
-				.setDescription(error)
+				.setDescription(":no_entry: " + error + ":no_entry:")
 				.build();
 	}
 
@@ -39,12 +37,24 @@ public abstract class CommandHandler {
 	/**
 	 * The warning
 	 */
-	public static EmbedBuilder warning = new EmbedBuilder().setColor(Color.yellow);
+	public static MessageEmbed generateWarningMsg (String warning){
+		return new EmbedBuilder()
+				.setColor(Color.YELLOW)
+				.setTitle("WARNING")
+				.setDescription(":warning: " + warning + " :warning:")
+				.build();
+	}
 
 	/**
 	 * Right
 	 */
-	public static EmbedBuilder right = new EmbedBuilder().setColor(Color.green);
+	public static MessageEmbed generateRighrMsg(String right){
+		return new EmbedBuilder()
+				.setColor(Color.GREEN)
+				.setTitle("RIGHT")
+				.setDescription("" + right + " :white_check_mark:")
+				.build();
+	}
 
 	/**
 	 * The invoke string.

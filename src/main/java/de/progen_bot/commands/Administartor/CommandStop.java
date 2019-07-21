@@ -26,7 +26,7 @@ class CommandStop extends CommandHandler {
 		event.getMessage().delete().queue();
 
 		Message msg = event.getTextChannel()
-				.sendMessage(new EmbedBuilder().setColor(Color.red).setDescription("Fahre herunter...").build())
+				.sendMessage(new EmbedBuilder(generateErrorMsg("Bot fährt herunter...")).build())
 				.complete();
 
 		new Timer().schedule(new TimerTask() {
