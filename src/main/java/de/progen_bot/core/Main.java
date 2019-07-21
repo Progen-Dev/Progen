@@ -19,7 +19,7 @@ import de.progen_bot.commands.User.GuildInfo;
 import de.progen_bot.commands.User.Ping;
 import de.progen_bot.commands.User.Say;
 import de.progen_bot.commands.Warn;
-import de.progen_bot.commands.WarnList;
+import de.progen_bot.commands.Moderator.WarnList;
 import de.progen_bot.commands.music.Music;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
