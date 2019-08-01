@@ -17,19 +17,16 @@ It features a great web interface, the [PWI (Progen Web Interface)](https://gith
 
 ### Commands
 
-[Will be added later]
+* All commands summarized once [Commands]("http://progen-bot.de/commands")
 
 ## Get Progen
 
 * [To add Progen to your server](https://discordbots.org/bot/495293590503817237)
 
-## Self hosted
+## Impatient
 
-You want to have the newest features? You have to build Progen yourself.
-It will take some time to release the first stable version of Progen, so if you want to check out the development before the first release, you'll have to go the hard way.
-You just want to use Progen? See __Download__.
-
-### Build it yourself [advanced]
+impatient? Become beta testers and help us get to know a stable version for Progen and get 
+to know the latest features at the same time.
 
 #### Jetbrains IntelliJ IDEA
 
@@ -70,6 +67,7 @@ Make sure you have installed the [Java Runtime Enviroment](https://java.com/de/d
 * __ShowMeYourSkil__
     * Discord ```ShowMeYourSkil#5698```
 * __M'Torials__
+    * [Discord](https://discordapp.com/channels/@me/402141243502493699)
     * [Website](http://mtorials.de/)
 
 ## Support
@@ -80,6 +78,9 @@ https://discord.gg/EjxZNXV
 ## Roadmap
 
 ## Credits
+@Evoh
+@ShowMeYourSkil
+@M'Torials
 
 ## License
 [GNU GPL v3.0](https://choosealicense.com/licenses/gpl-3.0/)
