@@ -8,6 +8,7 @@ It features a great web interface, the [PWI (Progen Web Interface)](https://gith
 * A list of commands for
     * moderation
     * music
+    * games
     * bot customization
     * utility
     * server management
