@@ -84,7 +84,7 @@ https://discord.gg/EjxZNXV
 
 ## License
 
-##Information
+## Information
 
  <a href="https://discordbots.org/bot/495293590503817237" >
   <img src="https://discordbots.org/api/widget/status/495293590503817237.svg?noavatar=true" alt="Progen" />
