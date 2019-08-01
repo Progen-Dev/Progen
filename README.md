@@ -86,7 +86,24 @@ https://discord.gg/EjxZNXV
 
 ##Information
 
-* <a href="https://discordbots.org/bot/495293590503817237" >
+ <a href="https://discordbots.org/bot/495293590503817237" >
   <img src="https://discordbots.org/api/widget/status/495293590503817237.svg?noavatar=true" alt="Progen" />
 </a>
+<p></p>
+<a href="https://discordbots.org/bot/495293590503817237" >
+  <img src="https://discordbots.org/api/widget/servers/495293590503817237.svg?noavatar=true" alt="Progen" />
+</a>
+<p></p>
+<a href="https://discordbots.org/bot/495293590503817237" >
+  <img src="https://discordbots.org/api/widget/upvotes/495293590503817237.svg?noavatar=true" alt="Progen" />
+</a>
+<p></p>
+<a href="https://discordbots.org/bot/495293590503817237" >
+  <img src="https://discordbots.org/api/widget/lib/495293590503817237.svg?noavatar=true" alt="Progen" />
+</a>
+<p></p>
+<a href="https://discordbots.org/bot/495293590503817237" >
+  <img src="https://discordbots.org/api/widget/lib/495293590503817237.svg?noavatar=true" alt="Progen" />
+</a>
+
 
