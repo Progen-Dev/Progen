@@ -13,6 +13,7 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
 import de.progen_bot.commands.Administartor.CommandAddConfig;
 import de.progen_bot.commands.Administartor.CommandRegisterAPI;
+import de.progen_bot.commands.Administartor.CommandStop;
 import de.progen_bot.commands.Fun.ConnectFour;
 import de.progen_bot.commands.Moderator.*;
 import de.progen_bot.commands.User.CommandUserInfo;
@@ -114,6 +115,7 @@ public class Main {
 		commandManager.setupCommandHandlers(new ChangePrefix());
 		commandManager.setupCommandHandlers(new WarnDelete());
 		commandManager.setupCommandHandlers(new Vote());
+		commandManager.setupCommandHandlers(new CommandStop());
 	}
 
 	/**
