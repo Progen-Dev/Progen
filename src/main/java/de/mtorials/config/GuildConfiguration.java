@@ -9,7 +9,6 @@ public class GuildConfiguration {
 
     private String prefix;
     private String logChannelID;
-    private String[] permissionGroup1RoleNames;
     private String tempChannelCatergoryID;
 
     GuildConfiguration() {}
@@ -18,7 +17,6 @@ public class GuildConfiguration {
 
         this.prefix = prefix;
         this.logChannelID = logChannelID;
-        this.permissionGroup1RoleNames = permissionGroup1RoleNames;
         this.tempChannelCatergoryID = tempChannelCatergoryID;
     }
 
@@ -28,10 +26,6 @@ public class GuildConfiguration {
 
     public String getLogChannelID() {
         return logChannelID;
-    }
-
-    public String[] getPermissionGroup1RoleNames() {
-        return permissionGroup1RoleNames;
     }
 
     public String getTempChannelCatergoryID() {

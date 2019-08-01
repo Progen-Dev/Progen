@@ -1,6 +1,7 @@
 package de.mtorials.webinterface.httpapi;
 
 import com.sun.net.httpserver.HttpServer;
+import de.mtorials.webinterface.commands.APICommandChangePrefix;
 import de.mtorials.webinterface.commands.APICommandMemberInfo;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class API {
         httpServer.createContext("/", new APICommandHandlerBuilder()
                 .setTokenManager(tokenManager)
                 .addCommand(new APICommandMemberInfo())
+                .addCommand(new APICommandChangePrefix())
                 .build()
         );
         httpServer.setExecutor(null);

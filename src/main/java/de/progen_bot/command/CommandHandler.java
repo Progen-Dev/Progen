@@ -30,7 +30,7 @@ public abstract class CommandHandler {
 		return new EmbedBuilder()
 				.setColor(Color.RED)
 				.setTitle("ERROR")
-				.setDescription(help())
+				.addField("Use the command like this:", this.commandUsage, false)
 				.build();
 	}
 
