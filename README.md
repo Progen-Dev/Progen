@@ -21,7 +21,7 @@ It features a great web interface, the [PWI (Progen Web Interface)](https://gith
 
 ## Get Progen
 
-To add Progen to your server("https://discordbots.org/bot/495293590503817237")
+To add Progen to your server(https://discordbots.org/bot/495293590503817237)
 
 ## Self hosted
 
