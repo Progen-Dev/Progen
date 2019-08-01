@@ -81,4 +81,4 @@ https://discord.gg/EjxZNXV
 ## Credits
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[GNU GPL v3.0](https://choosealicense.com/licenses/gpl-3.0/)
