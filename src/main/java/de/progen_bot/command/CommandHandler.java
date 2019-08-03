@@ -34,6 +34,15 @@ public abstract class CommandHandler {
 				.build();
 	}
 
+	public MessageEmbed generateSuccessfulMsg() {
+
+		return new EmbedBuilder()
+				.setColor(Color.BLUE)
+				.setTitle("SUCCESSFUL")
+				.setDescription("Successfully executed command " + this.invokeString + ".")
+				.build();
+	}
+
 	/**
 	 * The warning
 	 */
