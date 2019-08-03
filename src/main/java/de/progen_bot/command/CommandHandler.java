@@ -48,7 +48,7 @@ public abstract class CommandHandler {
 	/**
 	 * Right
 	 */
-	public  MessageEmbed generateRighrMsg(String right){
+	public  MessageEmbed generateRightMsg(String right){
 		return new EmbedBuilder()
 				.setColor(Color.GREEN)
 				.setTitle("RIGHT")
