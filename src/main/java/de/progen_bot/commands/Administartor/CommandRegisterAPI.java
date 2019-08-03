@@ -16,7 +16,8 @@ public class CommandRegisterAPI extends CommandHandler {
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
         String token = API.getTokenManager().register(event.getMember());
-        event.getMember().getUser().openPrivateChannel().complete().sendMessage("This is your new token: " + token).queue();
+        event.getMember().getUser().openPrivateChannel().complete().sendMessage("This is your new token: ```" + token + "```").queue();
+        event.getMember().getUser().openPrivateChannel().complete().sendMessage("Go to http://progen-bot/pwi/" + "to sign in.").queue();
     }
 
     @Override
