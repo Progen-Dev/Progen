@@ -37,7 +37,7 @@ public abstract class CommandHandler {
 	public MessageEmbed generateSuccessfulMsg() {
 
 		return new EmbedBuilder()
-				.setColor(Color.BLUE)
+				.setColor(Color.GREEN)
 				.setTitle("SUCCESSFUL")
 				.setDescription("Successfully executed command " + this.invokeString + ".")
 				.build();
@@ -51,6 +51,14 @@ public abstract class CommandHandler {
 				.setColor(Color.YELLOW)
 				.setTitle("WARNING")
 				.setDescription(":warning: " + warning + " :warning:")
+				.build();
+	}
+
+	public MessageEmbed generateInfoMsg(String infomsg) {
+		return new EmbedBuilder()
+				.setColor(Color.BLUE)
+				.setTitle("INFO")
+				.setDescription(" " + infomsg + "")
 				.build();
 	}
 

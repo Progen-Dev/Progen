@@ -96,7 +96,7 @@ public class Main {
 		commandManager.setupCommandHandlers(new Warn());
 		commandManager.setupCommandHandlers(new Mute());
 		commandManager.setupCommandHandlers(new UnMute());
-		commandManager.setupCommandHandlers(new AddUserToPrivateVoiceChannel());
+		commandManager.setupCommandHandlers(new PrivateVoiceChannel());
 		//commandManager.setupCommandHandlers(new VierGewinnt());
 		commandManager.setupCommandHandlers(new Help());
 		commandManager.setupCommandHandlers(new ConnectFour());
