@@ -1,4 +1,4 @@
-package de.progen_bot.commands.Moderator;
+package de.progen_bot.commands.User;
 
 import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
