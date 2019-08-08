@@ -1,8 +1,10 @@
 package de.progen_bot.commands.Moderator;
 
 import de.mtorials.config.GuildConfiguration;
+import de.mtorials.config.GuildConfigurationBuilder;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.core.Main;
 import de.progen_bot.listeners.PrivateVoice;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Channel;
@@ -13,7 +15,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 public class PrivateVoiceChannel extends CommandHandler {
 
     public PrivateVoiceChannel() {
-        super("pc","pc [create/add] <mentioned user>","You can create your private temporary voice channel. With the add command you can allow access to your channel. If no one is in it, it will be removed.");
+        super("pc","pc [create/add/category] </mentioned user/category name>","You can create your private temporary voice channel. With the add command you can allow access to your channel. If no one is in it, it will be removed.");
         //TODO add usage
     }
 
@@ -87,6 +89,29 @@ public class PrivateVoiceChannel extends CommandHandler {
 
             case "create":
                 createChannel(event, configuration.getTempChannelCatergoryID());
+                break;
+
+            case "category":
+                // If not owner
+                if (!event.getMember().isOwner()) {
+                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Sorry, you have to be the owner of the guild to create the category.")).queue();
+                    return;
+                }
+
+                // get length
+                if (parsedCommand.getArgsAsList().size() != 2) {
+                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                    return;
+                }
+
+                // create channel
+                String id = event.getGuild().getController().createCategory(parsedCommand.getArgsAsList().get(1)).complete().getId();
+
+                GuildConfiguration newConfig = new GuildConfigurationBuilder()
+                        .setGuildConfig(configuration)
+                        .setTempChannelCatergoryID(id)
+                        .build();
+                Main.getConfiguration().writeGuildConfiguration(event.getGuild(), newConfig);
                 break;
 
             default:

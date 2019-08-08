@@ -12,11 +12,6 @@ public class PrivateVoice extends ListenerAdapter {
 
     public static final String PRIVATEVOICECHANNELPREFIX = "[P]";
 
-    public void onGuildVoiceJoin(GuildVoiceJoinEvent event) {
-        if (!event.getChannelJoined().getName().contains(PRIVATEVOICECHANNELPREFIX)) return;
-
-    }
-
     public void onGuildVoiceLeave(GuildVoiceLeaveEvent event) {
 
         if (!event.getChannelLeft().getName().contains(PRIVATEVOICECHANNELPREFIX)) return;
