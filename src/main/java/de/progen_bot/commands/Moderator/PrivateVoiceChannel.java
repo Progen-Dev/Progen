@@ -19,7 +19,7 @@ import java.awt.*;
 public class PrivateVoiceChannel extends CommandHandler {
 
     public PrivateVoiceChannel() {
-        super("pChannel","pChannel [create/add] <mentioned user>","");
+        super("pc","pc [create/add] <mentioned user>","");
         //TODO add usage
     }
 
