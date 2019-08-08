@@ -38,7 +38,7 @@ public class Clear extends CommandHandler {
 		int numb = getInt(args[0]);
 
 		if (args.length < 1) {
-			event.getTextChannel().sendMessage(super.generateErrorMsg("Please specify the count of messages to be removed."))
+			event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Please specify the count of messages to be removed."))
 					.queue();
 		}
 
@@ -80,7 +80,7 @@ public class Clear extends CommandHandler {
 			}
 		} else {
 			event.getTextChannel()
-					.sendMessage(super.generateErrorMsg("Please use a Number between HBA ICH VERGESSEN")).queue();
+					.sendMessage(super.messageGenerators.generateErrorMsg("Please use a Number between HBA ICH VERGESSEN")).queue();
 		}
 	}
 

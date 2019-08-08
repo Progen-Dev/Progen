@@ -41,7 +41,7 @@ public class WarnList extends CommandHandler {
                 }
                 event.getTextChannel().sendMessage(eb.setDescription(sb.toString()).build()).queue();
             } else {
-                event.getChannel().sendMessage(super.generateErrorMsg("No Warns")).queue();
+                event.getChannel().sendMessage(super.messageGenerators.generateErrorMsg("No Warns")).queue();
             }
         } else {
 

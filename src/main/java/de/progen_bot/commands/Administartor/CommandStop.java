@@ -4,7 +4,6 @@ import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.PermissionCore;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -25,7 +24,7 @@ public class CommandStop extends CommandHandler {
 
         event.getMessage().delete().queue();
         Message msg = event.getTextChannel()
-                .sendMessage(super.generateWarningMsg("Progen shuts down")).complete();
+                .sendMessage(super.messageGenerators.generateWarningMsg("Progen shuts down")).complete();
 
 
         new Timer().schedule(new TimerTask() {

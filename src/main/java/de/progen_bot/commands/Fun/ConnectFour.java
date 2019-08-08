@@ -10,7 +10,6 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import de.progen_bot.util.Settings;
 
 public class ConnectFour extends CommandHandler {
 	public ConnectFour() {
@@ -24,7 +23,7 @@ public class ConnectFour extends CommandHandler {
 
 		if (args.length < 3) {
 
-			event.getTextChannel().sendMessage(super.generateErrorMsgWrongInput()).queue();
+			event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
 			return;
 		}
 
@@ -37,13 +36,13 @@ public class ConnectFour extends CommandHandler {
 		if (event.getGuild().getMembersByName(opponent, true).size() == 0) {
 			event.getTextChannel()
 					.sendMessage(
-							super.generateErrorMsgWrongInput())
+							super.messageGenerators.generateErrorMsgWrongInput())
 					.queue();
 			return;
 		}
 		if (event.getGuild().getMembersByName(opponent, true).get(0).getOnlineStatus() != OnlineStatus.ONLINE) {
 			event.getTextChannel()
-					.sendMessage(super.generateErrorMsg("User not Online")).queue();
+					.sendMessage(super.messageGenerators.generateErrorMsg("User not Online")).queue();
 			return;
 		}
 
@@ -68,18 +67,18 @@ public class ConnectFour extends CommandHandler {
 					});
 				} else {
 					event.getTextChannel()
-							.sendMessage(super.generateErrorMsg("You can't challenge yourself!"))
+							.sendMessage(super.messageGenerators.generateErrorMsg("You can't challenge yourself!"))
 							.queue();
 					return;
 				}
 			} else {
 				event.getTextChannel()
-						.sendMessage(super.generateErrorMsg("The Height must be 1 smaller then the width."))
+						.sendMessage(super.messageGenerators.generateErrorMsg("The Height must be 1 smaller then the width."))
 						.queue();
 				return;
 			}
 		} else {
-			event.getTextChannel().sendMessage(super.generateErrorMsg("The width has to be between 7 and 8."))
+			event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("The width has to be between 7 and 8."))
 					.queue();
 			return;
 		}

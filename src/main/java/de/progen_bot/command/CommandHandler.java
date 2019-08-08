@@ -3,6 +3,7 @@ package de.progen_bot.command;
 import de.mtorials.config.GuildConfiguration;
 import de.mtorials.db.DAOHandler;
 import de.progen_bot.core.Main;
+import de.progen_bot.util.MessageGenerator;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -15,63 +16,9 @@ import java.awt.*;
 public abstract class CommandHandler {
 
 	/**
-	 * The error.
+	 * MessageGenerators
 	 */
-	public MessageEmbed generateErrorMsg(String error) {
-
-		return new EmbedBuilder()
-				.setColor(Color.RED)
-				.setDescription(":no_entry: " + error + ":no_entry:")
-				.build();
-	}
-
-	public MessageEmbed generateErrorMsgWrongInput() {
-
-		return new EmbedBuilder()
-				.setColor(Color.RED)
-				.setTitle("ERROR")
-				.addField("Use the command like this:", this.commandUsage, false)
-				.build();
-	}
-
-	public MessageEmbed generateSuccessfulMsg() {
-
-		return new EmbedBuilder()
-				.setColor(Color.GREEN)
-				.setTitle("SUCCESSFUL")
-				.setDescription("Successfully executed command " + this.invokeString + ".")
-				.build();
-	}
-
-	/**
-	 * The warning
-	 */
-	public  MessageEmbed generateWarningMsg (String warning){
-		return new EmbedBuilder()
-				.setColor(Color.YELLOW)
-				.setTitle("WARNING")
-				.setDescription(":warning: " + warning + " :warning:")
-				.build();
-	}
-
-	public MessageEmbed generateInfoMsg(String infomsg) {
-		return new EmbedBuilder()
-				.setColor(Color.BLUE)
-				.setTitle("INFO")
-				.setDescription(" " + infomsg + "")
-				.build();
-	}
-
-	/**
-	 * Right
-	 */
-	public  MessageEmbed generateRightMsg(String right){
-		return new EmbedBuilder()
-				.setColor(Color.GREEN)
-				.setTitle("RIGHT")
-				.setDescription("" + right + " :white_check_mark:")
-				.build();
-	}
+	protected MessageGenerator messageGenerators;
 
 	/**
 	 * The invoke string.
@@ -104,6 +51,7 @@ public abstract class CommandHandler {
 		this.invokeString = invokeString;
 		this.commandUsage = commandUsage;
 		this.description = description;
+		this.messageGenerators = new MessageGenerator(this.commandUsage, this.invokeString);
 	}
 
 	/**

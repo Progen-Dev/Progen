@@ -4,22 +4,16 @@ import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.listeners.PrivateVoice;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.requests.Route;
-import net.dv8tion.jda.core.utils.PermissionUtil;
-
-import java.awt.*;
 
 public class PrivateVoiceChannel extends CommandHandler {
 
     public PrivateVoiceChannel() {
-        super("pc","pc [create/add] <mentioned user>","");
+        super("pc","pc [create/add] <mentioned user>","You can create your private temporary voice channel. With the add command you can allow access to your channel. If no one is in it, it will be removed.");
         //TODO add usage
     }
 
@@ -34,24 +28,24 @@ public class PrivateVoiceChannel extends CommandHandler {
 
         // Check if user is specified
         if (event.getMessage().getMentionedMembers().size() != 1) {
-            event.getTextChannel().sendMessage(super.generateErrorMsgWrongInput()).queue();
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
 
         //Check if user is in voice channel
         if (!event.getMember().getVoiceState().inVoiceChannel()) {
-            event.getTextChannel().sendMessage(super.generateErrorMsg("Your not in a voice channel!")).queue();
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Your not in a voice channel!")).queue();
             return;
         }
 
         //Check if user is owner
         if (!checkOwnership(event.getMember().getVoiceState().getChannel(), event.getMember())) {
-            event.getTextChannel().sendMessage(super.generateErrorMsg("This is not your voice channel!")).queue();
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("This is not your voice channel!")).queue();
             return;
         }
 
         event.getMember().getVoiceState().getChannel().createPermissionOverride(event.getMessage().getMentionedMembers().get(0)).setAllow(Permission.VOICE_CONNECT).queue();
-        event.getTextChannel().sendMessage(super.generateInfoMsg(event.getMessage().getMentionedMembers().get(0).getEffectiveName() + " can now join the voice channel")).queue();
+        event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg(event.getMessage().getMentionedMembers().get(0).getEffectiveName() + " can now join the voice channel")).queue();
         event.getMessage().getMentionedMembers().get(0).getUser().openPrivateChannel().complete().sendMessage(event.getMember().getEffectiveName() +" gave you the permission to join his/her voice channel").queue();
     }
 
@@ -59,7 +53,7 @@ public class PrivateVoiceChannel extends CommandHandler {
 
         //Check if user is in voice channel
         if (!event.getMember().getVoiceState().inVoiceChannel()) {
-            event.getTextChannel().sendMessage(super.generateErrorMsg("Your not in a voice channel! Please join any unimportant voice channel.")).queue();
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Your not in a voice channel! Please join any voice channel.")).queue();
             return null;
         }
 
@@ -72,7 +66,7 @@ public class PrivateVoiceChannel extends CommandHandler {
         // move member
         event.getGuild().getController().moveVoiceMember(event.getMember(), (VoiceChannel)channel).queue();
 
-        event.getTextChannel().sendMessage(super.generateSuccessfulMsg()).queue();
+        event.getTextChannel().sendMessage(super.messageGenerators.generateSuccessfulMsg()).queue();
 
         return channel;
     }
@@ -81,7 +75,7 @@ public class PrivateVoiceChannel extends CommandHandler {
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
         if (parsedCommand.getArgsAsList().size() == 0) {
-            event.getTextChannel().sendMessage(super.generateErrorMsgWrongInput()).queue();
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
 
@@ -96,7 +90,7 @@ public class PrivateVoiceChannel extends CommandHandler {
                 break;
 
             default:
-                event.getTextChannel().sendMessage(super.generateErrorMsgWrongInput()).queue();
+                event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
         }
     }
 
