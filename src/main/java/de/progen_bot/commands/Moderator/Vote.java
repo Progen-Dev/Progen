@@ -19,8 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Poll extends CommandHandler implements Serializable {
-    public Poll() {
+public class CmdPoll extends CommandHandler implements Serializable {
+    public CmdPoll() {
         super("poll" , "poll create <question>|<answer>|<answer2>|...\n vote number `vote for a answer`\n vote stats `Show the stats of the current vote\n vote close`Close the current vote" , "Vote evnt");
     }
     private static TextChannel channel;
