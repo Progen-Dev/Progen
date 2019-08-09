@@ -19,9 +19,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Vote extends CommandHandler implements Serializable {
-    public Vote() {
-        super("Vote" , "vote create <question>|<answer>|<answer2>|...\n vote number `vote for a answer`\n vote stats `Show the stats of the current vote\n vote close`Close the current vote" , "Vote evnt");
+public class Poll extends CommandHandler implements Serializable {
+    public Poll() {
+        super("poll" , "poll create <question>|<answer>|<answer2>|...\n vote number `vote for a answer`\n vote stats `Show the stats of the current vote\n vote close`Close the current vote" , "Vote evnt");
     }
     private static TextChannel channel;
     private static HashMap<Guild, Poll> polls = new HashMap<>();
@@ -64,12 +64,12 @@ public class Vote extends CommandHandler implements Serializable {
         return new EmbedBuilder()
                 .setAuthor(poll.getCreator(guild).getEffectiveName() + "'s poll.", null, poll.getCreator(guild).getUser().getAvatarUrl())
                 .setDescription(":pencil:   " + poll.heading + "\n\n" + anstr.toString())
-                .setFooter("Enter '" + Settings.PREFIX+"vote v <number>' to vote!", null)
+                .setFooter("Enter '" + Settings.PREFIX + "poll v <number>' to vote!", null)
                 .setColor(Color.cyan);
     }
     private void createPoll(String[] args, MessageReceivedEvent event){
         if (polls.containsKey(event.getGuild())){
-            message("There is already a vote running on this guild!", Color.red);
+            message("There is already a poll running on this guild!", Color.red);
             return;
         }
         String argsSTRG = String.join("  ", new ArrayList<>(Arrays.asList(args).subList(1, args.length)));
@@ -95,7 +95,7 @@ public class Vote extends CommandHandler implements Serializable {
                 break;
         }
 
-        }
+    }
 
 
 
