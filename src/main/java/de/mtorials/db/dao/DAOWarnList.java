@@ -3,7 +3,8 @@ package de.mtorials.db.dao;
 import de.mtorials.models.Warn;
 import de.progen_bot.core.Main;
 import net.dv8tion.jda.api.entities.Guild;
-import java.lang.reflect.Member;
+import net.dv8tion.jda.api.entities.Member;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class DAOWarnList extends DAO {
 
                 warnsByUser.put(rs.getString("id"), new Warn(Main.getJda().getGuildById(rs.getString("guildid")).getMemberById(rs.getString("userid")), rs.getString("reason")));
             }
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return warnsByUser;
@@ -35,13 +36,14 @@ public class DAOWarnList extends DAO {
     public ArrayList<Warn> getWarnsByMember(Member member) {
 
         ArrayList<Warn> warns = new ArrayList<>();
-        ResultSet rs = super.getMySQLConnection().query("SELECT reason FROM `warn` WHERE userid = '" + member.getUser.getId() + "' AND guildid = '" + member.getGuild().getId() + "'");
+        ResultSet rs =
+                super.getMySQLConnection().query("SELECT reason FROM `warn` WHERE userid = '" + member.getUser().getId() + "' AND guildid = '" + member.getGuild().getId() + "'");
         try {
             while (rs.next()) {
 
                 warns.add(new Warn(member, rs.getString("reason")));
             }
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return warns;
@@ -56,7 +58,7 @@ public class DAOWarnList extends DAO {
 
                 warnedUserIDs.add(rs.getString("userid"));
             }
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

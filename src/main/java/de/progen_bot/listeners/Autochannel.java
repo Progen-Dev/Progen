@@ -14,7 +14,7 @@ public class Autochannel extends ListenerAdapter {
         VoiceChannel vc = event.getChannelJoined();
 
         if (vc.getName().contains("⏬")) {
-            VoiceChannel vc1 = (VoiceChannel) event.getGuild().getController().createVoiceChannel(vc.getName().replace("⏬","⏫"))
+            VoiceChannel vc1 = (VoiceChannel) event.getGuild().createVoiceChannel(vc.getName().replace("⏬", "⏫"))
                     .setBitrate(vc.getBitrate())
                     .setUserlimit(vc.getUserLimit())
                     .complete();
@@ -22,9 +22,9 @@ public class Autochannel extends ListenerAdapter {
             if (vc.getParent() != null)
                 vc1.getManager().setParent(vc.getParent()).queue();
 
-            event.getGuild().getController().modifyVoiceChannelPositions().selectPosition(vc1).moveTo(vc.getPosition() + 1).queue();
-            event.getGuild().getController().modifyVoiceChannelPositions().selectPosition(vc1).moveTo(vc.getPosition() + 1).queue();
-            event.getGuild().getController().moveVoiceMember(event.getMember(), vc1).queue();
+            event.getGuild().modifyVoiceChannelPositions().selectPosition(vc1).moveTo(vc.getPosition() + 1).queue();
+            event.getGuild().modifyVoiceChannelPositions().selectPosition(vc1).moveTo(vc.getPosition() + 1).queue();
+            event.getGuild().moveVoiceMember(event.getMember(), vc1).queue();
         }
     }
 
@@ -34,7 +34,7 @@ public class Autochannel extends ListenerAdapter {
         VoiceChannel vc = event.getChannelJoined();
 
         if (vc.getName().contains("⏬")) {
-            VoiceChannel vc1 = (VoiceChannel) event.getGuild().getController().createVoiceChannel(vc.getName().replace("⏬","⏫"))
+            VoiceChannel vc1 = (VoiceChannel) event.getGuild().createVoiceChannel(vc.getName().replace("⏬", "⏫"))
                     .setBitrate(vc.getBitrate())
                     .setUserlimit(vc.getUserLimit())
                     .complete();
@@ -42,8 +42,8 @@ public class Autochannel extends ListenerAdapter {
             if (vc.getParent() != null)
                 vc1.getManager().setParent(vc.getParent()).queue();
 
-            event.getGuild().getController().modifyVoiceChannelPositions().selectPosition(vc1).moveTo(vc.getPosition() + 1).queue();
-            event.getGuild().getController().moveVoiceMember(event.getMember(), vc1).queue();
+            event.getGuild().modifyVoiceChannelPositions().selectPosition(vc1).moveTo(vc.getPosition() + 1).queue();
+            event.getGuild().moveVoiceMember(event.getMember(), vc1).queue();
         }
 
         vc = event.getChannelLeft();

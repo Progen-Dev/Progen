@@ -1,13 +1,13 @@
 package de.progen_bot.listeners;
 
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ThreadLocalRandom;
-
-import net.dv8tion.jda.api.events.
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The listener interface for receiving ready events.
@@ -22,33 +22,33 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  */
 public class ReadyListener extends ListenerAdapter {
 
-	/* (non-Javadoc)
-	 * @see net.dv8tion.jda.de.progen_bot.core.hooks.ListenerAdapter#onReady(net.dv8tion.jda.de.progen_bot.core.events.ReadyEvent)
-	 */
-	public void onReady(ReadyEvent event) {
+    /* (non-Javadoc)
+     * @see net.dv8tion.jda.de.progen_bot.core.hooks.ListenerAdapter#onReady(net.dv8tion.jda.de.progen_bot.core.events.ReadyEvent)
+     */
+    public void onReady(ReadyEvent event) {
 
-		String out = "\nProgen läuft auf:\n" + "----------------------------------\n";
+        String out = "\nProgen läuft auf:\n" + "----------------------------------\n";
 
-		for (Guild g : event.getJDA().getGuilds()) {
-			out += "-" + g.getName() + "(" + g.getId() + ")" +  "\n";
-		}
+        for (Guild g : event.getJDA().getGuilds()) {
+            out += "-" + g.getName() + "(" + g.getId() + ")" + "\n";
+        }
 
-		Game[] games = new Game[]{
-				Game.playing("Use your Prefix and register for the webinterface"),
-				Game.watching("Use pb!changeprefix"),
-				Game.playing("New Webinterface"),
-				Game.playing("New Commands!"),
-				Game.playing("Version: 1.0.0")};
+        Activity[] games = new Activity[]{
+                Activity.playing("Use your Prefix and register for the webinterface"),
+                Activity.watching("Use pb!changeprefix"),
+                Activity.playing("New Webinterface"),
+                Activity.playing("New Commands!"),
+                Activity.playing("Version: 1.0.0")};
 
-		new Timer().schedule(new TimerTask() {
+        new Timer().schedule(new TimerTask() {
 
-			@Override
-			public void run() {
-				event.getJDA().getPresence().setGame(games[ThreadLocalRandom.current().nextInt(5)]);
-			}
+            @Override
+            public void run() {
+                event.getJDA().getPresence().setActivity(games[ThreadLocalRandom.current().nextInt(5)]);
+            }
 
-		}, 0, 10000);
+        }, 0, 10000);
 
-		System.out.println(out);
-	}
+        System.out.println(out);
+    }
 }

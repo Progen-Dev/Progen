@@ -27,7 +27,7 @@ public class APICommandHandler implements HttpHandler {
         this.tokenManager = tokenManager;
     }
 
-    public void handle(HttpExchange exchange) throws IOException{
+    public void handle(HttpExchange exchange) throws IOException {
 
         System.out.println("Get Request");
 

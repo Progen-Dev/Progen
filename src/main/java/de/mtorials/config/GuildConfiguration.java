@@ -11,7 +11,8 @@ public class GuildConfiguration {
     private String logChannelID;
     private String tempChannelCatergoryID;
 
-    GuildConfiguration() {}
+    GuildConfiguration() {
+    }
 
     GuildConfiguration(String prefix, String logChannelID, String tempChannelCatergoryID) {
 

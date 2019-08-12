@@ -7,8 +7,9 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 
 public class WarnDelete extends CommandHandler {
-    public WarnDelete() {super("warndelete","warndelete <user> <reason>","warned a user");
-}
+    public WarnDelete() {
+        super("warndelete", "warndelete <user> <reason>", "warned a user");
+    }
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {

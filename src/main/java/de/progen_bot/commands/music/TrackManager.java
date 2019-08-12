@@ -8,7 +8,6 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 
-
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -18,6 +17,7 @@ public class TrackManager extends AudioEventAdapter {
 
     /**
      * Erstellt eine Instanz der Klasse TrackManager.
+     *
      * @param player
      */
 
@@ -26,9 +26,11 @@ public class TrackManager extends AudioEventAdapter {
         this.queue = new LinkedBlockingQueue<>();
 
     }
+
     /**
      * Reiht den übergebenen Track in die Queue ein.
-     * @param track AudioTrack
+     *
+     * @param track  AudioTrack
      * @param author Member, der den Track eingereiht hat
      */
 
@@ -42,6 +44,7 @@ public class TrackManager extends AudioEventAdapter {
 
     /**
      * Returnt die momentane Queue als LinkedHashSet.
+     *
      * @return Queue
      */
 
@@ -51,6 +54,7 @@ public class TrackManager extends AudioEventAdapter {
 
     /**
      * Returnt AudioInfo des Tracks aus der Queue.
+     *
      * @param track AudioTrack
      * @return AudioInfo
      */
@@ -85,13 +89,14 @@ public class TrackManager extends AudioEventAdapter {
         queue.addAll(cQueue);
 
     }
+
     /**
      * PLAYER EVENT: TRACK STARTET
      * Wenn Einreiher nicht im VoiceChannel ist, wird der Player gestoppt.
      * Sonst connectet der Bot in den Voice Channel des Einreihers.
+     *
      * @param player AudioPlayer
-     * @param track AudioTrack
-
+     * @param track  AudioTrack
      */
 
     @Override
@@ -104,6 +109,7 @@ public class TrackManager extends AudioEventAdapter {
             info.getAuthor().getGuild().getAudioManager().openAudioConnection(vChan);
 
     }
+
     /**
      * PLAYER EVENT: TRACK ENDE
      * Wenn die Queue zuende ist, verlässt der Bot den Audio Channel.

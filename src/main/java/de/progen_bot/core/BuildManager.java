@@ -10,29 +10,31 @@ import net.dv8tion.jda.api.JDABuilder;
  */
 public class BuildManager {
 
-	/** The builder. */
-	private JDABuilder builder;
+    /**
+     * The builder.
+     */
+    private JDABuilder builder;
 
-	/**
-	 * Instantiates a new builds the manager.
-	 *
-	 * @param builder the builder
-	 */
-	public BuildManager(JDABuilder builder) {
-		this.builder = builder;
-		addEventListeners();
-	}
+    /**
+     * Instantiates a new builds the manager.
+     *
+     * @param builder the builder
+     */
+    public BuildManager(JDABuilder builder) {
+        this.builder = builder;
+        addEventListeners();
+    }
 
-	/**
-	 * Adds the event de.progen_bot.listeners.
-	 */
-	private void addEventListeners() {
-		builder.addEventListeners(new CommandManager());
-		builder.addEventListeners(new ReadyListener());
-		builder.addEventListeners(new XPListener());
-		builder.addEventListeners(new VotingListener());
-		builder.addEventListeners(new Autochannel());
-		builder.addEventListeners(new PrivateVoice());
-		builder.addEventListeners(new FourConnectListener());
-	}
+    /**
+     * Adds the event de.progen_bot.listeners.
+     */
+    private void addEventListeners() {
+        builder.addEventListeners(new CommandManager());
+        builder.addEventListeners(new ReadyListener());
+        builder.addEventListeners(new XPListener());
+        builder.addEventListeners(new VotingListener());
+        builder.addEventListeners(new Autochannel());
+        builder.addEventListeners(new PrivateVoice());
+        builder.addEventListeners(new FourConnectListener());
+    }
 }

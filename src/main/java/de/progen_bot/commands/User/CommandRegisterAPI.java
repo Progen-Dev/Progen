@@ -5,7 +5,6 @@ import de.mtorials.webinterface.httpapi.API;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CommandRegisterAPI extends CommandHandler {
 

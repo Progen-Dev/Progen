@@ -1,7 +1,6 @@
 package de.progen_bot.util;
 
 
-
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
@@ -19,6 +18,7 @@ public class MessageGenerator {
 
     /**
      * The error.
+     *
      * @param error
      */
     public MessageEmbed generateErrorMsg(String error) {
@@ -49,6 +49,7 @@ public class MessageGenerator {
 
     /**
      * The warning
+     *
      * @param warning
      * @return
      */
@@ -56,9 +57,10 @@ public class MessageGenerator {
         return new EmbedBuilder()
                 .setColor(Color.BLUE)
                 .setTitle("INFO")
-                .setDescription(":warning: " + warning+ " :warning:")
+                .setDescription(":warning: " + warning + " :warning:")
                 .build();
     }
+
     public MessageEmbed generateInfoMsg(String infomsg) {
         return new EmbedBuilder()
                 .setColor(Color.BLUE)
@@ -69,9 +71,10 @@ public class MessageGenerator {
 
     /**
      * Right
+     *
      * @param right
      */
-    public  MessageEmbed generateRightMsg(String right){
+    public MessageEmbed generateRightMsg(String right) {
         return new EmbedBuilder()
                 .setColor(Color.GREEN)
                 .setTitle("RIGHT")

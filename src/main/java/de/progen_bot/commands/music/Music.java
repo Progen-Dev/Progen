@@ -18,15 +18,16 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Music extends CommandHandler {
-    public Music() {super("music" , "pb!music play [LINK], pb!music stop" , "music");
-            AudioSourceManagers.registerRemoteSources(MANAGER);}
+    public Music() {
+        super("music", "pb!music play [LINK], pb!music stop", "music");
+        AudioSourceManagers.registerRemoteSources(MANAGER);
+    }
 
 
     private static final int PLAYLIST_LIMIT = 2000;
@@ -40,7 +41,8 @@ public class Music extends CommandHandler {
      */
 
     private AudioPlayer createPlayer(Guild g) {
-        AudioPlayer p = MANAGER.createPlayer();TrackManager m = new TrackManager(p);
+        AudioPlayer p = MANAGER.createPlayer();
+        TrackManager m = new TrackManager(p);
         p.addListener(m);
         guild.getAudioManager().setSendingHandler(new PlayerSendHandler(p));
         PLAYERS.put(g, new AbstractMap.SimpleEntry<>(p, m));
@@ -58,6 +60,7 @@ public class Music extends CommandHandler {
 
     /**
      * oder erstellt einen neuen Player für die Guild.
+     *
      * @param g Guild
      * @return AudioPlayer
      */
@@ -70,7 +73,6 @@ public class Music extends CommandHandler {
     }
 
 
-
     /**
      * @param g Guild
      * @return TrackManager
@@ -81,6 +83,7 @@ public class Music extends CommandHandler {
 
     /**
      * gerade einen Track spielt.
+     *
      * @param g Guild
      * @return Boolean
      */
@@ -91,20 +94,21 @@ public class Music extends CommandHandler {
 
     /**
      * @param identifier URL oder Search String
-     * @param author Member, der den Track / die Playlist eingereiht hat
-     * @param msg Message des Contents
+     * @param author     Member, der den Track / die Playlist eingereiht hat
+     * @param msg        Message des Contents
      */
 
     private void loadTrack(String identifier, Member author, Message msg) {
         Guild guild = author.getGuild();
         getPlayer(guild);
         MANAGER.setFrameBufferDuration(1000);
-        MANAGER.loadItemOrdered(guild , identifier , new AudioLoadResultHandler() {
+        MANAGER.loadItemOrdered(guild, identifier, new AudioLoadResultHandler() {
 
             @Override
             public void trackLoaded(AudioTrack track) {
                 getManager(guild).queue(track, author);
             }
+
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
                 for (int i = 0; i < (playlist.getTracks().size() > PLAYLIST_LIMIT ? PLAYLIST_LIMIT : playlist.getTracks().size()); i++) {
@@ -122,12 +126,14 @@ public class Music extends CommandHandler {
             }
         });
     }
+
     /**
      * @param g Guild
      */
     private void skip(Guild g) {
         getPlayer(g).stopTrack();
     }
+
     /**
      * @param milis Timestamp
      * @return Zeitformat
@@ -146,6 +152,7 @@ public class Music extends CommandHandler {
 
     /**
      * Returnt aus der AudioInfo eines Tracks die Informationen als String.
+     *
      * @param info AudioInfo
      * @return Informationen als String
      */
@@ -159,7 +166,8 @@ public class Music extends CommandHandler {
 
     /**
      * Sendet eine Embed-Message in der Farbe Rot mit eingegebenen Content.
-     * @param event MessageReceivedEvent
+     *
+     * @param event   MessageReceivedEvent
      * @param content Error Message Content
      */
 
@@ -232,12 +240,12 @@ public class Music extends CommandHandler {
                 break;
             case "queue":
                 if (isIdle(guild)) return;
-                int sideNumb =parsedCommand.getArgs().length > 1 ? Integer.parseInt(parsedCommand.getArgs()[1]) : 1;
+                int sideNumb = parsedCommand.getArgs().length > 1 ? Integer.parseInt(parsedCommand.getArgs()[1]) : 1;
                 List<String> tracks = new ArrayList<>();
                 List<String> trackSublist;
                 getManager(guild).getQueue().forEach(audioInfo -> tracks.add(buildQueueMessage(audioInfo)));
                 if (tracks.size() > 20)
-                    trackSublist = tracks.subList((sideNumb-1)*20, (sideNumb-1)*20+20);
+                    trackSublist = tracks.subList((sideNumb - 1) * 20, (sideNumb - 1) * 20 + 20);
                 else
                     trackSublist = tracks;
                 String out = trackSublist.stream().collect(Collectors.joining("\n"));
@@ -254,9 +262,6 @@ public class Music extends CommandHandler {
                 break;
         }
     }
-
-
-
 
 
     @Override

@@ -1,60 +1,60 @@
 package de.progen_bot.db;
 
 public class GameData {
-	private String messageId;
-	private String opponentId;
-	private String challengerId;
-	private String channelId;
-	
-	private int heigh;
-	private int width;
+    private String messageId;
+    private String opponentId;
+    private String challengerId;
+    private String channelId;
 
-	public String getMessageId() {
-		return messageId;
-	}
+    private int heigh;
+    private int width;
 
-	public void setMessageId(String messageId) {
-		this.messageId = messageId;
-	}
+    public String getMessageId() {
+        return messageId;
+    }
 
-	public String getOpponentId() {
-		return opponentId;
-	}
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
 
-	public void setOpponentId(String opponentId) {
-		this.opponentId = opponentId;
-	}
+    public String getOpponentId() {
+        return opponentId;
+    }
 
-	public String getChallengerId() {
-		return challengerId;
-	}
+    public void setOpponentId(String opponentId) {
+        this.opponentId = opponentId;
+    }
 
-	public void setChallengerId(String challengerId) {
-		this.challengerId = challengerId;
-	}
+    public String getChallengerId() {
+        return challengerId;
+    }
 
-	public int getHeigh() {
-		return heigh;
-	}
+    public void setChallengerId(String challengerId) {
+        this.challengerId = challengerId;
+    }
 
-	public void setHeigh(int heigh) {
-		this.heigh = heigh;
-	}
+    public int getHeigh() {
+        return heigh;
+    }
 
-	public int getWidth() {
-		return width;
-	}
+    public void setHeigh(int heigh) {
+        this.heigh = heigh;
+    }
 
-	public void setWidth(int width) {
-		this.width = width;
-	}
+    public int getWidth() {
+        return width;
+    }
 
-	public void setChannel(String id) {
-		this.channelId = id;
-	}
-	
-	public String getChannelId() {
-		return channelId;
-	}
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setChannel(String id) {
+        this.channelId = id;
+    }
+
+    public String getChannelId() {
+        return channelId;
+    }
 
 }

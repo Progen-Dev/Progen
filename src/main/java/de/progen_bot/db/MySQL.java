@@ -1,36 +1,30 @@
 package de.progen_bot.db;
 
+import de.progen_bot.core.Main;
+import de.progen_bot.game.ConnectFourModel;
+import de.progen_bot.util.Settings;
+import net.dv8tion.jda.api.EmbedBuilder;
+
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.progen_bot.core.Main;
-import de.progen_bot.game.ConnectFourModel;
-import net.dv8tion.jda.core.EmbedBuilder;
-import de.progen_bot.util.Settings;
-
 /**
  * The Class Mysql.
  */
 public class MySQL {
-	/** The connection. */
+	/**
+	 * The connection.
+	 */
 
 	private static Connection connection;
 
 
-
 	/**
-
 	 * Connect to mysql.
-
 	 */
 
 	public static void connect() {
@@ -40,11 +34,9 @@ public class MySQL {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 
-
 			String url = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" + Settings.DATABASE
 
 					+ "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
-
 
 
 			System.out.println("Connecting to database...");
@@ -64,7 +56,6 @@ public class MySQL {
 		System.out.println("Connected to database successfully...");
 
 
-
 		generateXpTable();
 
 		//generateWarnTable();
@@ -80,11 +71,8 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Disconnect.
-
 	 */
 
 	public void disconnect() {
@@ -104,15 +92,10 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Gets the connection.
-
 	 *
-
 	 * @return the connection
-
 	 */
 
 	public static Connection getConnection() {
@@ -122,15 +105,10 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Save user data.
-
 	 *
-
 	 * @param data the data
-
 	 */
 
 	public static void saveUserData(UserData data) {
@@ -168,17 +146,11 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Load from id.
-
 	 *
-
 	 * @param userId the user id
-
 	 * @return the user data
-
 	 */
 
 	public static UserData loadFromId(String userId) {
@@ -226,15 +198,10 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Gets the top 10 ranks.
-
 	 *
-
 	 * @return the top 10 ranks as a list with userIds
-
 	 */
 
 	public static List<String> getTop10Ranks() {
@@ -248,7 +215,6 @@ public class MySQL {
 			}
 
 			PreparedStatement ps = connection.prepareStatement("SELECT * FROM `xp` ORDER BY `totalxp` DESC LIMIT 10");
-
 
 
 			ResultSet rs = ps.executeQuery();
@@ -274,17 +240,11 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Insert warn.
-
 	 *
-
 	 * @param username the user id
-
-	 * @param reason the reason
-
+	 * @param reason   the reason
 	 */
 
 	public static void insertWarn(String username, String reason) {
@@ -314,17 +274,11 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Insert warn count.
-
 	 *
-
 	 * @param username the user id
-
-	 * @param count  the count
-
+	 * @param count    the count
 	 */
 
 	public static void insertWarnCount(String username, int count) {
@@ -354,17 +308,11 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Load warn count.
-
 	 *
-
 	 * @param username the user id
-
 	 * @return the int
-
 	 */
 
 	public static int loadWarnCount(String username) {
@@ -423,15 +371,10 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Save poll data.
-
 	 *
-
 	 * @param data the data
-
 	 */
 
 	public static void savePollData(PollData data) {
@@ -489,17 +432,11 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Gets the poll data.
-
 	 *
-
 	 * @param messageId the message id
-
 	 * @return the poll data
-
 	 */
 
 	public static PollData getPollData(String messageId) {
@@ -519,7 +456,6 @@ public class MySQL {
 			ResultSet rs = ps.executeQuery();
 
 
-
 			if (rs.next()) {
 
 				return (setPollDatafromRS(rs));
@@ -537,11 +473,8 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Load poll timer.
-
 	 */
 
 	public static void loadPollTimer() {
@@ -559,11 +492,9 @@ public class MySQL {
 			ResultSet rs = ps.executeQuery();
 
 
-
 			while (rs.next()) {
 
 				PollData data = setPollDatafromRS(rs);
-
 
 
 				if (data.getTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
@@ -575,7 +506,7 @@ public class MySQL {
 					if (Main.getJda().getTextChannelById(data.getChannelId()) != null) {
 
 
-								Main.getJda().getTextChannelById(data.getChannelId());
+						Main.getJda().getTextChannelById(data.getChannelId());
 
 					}
 
@@ -608,7 +539,6 @@ public class MySQL {
 		}
 
 	}
-
 
 
 	public static PollData setPollDatafromRS(ResultSet rs) {
@@ -652,7 +582,6 @@ public class MySQL {
 	}
 
 
-
 	public static GameData getGameData(String messageId) {
 
 		try {
@@ -668,7 +597,6 @@ public class MySQL {
 			ps.setString(1, messageId);
 
 			ResultSet rs = ps.executeQuery();
-
 
 
 			while (rs.next()) {
@@ -692,7 +620,6 @@ public class MySQL {
 			}
 
 
-
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -702,7 +629,6 @@ public class MySQL {
 		return null;
 
 	}
-
 
 
 	public static void insertGameData(GameData game) {
@@ -742,11 +668,8 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Generate xp table.
-
 	 */
 
 	public static void generateXpTable() {
@@ -778,11 +701,8 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Generate warn table.
-
 	 */
 
 	public static void generateWarnTable() {
@@ -812,11 +732,8 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Generate wan count table.
-
 	 */
 
 	public static void generateWarnCountTable() {
@@ -846,11 +763,8 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Generate poll table.
-
 	 */
 
 	public static void generatePollTable() {
@@ -890,11 +804,8 @@ public class MySQL {
 	}
 
 
-
 	/**
-
 	 * Generate four wins table.
-
 	 */
 
 	public static void generateVierGameTable() {
@@ -926,7 +837,6 @@ public class MySQL {
 		}
 
 	}
-
 
 
 	public static void generateGameTable() {
@@ -962,9 +872,7 @@ public class MySQL {
 	}
 
 
-
 	public static void insertConnectFourData(ConnectFourModel data) {
-
 
 
 		try {
@@ -978,7 +886,6 @@ public class MySQL {
 			PreparedStatement ps = connection.prepareStatement(
 
 					"REPLACE INTO fourgame (msgid,height,width,actplayer,board,player1,player2,gameover,counter) VALUES (?,?,?,?,?,?,?,?,?)");
-
 
 
 			char[][] board = data.getBoard();
@@ -1020,7 +927,6 @@ public class MySQL {
 			ps.execute();
 
 
-
 			ps.close();
 
 		} catch (SQLException e) {
@@ -1030,7 +936,6 @@ public class MySQL {
 		}
 
 	}
-
 
 
 	public static ConnectFourModel getConnectFourData(String msgId) {
@@ -1044,19 +949,15 @@ public class MySQL {
 			pstmt.setString(1, msgId);
 
 
-
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 
 
-
 				String[] rows = rs.getString(5).split("\n");
 
 
-
 				char[][] loadedBoard = new char[rows.length][rows.length + 1];
-
 
 
 				for (int i = 0; i < rows.length; i++) {
@@ -1070,7 +971,6 @@ public class MySQL {
 					}
 
 				}
-
 
 
 				ConnectFourModel cFourModel = new ConnectFourModel(loadedBoard, loadedBoard.length,
@@ -1096,7 +996,6 @@ public class MySQL {
 		return null;
 
 	}
-
 
 
 }

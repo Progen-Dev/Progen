@@ -11,21 +11,18 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-
-import java.nio.channels.Channel;
-
 public class PrivateVoiceChannel extends CommandHandler {
 
     public PrivateVoiceChannel() {
-        super("pc","pc [create/add/category] </mentioned user/category name>","You can create your private temporary voice channel. With the add command you can allow access to your channel. If no one is in it, it will be removed.");
+        super("pc", "pc [create/add/category] </mentioned user/category name>", "You can create your private temporary voice channel. With the add command you can allow access to your channel. If no one is in it, it will be removed.");
         //TODO add usage
     }
 
     private String privateChannelPrefix = PrivateVoice.PRIVATEVOICECHANNELPREFIX;
 
-    private boolean checkOwnership(Channel channel, Member member) {
+    private boolean checkOwnership(VoiceChannel channel, Member member) {
 
-        return channel.getName().equals( privateChannelPrefix + " " + member.getUser().getName());
+        return channel.getName().equals(privateChannelPrefix + " " + member.getUser().getName());
     }
 
     private void addUserToChannel(MessageReceivedEvent event) {
@@ -50,10 +47,10 @@ public class PrivateVoiceChannel extends CommandHandler {
 
         event.getMember().getVoiceState().getChannel().createPermissionOverride(event.getMessage().getMentionedMembers().get(0)).setAllow(Permission.VOICE_CONNECT).queue();
         event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg(event.getMessage().getMentionedMembers().get(0).getEffectiveName() + " can now join the voice channel")).queue();
-        event.getMessage().getMentionedMembers().get(0).getUser().openPrivateChannel().complete().sendMessage(event.getMember().getEffectiveName() +" gave you the permission to join his/her voice channel").queue();
+        event.getMessage().getMentionedMembers().get(0).getUser().openPrivateChannel().complete().sendMessage(event.getMember().getEffectiveName() + " gave you the permission to join his/her voice channel").queue();
     }
 
-    private Channel createChannel(MessageReceivedEvent event, String categoryID) {
+    private VoiceChannel createChannel(MessageReceivedEvent event, String categoryID) {
 
         //Check if user is in voice channel
         if (!event.getMember().getVoiceState().inVoiceChannel()) {
@@ -62,13 +59,14 @@ public class PrivateVoiceChannel extends CommandHandler {
         }
 
         // create new channel
-        Channel channel = event.getGuild().getController().createVoiceChannel(privateChannelPrefix + " " + event.getMember().getUser().getName()).complete();
+        VoiceChannel channel =
+                event.getGuild().createVoiceChannel(privateChannelPrefix + " " + event.getMember().getUser().getName()).complete();
         // set permissions
         channel.putPermissionOverride(event.getGuild().getPublicRole()).setDeny(Permission.VOICE_CONNECT).complete();
         // set category
         channel.getManager().setParent(event.getGuild().getCategoryById(categoryID)).queue();
         // move member
-        event.getGuild().getController().moveVoiceMember(event.getMember(), (VoiceChannel)channel).queue();
+        event.getGuild().moveVoiceMember(event.getMember(), channel).queue();
 
         event.getTextChannel().sendMessage(super.messageGenerators.generateSuccessfulMsg()).queue();
 
@@ -83,7 +81,7 @@ public class PrivateVoiceChannel extends CommandHandler {
             return;
         }
 
-        switch(parsedCommand.getArgsAsList().get(0)) {
+        switch (parsedCommand.getArgsAsList().get(0)) {
 
             case "add":
                 addUserToChannel(event);
@@ -107,7 +105,7 @@ public class PrivateVoiceChannel extends CommandHandler {
                 }
 
                 // create channel
-                String id = event.getGuild().getController().createCategory(parsedCommand.getArgsAsList().get(1)).complete().getId();
+                String id = event.getGuild().createCategory(parsedCommand.getArgsAsList().get(1)).complete().getId();
 
                 GuildConfiguration newConfig = new GuildConfigurationBuilder()
                         .setGuildConfig(configuration)

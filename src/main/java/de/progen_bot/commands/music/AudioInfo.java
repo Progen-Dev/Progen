@@ -9,9 +9,9 @@ public class AudioInfo {
     private final Member AUTHOR;
 
     /**
-     *Creates an instance of the AudioInfo class.
+     * Creates an instance of the AudioInfo class.
      *
-     * @param track AudioTrack
+     * @param track  AudioTrack
      * @param author Member
      */
     public AudioInfo(AudioTrack track, Member author) {

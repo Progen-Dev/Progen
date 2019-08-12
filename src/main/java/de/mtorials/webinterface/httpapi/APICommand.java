@@ -2,7 +2,6 @@ package de.mtorials.webinterface.httpapi;
 
 import net.dv8tion.jda.api.entities.Member;
 
-
 import java.util.Map;
 
 public abstract class APICommand {

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package de.progen_bot.commands.xp;
 
@@ -15,36 +15,36 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
  */
 public class XPNotify extends CommandHandler {
 
-	/**
-	 * Instantiates a new XP notify.
-	 */
-	public XPNotify() {
-		super("xpnotify","xpnotify","disable or enable the lvl up notification");
-	}
+    /**
+     * Instantiates a new XP notify.
+     */
+    public XPNotify() {
+        super("xpnotify", "xpnotify", "disable or enable the lvl up notification");
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.progen_bot.command.CommandHandler#execute(de.progen_bot.command.CommandManager.ParsedCommandString,
-	 * net.dv8tion.jda.de.progen_bot.core.events.message.MessageReceivedEvent)
-	 */
-	@Override
-	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-		UserData data = UserData.fromId(event.getAuthor().getId());
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * de.progen_bot.command.CommandHandler#execute(de.progen_bot.command.CommandManager.ParsedCommandString,
+     * net.dv8tion.jda.de.progen_bot.core.events.message.MessageReceivedEvent)
+     */
+    @Override
+    public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+        UserData data = UserData.fromId(event.getAuthor().getId());
 
-		if (data.getLvlupNotify()) {
-			data.setLvlupNotify(false);
-			event.getTextChannel().sendMessage("LevelUp message successful disabled").queue();
-		} else {
-			data.setLvlupNotify(true);
-			event.getTextChannel().sendMessage("LevelUp message successful enabled").queue();
-		}
-		data.save(data);
-	}
+        if (data.getLvlupNotify()) {
+            data.setLvlupNotify(false);
+            event.getTextChannel().sendMessage("LevelUp message successful disabled").queue();
+        } else {
+            data.setLvlupNotify(true);
+            event.getTextChannel().sendMessage("LevelUp message successful enabled").queue();
+        }
+        data.save(data);
+    }
 
-	@Override
-	public String help() {
-		return null;
-	}
+    @Override
+    public String help() {
+        return null;
+    }
 }

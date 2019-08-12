@@ -21,7 +21,7 @@ public class TokenManagerDAO extends DAO {
         return rs.next();
     }
 
-    boolean memberExists(Member member) throws SQLException{
+    boolean memberExists(Member member) throws SQLException {
 
         ResultSet rs = super.getMySQLConnection().query("SELECT token FROM tokens WHERE userid = '" + member.getUser().getId() + "' AND guildid = '" + member.getGuild().getId() + "'");
         return rs.next();

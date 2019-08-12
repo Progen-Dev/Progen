@@ -13,7 +13,7 @@ public class MySQLConnection {
 
     private Connection connection;
 
-    public MySQLConnection(String host, String database, String user, String password){
+    public MySQLConnection(String host, String database, String user, String password) {
         this.host = host;
         this.database = database;
         this.user = user;
@@ -21,14 +21,14 @@ public class MySQLConnection {
         connect();
     }
 
-    public MySQLConnection(String host, String database, String user){
+    public MySQLConnection(String host, String database, String user) {
         this.host = host;
         this.database = database;
         this.user = user;
         connect();
     }
 
-    private void connect(){
+    private void connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://" + host + ":3306/" + database + "?autoReconnect=true&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin", user, password);
@@ -44,9 +44,9 @@ public class MySQLConnection {
         }
     }
 
-    public void close(){
+    public void close() {
         try {
-            if(connection != null){
+            if (connection != null) {
                 connection.close();
             }
         } catch (SQLException e) {
@@ -55,12 +55,12 @@ public class MySQLConnection {
         }
     }
 
-    public boolean update(String sql){
+    public boolean update(String sql) {
         try {
-            if(connection != null){
+            if (connection != null) {
                 Statement st = connection.createStatement();
                 st.execute(sql);
-            }else{
+            } else {
                 connect();
             }
             return true;

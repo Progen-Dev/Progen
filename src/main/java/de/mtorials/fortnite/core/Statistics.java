@@ -26,10 +26,12 @@ public class Statistics {
             throw new NotEnoughtDetailsException();
         }
 
-        if (jsonNode.get("overallData").get("defaultModes").get("kills") != null) this.overallKills = jsonNode.get("overallData").get("defaultModes").get("kills").asInt();
+        if (jsonNode.get("overallData").get("defaultModes").get("kills") != null)
+            this.overallKills = jsonNode.get("overallData").get("defaultModes").get("kills").asInt();
         else this.overallKills = 0;
 
-        if (jsonNode.get("overallData").get("defaultModes").get("placetop1") != null) this.overallPlaceTop1 = jsonNode.get("overallData").get("defaultModes").get("placetop1").asInt();
+        if (jsonNode.get("overallData").get("defaultModes").get("placetop1") != null)
+            this.overallPlaceTop1 = jsonNode.get("overallData").get("defaultModes").get("placetop1").asInt();
         else this.overallPlaceTop1 = 0;
     }
 

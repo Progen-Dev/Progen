@@ -1,12 +1,9 @@
 package de.mtorials.webinterface.httpapi;
 
 import de.mtorials.webinterface.exceptions.APIUserNotRegistered;
-import de.progen_bot.core.Main;
 import net.dv8tion.jda.api.entities.Member;
 
-
 import java.sql.SQLException;
-import java.util.HashMap;
 
 public class APITokenManager {
 
@@ -64,7 +61,7 @@ public class APITokenManager {
             // generate a random number between
             // 0 to AlphaNumericString variable length
             int index
-                    = (int)(AlphaNumericString.length()
+                    = (int) (AlphaNumericString.length()
                     * Math.random());
 
             // add Character one by one in end of sb

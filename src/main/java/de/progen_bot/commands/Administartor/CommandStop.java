@@ -18,8 +18,7 @@ public class CommandStop extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        if (PermissionCore.check(4,event))return;
-
+        if (PermissionCore.check(4, event)) return;
 
 
         event.getMessage().delete().queue();

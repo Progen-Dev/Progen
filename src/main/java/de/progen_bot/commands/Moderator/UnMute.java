@@ -9,16 +9,16 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-
 import java.awt.*;
 
 public class UnMute extends CommandHandler {
-    public UnMute(){
-        super("unmute","unmute <user>","unmute a muted user");
+    public UnMute() {
+        super("unmute", "unmute <user>", "unmute a muted user");
     }
+
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        if (PermissionCore.check(1,event))return;
+        if (PermissionCore.check(1, event)) return;
 
         EmbedBuilder error = new EmbedBuilder().setColor(Color.RED).setTitle("Error");
         Guild guild = event.getGuild();
@@ -35,9 +35,9 @@ public class UnMute extends CommandHandler {
             return;
         }
 
-        guild.getController().removeRolesFromMember(event.getMessage().getMentionedMembers().get(0), guild.getRolesByName("blue-muted", false).get(0)).complete();
+        guild.removeRoleFromMember(event.getMessage().getMentionedMembers().get(0), guild.getRolesByName("blue-muted", false).get(0)).complete();
 
-        event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.green).setTitle("Erfolgreich").setDescription("User "+ event.getMessage().getMentionedMembers().get(0).getAsMention()+ " erfolgreich entmutet").build()).queue();
+        event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.green).setTitle("Erfolgreich").setDescription("User " + event.getMessage().getMentionedMembers().get(0).getAsMention() + " erfolgreich entmutet").build()).queue();
 
     }
 

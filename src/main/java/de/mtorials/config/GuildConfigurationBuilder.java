@@ -1,7 +1,5 @@
 package de.mtorials.config;
 
-import java.util.ArrayList;
-
 public class GuildConfigurationBuilder {
 
     private String preifx;

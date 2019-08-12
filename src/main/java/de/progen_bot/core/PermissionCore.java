@@ -5,7 +5,6 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-
 import java.awt.*;
 
 public class PermissionCore {
@@ -31,7 +30,7 @@ public class PermissionCore {
             return 2;
 
         if (member.hasPermission(Permission.MESSAGE_MANAGE))
-                return 1;
+            return 1;
 
         return 0;
     }

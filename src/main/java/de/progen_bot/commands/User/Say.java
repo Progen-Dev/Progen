@@ -8,23 +8,23 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Say extends CommandHandler {
 
-	public Say() {
-		super("say","say <text>","let the bot write a message");
-	}
+    public Say() {
+        super("say", "say <text>", "let the bot write a message");
+    }
 
-	@Override
-	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-	    String out = " ";
-        for ( String s : parsedCommand.getArgs()) {
+    @Override
+    public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+        String out = " ";
+        for (String s : parsedCommand.getArgs()) {
             out += s + " ";
         }
 
         event.getTextChannel().sendMessage(out).queue();
-	}
+    }
 
-	@Override
-	public String help() {
-		return null;
-	}
+    @Override
+    public String help() {
+        return null;
+    }
 
 }

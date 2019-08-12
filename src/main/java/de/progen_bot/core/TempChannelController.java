@@ -1,9 +1,8 @@
 package de.progen_bot.core;
 
 import net.dv8tion.jda.api.entities.Category;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
-
-import java.nio.channels.Channel;
 
 public class TempChannelController {
 
@@ -14,17 +13,17 @@ public class TempChannelController {
         this.category = category;
     }
 
-    public Channel createTextChannel(String name, int userlimit) {
+    public TextChannel createTextChannel(String name, int userlimit) {
 
-        Channel channel =  category.createTextChannel(name).complete();
+        TextChannel channel = category.createTextChannel(name).complete();
         channel.getManager().setParent(category).queue();
         channel.getManager().setUserLimit(userlimit).queue();
         return channel;
     }
 
-    public Channel createTextChannel(String name) {
+    public TextChannel createTextChannel(String name) {
 
-        Channel channel =  category.createTextChannel(name).complete();
+        TextChannel channel = category.createTextChannel(name).complete();
         channel.getManager().setParent(category).queue();
         return channel;
     }

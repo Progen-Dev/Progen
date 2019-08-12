@@ -1,113 +1,113 @@
 package de.progen_bot.listeners;
 
-import java.awt.Color;
-import java.util.concurrent.TimeUnit;
-
 import de.progen_bot.core.Main;
 import de.progen_bot.db.GameData;
 import de.progen_bot.db.MySQL;
 import de.progen_bot.game.ConnectFourModel;
 import de.progen_bot.game.FourConnectGame;
+import de.progen_bot.util.Util;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.priv.react.PrivateMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import de.progen_bot.util.Util;
+
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 public class FourConnectListener extends ListenerAdapter {
-	private static JDA jda;
+    private static JDA jda;
 
-	@Override
-	public void onPrivateMessageReactionAdd(PrivateMessageReactionAddEvent event) {
-		jda = Main.getJda();
+    @Override
+    public void onPrivateMessageReactionAdd(PrivateMessageReactionAddEvent event) {
+        jda = Main.getJda();
 
-		// check if reactionMessage is an invite
-		if (MySQL.getGameData(event.getMessageId()) != null) {
-			if (!event.getUser().isBot()) {
-				GameData gameData = MySQL.getGameData(event.getMessageId());
-				String emoteName = event.getReactionEmote().getName();
+        // check if reactionMessage is an invite
+        if (MySQL.getGameData(event.getMessageId()) != null) {
+            if (!event.getUser().isBot()) {
+                GameData gameData = MySQL.getGameData(event.getMessageId());
+                String emoteName = event.getReactionEmote().getName();
 
-				jda.getPrivateChannelById(event.getChannel().getId())
-						.deleteMessageById(event.getReaction().getMessageId()).queue();
+                jda.getPrivateChannelById(event.getChannel().getId())
+                        .deleteMessageById(event.getReaction().getMessageId()).queue();
 
-				switch (emoteName) {
+                switch (emoteName) {
 
-				case "✅":
+                    case "✅":
 
-					event.getChannel()
-							.sendMessage(new EmbedBuilder().setColor(Color.DARK_GRAY)
-									.setDescription("Spiel wird vorbereitet...").build())
-							.queue(msg -> msg.delete().queueAfter(9, TimeUnit.SECONDS));
+                        event.getChannel()
+                                .sendMessage(new EmbedBuilder().setColor(Color.DARK_GRAY)
+                                        .setDescription("Spiel wird vorbereitet...").build())
+                                .queue(msg -> msg.delete().queueAfter(9, TimeUnit.SECONDS));
 
-					startGame(gameData);
-					break;
+                        startGame(gameData);
+                        break;
 
-				case "❌":
+                    case "❌":
 
-					event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.HSBtoRGB(85, 1, 100))
-							.setDescription("Spielanfrage abgelehnt!").build()).queue();
+                        event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.HSBtoRGB(85, 1, 100))
+                                .setDescription("Spielanfrage abgelehnt!").build()).queue();
 
-					closeGame(gameData);
-					break;
-				}
-			}
-		}
-	}
+                        closeGame(gameData);
+                        break;
+                }
+            }
+        }
+    }
 
-	private static void startGame(GameData gameData) {
-		jda.getUserById(gameData.getChallengerId()).openPrivateChannel().queue(privateChannel -> {
-			privateChannel.sendMessage(jda.getUserById(gameData.getOpponentId()).getName()
-					+ " hat deine Spielanfrage angenommen und eine Spielinstanz wird erstellt!").queue(msg -> {
+    private static void startGame(GameData gameData) {
+        jda.getUserById(gameData.getChallengerId()).openPrivateChannel().queue(privateChannel -> {
+            privateChannel.sendMessage(jda.getUserById(gameData.getOpponentId()).getName()
+                    + " hat deine Spielanfrage angenommen und eine Spielinstanz wird erstellt!").queue(msg -> {
 
-						int heigh = gameData.getHeigh();
-						int width = gameData.getWidth();
+                int heigh = gameData.getHeigh();
+                int width = gameData.getWidth();
 
-						FourConnectGame.createGame(gameData, heigh, width, jda);
-						msg.delete().queueAfter(10, TimeUnit.SECONDS);
-					});
-		});
-	}
+                FourConnectGame.createGame(gameData, heigh, width, jda);
+                msg.delete().queueAfter(10, TimeUnit.SECONDS);
+            });
+        });
+    }
 
-	private static void closeGame(GameData gameData) {
-		jda.getUserById(gameData.getChallengerId()).openPrivateChannel().queue(privateChannel -> {
-			privateChannel
-					.sendMessage(
-							jda.getUserById(gameData.getOpponentId()).getName() + " hat deine Spielanfrage abgelehnt!")
-					.queue();
-		});
-	}
+    private static void closeGame(GameData gameData) {
+        jda.getUserById(gameData.getChallengerId()).openPrivateChannel().queue(privateChannel -> {
+            privateChannel
+                    .sendMessage(
+                            jda.getUserById(gameData.getOpponentId()).getName() + " hat deine Spielanfrage abgelehnt!")
+                    .queue();
+        });
+    }
 
-	public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
-		if (event.getUser().isBot()) {
-			return;
-		}
+    public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
+        if (event.getUser().isBot()) {
+            return;
+        }
 
-		ConnectFourModel gameData = MySQL.getConnectFourData(event.getMessageId());
+        ConnectFourModel gameData = MySQL.getConnectFourData(event.getMessageId());
 
-		if (gameData != null) {
-			if (gameData.isGameOver()) {
-				return;
-			}
+        if (gameData != null) {
+            if (gameData.isGameOver()) {
+                return;
+            }
 
-			if (gameData.nextPlayerMove(event.getUser().getId())) {
-				int emote = Util.getIntegerFromReaction(event.getReactionEmote().getName());
-				if (emote == 0) {
-					return;
-				}
+            if (gameData.nextPlayerMove(event.getUser().getId())) {
+                int emote = Util.getIntegerFromReaction(event.getReactionEmote().getName());
+                if (emote == 0) {
+                    return;
+                }
 
-				gameData.setField(emote);
+                gameData.setField(emote);
 
-				event.getJDA().getTextChannelById(event.getChannel().getId()).getMessageById(event.getMessageId())
-						.queue(msgid -> gameData.updateBoard(msgid));
+                event.getJDA().getTextChannelById(event.getChannel().getId()).retrieveMessageById(event.getMessageId())
+                        .queue(msgid -> gameData.updateBoard(msgid));
 
-				if (gameData.isGameOver()) {
-					String text = event.getUser().getAsMention() + " hat gewonnen!";
-					event.getChannel().sendMessage(text).queue();
-					return;
-				}
-			}
-			event.getReaction().removeReaction(event.getUser()).queue();
-		}
-	}
+                if (gameData.isGameOver()) {
+                    String text = event.getUser().getAsMention() + " hat gewonnen!";
+                    event.getChannel().sendMessage(text).queue();
+                    return;
+                }
+            }
+            event.getReaction().removeReaction(event.getUser()).queue();
+        }
+    }
 }
