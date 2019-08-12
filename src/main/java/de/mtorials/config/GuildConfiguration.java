@@ -1,6 +1,6 @@
 package de.mtorials.config;
 
-import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.api.entities.Guild;
 
 
 public class GuildConfiguration {

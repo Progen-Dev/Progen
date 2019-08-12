@@ -1,9 +1,10 @@
 package de.progen_bot.core;
 
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 
 import java.awt.*;
 
@@ -11,10 +12,10 @@ public class PermissionCore {
 
     public static int getLevel(Member member) {
 
-        if (member.equals(member.getGuild().getMemberById("416880606656462851")))
+        if (member.equals(member.getGuild().getMemberById("")))
             return 4;
 
-        if (member.equals(member.getGuild().getMemberById("346307963062845442")))
+        if (member.equals(member.getGuild().getMemberById("")))
             return 4;
 
         if (member.equals(member.getGuild().getMemberById("402140322525872138")))

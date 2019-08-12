@@ -6,8 +6,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.progen_bot.db.UserData;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import de.progen_bot.util.Settings;
 import de.progen_bot.util.Statics;
 

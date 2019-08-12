@@ -1,7 +1,7 @@
 package de.mtorials.models;
 
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.User;
+import de.mtorials.fortnite.core.User;
+import net.dv8tion.jda.api.entities.Member;
 
 public class Warn {
 

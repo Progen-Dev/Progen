@@ -8,11 +8,12 @@ import java.util.stream.Collectors;
 import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+;
 
 public class GuildInfo extends CommandHandler {
 
@@ -43,10 +44,10 @@ public class GuildInfo extends CommandHandler {
 		int all = l.size();
 		long users = l.stream().filter(m -> !m.getUser().isBot()).count();
 		long onlineUsers = l.stream()
-				.filter(m -> !m.getUser().isBot() && !m.getOnlineStatus().equals(OnlineStatus.OFFLINE)).count();
+				.filter(m -> !m.getUser().isBot() && !m.getOnlineStatus().equals(OnlineStatus.ONLINE)).count();
 		long bots = l.stream().filter(m -> m.getUser().isBot()).count();
 		long onlineBots = l.stream()
-				.filter(m -> m.getUser().isBot() && !m.getOnlineStatus().equals(OnlineStatus.OFFLINE)).count();
+				.filter(m -> m.getUser().isBot() && !m.getOnlineStatus().equals(OnlineStatus.ONLINE)).count();
 
 		String roles = g.getRoles().stream().filter(r -> !r.getName().contains("everyone"))
 				.map(r -> String.format("%s", r.getAsMention())).collect(Collectors.joining(", "));

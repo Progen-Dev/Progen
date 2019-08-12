@@ -5,7 +5,7 @@ import de.mtorials.config.GuildConfigurationBuilder;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.Main;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class ChangePrefix extends CommandHandler {
 

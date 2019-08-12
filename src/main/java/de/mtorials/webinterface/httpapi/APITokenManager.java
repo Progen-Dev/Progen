@@ -2,7 +2,8 @@ package de.mtorials.webinterface.httpapi;
 
 import de.mtorials.webinterface.exceptions.APIUserNotRegistered;
 import de.progen_bot.core.Main;
-import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.api.entities.Member;
+
 
 import java.sql.SQLException;
 import java.util.HashMap;

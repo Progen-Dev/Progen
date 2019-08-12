@@ -5,7 +5,8 @@ import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.UserData;
 import de.progen_bot.util.Statics;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 
 public class Vote extends CommandHandler {
 

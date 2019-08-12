@@ -3,8 +3,8 @@ package de.progen_bot.game;
 import de.progen_bot.core.Main;
 import de.progen_bot.db.GameData;
 import de.progen_bot.db.MySQL;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Message;
 import de.progen_bot.util.Util;
 
 public class FourConnectGame {

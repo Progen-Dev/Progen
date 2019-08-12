@@ -3,7 +3,8 @@ package de.progen_bot.commands.Moderator;
 import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 
 public class WarnDelete extends CommandHandler {
     public WarnDelete() {super("warndelete","warndelete <user> <reason>","warned a user");

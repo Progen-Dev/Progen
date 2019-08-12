@@ -2,9 +2,9 @@ package de.mtorials.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.mtorials.exceptions.UserHasNoRoleExceotion;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
 
+import javax.management.relation.Role;
+import java.lang.reflect.Member;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;

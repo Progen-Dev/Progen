@@ -5,7 +5,7 @@ import de.mtorials.config.GuildConfigurationBuilder;
 import de.mtorials.webinterface.httpapi.APICommand;
 import de.mtorials.webinterface.httpapi.APIResponseObject;
 import de.progen_bot.core.Main;
-import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.api.entities.Member;
 
 import java.util.Map;
 

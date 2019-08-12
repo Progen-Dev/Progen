@@ -8,11 +8,11 @@ import de.progen_bot.db.GameData;
 import de.progen_bot.db.MySQL;
 import de.progen_bot.game.ConnectFourModel;
 import de.progen_bot.game.FourConnectGame;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.core.events.message.priv.react.PrivateMessageReactionAddEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.events.message.priv.react.PrivateMessageReactionAddEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import de.progen_bot.util.Util;
 
 public class FourConnectListener extends ListenerAdapter {

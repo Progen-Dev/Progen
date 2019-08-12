@@ -1,9 +1,9 @@
 package de.progen_bot.core;
 
-import net.dv8tion.jda.core.entities.Category;
-import net.dv8tion.jda.core.entities.Channel;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.VoiceChannel;
+import net.dv8tion.jda.api.entities.Category;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+
+import java.nio.channels.Channel;
 
 public class TempChannelController {
 

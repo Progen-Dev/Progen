@@ -2,9 +2,8 @@ package de.mtorials.db.dao;
 
 import de.mtorials.models.Warn;
 import de.progen_bot.core.Main;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-
+import net.dv8tion.jda.api.entities.Guild;
+import java.lang.reflect.Member;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class DAOWarnList extends DAO {
     public ArrayList<Warn> getWarnsByMember(Member member) {
 
         ArrayList<Warn> warns = new ArrayList<>();
-        ResultSet rs = super.getMySQLConnection().query("SELECT reason FROM `warn` WHERE userid = '" + member.getUser().getId() + "' AND guildid = '" + member.getGuild().getId() + "'");
+        ResultSet rs = super.getMySQLConnection().query("SELECT reason FROM `warn` WHERE userid = '" + member.getUser.getId() + "' AND guildid = '" + member.getGuild().getId() + "'");
         try {
             while (rs.next()) {
 
@@ -65,7 +64,7 @@ public class DAOWarnList extends DAO {
 
         for (String id : warnedUserIDs) {
 
-            Member currentMember = guild.getMemberById(id);
+            Member currentMember = (Member) guild.getMemberById(id);
             warnsByMembers.put(currentMember, getWarnsByMember(currentMember));
         }
         return warnsByMembers;
@@ -75,7 +74,7 @@ public class DAOWarnList extends DAO {
 
     public void deleteWarnForMember(Member member) {
 
-        super.getMySQLConnection().update("DELETE FROM warn WHERE guildid = '" + member.getGuild().getId() + "' AND userid = '" + member.getUser().getId() + "'");
+        super.getMySQLConnection().update("DELETE FROM warn WHERE guildid = '" + member.getUser().getId() + "' AND userid = '" + member.getUser().getId() + "'");
     }
 
     public void addWarnForMember(Member member, String reason) {

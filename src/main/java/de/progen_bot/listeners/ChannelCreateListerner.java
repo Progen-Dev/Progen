@@ -1,9 +1,9 @@
 package de.progen_bot.listeners;
 
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.events.channel.text.TextChannelCreateEvent;
-import net.dv8tion.jda.core.events.channel.voice.VoiceChannelCreateEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.events.channel.text.TextChannelCreateEvent;
+import net.dv8tion.jda.api.events.channel.voice.VoiceChannelCreateEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class ChannelCreateListerner extends ListenerAdapter {
     public void onTextChannelCreate(TextChannelCreateEvent event) {

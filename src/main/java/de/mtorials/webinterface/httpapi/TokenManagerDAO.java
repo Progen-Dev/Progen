@@ -2,7 +2,7 @@ package de.mtorials.webinterface.httpapi;
 
 import de.mtorials.db.dao.DAO;
 import de.progen_bot.core.Main;
-import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.api.entities.Member;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

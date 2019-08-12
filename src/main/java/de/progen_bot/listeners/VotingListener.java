@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.progen_bot.db.PollData;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import de.progen_bot.util.Util;
 
 public class VotingListener extends ListenerAdapter {

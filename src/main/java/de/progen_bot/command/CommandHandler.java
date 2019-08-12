@@ -4,11 +4,7 @@ import de.mtorials.config.GuildConfiguration;
 import de.mtorials.db.DAOHandler;
 import de.progen_bot.core.Main;
 import de.progen_bot.util.MessageGenerator;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-
-import java.awt.*;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 /**
  * The Class CommandHandler.

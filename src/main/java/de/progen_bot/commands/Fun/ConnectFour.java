@@ -6,10 +6,11 @@ import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.core.Main;
 import de.progen_bot.db.GameData;
 import de.progen_bot.db.MySQL;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 
 public class ConnectFour extends CommandHandler {
 	public ConnectFour() {

@@ -1,7 +1,8 @@
 package de.progen_bot.commands.music;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.api.entities.Member;
+
 
 public class AudioInfo {
     private final AudioTrack TRACK;

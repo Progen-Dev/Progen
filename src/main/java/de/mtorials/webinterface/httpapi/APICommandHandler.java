@@ -6,7 +6,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import de.mtorials.webinterface.exceptions.APICommandNotFoundException;
 import de.mtorials.webinterface.exceptions.APIException;
-import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.api.entities.Member;
 
 import java.io.IOException;
 import java.io.OutputStream;

@@ -11,22 +11,22 @@ import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.webinterface.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.*;
-import de.progen_bot.commands.Administartor.CommandAddConfig;
-import de.progen_bot.commands.Administartor.CommandRegisterAPI;
+import de.progen_bot.commands.Administartor.CommandRestart;
+import de.progen_bot.commands.User.CommandRegisterAPI;
 import de.progen_bot.commands.Administartor.CommandStop;
 import de.progen_bot.commands.Fun.ConnectFour;
 import de.progen_bot.commands.Moderator.*;
 import de.progen_bot.commands.User.*;
-import de.progen_bot.commands.Warn;
+import de.progen_bot.commands.Moderator.Warn;
 import de.progen_bot.commands.Moderator.WarnList;
 import de.progen_bot.commands.music.Music;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
 import de.progen_bot.db.MySQL;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.api.AccountType;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 import de.progen_bot.util.Settings;
 
 import java.io.IOException;
@@ -107,12 +107,12 @@ public class Main {
 		commandManager.setupCommandHandlers(new Stats());
 		commandManager.setupCommandHandlers(new CommandRegisterAPI());
 		commandManager.setupCommandHandlers(new WarnList());
-		//commandManager.setupCommandHandlers(new CmdTempChannel());
-		commandManager.setupCommandHandlers(new CommandAddConfig());
+		commandManager.setupCommandHandlers(new CmdTempChannel());
 		commandManager.setupCommandHandlers(new ChangePrefix());
 		commandManager.setupCommandHandlers(new WarnDelete());
 		commandManager.setupCommandHandlers(new Vote());
 		commandManager.setupCommandHandlers(new CommandStop());
+		commandManager.setupCommandHandlers(new CommandRestart());
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class Main {
 		new BuildManager(builder);
 
 		try {
-			jda = builder.buildBlocking();
+			jda = builder.build().awaitReady();
 		} catch (LoginException | InterruptedException e) {
 			e.printStackTrace();
 		}

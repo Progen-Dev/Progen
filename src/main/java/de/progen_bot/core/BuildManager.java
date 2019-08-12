@@ -2,7 +2,8 @@ package de.progen_bot.core;
 
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.listeners.*;
-import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.api.JDABuilder;
+
 
 /**
  * The Class BuildManager.
@@ -26,12 +27,12 @@ public class BuildManager {
 	 * Adds the event de.progen_bot.listeners.
 	 */
 	private void addEventListeners() {
-		builder.addEventListener(new CommandManager());
-		builder.addEventListener(new ReadyListener());
-		builder.addEventListener(new XPListener());
-		builder.addEventListener(new VotingListener());
-		builder.addEventListener(new Autochannel());
-		builder.addEventListener(new PrivateVoice());
-		builder.addEventListener(new FourConnectListener());
+		builder.addEventListeners(new CommandManager());
+		builder.addEventListeners(new ReadyListener());
+		builder.addEventListeners(new XPListener());
+		builder.addEventListeners(new VotingListener());
+		builder.addEventListeners(new Autochannel());
+		builder.addEventListeners(new PrivateVoice());
+		builder.addEventListeners(new FourConnectListener());
 	}
 }

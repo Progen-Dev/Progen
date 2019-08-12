@@ -4,10 +4,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.events.ReadyEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.events.
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * The listener interface for receiving ready events.
@@ -33,13 +33,12 @@ public class ReadyListener extends ListenerAdapter {
 			out += "-" + g.getName() + "(" + g.getId() + ")" +  "\n";
 		}
 
-		Game[] games = new Game[] {
-
-				Game.playing("New music feature"),
-				Game.watching("new Website: http://progen-bot.de/"),
-				Game.playing("Music: pb!help music"),
-				Game.playing("pb!help"),
-				Game.playing("Version:1.3")};
+		Game[] games = new Game[]{
+				Game.playing("Use your Prefix and register for the webinterface"),
+				Game.watching("Use pb!changeprefix"),
+				Game.playing("New Webinterface"),
+				Game.playing("New Commands!"),
+				Game.playing("Version: 1.0.0")};
 
 		new Timer().schedule(new TimerTask() {
 
@@ -48,7 +47,7 @@ public class ReadyListener extends ListenerAdapter {
 				event.getJDA().getPresence().setGame(games[ThreadLocalRandom.current().nextInt(5)]);
 			}
 
-		}, 0, 20000);
+		}, 0, 10000);
 
 		System.out.println(out);
 	}
