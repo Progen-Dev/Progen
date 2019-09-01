@@ -110,6 +110,7 @@ public class Main {
         commandManager.setupCommandHandlers(new Vote());
         commandManager.setupCommandHandlers(new CommandStop());
         commandManager.setupCommandHandlers(new CommandRestart());
+        commandManager.setupCommandHandlers(new kick());
     }
 
     /**

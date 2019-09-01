@@ -111,6 +111,7 @@ public class CommandManager extends ListenerAdapter {
          * The args.
          */
         private final String[] args;
+        public int lenght;
 
         /**
          * Instantiates a new parsed de.progen_bot.command string.

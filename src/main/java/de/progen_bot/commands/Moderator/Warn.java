@@ -19,7 +19,7 @@ public class Warn extends CommandHandler {
 
 	@Override
 	public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-		if (PermissionCore.check(3, event)) return;
+		if (PermissionCore.check(2, event)) return;
 
 		Member warned;
 		if (event.getMessage().getMentionedUsers().size() == 1) {
