@@ -111,6 +111,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandStop());
         commandManager.setupCommandHandlers(new CommandRestart());
         commandManager.setupCommandHandlers(new kick());
+        commandManager.setupCommandHandlers(new CommandInfo());
     }
 
     /**

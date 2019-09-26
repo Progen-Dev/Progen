@@ -1,6 +1,11 @@
 package de.progen_bot.util;
 
+import de.progen_bot.core.Main;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 import java.io.*;
+import java.util.HashMap;
 import java.util.Properties;
 
 /**
@@ -16,6 +21,7 @@ public class Settings {
     public static String USER;
     public static String PASSWORD;
 
+
     /**
      * Load settings.
      *
@@ -30,20 +36,20 @@ public class Settings {
         } catch (IOException e) {
             System.err.println("Error can't load properties check the config.properties file");
 
-            properties.setProperty("Prefix", "pb!");
-            properties.setProperty("Token", "");
+            properties.setProperty("Prefix" , "pb!");
+            properties.setProperty("Token" , "");
             // MySQL
-            properties.setProperty("Host", "");
-            properties.setProperty("Database", "");
-            properties.setProperty("User", "");
-            properties.setProperty("Port", "");
-            properties.setProperty("Password", "");
+            properties.setProperty("Host" , "");
+            properties.setProperty("Database" , "");
+            properties.setProperty("User" , "");
+            properties.setProperty("Port" , "");
+            properties.setProperty("Password" , "");
 
             File f = new File("config.properties");
             OutputStream out;
             try {
                 out = new FileOutputStream(f);
-                properties.store(out, "Enter your data here");
+                properties.store(out , "Enter your data here");
                 out.close();
                 System.out.println("Please enter your data in the config file!");
                 System.exit(0);

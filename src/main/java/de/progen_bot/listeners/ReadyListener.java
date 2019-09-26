@@ -38,7 +38,7 @@ public class ReadyListener extends ListenerAdapter {
                 Activity.watching("Use pb!changeprefix"),
                 Activity.playing("New Webinterface"),
                 Activity.playing("New Commands!"),
-                Activity.playing("Version: 1.0.0")};
+                Activity.playing("Version: 1.0.0.0")};
 
         new Timer().schedule(new TimerTask() {
 
