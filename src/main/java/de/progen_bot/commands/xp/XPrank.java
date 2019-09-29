@@ -13,7 +13,7 @@ import java.util.List;
 
 public class XPrank extends CommandHandler {
     public XPrank() {
-        super("xprank", "xprank", "xprank");
+        super("xprank", "xprank", "compare your xp with the servercommunity");
     }
 
     @Override

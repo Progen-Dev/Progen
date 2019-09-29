@@ -19,7 +19,7 @@ public class XPNotify extends CommandHandler {
      * Instantiates a new XP notify.
      */
     public XPNotify() {
-        super("xpnotify", "xpnotify", "disable or enable the lvl up notification");
+        super("xpnotify", "xpnotify", "enable or disable the lvl up notification");
     }
 
     /*

@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class CommandRegisterAPI extends CommandHandler {
 
     public CommandRegisterAPI() {
-        super("register", "regitser", "The usage of this command is shown in the web interface.");
+        super("register", "register", "The usage of this command is shown in the web interface.");
     }
 
     @Override

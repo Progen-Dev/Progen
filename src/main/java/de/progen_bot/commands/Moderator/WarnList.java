@@ -18,7 +18,7 @@ public class WarnList extends CommandHandler {
      * Instantiates a new de.progen_bot.command handler.
      */
     public WarnList() {
-        super("warnlist", "warnlist", "warnlist"); //TODO warnlist desc
+        super("warnlist", "warnlist or warnlist<user>", "list all active alerts of your server in a table or retrieve custom alerts from specific users"); //TODO warnlist desc
     }
 
     @Override

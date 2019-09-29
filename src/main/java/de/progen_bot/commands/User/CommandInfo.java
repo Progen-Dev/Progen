@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class CommandInfo extends CommandHandler {
     public CommandInfo() {
-        super("info" , "info" , "Infos about Progen");
+        super("info" , "info" , "all infos and links about Progen and Team");
     }
 
     @Override

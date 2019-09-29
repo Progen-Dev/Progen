@@ -1,7 +1,13 @@
 ##Intellij##
+  .out/
+ .github/
  .idea/
+ .images/
+ .target/
  Guilds/
 
   ## Java ##
     *.jar
     *.properties
+    *.json
+    *.class

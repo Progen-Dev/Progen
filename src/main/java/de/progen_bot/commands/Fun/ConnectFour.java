@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class ConnectFour extends CommandHandler {
     public ConnectFour() {
-        super("cf", "cf", "cf");
+        super("cf", "cf<height><width>", "Progen's mini game. Play with a friend. Use this command with: <prefix> cf <height><Width><user without @>");
     }
 
     @Override
