@@ -1,4 +1,5 @@
 ##Intellij##
+  .resources/
   .out/
  .github/
  .idea/
@@ -7,6 +8,7 @@
  Guilds/
 
   ## Java ##
+    *.MAINFEST.MF
     *.jar
     *.properties
     *.json

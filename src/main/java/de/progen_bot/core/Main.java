@@ -40,7 +40,7 @@ public class Main {
     private static MySQL sql;
 
     private static Configuration configuration = new Configuration("config.json");
-    private static MySQLConnection mySQLConnection = new MySQLConnection("localhost", "test", "root", "");
+    private static MySQLConnection mySQLConnection = new MySQLConnection("localhost", "progen", "root", "/Harry0103");
 
     private static Fortnite fortnite;
 

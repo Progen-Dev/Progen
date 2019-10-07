@@ -34,14 +34,14 @@ public class Mute extends CommandHandler {
             event.getTextChannel().sendMessage(error.build()).queue();
             return;
         }
-        if (!(event.getGuild().getRolesByName("blue-muted", false).size() > 0)) {
+        if (!(event.getGuild().getRolesByName("progen-muted", false).size() > 0)) {
             event.getGuild().createRole().setName("blue-muted").complete();
             Role muted = event.getGuild().getRolesByName("blue-muted", false).get(0);
             event.getGuild().getTextChannels().forEach(tchan -> tchan.createPermissionOverride(muted).setDeny(Permission.MESSAGE_WRITE).complete());
             event.getGuild().getVoiceChannels().forEach(vchan -> vchan.createPermissionOverride(muted).setDeny(Permission.VOICE_SPEAK).complete());
         }
         event.getGuild().addRoleToMember(event.getMessage().getMentionedMembers().get(0),
-                event.getGuild().getRolesByName("blue-muted", false).get(0)).complete();
+                event.getGuild().getRolesByName("progen-muted", false).get(0)).complete();
         ok.setDescription("User " + event.getMessage().getMentionedMembers().get(0).getAsMention() + " Wurde erfolgreich gemuted");
         event.getTextChannel().sendMessage(ok.build()).queue();
     }
