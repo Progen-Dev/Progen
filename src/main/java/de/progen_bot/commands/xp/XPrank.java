@@ -25,13 +25,14 @@ public class XPrank extends CommandHandler {
         int i = 1;
         for (String m : top10Ids) {
             UserData tmpData = UserData.fromId(m);
-            sb.append("``#" + i + "`` - " + event.getGuild().getMemberById(m).getAsMention() + " - Level "
-                    + tmpData.getLevel() + "(" + tmpData.getTotalXp() + "XP)\n");
-            i++;
+            if (event.getGuild().getMemberById(m) != null) {
+                sb.append("``#" + i + "`` - " + event.getGuild().getMemberById(m).getAsMention() + " - Level "
+                        + tmpData.getLevel() + "(" + tmpData.getTotalXp() + "XP)\n");
+                i++;
+            }
         }
 
         event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.cyan).setDescription(sb.toString()).build()).queue();
-
     }
 
     @Override
