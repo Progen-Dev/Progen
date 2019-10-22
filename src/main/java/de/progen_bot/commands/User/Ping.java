@@ -16,8 +16,7 @@ public class Ping extends CommandHandler {
 
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.green)
-                .setDescription("Ping: " + event.getJDA().getGatewayPing() + "").build()).queue();
+        event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.green).setDescription("Your Ping: " + event.getJDA().getGatewayPing() + "").build()).queue();
     }
 
     @Override
