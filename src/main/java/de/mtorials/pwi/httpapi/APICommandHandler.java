@@ -1,11 +1,11 @@
-package de.mtorials.webinterface.httpapi;
+package de.mtorials.pwi.httpapi;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import de.mtorials.webinterface.exceptions.APICommandNotFoundException;
-import de.mtorials.webinterface.exceptions.APIException;
+import de.mtorials.pwi.exceptions.APICommandNotFoundException;
+import de.mtorials.pwi.exceptions.APIException;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.io.IOException;

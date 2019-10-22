@@ -1,8 +1,8 @@
-package de.mtorials.webinterface.httpapi;
+package de.mtorials.pwi.httpapi;
 
 import com.sun.net.httpserver.HttpServer;
-import de.mtorials.webinterface.commands.APICommandChangePrefix;
-import de.mtorials.webinterface.commands.APICommandMemberInfo;
+import de.mtorials.pwi.endpoints.APIEPChangePrefix;
+import de.mtorials.pwi.endpoints.APIEPCommandMemberinfo;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -19,8 +19,8 @@ public class API {
         this.httpServer = HttpServer.create(new InetSocketAddress(port), 0);
         httpServer.createContext("/", new APICommandHandlerBuilder()
                 .setTokenManager(tokenManager)
-                .addCommand(new APICommandMemberInfo())
-                .addCommand(new APICommandChangePrefix())
+                .addCommand(new APIEPCommandMemberinfo())
+                .addCommand(new APIEPChangePrefix())
                 .build()
         );
         httpServer.setExecutor(null);

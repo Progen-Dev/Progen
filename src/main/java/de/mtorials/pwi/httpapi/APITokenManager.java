@@ -1,6 +1,6 @@
-package de.mtorials.webinterface.httpapi;
+package de.mtorials.pwi.httpapi;
 
-import de.mtorials.webinterface.exceptions.APIUserNotRegistered;
+import de.mtorials.pwi.exceptions.APIUserNotRegistered;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.sql.SQLException;

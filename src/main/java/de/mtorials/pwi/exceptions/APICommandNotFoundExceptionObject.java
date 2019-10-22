@@ -1,4 +1,4 @@
-package de.mtorials.webinterface.exceptions;
+package de.mtorials.pwi.exceptions;
 
 public class APICommandNotFoundExceptionObject {
 
