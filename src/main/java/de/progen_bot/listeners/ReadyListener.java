@@ -34,10 +34,10 @@ public class ReadyListener extends ListenerAdapter {
         }
 
         Activity[] games = new Activity[]{
-                Activity.playing("Use your Prefix and register for the webinterface"),
-                Activity.watching("Use pb!changeprefix"),
-                Activity.playing("New Webinterface"),
-                Activity.playing("New Commands!"),
+                Activity.playing("New fantastic Commands!"),
+                Activity.watching("Use pb! and check it"),
+                Activity.playing("New Tempchannelcommand"),
+                Activity.playing("New error messages!"),
                 Activity.playing("Version: 1.0.0.0")};
 
         new Timer().schedule(new TimerTask() {

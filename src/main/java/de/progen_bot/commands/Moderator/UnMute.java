@@ -35,7 +35,7 @@ public class UnMute extends CommandHandler {
             return;
         }
 
-        guild.removeRoleFromMember(event.getMessage().getMentionedMembers().get(0), guild.getRolesByName("blue-muted", false).get(0)).complete();
+        guild.removeRoleFromMember(event.getMessage().getMentionedMembers().get(0), guild.getRolesByName("progen-muted", false).get(0)).complete();
 
         event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.green).setTitle("Erfolgreich").setDescription("User " + event.getMessage().getMentionedMembers().get(0).getAsMention() + " erfolgreich entmutet").build()).queue();
 

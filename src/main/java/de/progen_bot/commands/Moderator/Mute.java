@@ -35,8 +35,8 @@ public class Mute extends CommandHandler {
             return;
         }
         if (!(event.getGuild().getRolesByName("progen-muted", false).size() > 0)) {
-            event.getGuild().createRole().setName("blue-muted").complete();
-            Role muted = event.getGuild().getRolesByName("blue-muted", false).get(0);
+            event.getGuild().createRole().setName("progen-muted").complete();
+            Role muted = event.getGuild().getRolesByName("progen-muted", false).get(0);
             event.getGuild().getTextChannels().forEach(tchan -> tchan.createPermissionOverride(muted).setDeny(Permission.MESSAGE_WRITE).complete());
             event.getGuild().getVoiceChannels().forEach(vchan -> vchan.createPermissionOverride(muted).setDeny(Permission.VOICE_SPEAK).complete());
         }

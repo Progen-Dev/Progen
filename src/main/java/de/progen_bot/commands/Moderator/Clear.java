@@ -18,7 +18,7 @@ import java.util.TimerTask;
 public class Clear extends CommandHandler {
 
     public Clear() {
-        super("clear", "clear <anzahl>", "clear some messages");
+        super("clear" , "clear <anzahl>" , "clear some messages");
     }
 
     private int getInt(String string) {
@@ -31,59 +31,12 @@ public class Clear extends CommandHandler {
     }
 
     @Override
-    public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+    public void execute(ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
 
-        if (PermissionCore.check(1, event)) return;
+        if (PermissionCore.check(1 , event)) return;
 
-        String[] args = parsedCommand.getArgs();
-        int numb = getInt(args[0]);
-
-        if (args.length < 1) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Please specify the count of messages to be removed."))
-                    .queue();
-        }
-
-        if (numb > 1 && numb <= 100) {
-            try {
-                MessageHistory history = new MessageHistory(event.getTextChannel());
-                List<Message> msgs;
-                event.getMessage().delete().queue();
-
-                msgs = history.retrievePast(numb).complete();
-                event.getTextChannel().deleteMessages(msgs).queue();
-
-                if (msgs.size() < Integer.parseInt(args[0])) {
-                    Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.ORANGE)
-                            .setDescription("Es konnten nur " + msgs.size() + " Nachrichten gelöscht werden!").build())
-                            .complete();
-
-                    new Timer().schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            msg.delete().queue();
-                        }
-                    }, 3000);
-                } else {
-                    Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.GREEN)
-                            .setDescription(msgs.size() + " gelöschte Nachrichten").build()).complete();
-
-                    new Timer().schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            msg.delete().queue();
-                        }
-                    }, 3000);
-                }
-
-                System.out.println("[INFO]: Es wurden " + msgs.size() + " Nachrichten gelöscht");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            event.getTextChannel()
-                    .sendMessage(super.messageGenerators.generateErrorMsg("Please use a Number between HBA ICH VERGESSEN")).queue();
-        }
     }
+
 
     @Override
     public String help() {
