@@ -1,4 +1,4 @@
-package de.mtorials.webinterface.httpapi;
+package de.mtorials.pwi.httpapi;
 
 public class APIResponseObject {
 

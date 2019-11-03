@@ -67,11 +67,6 @@ Make sure you have installed the [Java Runtime Enviroment](https://java.com/de/d
 
 ## Authors
 * __ShowMeYourSkil__
-    * Discord ```ShowMeYourSkil#5698```
-* __M'Torials__
-    * [Discord](https://discordapp.com/channels/@me/402141243502493699)
-    * [Website](http://mtorials.de/)
-
 ## Support
 
 Feel free to join our Progen discord guild.

@@ -1,17 +1,17 @@
-package de.mtorials.webinterface.commands;
+package de.mtorials.pwi.endpoints;
 
 import de.mtorials.config.GuildConfiguration;
 import de.mtorials.config.GuildConfigurationBuilder;
-import de.mtorials.webinterface.httpapi.APICommand;
-import de.mtorials.webinterface.httpapi.APIResponseObject;
+import de.mtorials.pwi.httpapi.APICommand;
+import de.mtorials.pwi.httpapi.APIResponseObject;
 import de.progen_bot.core.Main;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.util.Map;
 
-public class APICommandChangePrefix extends APICommand {
+public class APIEPChangePrefix extends APICommand {
 
-    public APICommandChangePrefix() {
+    public APIEPChangePrefix() {
         super("changePrefix");
     }
 

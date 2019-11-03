@@ -6,7 +6,7 @@ import de.mtorials.config.Configuration;
 import de.mtorials.db.DAOHandler;
 import de.mtorials.db.MySQLConnection;
 import de.mtorials.fortnite.core.Fortnite;
-import de.mtorials.webinterface.httpapi.API;
+import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.Administartor.CommandRestart;
 import de.progen_bot.commands.Administartor.CommandStop;
@@ -40,7 +40,7 @@ public class Main {
     private static MySQL sql;
 
     private static Configuration configuration = new Configuration("config.json");
-    private static MySQLConnection mySQLConnection = new MySQLConnection("localhost", "test", "root", "");
+    private static MySQLConnection mySQLConnection = new MySQLConnection(Settings.HOST, Settings.DATABASE, Settings.DATABASE, Settings.PASSWORD);
 
     private static Fortnite fortnite;
 

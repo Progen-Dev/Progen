@@ -1,15 +1,15 @@
-package de.mtorials.webinterface.commands;
+package de.mtorials.pwi.endpoints;
 
 import de.mtorials.models.MemberInfo;
-import de.mtorials.webinterface.httpapi.APICommand;
-import de.mtorials.webinterface.httpapi.APIResponseObject;
+import de.mtorials.pwi.httpapi.APICommand;
+import de.mtorials.pwi.httpapi.APIResponseObject;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.util.Map;
 
-public class APICommandMemberInfo extends APICommand {
+public class APIEPCommandMemberinfo extends APICommand {
 
-    public APICommandMemberInfo() {
+    public APIEPCommandMemberinfo() {
         super("getMemberInfo");
     }
 

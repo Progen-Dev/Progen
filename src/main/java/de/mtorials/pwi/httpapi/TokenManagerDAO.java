@@ -1,4 +1,4 @@
-package de.mtorials.webinterface.httpapi;
+package de.mtorials.pwi.httpapi;
 
 import de.mtorials.db.dao.DAO;
 import de.progen_bot.core.Main;

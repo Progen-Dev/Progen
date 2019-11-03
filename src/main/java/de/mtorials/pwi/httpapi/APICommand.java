@@ -1,4 +1,4 @@
-package de.mtorials.webinterface.httpapi;
+package de.mtorials.pwi.httpapi;
 
 import net.dv8tion.jda.api.entities.Member;
 

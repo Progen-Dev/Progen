@@ -1,7 +1,7 @@
 package de.progen_bot.commands.User;
 
 import de.mtorials.config.GuildConfiguration;
-import de.mtorials.webinterface.httpapi.API;
+import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
