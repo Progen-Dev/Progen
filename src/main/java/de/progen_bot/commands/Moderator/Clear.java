@@ -11,14 +11,17 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class Clear extends CommandHandler {
 
+    EmbedBuilder error = new EmbedBuilder().setColor(Color.RED);
+
     public Clear() {
-        super("clear" , "clear <anzahl>" , "clear some messages");
+        super("clear" , "clear <anzahl>" , "clear some messages that are no older than two weeks");
     }
 
     private int getInt(String string) {
@@ -32,10 +35,60 @@ public class Clear extends CommandHandler {
 
     @Override
     public void execute(ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
-
         if (PermissionCore.check(1 , event)) return;
 
-    }
+        String[] args = parsedCommand.getArgs();
+        int numb = getInt(args[0]);
+
+        if (args.length < 1) {
+            event.getTextChannel().sendMessage(error
+                    .setDescription("Please specify how many messages should be deleted.").build())
+                    .queue();
+
+        }
+        if (numb > 1 && numb <= 100) {
+            try {
+                MessageHistory history = new MessageHistory(event.getTextChannel());
+                List<Message> msgs;
+                event.getMessage().delete().queue();
+
+                msgs = history.retrievePast(numb).complete();
+                event.getTextChannel().deleteMessages(msgs).queue();
+
+                if (msgs.size() < Integer.parseInt(args[0])) {
+                    Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.ORANGE)
+
+                            .setDescription("Only " + msgs.size() + " messages could be deleted!").build())
+                            .complete();
+
+                    new Timer().schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            msg.delete().queue();
+                        }
+                    }, 3000);
+                } else {
+                    Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.GREEN)
+                            .setDescription(msgs.size() + " gelöschte Nachrichten").build()).complete();
+
+                    new Timer().schedule(new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            msg.delete().queue();
+                        }
+                    }, 3000);
+                }
+                System.out.println("[INFO]: Es wurden " + msgs.size() + " Nachrichten gelöscht");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            event.getTextChannel()
+                    .sendMessage(error.setDescription("Please use a number between 2 and 500!").build()).queue();
+        }
+}
 
 
     @Override

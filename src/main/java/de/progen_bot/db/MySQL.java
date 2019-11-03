@@ -16,79 +16,57 @@ import java.util.List;
  * The Class Mysql.
  */
 public class MySQL {
-	/**
-	 * The connection.
-	 */
 
+	//Connection
 	private static Connection connection;
 
 
-	/**
-	 * Connect to mysql.
-	 */
-
+	//Connect to Database
 	public static void connect() {
 
 		try {
-
 			Class.forName("com.mysql.cj.jdbc.Driver");
-
-
 			String url = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" + Settings.DATABASE
-
 					+ "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
-
-
 			System.out.println("Connecting to database...");
-
 			connection = DriverManager.getConnection(url, Settings.USER, Settings.PASSWORD);
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
 			System.err.println("Can't connect to database. Please check the config file or connection.");
-
 			System.exit(0);
-
 		}
 
 		System.out.println("Connected to database successfully...");
 
-
+		//generateTAble
 		generateXpTable();
-
-		//generateWarnTable();
-
-		//generateWarnCountTable();
-
 		generatePollTable();
-
 		generateVierGameTable();
-
-		generateGameTable();
-
 	}
 
-
 	/**
-	 * Disconnect.
+	 * Save user data
+	 * @param data the data
 	 */
 
-	public void disconnect() {
-
-		System.out.println("Closing connection to database...");
-
+	public static void saveUserData(UserData data) {
 		try {
+			if (connection.isClosed()) {
+				connect();
+			}
 
-			connection.close();
+			PreparedStatement ps = connection
+					.prepareStatement("REPLACE INTO `xp` (id,userid,totalxp,level,notify) VALUES(?,?,?,?,?)");
+			ps.setInt(1, data.getId());
+			ps.setString(2, data.getUserId());
+			ps.setLong(3, data.getTotalXp());
+			ps.setLong(4, data.getLevel());
+			ps.setBoolean(5, data.getLvlupNotify());
+			ps.execute();
 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-
 		}
-
 	}
 
 
@@ -99,19 +77,11 @@ public class MySQL {
 	 */
 
 	public static Connection getConnection() {
-
 		return connection;
-
 	}
 
-
-	/**
-	 * Save user data.
-	 *
-	 * @param data the data
-	 */
-
-	public static void saveUserData(UserData data) {
+		//GAME
+	public static GameData getGameData(String messageId) {
 
 		try {
 
@@ -121,27 +91,41 @@ public class MySQL {
 
 			}
 
-			PreparedStatement ps = connection
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM `viergame` WHERE `messageid` = ?");
 
-					.prepareStatement("REPLACE INTO `xp` (id,userid,totalxp,level,notify) VALUES(?,?,?,?,?)");
+			ps.setString(1, messageId);
 
-			ps.setInt(1, data.getId());
+			ResultSet rs = ps.executeQuery();
 
-			ps.setString(2, data.getUserId());
 
-			ps.setLong(3, data.getTotalXp());
+			while (rs.next()) {
 
-			ps.setLong(4, data.getLevel());
+				GameData data = new GameData();
 
-			ps.setBoolean(5, data.getLvlupNotify());
+				data.setMessageId(rs.getString(1));
 
-			ps.execute();
+				data.setOpponentId(rs.getString(2));
+
+				data.setChallengerId(rs.getString(3));
+
+				data.setHeigh(rs.getInt(4));
+
+				data.setWidth(rs.getInt(5));
+
+				data.setChannel(rs.getString(6));
+
+				return data;
+
+			}
+
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 
 		}
+
+		return null;
 
 	}
 
@@ -154,92 +138,55 @@ public class MySQL {
 	 */
 
 	public static UserData loadFromId(String userId) {
-
 		UserData data = new UserData();
-
 		try {
-
 			if (connection.isClosed()) {
-
 				connect();
-
 			}
-
 			PreparedStatement ps = connection.prepareStatement("SELECT * FROM `xp` WHERE `userid` = ?");
-
 			ps.setString(1, userId);
-
 			ResultSet rs = ps.executeQuery();
-
 			if (rs.next()) {
-
 				data.setId(rs.getInt(1));
-
 				data.setUserId(rs.getString(2));
-
 				data.setDBTotalXp(rs.getLong(3));
-
 				data.setDBLevel(rs.getInt(4));
-
 				data.setLvlupNotify(rs.getBoolean(5));
-
 				return data;
-
 			}
-
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-
 		}
-
 		return null;
-
 	}
 
 
+	//TOP10RANKS//
 	/**
-	 * Gets the top 10 ranks.
-	 *
 	 * @return the top 10 ranks as a list with userIds
 	 */
 
 	public static List<String> getTop10Ranks() {
 
 		try {
-
 			if (connection.isClosed()) {
-
 				connect();
-
 			}
-
 			PreparedStatement ps = connection.prepareStatement("SELECT * FROM `xp` ORDER BY `totalxp` DESC LIMIT 10");
-
-
 			ResultSet rs = ps.executeQuery();
-
 			List<String> top10 = new ArrayList<String>();
-
 			while (rs.next()) {
-
 				top10.add(rs.getString(2));
-
 			}
-
 			return top10;
-
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-
 		}
-
 		return null;
 
 	}
 
-
+	//WARN//
 	/**
 	 * Insert warn.
 	 *
@@ -250,29 +197,17 @@ public class MySQL {
 	public static void insertWarn(String username, String reason) {
 
 		try {
-
 			if (connection.isClosed()) {
-
 				connect();
-
 			}
-
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO `warn` (userid,reason) VALUES(?,?)");
-
 			ps.setString(1, username);
-
 			ps.setString(2, reason);
-
 			ps.execute();
-
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-
 		}
-
 	}
-
 
 	/**
 	 * Insert warn count.
@@ -282,29 +217,17 @@ public class MySQL {
 	 */
 
 	public static void insertWarnCount(String username, int count) {
-
 		try {
-
 			if (connection.isClosed()) {
-
 				connect();
-
 			}
-
 			PreparedStatement ps = connection.prepareStatement("REPLACE INTO `reportcount` (userid,count) VALUES(?,?)");
-
 			ps.setString(1, username);
-
 			ps.setInt(2, count);
-
 			ps.execute();
-
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-
 		}
-
 	}
 
 
@@ -318,27 +241,19 @@ public class MySQL {
 	public static int loadWarnCount(String username) {
 
 		try {
-
 			if (connection.isClosed()) {
-
 				connect();
-
 			}
 
 			PreparedStatement ps = connection.prepareStatement("SELECT * FROM `reportcount` WHERE `userid` = ?");
-
 			ps.setString(1, username);
-
 			ResultSet rs = ps.executeQuery();
-
 			if (rs.next()) {
-
 				return rs.getInt(2);
 
 			}
 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 
 		}
@@ -371,6 +286,7 @@ public class MySQL {
 	}
 
 
+	//POLL//
 	/**
 	 * Save poll data.
 	 *
@@ -581,52 +497,18 @@ public class MySQL {
 
 	}
 
-
-	public static GameData getGameData(String messageId) {
-
+	//Disconnect
+	public void disconnect() {
+		System.out.println("Closing connection to database...");
 		try {
 
-			if (connection.isClosed()) {
-
-				connect();
-
-			}
-
-			PreparedStatement ps = connection.prepareStatement("SELECT * FROM `viergame` WHERE `messageid` = ?");
-
-			ps.setString(1, messageId);
-
-			ResultSet rs = ps.executeQuery();
-
-
-			while (rs.next()) {
-
-				GameData data = new GameData();
-
-				data.setMessageId(rs.getString(1));
-
-				data.setOpponentId(rs.getString(2));
-
-				data.setChallengerId(rs.getString(3));
-
-				data.setHeigh(rs.getInt(4));
-
-				data.setWidth(rs.getInt(5));
-
-				data.setChannel(rs.getString(6));
-
-				return data;
-
-			}
-
+			connection.close();
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 
 		}
-
-		return null;
 
 	}
 
