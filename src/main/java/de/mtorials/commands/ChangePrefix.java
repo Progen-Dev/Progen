@@ -28,16 +28,11 @@ public class ChangePrefix extends CommandHandler {
             return;
         }
 
-        GuildConfiguration oldConfiguration = Main.getConfiguration().getGuildConfiguration(event.getGuild());
+        configuration.prefix = parsedCommand.getArgsAsList().get(0);
 
-        GuildConfiguration newConfiguration = new GuildConfigurationBuilder()
-                .setGuildConfig(oldConfiguration)
-                .setPrefix(parsedCommand.getArgsAsList().get(0))
-                .build();
+        getDAOs().getConfig().writeConfig(configuration, event.getGuild());
 
-        Main.getConfiguration().writeGuildConfiguration(event.getGuild(), newConfiguration);
-
-        event.getTextChannel().sendMessage("Prefix has changed to " + newConfiguration.getPrefix()).queue();
+        event.getTextChannel().sendMessage("Prefix has changed to " + configuration.prefix).queue();
     }
 
     @Override

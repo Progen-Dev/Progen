@@ -88,7 +88,7 @@ public class PrivateVoiceChannel extends CommandHandler {
                 break;
 
             case "create":
-                createChannel(event, configuration.getTempChannelCatergoryID());
+                createChannel(event, configuration.tempChannelCatergoryID);
                 break;
 
             case "category":
@@ -107,11 +107,8 @@ public class PrivateVoiceChannel extends CommandHandler {
                 // create channel
                 String id = event.getGuild().createCategory(parsedCommand.getArgsAsList().get(1)).complete().getId();
 
-                GuildConfiguration newConfig = new GuildConfigurationBuilder()
-                        .setGuildConfig(configuration)
-                        .setTempChannelCatergoryID(id)
-                        .build();
-                Main.getConfiguration().writeGuildConfiguration(event.getGuild(), newConfig);
+                configuration.tempChannelCatergoryID = id;
+                getDAOs().getConfig().writeConfig(configuration, event.getGuild());
                 break;
 
             default:

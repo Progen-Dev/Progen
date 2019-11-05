@@ -2,7 +2,6 @@ package de.progen_bot.core;
 
 import de.mtorials.commands.ChangePrefix;
 import de.mtorials.commands.Stats;
-import de.mtorials.config.Configuration;
 import de.mtorials.db.DAOHandler;
 import de.mtorials.db.MySQLConnection;
 import de.mtorials.fortnite.core.Fortnite;
@@ -39,8 +38,7 @@ public class Main {
 
     private static MySQL sql;
 
-    private static Configuration configuration = new Configuration("config.json");
-    private static MySQLConnection mySQLConnection;
+    private static MySQLConnection mySQLConnection = new MySQLConnection(Settings.HOST, Settings.DATABASE, Settings.DATABASE, Settings.PASSWORD);
 
     private static Fortnite fortnite;
 
@@ -58,7 +56,6 @@ public class Main {
     public Main() throws IOException {
 
         Settings.loadSettings();
-        mySQLConnection = new MySQLConnection(Settings.HOST, Settings.DATABASE, Settings.DATABASE, Settings.PASSWORD);
 
         httpapi = new API(8083);
         httpapi.start();
@@ -68,8 +65,6 @@ public class Main {
         MySQL.connect();
 
         initJDA();
-
-        configuration.loadGuildsConfig(jda.getGuilds());
 
         MySQL.loadPollTimer();
 
@@ -159,11 +154,6 @@ public class Main {
     public static DAOHandler getDAOs() {
 
         return daoHandler;
-    }
-
-    public static Configuration getConfiguration() {
-
-        return configuration;
     }
 
     /**

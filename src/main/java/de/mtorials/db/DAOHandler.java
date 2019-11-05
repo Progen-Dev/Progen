@@ -1,6 +1,7 @@
 package de.mtorials.db;
 
 import de.mtorials.db.dao.DAO;
+import de.mtorials.db.dao.DAOConfigInterface;
 import de.mtorials.db.dao.DAOWarnList;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class DAOHandler {
 
     //DOA Classes
     private DAOWarnList warnList;
+    private DAOConfigInterface config;
 
     public DAOHandler() {
 
@@ -30,5 +32,8 @@ public class DAOHandler {
 
     public DAOWarnList getWarnList() {
         return warnList;
+    }
+    public DAOConfigInterface getConfig() {
+        return this.config;
     }
 }

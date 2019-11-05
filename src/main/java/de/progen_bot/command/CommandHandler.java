@@ -2,6 +2,7 @@ package de.progen_bot.command;
 
 import de.mtorials.config.GuildConfiguration;
 import de.mtorials.db.DAOHandler;
+import de.mtorials.db.dao.DAO;
 import de.progen_bot.core.Main;
 import de.progen_bot.util.MessageGenerator;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -35,6 +36,8 @@ public abstract class CommandHandler {
      * The DAO handling class
      */
     private DAOHandler daoHandler = Main.getDAOs();
+
+    private GuildConfiguration guildConfiguration;
 
     /**
      * Instantiates a new de.progen_bot.command handler.

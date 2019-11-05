@@ -6,15 +6,6 @@ public class GuildConfigurationBuilder {
     private String logChannelID;
     private String tempChannelCatergoryID;
 
-    public GuildConfigurationBuilder setGuildConfig(GuildConfiguration configuration) {
-
-        this.logChannelID = configuration.getLogChannelID();
-        this.preifx = configuration.getPrefix();
-        this.tempChannelCatergoryID = configuration.getTempChannelCatergoryID();
-
-        return this;
-    }
-
     public GuildConfigurationBuilder setPrefix(String prefix) {
         this.preifx = prefix;
         return this;

@@ -4,8 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import de.mtorials.config.GuildConfiguration;
 import de.mtorials.pwi.exceptions.APICommandNotFoundException;
 import de.mtorials.pwi.exceptions.APIException;
+import de.progen_bot.core.Main;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.io.IOException;
@@ -18,10 +20,10 @@ import java.util.Map;
 
 public class APICommandHandler implements HttpHandler {
 
-    private ArrayList<APICommand> registeredCommands;
+    private ArrayList<Endpiont> registeredCommands;
     private APITokenManager tokenManager;
 
-    public APICommandHandler(ArrayList<APICommand> commands, APITokenManager tokenManager) {
+    public APICommandHandler(ArrayList<Endpiont> commands, APITokenManager tokenManager) {
 
         this.registeredCommands = commands;
         this.tokenManager = tokenManager;
@@ -63,12 +65,13 @@ public class APICommandHandler implements HttpHandler {
 
         boolean commandNotFound = true;
         APIResponseObject returnObject = null;
-        for (APICommand command : registeredCommands) {
+        for (Endpiont command : registeredCommands) {
 
             if (currentInvoke.equals(command.getInvoke())) {
 
                 Member member = tokenManager.getMember(params.get("token"));
-                returnObject = command.execute(params, member);
+                GuildConfiguration config = Main.getDAOs().getConfig().loadConfig(member.getGuild());
+                returnObject = command.execute(params, member, config);
                 commandNotFound = false;
             }
         }

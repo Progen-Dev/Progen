@@ -27,7 +27,7 @@ public class CommandManager extends ListenerAdapter {
 
         GuildConfiguration guildConfiguration;
         try {
-            guildConfiguration = Main.getConfiguration().getGuildConfiguration(event.getGuild());
+            guildConfiguration = Main.getDAOs().getConfig().loadConfig(event.getGuild());
         } catch (GuildHasNoConfigException e) {
             guildConfiguration = new GuildConfigurationBuilder()
                     .setLogChannelID(null)
@@ -35,10 +35,10 @@ public class CommandManager extends ListenerAdapter {
                     .setTempChannelCatergoryID(null)
                     .build();
 
-            Main.getConfiguration().writeGuildConfiguration(event.getGuild(), guildConfiguration);
+            Main.getDAOs().getConfig().writeConfig(guildConfiguration, event.getGuild());
         }
 
-        ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.getPrefix());
+        ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.prefix);
 
         if (!event.getAuthor().isBot() && !event.getAuthor().isFake() && parsedMessage != null
                 && event.getChannelType().isGuild()) {
