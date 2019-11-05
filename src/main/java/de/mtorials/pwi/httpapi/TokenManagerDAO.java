@@ -12,7 +12,8 @@ public class TokenManagerDAO extends DAO {
     @Override
     public void generateTables() {
 
-        super.getMySQLConnection().update("CREATE TABLE `tokens` ( `guildid` VARCHAR(18) NOT NULL , `userid` VARCHAR(18) NOT NULL , `token` VARCHAR(10) NOT NULL , `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`token`)) ENGINE = InnoDB;");
+        super.getMySQLConnection().update("CREATE TABLE if not exists `tokens` ( `guildid` VARCHAR(18) NOT NULL , " +
+                "`userid` VARCHAR(18) NOT NULL , `token` VARCHAR(10) NOT NULL , `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`token`)) ENGINE = InnoDB;");
     }
 
     boolean keyExists(String token) throws SQLException {
