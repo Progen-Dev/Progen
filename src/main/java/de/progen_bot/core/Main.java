@@ -38,7 +38,7 @@ public class Main {
 
     private static MySQL sql;
 
-    private static MySQLConnection mySQLConnection = new MySQLConnection(Settings.HOST, Settings.DATABASE, Settings.DATABASE, Settings.PASSWORD);
+    private static MySQLConnection mySQLConnection;
 
     private static Fortnite fortnite;
 
@@ -56,6 +56,8 @@ public class Main {
     public Main() throws IOException {
 
         Settings.loadSettings();
+
+        mySQLConnection  = new MySQLConnection(Settings.HOST, Settings.DATABASE, Settings.DATABASE, Settings.PASSWORD);
 
         httpapi = new API(8083);
         httpapi.start();
