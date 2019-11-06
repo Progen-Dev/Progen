@@ -37,13 +37,13 @@ public class Settings {
             System.err.println("Error can't load properties check the config.properties file");
 
             properties.setProperty("Prefix" , "pb!");
-            properties.setProperty("Token" , "");
+            properties.setProperty("Token" , "NDk1MjkzNTkwNTAzODE3MjM3.XcGGMg.-fyzvt20ybDj51I15BMV3QVFA4s");
             // MySQL
-            properties.setProperty("Host" , "");
-            properties.setProperty("Database" , "");
-            properties.setProperty("User" , "");
-            properties.setProperty("Port" , "");
-            properties.setProperty("Password" , "");
+            properties.setProperty("Host" , "root");
+            properties.setProperty("Database" , "progen");
+            properties.setProperty("User" , "root");
+            properties.setProperty("Port" , "3306");
+            properties.setProperty("Password" , "99PG3Zw9mw70IIWb");
 
             File f = new File("config.properties");
             OutputStream out;
