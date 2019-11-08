@@ -10,10 +10,12 @@ import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
+import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.Collectors;
 
 
 public class Clear extends CommandHandler {
@@ -21,7 +23,7 @@ public class Clear extends CommandHandler {
     EmbedBuilder error = new EmbedBuilder().setColor(Color.RED);
 
     public Clear() {
-        super("clear" , "clear <anzahl>" , "clear some messages that are no older than two weeks");
+        super("clear", "clear <anzahl>", "clear some messages that are no older than two weeks");
     }
 
     private int getInt(String string) {
@@ -34,8 +36,8 @@ public class Clear extends CommandHandler {
     }
 
     @Override
-    public void execute(ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
-        if (PermissionCore.check(1 , event)) return;
+    public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+        if (PermissionCore.check(1, event)) return;
 
         String[] args = parsedCommand.getArgs();
         int numb = getInt(args[0]);
@@ -44,51 +46,46 @@ public class Clear extends CommandHandler {
             event.getTextChannel().sendMessage(error
                     .setDescription("Please specify how many messages should be deleted.").build())
                     .queue();
-
         }
         if (numb > 1 && numb <= 100) {
-            try {
-                MessageHistory history = new MessageHistory(event.getTextChannel());
-                List<Message> msgs;
-                event.getMessage().delete().queue();
+            event.getMessage().delete().queue();
 
-                msgs = history.retrievePast(numb).complete();
-                event.getTextChannel().deleteMessages(msgs).queue();
+            OffsetDateTime twoWeeksAgo = OffsetDateTime.now().minus(2, ChronoUnit.WEEKS);
+            MessageHistory history = new MessageHistory(event.getTextChannel());
+            List<Message> messages = history.retrievePast(numb).complete();
 
-                if (msgs.size() < Integer.parseInt(args[0])) {
-                    Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.ORANGE)
+            List<Message> messagesTwoWeeksAgo =
+                    messages.stream().filter(m -> m.getTimeCreated().isBefore(twoWeeksAgo)).collect(Collectors.toList());
+            messages.removeIf(m -> m.getTimeCreated().isBefore(twoWeeksAgo));
 
-                            .setDescription("Only " + msgs.size() + " messages could be deleted!").build())
-                            .complete();
-
-                    new Timer().schedule(new TimerTask() {
-
-                        @Override
-                        public void run() {
-                            msg.delete().queue();
-                        }
-                    }, 3000);
-                } else {
-                    Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.GREEN)
-                            .setDescription(msgs.size() + " gelöschte Nachrichten").build()).complete();
-
-                    new Timer().schedule(new TimerTask() {
-
-                        @Override
-                        public void run() {
-                            msg.delete().queue();
-                        }
-                    }, 3000);
-                }
-                System.out.println("[INFO]: Es wurden " + msgs.size() + " Nachrichten gelöscht");
-            } catch (Exception e) {
-                e.printStackTrace();
+            for (Message message : messagesTwoWeeksAgo) {
+                message.delete().queue();
             }
+
+            if (messages.size() == 1) {
+                messages.get(0).delete().queue();
+            } else if (messages.size() > 1) {
+                event.getTextChannel().deleteMessages(messages).queue();
+            }
+
+            Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.GREEN)
+                    .setDescription(messages.size() + messagesTwoWeeksAgo.size() + " gelöschte Nachrichten").build()).complete();
+
+            new Timer().schedule(new TimerTask() {
+
+                @Override
+                public void run() {
+                    msg.delete().queue();
+                }
+            }, 3000);
+
+            System.out.println("[INFO]: Es wurden " + messages.size() + " Nachrichten gelöscht");
+
         } else {
             event.getTextChannel()
                     .sendMessage(error.setDescription("Please use a number between 2 and 500!").build()).queue();
         }
-}
+    }
 
 
     @Override
