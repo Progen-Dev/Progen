@@ -117,7 +117,7 @@ public class Main {
      */
     private void initJDA() {
         JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Settings.TOKEN);
-
+        builder.setAutoReconnect(true);
         new BuildManager(builder);
 
         try {
