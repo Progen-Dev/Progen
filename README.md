@@ -1,5 +1,5 @@
 # Progen
-
+!https://travis-ci.com/ProgenBot/ProgenBot.svg?branch=master!:https://travis-ci.com/ProgenBot/ProgenBot
 Progen is a very useful discord bot, but still under heavy development.
 It features a web interface, the [PWI (Progen Web Interface)](https://github.com/ProgenBot/Webinterface), to manage the bot and moderate your server.
 
