@@ -1,14 +1,14 @@
 package de.mtorials.pwi.endpoints;
 
-import de.mtorials.config.GuildConfiguration;
 import de.mtorials.models.MemberInfo;
-import de.mtorials.pwi.httpapi.Endpiont;
 import de.mtorials.pwi.httpapi.APIResponseObject;
+import de.mtorials.pwi.httpapi.Endpoint;
+import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.util.Map;
 
-public class APIEPCommandMemberinfo extends Endpiont {
+public class APIEPCommandMemberinfo extends Endpoint {
 
     public APIEPCommandMemberinfo() {
         super("getMemberInfo");

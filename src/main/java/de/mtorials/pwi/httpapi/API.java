@@ -27,7 +27,6 @@ public class API {
     }
 
     public void start() {
-
         httpServer.start();
     }
 

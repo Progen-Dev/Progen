@@ -1,18 +1,14 @@
 package de.mtorials.pwi.httpapi;
 
 import de.mtorials.pwi.exceptions.APIUserNotRegistered;
+import de.progen_bot.db.dao.tokenmanager.TokenManagerDao;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.sql.SQLException;
 
 public class APITokenManager {
 
-    private TokenManagerDAO dao = new TokenManagerDAO();
-
-    public APITokenManager() {
-
-        dao.generateTables();
-    }
+    private TokenManagerDao dao = new TokenManagerDao();
 
     public String register(Member member) {
 
@@ -20,11 +16,11 @@ public class APITokenManager {
         try {
             if (dao.keyExists(randomString)) return register(member);
             if (dao.memberExists(member)) dao.deleteMember(member);
+            dao.addMember(randomString, member);
         } catch (SQLException e) {
             e.printStackTrace();
             return "";
         }
-        dao.addMember(randomString, member);
         return randomString;
     }
 

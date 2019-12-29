@@ -1,9 +1,8 @@
 package de.progen_bot.command;
 
-import de.mtorials.config.GuildConfiguration;
-import de.mtorials.db.DAOHandler;
-import de.mtorials.db.dao.DAO;
 import de.progen_bot.core.Main;
+import de.progen_bot.db.DaoHandler;
+import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.util.MessageGenerator;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -35,7 +34,7 @@ public abstract class CommandHandler {
     /**
      * The DAO handling class
      */
-    private DAOHandler daoHandler = Main.getDAOs();
+    private DaoHandler daoHandler = Main.getDAOs();
 
     private GuildConfiguration guildConfiguration;
 
@@ -60,7 +59,8 @@ public abstract class CommandHandler {
      * @param event         the event
      * @param configuration
      */
-    public abstract void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration);
+    public abstract void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event,
+                                 GuildConfiguration configuration);
 
     /**
      * Gets the invoke string.
@@ -89,7 +89,7 @@ public abstract class CommandHandler {
         return description;
     }
 
-    public DAOHandler getDAOs() {
+    public DaoHandler getDAOs() {
         return daoHandler;
     }
 

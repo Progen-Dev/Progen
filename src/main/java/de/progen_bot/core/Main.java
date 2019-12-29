@@ -2,22 +2,20 @@ package de.progen_bot.core;
 
 import de.mtorials.commands.ChangePrefix;
 import de.mtorials.commands.Stats;
-import de.mtorials.db.DAOHandler;
-import de.mtorials.db.MySQLConnection;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandManager;
-import de.progen_bot.commands.Administartor.CommandRestart;
-import de.progen_bot.commands.Administartor.CommandStop;
 import de.progen_bot.commands.Fun.ConnectFour;
 import de.progen_bot.commands.Help;
 import de.progen_bot.commands.Moderator.*;
 import de.progen_bot.commands.User.*;
+import de.progen_bot.commands.administartor.CommandRestart;
+import de.progen_bot.commands.administartor.CommandStop;
 import de.progen_bot.commands.music.Music;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
-import de.progen_bot.db.MySQL;
+import de.progen_bot.db.DaoHandler;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
@@ -36,19 +34,13 @@ public class Main {
      */
     private static JDA jda;
 
-    private static MySQL sql;
-
-    private static MySQLConnection mySQLConnection;
-
     private static Fortnite fortnite;
 
     private static API httpapi;
 
     private static CommandManager commandManager;
 
-    //DAOs
-
-    private static DAOHandler daoHandler;
+    private static DaoHandler daoHandler;
 
     /**
      * Instantiates a new main.
@@ -57,21 +49,17 @@ public class Main {
 
         Settings.loadSettings();
 
-        mySQLConnection  = new MySQLConnection(Settings.HOST, Settings.DATABASE, Settings.DATABASE, Settings.PASSWORD);
-
         httpapi = new API(8083);
         httpapi.start();
 
         fortnite = new Fortnite();
 
-        MySQL.connect();
-
         initJDA();
 
-        MySQL.loadPollTimer();
+        //TODO MySQL.loadPollTimer();
 
         // DAO Handler
-        daoHandler = new DAOHandler();
+        daoHandler = new DaoHandler();
 
         commandManager = new CommandManager();
         initCommandHandlers(commandManager);
@@ -108,7 +96,7 @@ public class Main {
         commandManager.setupCommandHandlers(new Vote());
         commandManager.setupCommandHandlers(new CommandStop());
         commandManager.setupCommandHandlers(new CommandRestart());
-        commandManager.setupCommandHandlers(new kick());
+        commandManager.setupCommandHandlers(new Kick());
         commandManager.setupCommandHandlers(new CommandInfo());
     }
 
@@ -136,10 +124,6 @@ public class Main {
         return jda;
     }
 
-    public static MySQL getSQL() {
-        return sql;
-    }
-
     public static Fortnite getFortnite() {
         return fortnite;
     }
@@ -148,13 +132,7 @@ public class Main {
         return commandManager;
     }
 
-    public static MySQLConnection getMysqlConnection() {
-
-        return mySQLConnection;
-    }
-
-    public static DAOHandler getDAOs() {
-
+    public static DaoHandler getDAOs() {
         return daoHandler;
     }
 

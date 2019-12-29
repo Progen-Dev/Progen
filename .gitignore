@@ -1,15 +1,16 @@
 ##Intellij##
-  .resources/
-  .out/
- .github/
- .idea/
- .images/
- .target/
- Guilds/
+.resources/
+.out/
+.github/
+.idea/
+.images/
+.target/
+Guilds/
 
-  ## Java ##
-    *.MAINFEST.MF
-    *.jar
-    *.properties
-    *.json
-    *.class
+## Java ##
+*.jar
+*.properties
+*.json
+*.class
+*.MF
+*.kotlin_module

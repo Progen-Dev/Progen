@@ -1,8 +1,9 @@
 package de.progen_bot.game;
 
 import de.progen_bot.core.Main;
-import de.progen_bot.db.GameData;
-import de.progen_bot.db.MySQL;
+import de.progen_bot.db.dao.connectfour.ConnectFourDaoImpl;
+import de.progen_bot.db.entities.ConnectFourModel;
+import de.progen_bot.db.entities.GameData;
 import de.progen_bot.util.Util;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
@@ -12,14 +13,14 @@ public class FourConnectGame {
     public static void createGame(GameData gameData, int height, int width, JDA jda) {
         ConnectFourModel conFourMod = new ConnectFourModel(width, height, gameData.getChallengerId(),
                 gameData.getOpponentId());
-//TODO maybe random player
+
         String field = generateBoardString(conFourMod.getBoard(), conFourMod.getPlayer1());
 
         jda.getTextChannelById(gameData.getChannelId()).sendMessage(field).queue(msg -> {
             addReaction(msg, gameData.getWidth());
             conFourMod.setMsgId(msg.getId());
             conFourMod.setActPlayer(conFourMod.getPlayer1());
-            MySQL.insertConnectFourData(conFourMod);
+            new ConnectFourDaoImpl().insertConnectFourData(conFourMod);
         });
     }
 

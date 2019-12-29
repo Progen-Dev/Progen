@@ -1,9 +1,8 @@
 package de.progen_bot.command;
 
-import de.mtorials.config.GuildConfiguration;
-import de.mtorials.config.GuildConfigurationBuilder;
-import de.mtorials.exceptions.GuildHasNoConfigException;
-import de.progen_bot.core.Main;
+import de.progen_bot.db.dao.config.ConfigDaoImpl;
+import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.db.entities.config.GuildConfigurationBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -25,19 +24,17 @@ public class CommandManager extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
 
-        GuildConfiguration guildConfiguration;
-        try {
-            guildConfiguration = Main.getDAOs().getConfig().loadConfig(event.getGuild());
-        } catch (GuildHasNoConfigException e) {
+        GuildConfiguration guildConfiguration = new ConfigDaoImpl().loadConfig(event.getGuild());
+
+        if (guildConfiguration == null) {
             guildConfiguration = new GuildConfigurationBuilder()
                     .setLogChannelID(null)
-                    .setPrefix("pb!")
-                    .setTempChannelCatergoryID(null)
+                    .setPrefix("test!")
+                    .setTempChannelCategoryID(null)
                     .build();
 
-            Main.getDAOs().getConfig().writeConfig(guildConfiguration, event.getGuild());
+            new ConfigDaoImpl().writeConfig(guildConfiguration, event.getGuild());
         }
-
         ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.prefix);
 
         if (!event.getAuthor().isBot() && !event.getAuthor().isFake() && parsedMessage != null
@@ -46,10 +43,7 @@ public class CommandManager extends ListenerAdapter {
 
             if (commandHandler != null) {
                 commandHandler.execute(parsedMessage, event, guildConfiguration);
-                return;
             }
-        } else {
-            return;
         }
     }
 
@@ -59,9 +53,7 @@ public class CommandManager extends ListenerAdapter {
      * @param commandHandler the new up de.progen_bot.command handlers
      */
     public void setupCommandHandlers(CommandHandler commandHandler) {
-        if (commandAssociations.containsKey(commandHandler.getInvokeString().toLowerCase())) {
-            return;
-        } else {
+        if (!commandAssociations.containsKey(commandHandler.getInvokeString().toLowerCase())) {
             commandAssociations.put(commandHandler.getInvokeString(), commandHandler);
         }
 
