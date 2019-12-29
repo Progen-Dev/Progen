@@ -11,10 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WarnListDaoImpl extends Dao implements WarnListDao {
-    final String sqlQuery = "CREATE TABLE IF NOT EXISTS warn(`id` INT(11) NOT NULL AUTO_INCREMENT, `userid` VARCHAR(50) NOT NULL, " +
+    final private String sqlQuery = "CREATE TABLE IF NOT EXISTS warn(`id` INT(11) NOT NULL AUTO_INCREMENT, `guildid` " +
+            "VARCHAR(50) NOT NULL, `userid` VARCHAR(50) NOT NULL, \"" +
             "`reason` VARCHAR(50) NOT NULL, PRIMARY KEY(`id`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8";
 
-    private final String sqlQueryCount = "CREATE TABLE IF NOT EXISTS reportcount ( `userid` VARCHAR(50) NOT NULL, " +
+    private final String sqlQueryCount = "CREATE TABLE IF NOT EXISTS reportcount ( `userid` VARCHAR(50) NOT " +
+            "NULL, " +
             "`count` INT(11) NOT NULL, PRIMARY KEY(`userid`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8";
 
     public void insertWarn(String username, String reason) {
