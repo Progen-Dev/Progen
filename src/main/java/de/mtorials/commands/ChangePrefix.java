@@ -1,10 +1,9 @@
 package de.mtorials.commands;
 
-import de.mtorials.config.GuildConfiguration;
-import de.mtorials.config.GuildConfigurationBuilder;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
-import de.progen_bot.core.Main;
+import de.progen_bot.db.dao.config.ConfigDaoImpl;
+import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class ChangePrefix extends CommandHandler {
@@ -30,7 +29,7 @@ public class ChangePrefix extends CommandHandler {
 
         configuration.prefix = parsedCommand.getArgsAsList().get(0);
 
-        getDAOs().getConfig().writeConfig(configuration, event.getGuild());
+        new ConfigDaoImpl().writeConfig(configuration, event.getGuild());
 
         event.getTextChannel().sendMessage("Prefix has changed to " + configuration.prefix).queue();
     }

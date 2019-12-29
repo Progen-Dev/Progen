@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class APICommandHandlerBuilder {
 
-    private ArrayList<Endpiont> commands = new ArrayList<>();
+    private ArrayList<Endpoint> commands = new ArrayList<>();
     private APITokenManager tokenManager;
 
-    public APICommandHandlerBuilder addCommand(Endpiont command) {
+    public APICommandHandlerBuilder addCommand(Endpoint command) {
 
         this.commands.add(command);
         return this;

@@ -1,9 +1,9 @@
 package de.progen_bot.commands.User;
 
-import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.TempChannelController;
+import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class CmdTempChannel extends CommandHandler {
 
     private void createNewTempChannel(ArrayList<String> args, MessageReceivedEvent event, GuildConfiguration configuration) {
 
-        TempChannelController tempChannelController = new TempChannelController(event.getGuild().getCategoryById(configuration.tempChannelCatergoryID));
+        TempChannelController tempChannelController = new TempChannelController(event.getGuild().getCategoryById(configuration.tempChannelCategoryID));
 
         if (tempChannelController.getTempChannelCount() >= 3) tempChannelController.removeOldestTempChannel();
         if (args.size() >= 3) tempChannelController.createTextChannel(args.get(1), Integer.getInteger(args.get(3)));

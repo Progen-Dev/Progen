@@ -1,10 +1,10 @@
 package de.progen_bot.commands.xp;
 
-import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
-import de.progen_bot.db.MySQL;
-import de.progen_bot.db.UserData;
+import de.progen_bot.db.dao.xp.XpDaoImpl;
+import de.progen_bot.db.entities.UserData;
+import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -19,7 +19,7 @@ public class XPrank extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
-        List<String> top10Ids = MySQL.getTop10Ranks();
+        List<String> top10Ids = new XpDaoImpl().getTop10Ranks();
 
         StringBuilder sb = new StringBuilder();
         int i = 1;

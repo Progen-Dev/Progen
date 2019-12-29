@@ -1,6 +1,6 @@
 package de.progen_bot.listeners;
 
-import de.progen_bot.db.UserData;
+import de.progen_bot.db.entities.UserData;
 import de.progen_bot.util.Settings;
 import de.progen_bot.util.Statics;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

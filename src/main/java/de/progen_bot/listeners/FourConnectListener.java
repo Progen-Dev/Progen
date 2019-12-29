@@ -1,9 +1,9 @@
 package de.progen_bot.listeners;
 
 import de.progen_bot.core.Main;
-import de.progen_bot.db.GameData;
-import de.progen_bot.db.MySQL;
-import de.progen_bot.game.ConnectFourModel;
+import de.progen_bot.db.dao.connectfour.ConnectFourDaoImpl;
+import de.progen_bot.db.entities.ConnectFourModel;
+import de.progen_bot.db.entities.GameData;
 import de.progen_bot.game.FourConnectGame;
 import de.progen_bot.util.Util;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -17,15 +17,16 @@ import java.util.concurrent.TimeUnit;
 
 public class FourConnectListener extends ListenerAdapter {
     private static JDA jda;
+    ConnectFourDaoImpl dao;
 
     @Override
     public void onPrivateMessageReactionAdd(PrivateMessageReactionAddEvent event) {
         jda = Main.getJda();
-
+        dao = new ConnectFourDaoImpl();
         // check if reactionMessage is an invite
-        if (MySQL.getGameData(event.getMessageId()) != null) {
+        if (dao.getGameData(event.getMessageId()) != null) {
             if (!event.getUser().isBot()) {
-                GameData gameData = MySQL.getGameData(event.getMessageId());
+                GameData gameData = dao.getGameData(event.getMessageId());
                 String emoteName = event.getReactionEmote().getName();
 
                 jda.getPrivateChannelById(event.getChannel().getId())
@@ -79,11 +80,13 @@ public class FourConnectListener extends ListenerAdapter {
     }
 
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
+        dao = new ConnectFourDaoImpl();
+
         if (event.getUser().isBot()) {
             return;
         }
 
-        ConnectFourModel gameData = MySQL.getConnectFourData(event.getMessageId());
+        ConnectFourModel gameData = dao.getConnectFourData(event.getMessageId());
 
         if (gameData != null) {
             if (gameData.isGameOver()) {

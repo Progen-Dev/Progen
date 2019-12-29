@@ -1,8 +1,8 @@
 package de.progen_bot.commands.Moderator;
 
-import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 
@@ -20,7 +20,7 @@ public class WarnDelete extends CommandHandler {
             return;
         }
 
-        super.getDAOs().getWarnList().deleteWarnForMember(event.getMessage().getMentionedMembers().get(0));
+        //TODO       super.getDAOs().getWarnList().deleteWarnForMember(event.getMessage().getMentionedMembers().get(0));
 
         event.getTextChannel().sendMessage(super.messageGenerators.generateSuccessfulMsg()).queue();
     }

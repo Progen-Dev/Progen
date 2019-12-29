@@ -1,12 +1,12 @@
 package de.mtorials.commands;
 
-import de.mtorials.config.GuildConfiguration;
 import de.mtorials.fortnite.core.Statistics;
 import de.mtorials.fortnite.exeptions.NotEnoughtDetailsException;
 import de.mtorials.fortnite.exeptions.UserNotFoundExeption;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.Main;
+import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

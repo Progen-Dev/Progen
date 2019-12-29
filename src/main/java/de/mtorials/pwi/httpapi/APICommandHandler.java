@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import de.mtorials.config.GuildConfiguration;
 import de.mtorials.pwi.exceptions.APICommandNotFoundException;
 import de.mtorials.pwi.exceptions.APIException;
-import de.progen_bot.core.Main;
+import de.progen_bot.db.dao.config.ConfigDaoImpl;
+import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.io.IOException;
@@ -20,10 +20,10 @@ import java.util.Map;
 
 public class APICommandHandler implements HttpHandler {
 
-    private ArrayList<Endpiont> registeredCommands;
+    private ArrayList<Endpoint> registeredCommands;
     private APITokenManager tokenManager;
 
-    public APICommandHandler(ArrayList<Endpiont> commands, APITokenManager tokenManager) {
+    APICommandHandler(ArrayList<Endpoint> commands, APITokenManager tokenManager) {
 
         this.registeredCommands = commands;
         this.tokenManager = tokenManager;
@@ -36,18 +36,15 @@ public class APICommandHandler implements HttpHandler {
         String uri = exchange.getRequestURI().toString();
         Map<String, String> params = parseQueryString(uri.split("\\?", 2)[1]);
         String currentInvoke = uri.split("/")[1].split("\\?")[0];
-
         String response = "";
         int rCode;
 
         try {
-
             APIResponseObject responseObject = handleCommands(currentInvoke, params);
             response = toJSON(responseObject);
             rCode = responseObject.getrCode();
 
         } catch (APIException e) {
-
             rCode = 500;
             response = "ERROR";
         }
@@ -62,15 +59,12 @@ public class APICommandHandler implements HttpHandler {
     }
 
     private APIResponseObject handleCommands(String currentInvoke, Map<String, String> params) {
-
         boolean commandNotFound = true;
         APIResponseObject returnObject = null;
-        for (Endpiont command : registeredCommands) {
-
+        for (Endpoint command : registeredCommands) {
             if (currentInvoke.equals(command.getInvoke())) {
-
                 Member member = tokenManager.getMember(params.get("token"));
-                GuildConfiguration config = Main.getDAOs().getConfig().loadConfig(member.getGuild());
+                GuildConfiguration config = new ConfigDaoImpl().loadConfig(member.getGuild());
                 returnObject = command.execute(params, member, config);
                 commandNotFound = false;
             }
@@ -81,7 +75,6 @@ public class APICommandHandler implements HttpHandler {
 
     private static Map<String, String> parseQueryString(String qs) {
         Map<String, String> result = new HashMap<>();
-
         int last = 0, next, l = qs.length();
         while (last < l) {
             next = qs.indexOf('&', last);

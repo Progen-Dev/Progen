@@ -1,6 +1,6 @@
 package de.progen_bot.util;
 
-import de.progen_bot.db.PollData;
+import de.progen_bot.db.entities.PollData;
 import net.dv8tion.jda.api.entities.Message;
 
 public class Util {

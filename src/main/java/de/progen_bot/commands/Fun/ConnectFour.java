@@ -1,11 +1,11 @@
 package de.progen_bot.commands.Fun;
 
-import de.mtorials.config.GuildConfiguration;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.core.Main;
-import de.progen_bot.db.GameData;
-import de.progen_bot.db.MySQL;
+import de.progen_bot.db.dao.connectfour.ConnectFourDaoImpl;
+import de.progen_bot.db.entities.GameData;
+import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.User;
@@ -63,7 +63,7 @@ public class ConnectFour extends CommandHandler {
                             msg.addReaction("✅").queue();
                             msg.addReaction("❌").queue();
                             gameData.setMessageId(msg.getId());
-                            MySQL.insertGameData(gameData);
+                            new ConnectFourDaoImpl().insertGameData(gameData);
                         });
                     });
                 } else {
