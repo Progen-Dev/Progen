@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import de.mtorials.misc.Logger;
 import de.mtorials.pwi.exceptions.APICommandNotFoundException;
 import de.mtorials.pwi.exceptions.APIException;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
@@ -31,13 +32,13 @@ public class APICommandHandler implements HttpHandler {
 
     public void handle(HttpExchange exchange) throws IOException {
 
-        System.out.println("Get Request");
-
         String uri = exchange.getRequestURI().toString();
         Map<String, String> params = parseQueryString(uri.split("\\?", 2)[1]);
         String currentInvoke = uri.split("/")[1].split("\\?")[0];
         String response = "";
         int rCode;
+
+        Logger.info("Request " + currentInvoke);
 
         try {
             APIResponseObject responseObject = handleCommands(currentInvoke, params);

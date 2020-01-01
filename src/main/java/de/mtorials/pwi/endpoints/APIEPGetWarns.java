@@ -6,6 +6,7 @@ import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.entities.Member;
 
+import java.util.List;
 import java.util.Map;
 
 public class APIEPGetWarns extends Endpoint {
@@ -16,6 +17,7 @@ public class APIEPGetWarns extends Endpoint {
 
     @Override
     public APIResponseObject execute(Map<String, String> params, Member member, GuildConfiguration configuration) {
-        return new APIResponseObject(200, new WarnListDaoImpl().loadWarnList(member.getId())); //TODO check if correct
+        List<String> warns = new WarnListDaoImpl().loadWarnList(member);
+        return new APIResponseObject(200, warns); //TODO check if correct
     }
 }

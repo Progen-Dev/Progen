@@ -3,6 +3,7 @@ package de.mtorials.pwi.httpapi;
 import com.sun.net.httpserver.HttpServer;
 import de.mtorials.pwi.endpoints.APIEPChangePrefix;
 import de.mtorials.pwi.endpoints.APIEPCommandMemberinfo;
+import de.mtorials.pwi.endpoints.APIEPGetWarns;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -20,6 +21,7 @@ public class API {
         httpServer.createContext("/", new APICommandHandlerBuilder()
                 .setTokenManager(tokenManager)
                 .addCommand(new APIEPCommandMemberinfo())
+                .addCommand(new APIEPGetWarns())
                 .addCommand(new APIEPChangePrefix())
                 .build()
         );
