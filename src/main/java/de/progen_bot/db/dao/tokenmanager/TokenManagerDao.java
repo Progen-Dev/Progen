@@ -50,6 +50,6 @@ public class TokenManagerDao extends Dao {
     public void deleteMember(Member member) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         connection.prepareStatement("DELETE FROM tokens WHERE userid = '" + member.getUser().getId() +
-                "' AND guildid = '" + member.getGuild().getId() + "'").executeQuery();
+                "' AND guildid = '" + member.getGuild().getId() + "'").execute();
     }
 }
