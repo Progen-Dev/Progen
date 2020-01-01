@@ -1,5 +1,6 @@
 package de.progen_bot.command;
 
+import de.mtorials.misc.Logger;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.db.entities.config.GuildConfigurationBuilder;
@@ -29,7 +30,7 @@ public class CommandManager extends ListenerAdapter {
         if (guildConfiguration == null) {
             guildConfiguration = new GuildConfigurationBuilder()
                     .setLogChannelID(null)
-                    .setPrefix("test!")
+                    .setPrefix("pb!")
                     .setTempChannelCategoryID(null)
                     .build();
 
@@ -37,14 +38,16 @@ public class CommandManager extends ListenerAdapter {
         }
         ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.prefix);
 
-        if (!event.getAuthor().isBot() && !event.getAuthor().isFake() && parsedMessage != null
-                && event.getChannelType().isGuild()) {
-            CommandHandler commandHandler = commandAssociations.get(parsedMessage.getCommand());
-
-            if (commandHandler != null) {
-                commandHandler.execute(parsedMessage, event, guildConfiguration);
-            }
+        if (event.getAuthor().isBot() || event.getAuthor().isFake() || parsedMessage == null || !event.getChannelType().isGuild()) {
+            return;
         }
+
+        CommandHandler commandHandler = commandAssociations.get(parsedMessage.getCommand());
+
+        //DEBUG
+        Logger.info("Command " + commandHandler.getInvokeString() + " was invoked.");
+
+        commandHandler.execute(parsedMessage, event, guildConfiguration);
     }
 
     /**

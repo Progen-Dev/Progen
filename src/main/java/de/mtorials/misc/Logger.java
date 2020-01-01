@@ -12,4 +12,8 @@ public class Logger {
             System.out.println("[WARNING] " + msg);
         }
     }
+
+    public static void info(String msg) {
+        log(msg, 0);
+    }
 }
