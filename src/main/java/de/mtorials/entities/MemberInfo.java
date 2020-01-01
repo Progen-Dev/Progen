@@ -1,4 +1,4 @@
-package de.mtorials.models;
+package de.mtorials.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.dv8tion.jda.api.entities.Member;
@@ -62,12 +62,12 @@ public class MemberInfo {
         return member.getRoles();
     }
 
-    public ArrayList<String> getRolesAsMention() {
+    public ArrayList<String> getRoleNames() {
 
         //if (member.getRoles().size() == 0) throw new UserHasNoRoleExceotion();
         ArrayList<String> s = new ArrayList<>();
         for (Role r : member.getRoles()) {
-            s.add(r.getAsMention());
+            s.add(r.getName());
         }
         return s;
     }
