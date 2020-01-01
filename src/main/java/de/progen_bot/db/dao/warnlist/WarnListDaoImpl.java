@@ -12,7 +12,7 @@ import java.util.List;
 
 public class WarnListDaoImpl extends Dao implements WarnListDao {
     final private String sqlQuery = "CREATE TABLE IF NOT EXISTS warn(`id` INT(11) NOT NULL AUTO_INCREMENT, `guildid` " +
-            "VARCHAR(50) NOT NULL, `userid` VARCHAR(50) NOT NULL, \"" +
+            "VARCHAR(50) NOT NULL, `userid` VARCHAR(50) NOT NULL, " +
             "`reason` VARCHAR(50) NOT NULL, PRIMARY KEY(`id`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8";
 
     private final String sqlQueryCount = "CREATE TABLE IF NOT EXISTS reportcount ( `userid` VARCHAR(50) NOT " +
