@@ -42,11 +42,13 @@ public class CommandManager extends ListenerAdapter {
         }
         ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.prefix);
 
-        if ( parsedMessage == null ) {
-            return;
-        }
+        if (parsedMessage == null) return;
 
         CommandHandler commandHandler = commandAssociations.get(parsedMessage.getCommand());
+
+        if (commandHandler == null) {
+            commandAssociations.get("help").execute(parsedMessage, event, guildConfiguration);
+        }
 
         //DEBUG
         Logger.info("Command " + commandHandler.getInvokeString() + " was invoked.");
