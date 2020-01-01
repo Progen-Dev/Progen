@@ -2,6 +2,7 @@ package de.progen_bot.db.dao.warnlist;
 
 import de.progen_bot.db.connection.ConnectionFactory;
 import de.progen_bot.db.dao.Dao;
+import net.dv8tion.jda.api.entities.Member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,12 +20,13 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
             "NULL, " +
             "`count` INT(11) NOT NULL, PRIMARY KEY(`userid`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8";
 
-    public void insertWarn(String username, String reason) {
+    public void insertWarn(Member member, String reason) {
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO `warn` (userid,reason) VALUES(?,?)");
-            ps.setString(1, username);
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO `warn` (userid , reason, guildid) VALUES(?,?,?)");
+            ps.setString(1, member.getUser().getId());
             ps.setString(2, reason);
+            ps.setString(3, member.getGuild().getId());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,11 +72,12 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
         return 0;
     }
 
-    public List<String> loadWarnList(String userId) {
+    public List<String> loadWarnList(Member member) {
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM `warn` WHERE `userid` = ?");
-            ps.setString(1, userId);
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM `warn` WHERE `userid` = ? AND 'guildid' = ?");
+            ps.setString(1, member.getUser().getId());
+            ps.setString(2, member.getGuild().getId());
 
             ResultSet rs = ps.executeQuery();
             List<String> warnTable = new ArrayList<>();
