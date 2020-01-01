@@ -20,7 +20,7 @@ public class ConfigDaoImpl extends Dao implements ConfigDao {
     public void writeConfig(GuildConfiguration configuration, Guild guild) {
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO `config` (`guildid`, `prefix`, " +
+            PreparedStatement ps = connection.prepareStatement("REPLACE INTO `config` (`guildid`, `prefix`, " +
                     "`logChannelID`, `tempChannelCategoryID`) VALUES (?, ?, ?, ?);");
             ps.setString(1, guild.getId());
             ps.setString(2, configuration.prefix);
