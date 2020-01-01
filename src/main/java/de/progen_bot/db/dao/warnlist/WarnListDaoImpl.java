@@ -75,7 +75,7 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
     public List<String> loadWarnList(Member member) {
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM `warn` WHERE `userid` = ? AND 'guildid' = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM `warn` WHERE `userid` = ? AND `guildid` = ?");
             ps.setString(1, member.getUser().getId());
             ps.setString(2, member.getGuild().getId());
 
@@ -83,7 +83,7 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
             List<String> warnTable = new ArrayList<>();
 
             while (rs.next()) {
-                warnTable.add(rs.getString(3));
+                warnTable.add(rs.getString("reason"));
             }
             return warnTable;
         } catch (SQLException e) {

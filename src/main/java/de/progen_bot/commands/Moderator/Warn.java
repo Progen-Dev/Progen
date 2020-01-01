@@ -41,7 +41,7 @@ public class Warn extends CommandHandler {
 
         WarnListDaoImpl dao = new WarnListDaoImpl();
         int warnCount = dao.loadWarnCount(warned.getEffectiveName());
-        dao.insertWarn(warned.getEffectiveName(), reason);
+        dao.insertWarn(warned, reason);
 
         event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setTitle("warn")
                 .setDescription(
