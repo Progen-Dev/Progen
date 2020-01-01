@@ -25,6 +25,10 @@ public class CommandManager extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
 
+        if (event.getAuthor().isBot() || event.getAuthor().isFake() || !event.getChannelType().isGuild()) {
+            return;
+        }
+
         GuildConfiguration guildConfiguration = new ConfigDaoImpl().loadConfig(event.getGuild());
 
         if (guildConfiguration == null) {
@@ -38,7 +42,7 @@ public class CommandManager extends ListenerAdapter {
         }
         ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.prefix);
 
-        if (event.getAuthor().isBot() || event.getAuthor().isFake() || parsedMessage == null || !event.getChannelType().isGuild()) {
+        if ( parsedMessage == null ) {
             return;
         }
 
