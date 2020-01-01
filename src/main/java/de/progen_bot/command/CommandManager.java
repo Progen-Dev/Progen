@@ -4,6 +4,7 @@ import de.mtorials.misc.Logger;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.db.entities.config.GuildConfigurationBuilder;
+import de.progen_bot.util.MessageGenerator;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -47,7 +48,8 @@ public class CommandManager extends ListenerAdapter {
         CommandHandler commandHandler = commandAssociations.get(parsedMessage.getCommand());
 
         if (commandHandler == null) {
-            commandAssociations.get("help").execute(parsedMessage, event, guildConfiguration);
+            event.getTextChannel().sendMessage(new MessageGenerator("", "").generateErrorMsg("This is not a command. Use the help command for help.")).queue();
+            return;
         }
 
         //DEBUG
