@@ -6,9 +6,12 @@ import de.progen_bot.core.Main;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Help extends CommandHandler {
     public Help() {
@@ -20,44 +23,34 @@ public class Help extends CommandHandler {
         EmbedBuilder builder = new EmbedBuilder();
 
         if (parsedCommand.getArgs().length == 0) {
-            event.getTextChannel().sendMessage(
-                    new EmbedBuilder()
-                            .setColor(Color.cyan)
-                            .setAuthor("Progen Development Team")
-                            .setTitle("Commandlist")
-                            .setDescription("For more information about commands use <prefix>help <command>\n")
-                            .addField("Owner",
-                                    "`Stop` ", true)
-                            .addField("Moderator\n",
-                                    "`clear`\n" +
-                                            "`kick`\n" +
-                                            "`pc`\n" +
-                                            "`unmute`\n" +
-                                            "`warn`\n" +
-                                            "`warndelete`\n" +
-                                            "`warnlist`\n", true)
-                            .addField("User",
-                                    "`tempchannel`\n" +
-                                            "`info`\n" +
-                                            "`register`\n" +
-                                            "`userinfo`\n" +
-                                            "`guildinfo`\n" +
-                                            "`ping`\n" +
-                                            "`say`\n" +
-                                            "`vote`\n", true)
-                            .addField("etc",
-                                    "`help`", true)
-                            .addField("music",
-                                    "`music`", true)
-                            .addField("xp",
-                                    "`xp`\n" +
-                                            "`xpnotify`\n" +
-                                            "`xprank`\n", true)
-                            .addField("fun",
-                                    "`cf`\n", true)
-                            .setFooter("Discord Server: https://discord.gg/27zmyKu")
-                            .build()
-            ).queue();
+
+            HashMap<String, ArrayList<CommandHandler>> commandsByGroup = new HashMap<>();
+            for (CommandHandler commandHandler : Main.getCommandManager().getCommandassociations().values()) {
+
+                String[] packageSplit = commandHandler.getClass().getPackageName().split("\\.");
+                String packageName = packageSplit[ packageSplit.length - 1 ];
+
+                if (!commandsByGroup.containsKey(packageName)) commandsByGroup.put(packageName, new ArrayList<>());
+                commandsByGroup.get(packageName).add(commandHandler);
+            }
+
+            EmbedBuilder msg = new EmbedBuilder()
+                    .setAuthor("Progen Development Team")
+                    .setTitle("Help")
+                    .setDescription("For more information about commands use <prefix>help <command>\n")
+                    .setFooter("Discord Server: https://discord.gg/27zmyKu");
+
+            for (String group : commandsByGroup.keySet()) {
+                StringBuilder s = new StringBuilder();
+                for (CommandHandler commandHandler1 : commandsByGroup.get(group)) {
+
+                    s.append("`").append(commandHandler1.getInvokeString()).append("`\n");
+                }
+                msg.addField(group + "\n", s.toString(), true);
+            }
+
+            event.getTextChannel().sendMessage(msg.build()).queue();
+
         } else {
             CommandHandler handler = Main.getCommandManager().getCommandHandler(parsedCommand.getArgs()[0]);
 

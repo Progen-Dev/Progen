@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class ChangePrefix extends CommandHandler {
 
     public ChangePrefix() {
-        super("changeprefix", "changeprefix <new prefix>", "Changes the bots prefix");
+        super("changeprefix", "changeprefix <new prefix>", "Changes the bot's prefix");
     }
 
     @Override
