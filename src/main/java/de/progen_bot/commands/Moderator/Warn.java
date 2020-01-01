@@ -40,14 +40,14 @@ public class Warn extends CommandHandler {
         String reason = String.join(" ", parsedCommand.getArgs()).replace(parsedCommand.getArgs()[0] + " ", "");
 
         WarnListDaoImpl dao = new WarnListDaoImpl();
-        int warnCount = dao.loadWarnCount(warned.getEffectiveName());
         dao.insertWarn(warned, reason);
+        int warnCount = dao.loadWarnList(event.getMember()).size();
 
         event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setTitle("warn")
                 .setDescription(
                         warned.getAsMention() + " wurde von " + event.getAuthor().getAsMention() + " verwarnt!")
                 .addField("Grund:", "```" + reason + "```", false)
-                .setFooter(warned.getEffectiveName() + " wurde zum " + (warnCount + 1) + " mal verwarnt!", null).build())
+                .setFooter(warned.getEffectiveName() + " wurde zum " + warnCount + " mal verwarnt!", null).build())
                 .queue();
 
     }
