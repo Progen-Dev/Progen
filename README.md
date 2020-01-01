@@ -19,18 +19,18 @@ For more information read our [WIKI](https://github.com/ProgenBot/ProgenBot/wiki
 
 ### Commands
 
-* All commands summarized once [Commands]("http://progen-bot.de/commands")
+* All commands summarized [Commands]("http://progen-bot.de/commands")
 
 ## Get Progen
 
-* [To add Progen to your server](https://discordbots.org/bot/495293590503817237)
+* [Add Progen to your server](https://discordbots.org/bot/495293590503817237)
 
-## Impatient
+## Contrubution
 
-impatient? Become beta testers and help us get to know a stable version for Progen and get 
-to know the latest features at the same time.
+Impatient? Become beta testers and help us get to know a stable version of Progen and get 
+to know the latest features as fast as possible.
 
-#### Jetbrains IntelliJ IDEA
+### Jetbrains IntelliJ IDEA
 
 1. Start IntelliJ
 2. If there is a project opened, close it via File -> Close Project
@@ -45,10 +45,6 @@ To simply start Progen
 2. Right click and select ```Run 'Main.main()'```
 
 To build Progen as .jar file, see [this](https://blog.jetbrains.com/idea/2010/08/quickly-create-jar-artifact/) post. Now you can go on with chapter __Run__.
-
-### Download
-
-Check the newest [releases](https://github.com/ProgenBot/ProgenBot/releases). Download the newest stable release. If you want the newest features and stability is not the problem, you can also download a non stable release.
 
 ### Run
 
@@ -65,8 +61,18 @@ Make sure you have installed the [Java Runtime Enviroment](https://java.com/de/d
 1. Open a shell in the directory containing the .jar file
 2. Enter ```java -jar <filename>.jar```
 
+### Download for self hosting
+
+If you don't want to self host Progen, use [this](https://discordbots.org/bot/495293590503817237) link to get Progen.
+Check the newest [releases](https://github.com/ProgenBot/ProgenBot/releases). Download the newest stable release.
+If you want the newest features and stability is not the problem, you can also download a non stable release.
+To run Progen you need to set up a MySQL/MariaDB database and configure the config.properties.
+
 ## Authors
 * __ShowMeYourSkil__
+* __M'Torials__
+* __Evoh__
+
 ## Support
 
 Feel free to join our Progen discord guild.
