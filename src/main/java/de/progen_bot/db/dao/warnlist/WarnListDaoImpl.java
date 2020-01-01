@@ -49,6 +49,18 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
         return null;
     }
 
+    public void deleteWarns(Member member) {
+        Connection connection = ConnectionFactory.getConnection();
+        try {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM `warn` WHERE `userid` = ? AND `guildid` = ?");
+            ps.setString(1, member.getUser().getId());
+            ps.setString(2, member.getGuild().getId());
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void generateTables(String query) {
         super.generateTables(sqlQuery);

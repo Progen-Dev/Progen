@@ -2,6 +2,7 @@ package de.progen_bot.commands.Moderator;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -20,7 +21,7 @@ public class WarnDelete extends CommandHandler {
             return;
         }
 
-        //TODO       super.getDAOs().getWarnList().deleteWarnForMember(event.getMessage().getMentionedMembers().get(0));
+        new WarnListDaoImpl().deleteWarns(event.getMember());
 
         event.getTextChannel().sendMessage(super.messageGenerators.generateSuccessfulMsg()).queue();
     }
