@@ -8,6 +8,7 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.Fun.ConnectFour;
 import de.progen_bot.commands.Help;
 import de.progen_bot.commands.Moderator.*;
+import de.progen_bot.commands.Moderator.Blacklist.CommandBan;
 import de.progen_bot.commands.Moderator.Blacklist.CommandKick;
 import de.progen_bot.commands.User.*;
 import de.progen_bot.commands.Owner.CommandRestart;
@@ -99,7 +100,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandRestart());
         commandManager.setupCommandHandlers(new CommandKick());
         commandManager.setupCommandHandlers(new CommandInfo());
-    }
+        commandManager.setupCommandHandlers(new CommandBan());    }
 
     /**
      * Inits the JDA.

@@ -17,26 +17,7 @@ public class CommandRestart extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        if (PermissionCore.check(4, event)) return;
-
-        event.getMessage().delete().queue();
-        Message msg = event.getTextChannel()
-                .sendMessage(super.messageGenerators.generateWarningMsg("Progen restarts")).complete();
-
-        new Timer().schedule(new TimerTask() {
-
-            @Override
-
-            public void run() {
-
-                msg.delete().queue();
-
-                System.exit(0);
-
-            }
-
-        }, 3000);
-
+        if (PermissionCore.check(4 , event)) return;
     }
 
     @Override
