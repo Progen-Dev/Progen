@@ -35,10 +35,10 @@ public class XPNotify extends CommandHandler {
 
         if (data.getLvlUpNotify()) {
             data.setLvlUpNotify(false);
-            event.getTextChannel().sendMessage("LevelUp message successful disabled").queue();
+            event.getTextChannel().sendMessage("LevelUp message successfully disabled").queue();
         } else {
             data.setLvlUpNotify(true);
-            event.getTextChannel().sendMessage("LevelUp message successful enabled").queue();
+            event.getTextChannel().sendMessage("LevelUp message successfully enabled").queue();
         }
         data.save(data);
     }
