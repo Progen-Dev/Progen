@@ -2,7 +2,6 @@ package de.mtorials.pwi.endpoints;
 
 import de.mtorials.entities.GuildMusic;
 import de.mtorials.pwi.exceptions.APIWrongParametersException;
-import de.mtorials.pwi.httpapi.API;
 import de.mtorials.pwi.httpapi.APIResponseObject;
 import de.mtorials.pwi.httpapi.Endpoint;
 import de.progen_bot.commands.music.Music;
