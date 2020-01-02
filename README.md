@@ -110,4 +110,8 @@ https://discord.gg/EjxZNXV
   <img src="https://discordbots.org/api/widget/lib/495293590503817237.svg?noavatar=true" alt="Progen" />
 </a>
 
-
+     - [Invite Progen](http://invite.progen-bot.de)
+     - [Discord](http://discord.progen-bot.de)
+     - [Support](http://discord.progen-bot.de)
+     - [github](http://github.progen-bot.de)
+  
