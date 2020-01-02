@@ -8,9 +8,9 @@ import net.dv8tion.jda.api.entities.Member;
 
 import java.util.Map;
 
-public class APIEPCommandMemberinfo extends Endpoint {
+public class APIEPMemberinfo extends Endpoint {
 
-    public APIEPCommandMemberinfo() {
+    public APIEPMemberinfo() {
         super("getMemberInfo");
     }
 
