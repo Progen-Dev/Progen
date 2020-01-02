@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpServer;
 import de.mtorials.pwi.endpoints.APIEPChangePrefix;
 import de.mtorials.pwi.endpoints.APIEPCommandMemberinfo;
 import de.mtorials.pwi.endpoints.APIEPGetWarns;
+import de.mtorials.pwi.exceptions.APIEPMusic;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -23,6 +24,7 @@ public class API {
                 .addCommand(new APIEPCommandMemberinfo())
                 .addCommand(new APIEPGetWarns())
                 .addCommand(new APIEPChangePrefix())
+                .addCommand(new APIEPMusic())
                 .build()
         );
         httpServer.setExecutor(null);

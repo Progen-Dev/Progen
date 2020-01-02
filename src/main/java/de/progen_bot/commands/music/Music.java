@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 public class Music extends CommandHandler {
     public Music() {
-        super("music", "music play <name or link>, music stop, music skip, music resume ", "games music of all kind with progen in your language channel");
+        super("music", "music play <name or link>, music stop, music skip, music resume ", "games music of all kind with progen in your voice channel");
         AudioSourceManagers.registerRemoteSources(MANAGER);
     }
 
@@ -40,7 +40,7 @@ public class Music extends CommandHandler {
      * @return AudioPlayer
      */
 
-    private AudioPlayer createPlayer(Guild g) {
+    public AudioPlayer createPlayer(Guild g) {
         AudioPlayer p = MANAGER.createPlayer();
         TrackManager m = new TrackManager(p);
         p.addListener(m);
@@ -54,7 +54,7 @@ public class Music extends CommandHandler {
      * @return Boolean
      */
 
-    private boolean hasPlayer(Guild g) {
+    public boolean hasPlayer(Guild g) {
         return PLAYERS.containsKey(g);
     }
 
@@ -65,7 +65,7 @@ public class Music extends CommandHandler {
      * @return AudioPlayer
      */
 
-    private AudioPlayer getPlayer(Guild g) {
+    public AudioPlayer getPlayer(Guild g) {
         if (hasPlayer(g))
             return PLAYERS.get(g).getKey();
         else
@@ -77,7 +77,7 @@ public class Music extends CommandHandler {
      * @param g Guild
      * @return TrackManager
      */
-    private TrackManager getManager(Guild g) {
+    public TrackManager getManager(Guild g) {
         return PLAYERS.get(g).getValue();
     }
 
@@ -88,7 +88,7 @@ public class Music extends CommandHandler {
      * @return Boolean
      */
 
-    private boolean isIdle(Guild g) {
+    public boolean isIdle(Guild g) {
         return !hasPlayer(g) || getPlayer(g).getPlayingTrack() == null;
     }
 
@@ -98,7 +98,7 @@ public class Music extends CommandHandler {
      * @param msg        Message des Contents
      */
 
-    private void loadTrack(String identifier, Member author, Message msg) {
+    public void loadTrack(String identifier, Member author, Message msg) {
         Guild guild = author.getGuild();
         getPlayer(guild);
         MANAGER.setFrameBufferDuration(1000);
@@ -130,7 +130,7 @@ public class Music extends CommandHandler {
     /**
      * @param g Guild
      */
-    private void skip(Guild g) {
+    public void skip(Guild g) {
         getPlayer(g).stopTrack();
     }
 
@@ -139,7 +139,7 @@ public class Music extends CommandHandler {
      * @return Zeitformat
      */
 
-    private String getTimestamp(long milis) {
+    public String getTimestamp(long milis) {
 
         long seconds = milis / 1000;
 
