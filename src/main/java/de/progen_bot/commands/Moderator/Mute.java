@@ -23,14 +23,14 @@ public class Mute extends CommandHandler {
         if (PermissionCore.check(1, event)) return;
 
         EmbedBuilder error = new EmbedBuilder().setColor(Color.RED).setTitle("Error");
-        EmbedBuilder ok = new EmbedBuilder().setColor(Color.green).setTitle("Erfolgreich");
+        EmbedBuilder ok = new EmbedBuilder().setColor(Color.green).setTitle("Successfully");
         if (!event.getMember().hasPermission(Permission.MESSAGE_MANAGE)) {
-            error.setDescription("Du hast keine Rechte dafür");
+            error.setDescription("Sorry, but you don't have any rights to run this command");
             event.getTextChannel().sendMessage(error.build()).queue();
             return;
         }
         if (event.getMessage().getMentionedMembers().size() != 1) {
-            error.setDescription("Du musst einen User auswählen");
+            error.setDescription("Please select a user.");
             event.getTextChannel().sendMessage(error.build()).queue();
             return;
         }
@@ -42,7 +42,7 @@ public class Mute extends CommandHandler {
         }
         event.getGuild().addRoleToMember(event.getMessage().getMentionedMembers().get(0),
                 event.getGuild().getRolesByName("progen-muted", false).get(0)).complete();
-        ok.setDescription("User " + event.getMessage().getMentionedMembers().get(0).getAsMention() + " Wurde erfolgreich gemuted");
+        ok.setDescription("User " + event.getMessage().getMentionedMembers().get(0).getAsMention() + " was successfully muted");
         event.getTextChannel().sendMessage(ok.build()).queue();
     }
 

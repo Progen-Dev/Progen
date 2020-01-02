@@ -8,9 +8,10 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.Fun.ConnectFour;
 import de.progen_bot.commands.Help;
 import de.progen_bot.commands.Moderator.*;
+import de.progen_bot.commands.Moderator.Blacklist.CommandKick;
 import de.progen_bot.commands.User.*;
-import de.progen_bot.commands.administartor.CommandRestart;
-import de.progen_bot.commands.administartor.CommandStop;
+import de.progen_bot.commands.Owner.CommandRestart;
+import de.progen_bot.commands.Owner.CommandStop;
 import de.progen_bot.commands.music.Music;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
@@ -96,7 +97,7 @@ public class Main {
         commandManager.setupCommandHandlers(new Vote());
         commandManager.setupCommandHandlers(new CommandStop());
         commandManager.setupCommandHandlers(new CommandRestart());
-        commandManager.setupCommandHandlers(new Kick());
+        commandManager.setupCommandHandlers(new CommandKick());
         commandManager.setupCommandHandlers(new CommandInfo());
     }
 

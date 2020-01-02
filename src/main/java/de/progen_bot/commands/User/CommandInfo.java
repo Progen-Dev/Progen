@@ -38,15 +38,13 @@ public class CommandInfo extends CommandHandler {
 
                         .addField("Information and Links" ,
 
-                                "GitHub Repository: \n*https://github.com/ProgenBot/ProgenBot*\n\n" +
+                                "GitHub Repository: \n*https://github.progen-bot.de*\n\n" +
 
                                         "Readme: \n*https://github.com/ProgenBot/ProgenBot/blob/master/README.md*\n\n" +
 
                                         "Wiki : \n*https://github.com/ProgenBot/ProgenBot/wiki*\n\n" +
 
-                                        "Webpage: \n*http://progen-bot.de*\n\n" +
-
-                                        "Github Profile: \n*https://github.com/ProgenBot*" , false)
+                                        "Webpage: \n*http://progen-bot.de*\n\n" ,false)
 
                         .addField("Libraries and Dependencies" ,
 
@@ -62,11 +60,9 @@ public class CommandInfo extends CommandHandler {
 
                                 "If you got some bugs, please contact us here:\n" +
 
-                                        " - **Please use this document to report a Bug or suggest an idea: http://progen-bot.de/Kontakt.html**\n" +
+                                        " - **Please use this document to report a Bug or suggest an idea:  \n http://supp.progen-bot.de**\n\n" +
 
-                                        " -  E-Mail:  progenbot@gmail.com\n" +
-
-                                        " -  Discord:  https://discord.gg/27zmyKu" , false)
+                                        " \n-  Discord:  http://discord.progen-bot.de" , false)
                         .build()
         ).queue();
     }
