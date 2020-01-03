@@ -1,4 +1,4 @@
-package de.progen_bot.commands.music;
+package de.progen_bot.music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
@@ -100,7 +100,7 @@ public class TrackManager extends AudioEventAdapter {
      */
 
     @Override
-    public void onTrackStart(AudioPlayer player, AudioTrack track) {
+    public void onTrackStart(AudioPlayer player, AudioTrack track) throws NullPointerException{
         AudioInfo info = queue.element();
         VoiceChannel vChan = info.getAuthor().getVoiceState().getChannel();
         if (vChan == null)

@@ -1,8 +1,6 @@
 package de.mtorials.entities;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import de.progen_bot.commands.music.AudioInfo;
-import net.dv8tion.jda.api.entities.Guild;
 
 public class TrackInformation {
 

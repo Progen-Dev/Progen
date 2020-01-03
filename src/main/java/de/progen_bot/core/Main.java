@@ -13,7 +13,7 @@ import de.progen_bot.commands.Moderator.Blacklist.CommandKick;
 import de.progen_bot.commands.User.*;
 import de.progen_bot.commands.Owner.CommandRestart;
 import de.progen_bot.commands.Owner.CommandStop;
-import de.progen_bot.commands.music.Music;
+import de.progen_bot.commands.music.CommandMusic;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
@@ -88,7 +88,7 @@ public class Main {
         commandManager.setupCommandHandlers(new XPrank());
         commandManager.setupCommandHandlers(new XP());
         commandManager.setupCommandHandlers(new XPNotify());
-        commandManager.setupCommandHandlers(new Music());
+        commandManager.setupCommandHandlers(new CommandMusic());
         commandManager.setupCommandHandlers(new Stats());
         commandManager.setupCommandHandlers(new CommandRegisterAPI());
         commandManager.setupCommandHandlers(new WarnList());
