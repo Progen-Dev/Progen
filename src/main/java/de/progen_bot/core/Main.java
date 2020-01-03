@@ -76,6 +76,7 @@ public class Main {
         initCommandHandlers(commandManager);
 
         musicBotManager = new MusicBotManager();
+        musicManager = new MusicManager();
     }
 
     /**

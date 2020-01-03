@@ -12,11 +12,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 
-import java.awt.*;
-import java.util.List;
-import java.util.*;
-import java.util.stream.Collectors;
-
 public class Music {
 
     private static final int PLAYLIST_LIMIT = 2000;
@@ -25,7 +20,7 @@ public class Music {
     private Member owner;
     private JDA jda;
     private AudioPlayer player;
-    private TrackManager manager;
+    private TrackManager trackManager;
 
     public Music(Member owner, JDA jda) {
 
@@ -37,9 +32,9 @@ public class Music {
 
     public void createPlayer() {
         player = MANAGER.createPlayer();
-        manager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()));
-        player.addListener(manager);
-        owner.getGuild().getAudioManager().setSendingHandler(new PlayerSendHandler(player));
+        trackManager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()));
+        player.addListener(trackManager);
+        jda.getGuildById(owner.getGuild().getId()).getAudioManager().setSendingHandler(new PlayerSendHandler(player));
     }
 
     public Member getOwner() {
@@ -56,7 +51,7 @@ public class Music {
     }
 
     public TrackManager getManager() {
-        return manager;
+        return trackManager;
     }
 
     public boolean isIdle() {
@@ -64,19 +59,20 @@ public class Music {
     }
 
     public void loadTrack(String identifier, Member author) {
-        Guild guild = owner.getGuild();
+        Guild guild = jda.getGuildById(owner.getGuild().getId());
+        Member auhtorInJDA = jda.getGuildById(author.getGuild().getId()).getMemberById(author.getId());
         MANAGER.setFrameBufferDuration(1000);
         MANAGER.loadItemOrdered(guild, identifier, new AudioLoadResultHandler() {
 
             @Override
             public void trackLoaded(AudioTrack track) {
-                getManager().queue(track, author);
+                getManager().queue(track, auhtorInJDA);
             }
 
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
                 for (int i = 0; i < (playlist.getTracks().size() > PLAYLIST_LIMIT ? PLAYLIST_LIMIT : playlist.getTracks().size()); i++) {
-                    getManager().queue(playlist.getTracks().get(i), author);
+                    getManager().queue(playlist.getTracks().get(i), auhtorInJDA);
                 }
             }
 
