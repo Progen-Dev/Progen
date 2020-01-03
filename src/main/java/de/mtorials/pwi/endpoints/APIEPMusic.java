@@ -39,6 +39,9 @@ public class APIEPMusic extends Endpoint {
             case "skip":
                 music.skip();
                 break;
+            case "stop":
+                music.stop();
+                break;
             default:
                 return new APIResponseObject(400, new APIWrongParametersException());
         }
