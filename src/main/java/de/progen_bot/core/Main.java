@@ -18,13 +18,19 @@ import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
 import de.progen_bot.db.DaoHandler;
+import de.progen_bot.music.Music;
+import de.progen_bot.music.MusicManager;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * The Class Main.
@@ -43,6 +49,9 @@ public class Main {
     private static CommandManager commandManager;
 
     private static DaoHandler daoHandler;
+
+    private static MusicBotManager musicBotManager;
+    private static MusicManager musicManager;
 
     /**
      * Instantiates a new main.
@@ -65,6 +74,8 @@ public class Main {
 
         commandManager = new CommandManager();
         initCommandHandlers(commandManager);
+
+        musicBotManager = new MusicBotManager();
     }
 
     /**
@@ -100,7 +111,8 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandRestart());
         commandManager.setupCommandHandlers(new CommandKick());
         commandManager.setupCommandHandlers(new CommandInfo());
-        commandManager.setupCommandHandlers(new CommandBan());    }
+        commandManager.setupCommandHandlers(new CommandBan());
+    }
 
     /**
      * Inits the JDA.
@@ -136,6 +148,14 @@ public class Main {
 
     public static DaoHandler getDAOs() {
         return daoHandler;
+    }
+
+    // Music
+    public static MusicBotManager getMusicBotManager() {
+        return musicBotManager;
+    }
+    public static MusicManager getMusicManager() {
+        return musicManager;
     }
 
     /**

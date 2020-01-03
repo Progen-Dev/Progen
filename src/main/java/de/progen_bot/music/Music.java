@@ -4,17 +4,13 @@ import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
-import de.progen_bot.command.CommandManager;
-import de.progen_bot.db.entities.config.GuildConfiguration;
-import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.List;
@@ -27,20 +23,27 @@ public class Music {
     private static final AudioPlayerManager MANAGER = new DefaultAudioPlayerManager();
 
     private Member owner;
+    private JDA jda;
     private AudioPlayer player;
     private TrackManager manager;
 
-    public Music(Member owner) {
+    public Music(Member owner, JDA jda) {
 
         this.owner = owner;
+        this.jda = jda;
+        AudioSourceManagers.registerRemoteSources(MANAGER);
         createPlayer();
     }
 
     public void createPlayer() {
         player = MANAGER.createPlayer();
-        manager = new TrackManager(player);
+        manager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()));
         player.addListener(manager);
         owner.getGuild().getAudioManager().setSendingHandler(new PlayerSendHandler(player));
+    }
+
+    public Member getOwner() {
+        return owner;
     }
 
     public boolean hasPlayer() {

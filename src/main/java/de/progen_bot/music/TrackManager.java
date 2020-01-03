@@ -14,6 +14,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class TrackManager extends AudioEventAdapter {
     private final AudioPlayer PLAYER;
     private final Queue<AudioInfo> queue;
+    private final VoiceChannel voiceChannel;
 
     /**
      * Erstellt eine Instanz der Klasse TrackManager.
@@ -21,10 +22,10 @@ public class TrackManager extends AudioEventAdapter {
      * @param player
      */
 
-    public TrackManager(AudioPlayer player) {
+    public TrackManager(AudioPlayer player, VoiceChannel voiceChannel) {
         this.PLAYER = player;
         this.queue = new LinkedBlockingQueue<>();
-
+        this.voiceChannel = voiceChannel;
     }
 
     /**
@@ -100,14 +101,13 @@ public class TrackManager extends AudioEventAdapter {
      */
 
     @Override
-    public void onTrackStart(AudioPlayer player, AudioTrack track) throws NullPointerException{
+    public void onTrackStart(AudioPlayer player, AudioTrack track) {
         AudioInfo info = queue.element();
-        VoiceChannel vChan = info.getAuthor().getVoiceState().getChannel();
+        VoiceChannel vChan = voiceChannel;
         if (vChan == null)
             player.stopTrack();
         else
-            info.getAuthor().getGuild().getAudioManager().openAudioConnection(vChan);
-
+            voiceChannel.getGuild().getAudioManager().openAudioConnection(vChan);
     }
 
     /**
