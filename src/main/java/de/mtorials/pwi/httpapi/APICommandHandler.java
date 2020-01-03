@@ -1,12 +1,14 @@
 package de.mtorials.pwi.httpapi;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import de.mtorials.misc.Logger;
 import de.mtorials.pwi.exceptions.APICommandNotFoundException;
 import de.mtorials.pwi.exceptions.APIException;
+import de.mtorials.pwi.exceptions.MusicStillCreatingException;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.entities.Member;
@@ -42,9 +44,7 @@ public class APICommandHandler implements HttpHandler {
 
         try {
             APIResponseObject responseObject = handleCommands(currentInvoke, params);
-            Logger.info("-Handeled");
             response = toJSON(responseObject);
-            Logger.info("-Response");
             rCode = responseObject.getrCode();
 
         } catch (APIException e) {
@@ -52,7 +52,6 @@ public class APICommandHandler implements HttpHandler {
             response = "ERROR";
         }
 
-        Logger.info("Bearbeitet");
 
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         exchange.sendResponseHeaders(rCode, response.getBytes().length);
@@ -69,13 +68,9 @@ public class APICommandHandler implements HttpHandler {
         APIResponseObject returnObject = null;
         for (Endpoint command : registeredCommands) {
             if (currentInvoke.equals(command.getInvoke())) {
-                Logger.info("--Hi");
                 Member member = tokenManager.getMember(params.get("token"));
-                Logger.info("--Got Member");
                 GuildConfiguration config = new ConfigDaoImpl().loadConfig(member.getGuild());
-                Logger.info("--Got Config");
                 returnObject = command.execute(params, member, config);
-                Logger.info("Executed");
                 commandNotFound = false;
             }
         }
@@ -108,6 +103,13 @@ public class APICommandHandler implements HttpHandler {
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.writeValueAsString(o);
+        } catch (JsonMappingException e) {
+            if (e.getCause() instanceof MusicStillCreatingException)
+                return toJSON(new APIResponseObject(200, false));
+            else {
+                e.printStackTrace();
+                return "ERRORJSON";
+            }
         } catch (JsonProcessingException e) {
             System.out.println("JSON Parser exeption");
             e.printStackTrace();

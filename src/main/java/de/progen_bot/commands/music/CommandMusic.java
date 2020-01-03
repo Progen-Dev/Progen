@@ -38,14 +38,14 @@ public class CommandMusic extends CommandHandler {
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
         if (parsedCommand.getArgs().length < 1) {
-            super.messageGenerators.generateErrorMsg("Not enough arguments");
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
 
         Music music;
         // Is not in voice channel
         if (!event.getMember().getVoiceState().inVoiceChannel()) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You are not in a voice channel")).queue();
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You are not in a voice channel!")).queue();
             return;
         }
 
@@ -56,6 +56,12 @@ public class CommandMusic extends CommandHandler {
 
                 if (Main.getMusicManager().getMusicByOwner(event.getMember()) != null) {
                     event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You have already created an music player. Please go back to your channel to use it!")).queue();
+                    return;
+                }
+                //Check if afk channel
+                if (event.getMember().getVoiceState().getChannel().getId().equals(event.getGuild().getAfkChannel().getId())) {
+
+                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You can not listen to music in an afk channel!")).queue();
                     return;
                 }
                 Main.getMusicManager().registerMusicByMember(event.getMember(), new Music(event.getMember(), Main.getMusicBotManager().getUnusedBotForMember(event.getGuild())));
@@ -75,6 +81,7 @@ public class CommandMusic extends CommandHandler {
 
                 if (parsedCommand.getArgs().length < 2) {
                     event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg( "Please enter a valid source!")).queue();
+                    music.stop();
                     return;
                 }
 
@@ -87,8 +94,7 @@ public class CommandMusic extends CommandHandler {
                 break;
 
             case "stop":
-                music.getManager().purgeQueue();
-                music.skip();
+                music.stop();
                 break;
 
             default:

@@ -2,7 +2,9 @@ package de.mtorials.entities.json;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+import de.mtorials.pwi.exceptions.MusicStillCreatingException;
 import de.progen_bot.music.AudioInfo;
 import de.progen_bot.music.Music;
 import de.progen_bot.music.TrackManager;
@@ -46,7 +48,11 @@ import java.util.List;
         }
 
         public String getTimestamp() {
-            return music.getTimestamp();
+            try {
+                return music.getTimestamp();
+            } catch (NullPointerException e) {
+                throw new MusicStillCreatingException();
+            }
         }
 
         public List<TrackInformation> getQueue() {
@@ -58,7 +64,11 @@ import java.util.List;
         }
 
         public TrackInformation getCurrentTrackInformation() {
-            return new TrackInformation(this.getPlayer().getPlayingTrack());
+            try {
+                return new TrackInformation(this.getPlayer().getPlayingTrack());
+            } catch (NullPointerException e) {
+                throw new MusicStillCreatingException();
+            }
         }
 
         // Setter

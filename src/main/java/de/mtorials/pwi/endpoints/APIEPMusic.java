@@ -28,7 +28,6 @@ public class APIEPMusic extends Endpoint {
 
         Music music = Main.getMusicManager().getMusicByChannel(member.getVoiceState().getChannel());
         if (music == null) return new APIResponseObject(200, false);
-
         if (!params.containsKey("action")) return new APIResponseObject(200, new MusicInfo(music));
         switch (params.get("action")) {
             case "pause":

@@ -20,22 +20,27 @@ public class Music {
 
     private Member owner;
     private JDA jda;
-    private VoiceChannel channel;
     private AudioPlayer player;
     private TrackManager trackManager;
+
+    // Bots
+    private Guild botGuild;
 
     public Music(Member owner, JDA jda) {
 
         this.owner = owner;
         this.jda = jda;
-        this.channel = owner.getVoiceState().getChannel();
+
+        //Bot
+        this.botGuild = jda.getGuildById(owner.getGuild().getId());
+
         AudioSourceManagers.registerRemoteSources(MANAGER);
         createPlayer();
     }
 
     public void createPlayer() {
         player = MANAGER.createPlayer();
-        trackManager = new TrackManager(player, jda.getVoiceChannelById(channel.getId()), jda, owner);
+        trackManager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()), jda, owner);
         player.addListener(trackManager);
         jda.getGuildById(owner.getGuild().getId()).getAudioManager().setSendingHandler(new PlayerSendHandler(player));
     }
@@ -49,7 +54,9 @@ public class Music {
     }
 
     public VoiceChannel getChannel() {
-        return channel;
+        // Bot needs time to connect
+        if (!getBot().getGuildById(getOwner().getGuild().getId()).getAudioManager().isConnected()) return owner.getVoiceState().getChannel();
+        return getBot().getGuildById(getOwner().getGuild().getId()).getAudioManager().getConnectedChannel();
     }
 
     public boolean hasPlayer() {
@@ -71,10 +78,9 @@ public class Music {
     }
 
     public void loadTrack(String identifier, Member author) {
-        Guild guild = jda.getGuildById(owner.getGuild().getId());
         Member auhtorInJDA = jda.getGuildById(author.getGuild().getId()).getMemberById(author.getId());
         MANAGER.setFrameBufferDuration(1000);
-        MANAGER.loadItemOrdered(guild, identifier, new AudioLoadResultHandler() {
+        MANAGER.loadItemOrdered(botGuild, identifier, new AudioLoadResultHandler() {
 
             @Override
             public void trackLoaded(AudioTrack track) {
@@ -100,6 +106,11 @@ public class Music {
     }
 
     public void skip() {
+        getPlayer().stopTrack();
+    }
+
+    public void stop() {
+        getManager().purgeQueue();
         getPlayer().stopTrack();
     }
 
