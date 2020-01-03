@@ -24,7 +24,7 @@ public class MusicManager {
     public Music getMusicByChannel(VoiceChannel channel) {
         if (!musicByGuildByOwner.containsKey(channel.getGuild())) return null;
         for (Music m : musicByGuildByOwner.get(channel.getGuild()).values()) {
-            if (m.getOwner().getVoiceState().getChannel().getId() == channel.getId()) {
+            if (m.getChannel().getId().equals(channel.getId())) {
                 return m;
             }
         }
@@ -36,5 +36,10 @@ public class MusicManager {
         if (!musicByGuildByOwner.containsKey(owner.getGuild())) musicByGuildByOwner.put(owner.getGuild(), new HashMap<>());
         musicByGuildByOwner.get(owner.getGuild()).put(owner, music);
         return music;
+    }
+
+    public void unregisterMusicByOwner(Member owner) {
+        if (!musicByGuildByOwner.containsKey(owner.getGuild())) return;
+        musicByGuildByOwner.get(owner.getGuild()).remove(owner);
     }
 }

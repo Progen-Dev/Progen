@@ -11,6 +11,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.VoiceChannel;
 
 public class Music {
 
@@ -19,6 +20,7 @@ public class Music {
 
     private Member owner;
     private JDA jda;
+    private VoiceChannel channel;
     private AudioPlayer player;
     private TrackManager trackManager;
 
@@ -26,13 +28,14 @@ public class Music {
 
         this.owner = owner;
         this.jda = jda;
+        this.channel = owner.getVoiceState().getChannel();
         AudioSourceManagers.registerRemoteSources(MANAGER);
         createPlayer();
     }
 
     public void createPlayer() {
         player = MANAGER.createPlayer();
-        trackManager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()));
+        trackManager = new TrackManager(player, jda.getVoiceChannelById(channel.getId()), jda, owner);
         player.addListener(trackManager);
         jda.getGuildById(owner.getGuild().getId()).getAudioManager().setSendingHandler(new PlayerSendHandler(player));
     }
@@ -41,10 +44,19 @@ public class Music {
         return owner;
     }
 
+    public JDA getBot() {
+        return jda;
+    }
+
+    public VoiceChannel getChannel() {
+        return channel;
+    }
+
     public boolean hasPlayer() {
         if (player != null) return true;
         return false;
     }
+
 
     public AudioPlayer getPlayer() {
         return player;

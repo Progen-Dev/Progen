@@ -4,6 +4,8 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
+import de.progen_bot.core.Main;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
@@ -15,15 +17,20 @@ public class TrackManager extends AudioEventAdapter {
     private final AudioPlayer PLAYER;
     private final Queue<AudioInfo> queue;
     private final VoiceChannel voiceChannel;
+    private final JDA bot;
+    private final Member owner;
 
     /**
      * Erstellt eine Instanz der Klasse TrackManager.
-     *
-     * @param player
+     *  @param player
+     * @param bot
+     * @param owner
      */
 
-    public TrackManager(AudioPlayer player, VoiceChannel voiceChannel) {
+    public TrackManager(AudioPlayer player, VoiceChannel voiceChannel, JDA bot, Member owner) {
         this.PLAYER = player;
+        this.bot = bot;
+        this.owner = owner;
         this.queue = new LinkedBlockingQueue<>();
         this.voiceChannel = voiceChannel;
     }
@@ -123,9 +130,11 @@ public class TrackManager extends AudioEventAdapter {
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         Guild g = queue.poll().getAuthor().getGuild();
-        if (queue.isEmpty())
+        if (queue.isEmpty()) {
             g.getAudioManager().closeAudioConnection();
-        else
+            Main.getMusicBotManager().setBotUnsed(voiceChannel.getGuild(), bot);
+            Main.getMusicManager().unregisterMusicByOwner(owner);
+        } else
             player.playTrack(queue.element().getTrack());
     }
 }

@@ -1,4 +1,4 @@
-package de.mtorials.entities;
+package de.mtorials.entities.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.dv8tion.jda.api.entities.Member;

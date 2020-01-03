@@ -1,6 +1,6 @@
 package de.mtorials.pwi.endpoints;
 
-import de.mtorials.entities.MemberInfo;
+import de.mtorials.entities.json.MemberInfo;
 import de.mtorials.pwi.httpapi.APIResponseObject;
 import de.mtorials.pwi.httpapi.Endpoint;
 import de.progen_bot.db.entities.config.GuildConfiguration;

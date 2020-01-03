@@ -54,12 +54,24 @@ public class CommandMusic extends CommandHandler {
 
                 if (!(input.startsWith("http://") || input.startsWith("https://")))
                     input = "ytsearch: " + input;
-                Music music = Main.getMusicManager().registerMusicByMember(event.getMember(), new Music(event.getMember(), Main.getMusicBotManager().getUnusedBotForMember(event.getGuild())));
+
+                Music music;
+                // Is not in voice channel
+                if (!event.getMember().getVoiceState().inVoiceChannel()) {
+                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You are not in a voice channel")).queue();
+                    return;
+                }
+
+                // If no Music in Channel : new Music
+                if (Main.getMusicManager().getMusicByChannel(event.getMember().getVoiceState().getChannel()) == null)
+                    music = Main.getMusicManager().registerMusicByMember(event.getMember(), new Music(event.getMember(), Main.getMusicBotManager().getUnusedBotForMember(event.getGuild())));
+                else
+                    // Else get music of channel
+                    music = Main.getMusicManager().getMusicByChannel(event.getMember().getVoiceState().getChannel());
                 music.loadTrack(input, event.getMember());
                 break;
         }
     }
-
 
     @Override
     public String help() {

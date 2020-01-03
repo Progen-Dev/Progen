@@ -37,7 +37,7 @@ public class MusicBotManager {
         if (!botsNotInUse.containsKey(guild)) return null;
         if (botsNotInUse.get(guild).isEmpty()) return null;
         JDA bot = botsNotInUse.get(guild).get(0);
-        botsNotInUse.remove(0);
+        botsNotInUse.get(guild).remove(0);
         return bot;
     }
 

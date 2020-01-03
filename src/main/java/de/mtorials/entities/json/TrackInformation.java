@@ -1,4 +1,4 @@
-package de.mtorials.entities;
+package de.mtorials.entities.json;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 
