@@ -1,5 +1,6 @@
 package de.progen_bot.core;
 
+import com.mysql.cj.jdbc.Driver;
 import de.mtorials.commands.ChangePrefix;
 import de.mtorials.commands.Stats;
 import de.mtorials.fortnite.core.Fortnite;
@@ -29,6 +30,9 @@ import net.dv8tion.jda.api.entities.Member;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -40,7 +44,12 @@ public class Main {
     /**
      * The jda.
      */
+
+    private static String URL;
+
     private static JDA jda;
+
+    private static Connection sqlConnection;
 
     private static Fortnite fortnite;
 
@@ -59,6 +68,17 @@ public class Main {
     public Main() throws IOException {
 
         Settings.loadSettings();
+
+        URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
+                Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
+
+        try {
+            DriverManager.registerDriver(new Driver());
+            sqlConnection = DriverManager.getConnection(URL, Settings.USER, Settings.PASSWORD);
+        } catch (
+                SQLException ex) {
+            throw new RuntimeException("Error connecting to the database", ex);
+        }
 
         httpapi = new API(8083);
         httpapi.start();
@@ -137,6 +157,10 @@ public class Main {
      */
     public static JDA getJda() {
         return jda;
+    }
+
+    public static Connection getSqlConnection() {
+        return sqlConnection;
     }
 
     public static Fortnite getFortnite() {

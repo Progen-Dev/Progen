@@ -15,7 +15,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class TrackManager extends AudioEventAdapter {
     private final AudioPlayer PLAYER;
-    private final Queue<AudioInfo> queue;
+    private Queue<AudioInfo> queue;
     private final VoiceChannel voiceChannel;
     private final JDA bot;
     private final Member owner;
@@ -79,7 +79,10 @@ public class TrackManager extends AudioEventAdapter {
      */
 
     public void purgeQueue() {
-        queue.clear();
+
+        Queue<AudioInfo> newqueue = new LinkedBlockingQueue<>();
+        newqueue.add(queue.element());
+        queue = newqueue;
     }
 
 

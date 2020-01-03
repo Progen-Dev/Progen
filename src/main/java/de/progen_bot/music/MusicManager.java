@@ -12,7 +12,7 @@ public class MusicManager {
     private HashMap<Guild, HashMap<Member, Music>> musicByGuildByOwner = new HashMap<>();
 
     public Music getMusicByOwner(Member owner) {
-        if (!musicByGuildByOwner.containsValue(owner.getGuild())) return null;
+        if (!musicByGuildByOwner.containsKey(owner.getGuild())) return null;
         if (musicByGuildByOwner.get(owner.getGuild()).isEmpty()) return null;
         return musicByGuildByOwner.get(owner.getGuild()).get(owner);
     }
@@ -29,6 +29,16 @@ public class MusicManager {
             }
         }
         return null;
+    }
+
+    public boolean isMusicInChannel(VoiceChannel channel) {
+        if (getMusicByChannel(channel) == null) return false;
+        return true;
+    }
+
+    public boolean isMemberOwner(Member member) {
+        if (getMusicByOwner(member) == null) return false;
+        return true;
     }
 
     public Music registerMusicByMember(Member owner, Music music) {

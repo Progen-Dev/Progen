@@ -1,6 +1,5 @@
 package de.mtorials.pwi.httpapi;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
@@ -39,17 +38,21 @@ public class APICommandHandler implements HttpHandler {
         String response = "";
         int rCode;
 
-        Logger.info("Request " + currentInvoke);
+        Logger.info("REQUEST " + currentInvoke);
 
         try {
             APIResponseObject responseObject = handleCommands(currentInvoke, params);
+            Logger.info("-Handeled");
             response = toJSON(responseObject);
+            Logger.info("-Response");
             rCode = responseObject.getrCode();
 
         } catch (APIException e) {
             rCode = 500;
             response = "ERROR";
         }
+
+        Logger.info("Bearbeitet");
 
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         exchange.sendResponseHeaders(rCode, response.getBytes().length);
@@ -58,6 +61,7 @@ public class APICommandHandler implements HttpHandler {
         os.flush();
         os.close();
 
+        Logger.info("Geschlossen");
     }
 
     private APIResponseObject handleCommands(String currentInvoke, Map<String, String> params) {
@@ -65,9 +69,13 @@ public class APICommandHandler implements HttpHandler {
         APIResponseObject returnObject = null;
         for (Endpoint command : registeredCommands) {
             if (currentInvoke.equals(command.getInvoke())) {
+                Logger.info("--Hi");
                 Member member = tokenManager.getMember(params.get("token"));
+                Logger.info("--Got Member");
                 GuildConfiguration config = new ConfigDaoImpl().loadConfig(member.getGuild());
+                Logger.info("--Got Config");
                 returnObject = command.execute(params, member, config);
+                Logger.info("Executed");
                 commandNotFound = false;
             }
         }

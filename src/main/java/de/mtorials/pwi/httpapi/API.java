@@ -14,11 +14,14 @@ public class API {
     private HttpServer httpServer;
     private static APITokenManager tokenManager;
 
-    public API(int port) throws IOException {
+    public API(int port) {
 
         tokenManager = new APITokenManager();
-
-        this.httpServer = HttpServer.create(new InetSocketAddress(port), 0);
+        try {
+            this.httpServer = HttpServer.create(new InetSocketAddress(port), 0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         httpServer.createContext("/", new APICommandHandlerBuilder()
                 .setTokenManager(tokenManager)
                 .addCommand(new APIEPMemberinfo())

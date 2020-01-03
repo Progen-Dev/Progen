@@ -41,12 +41,40 @@ public class CommandMusic extends CommandHandler {
             super.messageGenerators.generateErrorMsg("Not enough arguments");
             return;
         }
+
+        Music music;
+        // Is not in voice channel
+        if (!event.getMember().getVoiceState().inVoiceChannel()) {
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You are not in a voice channel")).queue();
+            return;
+        }
+
+        // Check: create new Music
+        if (parsedCommand.getArgsAsList().get(0).equals("play") || parsedCommand.getArgsAsList().get(0).equals("p")) {
+            // If no Music in Channel
+            if (Main.getMusicManager().getMusicByChannel(event.getMember().getVoiceState().getChannel()) == null) {
+
+                if (Main.getMusicManager().getMusicByOwner(event.getMember()) != null) {
+                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You have already created an music player. Please go back to your channel to use it!")).queue();
+                    return;
+                }
+                Main.getMusicManager().registerMusicByMember(event.getMember(), new Music(event.getMember(), Main.getMusicBotManager().getUnusedBotForMember(event.getGuild())));
+            }
+        }
+
+        music = Main.getMusicManager().getMusicByChannel(event.getMember().getVoiceState().getChannel());
+
+        if (music == null) {
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Execute the command `music play` fist")).queue();
+            return;
+        }
+
         switch (parsedCommand.getArgs()[0].toLowerCase()) {
             case "play":
             case "p":
-                if (parsedCommand.getArgs().length < 2) {
 
-                    super.messageGenerators.generateErrorMsg( "Please enter a valid source!");
+                if (parsedCommand.getArgs().length < 2) {
+                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg( "Please enter a valid source!")).queue();
                     return;
                 }
 
@@ -55,21 +83,16 @@ public class CommandMusic extends CommandHandler {
                 if (!(input.startsWith("http://") || input.startsWith("https://")))
                     input = "ytsearch: " + input;
 
-                Music music;
-                // Is not in voice channel
-                if (!event.getMember().getVoiceState().inVoiceChannel()) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You are not in a voice channel")).queue();
-                    return;
-                }
-
-                // If no Music in Channel : new Music
-                if (Main.getMusicManager().getMusicByChannel(event.getMember().getVoiceState().getChannel()) == null)
-                    music = Main.getMusicManager().registerMusicByMember(event.getMember(), new Music(event.getMember(), Main.getMusicBotManager().getUnusedBotForMember(event.getGuild())));
-                else
-                    // Else get music of channel
-                    music = Main.getMusicManager().getMusicByChannel(event.getMember().getVoiceState().getChannel());
                 music.loadTrack(input, event.getMember());
                 break;
+
+            case "stop":
+                music.getManager().purgeQueue();
+                music.skip();
+                break;
+
+            default:
+                event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
         }
     }
 
