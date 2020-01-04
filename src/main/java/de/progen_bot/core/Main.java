@@ -110,14 +110,12 @@ public class Main {
         commandManager.setupCommandHandlers(new Mute());
         commandManager.setupCommandHandlers(new UnMute());
         commandManager.setupCommandHandlers(new PrivateVoiceChannel());
-        //commandManager.setupCommandHandlers(new VierGewinnt());
         commandManager.setupCommandHandlers(new Help());
         commandManager.setupCommandHandlers(new ConnectFour());
         commandManager.setupCommandHandlers(new XPrank());
         commandManager.setupCommandHandlers(new XP());
         commandManager.setupCommandHandlers(new XPNotify());
         commandManager.setupCommandHandlers(new CommandMusic());
-        commandManager.setupCommandHandlers(new Stats());
         commandManager.setupCommandHandlers(new CommandRegisterAPI());
         commandManager.setupCommandHandlers(new WarnList());
         commandManager.setupCommandHandlers(new CmdTempChannel());
