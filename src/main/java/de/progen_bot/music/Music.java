@@ -85,9 +85,7 @@ public class Music {
 
         String input = identifier.trim();
 
-        if (!(input.startsWith("http://") || input.startsWith("https://")))
-            input = "ytsearch: " + input;
-
+        if (!(input.startsWith("http://") || input.startsWith("https://"))) input = "ytsearch: " + input;
 
         MANAGER.setFrameBufferDuration(1000);
         MANAGER.loadItemOrdered(botGuild, input, new AudioLoadResultHandler() {

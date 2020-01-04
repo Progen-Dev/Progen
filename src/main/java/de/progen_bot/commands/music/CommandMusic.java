@@ -104,7 +104,7 @@ public class CommandMusic extends CommandHandler {
                         .setDescription("The cue of your music player bot!");
 
                 for (AudioInfo track :  music.getManager().getQueue()) {
-                    msgQueueBuilder.addField(track.getTrack().getInfo().title, "`" + getTimestamp(track.getTrack().getInfo().length) + "`", true);
+                    msgQueueBuilder.addField(track.getTrack().getInfo().title, "`" + getTimestamp(track.getTrack().getInfo().length) + "`", false);
                 }
 
                 event.getTextChannel().sendMessage(msgQueueBuilder.build()).queue();
