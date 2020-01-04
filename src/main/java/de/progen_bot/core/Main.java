@@ -11,6 +11,7 @@ import de.progen_bot.commands.Help;
 import de.progen_bot.commands.moderator.*;
 import de.progen_bot.commands.moderator.Blacklist.CommandBan;
 import de.progen_bot.commands.moderator.Blacklist.CommandKick;
+import de.progen_bot.commands.music.CommandPlaylist;
 import de.progen_bot.commands.user.*;
 import de.progen_bot.commands.owner.CommandRestart;
 import de.progen_bot.commands.owner.CommandStop;
@@ -128,6 +129,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandKick());
         commandManager.setupCommandHandlers(new CommandInfo());
         commandManager.setupCommandHandlers(new CommandBan());
+        commandManager.setupCommandHandlers(new CommandPlaylist());
     }
 
     /**
