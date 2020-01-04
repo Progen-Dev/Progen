@@ -87,6 +87,12 @@ public class CommandMusic extends CommandHandler {
                 music.skip();
                 break;
 
+            case "playpause":
+            case "pp":
+                if (music.getPlayer().isPaused()) music.getPlayer().setPaused(false);
+                else music.getPlayer().setPaused(true);
+                break;
+
             case "queue":
             case "q":
                 EmbedBuilder msgQueueBuilder = new EmbedBuilder()
