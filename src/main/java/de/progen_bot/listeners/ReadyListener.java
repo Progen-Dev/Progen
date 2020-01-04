@@ -34,11 +34,11 @@ public class ReadyListener extends ListenerAdapter {
         }
 
         Activity[] games = new Activity[]{
-                Activity.playing("New fantastic Commands!"),
-                Activity.watching("Use pb! and check it"),
-                Activity.playing("New Tempchannelcommand"),
-                Activity.playing("New error messages!"),
-                Activity.playing("Version: 1.0.0.0")};
+                Activity.playing(""),
+                Activity.watching("New fantastic features"),
+                Activity.streaming("Webinterface","pwi.progen-bot.de/\n"),
+                Activity.playing("http://progen-bot.de!"),
+                Activity.playing("Version: 1.0.0.1")};
 
         new Timer().schedule(new TimerTask() {
 
