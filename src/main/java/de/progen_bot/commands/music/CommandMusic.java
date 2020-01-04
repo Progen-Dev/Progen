@@ -92,6 +92,10 @@ public class CommandMusic extends CommandHandler {
                 music.stop();
                 break;
 
+            case "skip":
+                music.skip();
+                break;
+
             default:
                 event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
         }
