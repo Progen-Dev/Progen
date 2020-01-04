@@ -1,4 +1,4 @@
-package de.progen_bot.commands.User;
+package de.progen_bot.commands.user;
 
 import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandHandler;

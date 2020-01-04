@@ -6,35 +6,30 @@ import de.mtorials.commands.Stats;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandManager;
-import de.progen_bot.commands.Fun.ConnectFour;
+import de.progen_bot.commands.fun.ConnectFour;
 import de.progen_bot.commands.Help;
-import de.progen_bot.commands.Moderator.*;
-import de.progen_bot.commands.Moderator.Blacklist.CommandBan;
-import de.progen_bot.commands.Moderator.Blacklist.CommandKick;
-import de.progen_bot.commands.User.*;
-import de.progen_bot.commands.Owner.CommandRestart;
-import de.progen_bot.commands.Owner.CommandStop;
+import de.progen_bot.commands.moderator.*;
+import de.progen_bot.commands.moderator.Blacklist.CommandBan;
+import de.progen_bot.commands.moderator.Blacklist.CommandKick;
+import de.progen_bot.commands.user.*;
+import de.progen_bot.commands.owner.CommandRestart;
+import de.progen_bot.commands.owner.CommandStop;
 import de.progen_bot.commands.music.CommandMusic;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
 import de.progen_bot.db.DaoHandler;
-import de.progen_bot.music.Music;
 import de.progen_bot.music.MusicManager;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.HashMap;
 
 /**
  * The Class Main.

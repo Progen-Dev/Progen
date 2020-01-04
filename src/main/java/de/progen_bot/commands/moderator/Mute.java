@@ -1,4 +1,4 @@
-package de.progen_bot.commands.Moderator;
+package de.progen_bot.commands.moderator;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;

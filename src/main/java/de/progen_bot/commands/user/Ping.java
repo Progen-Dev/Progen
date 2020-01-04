@@ -1,30 +1,26 @@
-package de.progen_bot.commands.User;
+package de.progen_bot.commands.user;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import java.awt.*;
 
-public class Say extends CommandHandler {
+public class Ping extends CommandHandler {
 
-    public Say() {
-        super("say", "say <text>", "let the bot write a message");
+    public Ping() {
+        super("ping", "ping", "get the bot ping");
     }
 
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        String out = " ";
-        for (String s : parsedCommand.getArgs()) {
-            out += s + " ";
-        }
-
-        event.getTextChannel().sendMessage(out).queue();
+        event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.green).setDescription("Your Ping: " + event.getJDA().getGatewayPing() + "").build()).queue();
     }
 
     @Override
     public String help() {
         return null;
     }
-
 }

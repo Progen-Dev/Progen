@@ -1,4 +1,4 @@
-package de.progen_bot.commands.Owner;
+package de.progen_bot.commands.owner;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
