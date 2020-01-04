@@ -102,7 +102,7 @@ public class Main {
     private void initCommandHandlers(CommandManager commandManager) {
         commandManager.setupCommandHandlers(new Clear());
         commandManager.setupCommandHandlers(new GuildInfo());
-        commandManager.setupCommandHandlers(new Ping());
+        commandManager.setupCommandHandlers(new CommandPing());
         commandManager.setupCommandHandlers(new Say());
         commandManager.setupCommandHandlers(new CommandUserInfo());
         commandManager.setupCommandHandlers(new Warn());
