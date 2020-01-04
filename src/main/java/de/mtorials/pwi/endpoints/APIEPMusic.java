@@ -42,6 +42,10 @@ public class APIEPMusic extends Endpoint {
             case "stop":
                 music.stop();
                 break;
+            case "queue":
+                if (!params.containsKey("q")) return new APIResponseObject(400, new APIWrongParametersException());
+                music.loadTrack(params.get("q"), member);
+                break;
             default:
                 return new APIResponseObject(400, new APIWrongParametersException());
         }

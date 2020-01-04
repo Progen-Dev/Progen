@@ -13,6 +13,9 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class Music {
 
     private static final int PLAYLIST_LIMIT = 2000;
@@ -79,8 +82,15 @@ public class Music {
 
     public void loadTrack(String identifier, Member author) {
         Member auhtorInJDA = jda.getGuildById(author.getGuild().getId()).getMemberById(author.getId());
+
+        String input = identifier.trim().toLowerCase();
+
+        if (!(input.startsWith("http://") || input.startsWith("https://")))
+            input = "ytsearch: " + input;
+
+
         MANAGER.setFrameBufferDuration(1000);
-        MANAGER.loadItemOrdered(botGuild, identifier, new AudioLoadResultHandler() {
+        MANAGER.loadItemOrdered(botGuild, input, new AudioLoadResultHandler() {
 
             @Override
             public void trackLoaded(AudioTrack track) {
@@ -89,9 +99,7 @@ public class Music {
 
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
-                for (int i = 0; i < (playlist.getTracks().size() > PLAYLIST_LIMIT ? PLAYLIST_LIMIT : playlist.getTracks().size()); i++) {
-                    getManager().queue(playlist.getTracks().get(i), auhtorInJDA);
-                }
+                getManager().queue(playlist.getTracks().get(0), auhtorInJDA);
             }
 
             @Override

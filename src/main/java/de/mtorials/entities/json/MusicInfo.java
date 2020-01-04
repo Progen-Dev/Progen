@@ -2,7 +2,6 @@ package de.mtorials.entities.json;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import de.mtorials.pwi.exceptions.MusicStillCreatingException;
 import de.progen_bot.music.AudioInfo;

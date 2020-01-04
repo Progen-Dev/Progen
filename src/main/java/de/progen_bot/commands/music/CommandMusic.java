@@ -85,12 +85,7 @@ public class CommandMusic extends CommandHandler {
                     return;
                 }
 
-                String input = Arrays.stream(parsedCommand.getArgs()).skip(1).map(s -> " " + s).collect(Collectors.joining()).substring(1);
-
-                if (!(input.startsWith("http://") || input.startsWith("https://")))
-                    input = "ytsearch: " + input;
-
-                music.loadTrack(input, event.getMember());
+                music.loadTrack(Arrays.stream(parsedCommand.getArgs()).skip(1).map(s -> " " + s).collect(Collectors.joining()).substring(1), event.getMember());
                 break;
 
             case "stop":

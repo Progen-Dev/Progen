@@ -59,8 +59,6 @@ public class APICommandHandler implements HttpHandler {
         os.write(response.getBytes());
         os.flush();
         os.close();
-
-        Logger.info("Geschlossen");
     }
 
     private APIResponseObject handleCommands(String currentInvoke, Map<String, String> params) {
