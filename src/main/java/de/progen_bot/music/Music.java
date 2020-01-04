@@ -8,6 +8,7 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import de.progen_bot.core.Main;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -39,11 +40,12 @@ public class Music {
 
         AudioSourceManagers.registerRemoteSources(MANAGER);
         createPlayer();
+        jda.getGuildById(owner.getGuild().getId()).getAudioManager().openAudioConnection(owner.getVoiceState().getChannel());
     }
 
     public void createPlayer() {
         player = MANAGER.createPlayer();
-        trackManager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()), jda, owner);
+        trackManager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()), this);
         player.addListener(trackManager);
         jda.getGuildById(owner.getGuild().getId()).getAudioManager().setSendingHandler(new PlayerSendHandler(player));
     }
@@ -116,8 +118,17 @@ public class Music {
     }
 
     public void stop() {
-        getManager().purgeQueue();
-        getPlayer().stopTrack();
+        musicDetach();
+    }
+
+    public void musicDetach() {
+        botGuild.getAudioManager().closeAudioConnection();
+        Main.getMusicBotManager().setBotUnsed(getChannel().getGuild(), jda);
+        Main.getMusicManager().unregisterMusicByOwner(owner);
+    }
+
+    public void onTrackEndCallback() {
+        owner.getGuild().getDefaultChannel().sendMessage("The music bot " + getBot().getSelfUser().getName() + "'s queue is empty, you may want to play some more music!").queue();
     }
 
     public String getTimestamp() {

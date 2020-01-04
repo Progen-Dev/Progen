@@ -11,10 +11,11 @@ import de.progen_bot.commands.Help;
 import de.progen_bot.commands.moderator.*;
 import de.progen_bot.commands.moderator.Blacklist.CommandBan;
 import de.progen_bot.commands.moderator.Blacklist.CommandKick;
+import de.progen_bot.commands.music.CommandPlaylist;
+import de.progen_bot.commands.user.*;
 import de.progen_bot.commands.owner.CommandRestart;
 import de.progen_bot.commands.owner.CommandStop;
 import de.progen_bot.commands.music.CommandMusic;
-import de.progen_bot.commands.user.*;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
@@ -102,11 +103,11 @@ public class Main {
     private void initCommandHandlers(CommandManager commandManager) {
         commandManager.setupCommandHandlers(new Clear());
         commandManager.setupCommandHandlers(new GuildInfo());
-        commandManager.setupCommandHandlers(new CommandPing());
+        commandManager.setupCommandHandlers(new Ping());
         commandManager.setupCommandHandlers(new Say());
         commandManager.setupCommandHandlers(new CommandUserInfo());
         commandManager.setupCommandHandlers(new Warn());
-        commandManager.setupCommandHandlers(new CommandMute());
+        commandManager.setupCommandHandlers(new Mute());
         commandManager.setupCommandHandlers(new UnMute());
         commandManager.setupCommandHandlers(new PrivateVoiceChannel());
         commandManager.setupCommandHandlers(new Help());
@@ -115,7 +116,6 @@ public class Main {
         commandManager.setupCommandHandlers(new XP());
         commandManager.setupCommandHandlers(new XPNotify());
         commandManager.setupCommandHandlers(new CommandMusic());
-        commandManager.setupCommandHandlers(new Stats());
         commandManager.setupCommandHandlers(new CommandRegisterAPI());
         commandManager.setupCommandHandlers(new WarnList());
         commandManager.setupCommandHandlers(new CmdTempChannel());
@@ -126,6 +126,8 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandRestart());
         commandManager.setupCommandHandlers(new CommandKick());
         commandManager.setupCommandHandlers(new CommandInfo());
+        commandManager.setupCommandHandlers(new CommandBan());
+        commandManager.setupCommandHandlers(new CommandPlaylist());
     }
 
     /**

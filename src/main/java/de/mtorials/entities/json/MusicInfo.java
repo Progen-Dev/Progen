@@ -2,6 +2,7 @@ package de.mtorials.entities.json;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import de.mtorials.pwi.exceptions.MusicStillCreatingException;
 import de.progen_bot.music.AudioInfo;
@@ -46,11 +47,12 @@ import java.util.List;
             return music.isIdle();
         }
 
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         public String getTimestamp() {
             try {
                 return music.getTimestamp();
             } catch (NullPointerException e) {
-                throw new MusicStillCreatingException();
+                return null;
             }
         }
 
@@ -63,21 +65,10 @@ import java.util.List;
         }
 
         public TrackInformation getCurrentTrackInformation() {
-            try {
-                return new TrackInformation(this.getPlayer().getPlayingTrack());
-            } catch (NullPointerException e) {
-                throw new MusicStillCreatingException();
-            }
+            if (this.getPlayer().getPlayingTrack() == null) return null;
+            return new TrackInformation(this.getPlayer().getPlayingTrack());
+
         }
 
-        // Setter
-
-        public void loadTrack(String identifier, Member author, Message msg) {
-            music.loadTrack(identifier, author);
-        }
-
-        public void skip() {
-            music.skip();
-        }
     }
 

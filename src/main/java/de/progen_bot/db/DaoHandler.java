@@ -3,6 +3,7 @@ package de.progen_bot.db;
 import de.progen_bot.db.dao.Dao;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.dao.connectfour.ConnectFourDaoImpl;
+import de.progen_bot.db.dao.playlist.PlaylistDaoImpl;
 import de.progen_bot.db.dao.poll.PollDaoImpl;
 import de.progen_bot.db.dao.tokenmanager.TokenManagerDao;
 import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
@@ -21,6 +22,7 @@ public class DaoHandler {
         daoList.add(new ConnectFourDaoImpl());
         daoList.add(new TokenManagerDao());
         daoList.add(new ConfigDaoImpl());
+        daoList.add(new PlaylistDaoImpl());
 
         for (Dao dao : daoList) {
             dao.generateTables("");

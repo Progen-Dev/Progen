@@ -101,13 +101,6 @@ public class APICommandHandler implements HttpHandler {
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.writeValueAsString(o);
-        } catch (JsonMappingException e) {
-            if (e.getCause() instanceof MusicStillCreatingException)
-                return toJSON(new APIResponseObject(200, false));
-            else {
-                e.printStackTrace();
-                return "ERRORJSON";
-            }
         } catch (JsonProcessingException e) {
             System.out.println("JSON Parser exeption");
             e.printStackTrace();

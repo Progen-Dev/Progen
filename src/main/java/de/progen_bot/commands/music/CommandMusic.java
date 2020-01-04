@@ -36,7 +36,7 @@ public class CommandMusic extends CommandHandler {
         }
 
         // Check: create new Music
-        if (parsedCommand.getArgsAsList().get(0).equals("play") || parsedCommand.getArgsAsList().get(0).equals("p")) {
+        if (parsedCommand.getArgsAsList().get(0).equals("start")) {
             // If no Music in Channel
             if (!musicManager.isMusicInChannel(event.getMember().getVoiceState().getChannel())) {
 
@@ -56,13 +56,15 @@ public class CommandMusic extends CommandHandler {
                     return;
                 }
                 musicManager.registerMusicByMember(event.getMember(), new Music(event.getMember(), Main.getMusicBotManager().getUnusedBot(event.getGuild())));
+                event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg("You have now a music instance in your voice chat! Check out the PWI to control your music more efficient!")).queue();
+                return;
             }
         }
 
         music = musicManager.getMusicByChannel(event.getMember().getVoiceState().getChannel());
 
         if (music == null) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Execute the command `music play` fist")).queue();
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Execute the command `music start` fist")).queue();
             return;
         }
 
