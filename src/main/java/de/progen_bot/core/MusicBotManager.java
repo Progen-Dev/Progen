@@ -25,6 +25,7 @@ public class MusicBotManager {
             botsNotInUse.get(g).add(Main.getJda());
         }
 
+        // Music bots
         for (String token : tokens) {
             JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(token);
             try {
