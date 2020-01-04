@@ -83,7 +83,7 @@ public class Music {
     public void loadTrack(String identifier, Member author) {
         Member auhtorInJDA = jda.getGuildById(author.getGuild().getId()).getMemberById(author.getId());
 
-        String input = identifier.trim().toLowerCase();
+        String input = identifier.trim();
 
         if (!(input.startsWith("http://") || input.startsWith("https://")))
             input = "ytsearch: " + input;

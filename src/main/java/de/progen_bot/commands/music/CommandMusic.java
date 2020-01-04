@@ -96,9 +96,50 @@ public class CommandMusic extends CommandHandler {
                 music.skip();
                 break;
 
+            case "queue":
+            case "q":
+                EmbedBuilder msgQueueBuilder = new EmbedBuilder()
+                        .setTitle("Queue")
+                        .setColor(Color.CYAN)
+                        .setDescription("The cue of your music player bot!");
+
+                for (AudioInfo track :  music.getManager().getQueue()) {
+                    msgQueueBuilder.addField(track.getTrack().getInfo().title, "`" + getTimestamp(track.getTrack().getInfo().length) + "`", true);
+                }
+
+                event.getTextChannel().sendMessage(msgQueueBuilder.build()).queue();
+                break;
+
+            case "info":
+            case "i":
+
+                EmbedBuilder msgInfoBuilder = new EmbedBuilder()
+                        .setTitle("Track Info")
+                        .setColor(Color.CYAN)
+                        .setDescription("The current track");
+
+                msgInfoBuilder.addField("Title", music.getPlayer().getPlayingTrack().getInfo().title, false);
+                msgInfoBuilder.addField("Interpret / Uploader", music.getPlayer().getPlayingTrack().getInfo().author, false);
+                msgInfoBuilder.addField("Position", "`" + getTimestamp(music.getPlayer().getPlayingTrack().getPosition()) + "/" + getTimestamp(music.getPlayer().getPlayingTrack().getInfo().length) + "`", false);
+                msgInfoBuilder.addField("URI", music.getPlayer().getPlayingTrack().getInfo().uri, false);
+
+                event.getTextChannel().sendMessage(msgInfoBuilder.build()).queue();
+                break;
+
             default:
                 event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
         }
+    }
+
+    private String getTimestamp(long millis) {
+
+        long seconds = millis / 1000;
+
+        long hours = Math.floorDiv(seconds, 3600);
+        seconds = seconds - (hours * 3600);
+        long mins = Math.floorDiv(seconds, 60);
+        seconds = seconds - (mins * 60);
+        return (hours == 0 ? "" : hours + ":") + String.format("%02d", mins) + ":" + String.format("%02d", seconds);
     }
 
     @Override
