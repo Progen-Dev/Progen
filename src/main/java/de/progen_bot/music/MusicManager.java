@@ -36,7 +36,7 @@ public class MusicManager {
         return true;
     }
 
-    public boolean isMemberOwner(Member member) {
+    public boolean isMusicOwner(Member member) {
         if (getMusicByOwner(member) == null) return false;
         return true;
     }

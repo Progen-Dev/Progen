@@ -19,6 +19,12 @@ public class MusicBotManager {
         tokens.add(Settings.MUSICTOKEN1);
         tokens.add(Settings.MUSICTOKEN2);
 
+        //Progen
+        for (Guild g : Main.getJda().getGuilds()) {
+            if (!botsNotInUse.containsKey(g)) botsNotInUse.put(g, new ArrayList<>());
+            botsNotInUse.get(g).add(Main.getJda());
+        }
+
         for (String token : tokens) {
             JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(token);
             try {
@@ -33,12 +39,17 @@ public class MusicBotManager {
         }
     }
 
-    public JDA getUnusedBotForMember(Guild guild) {
+    public JDA getUnusedBot(Guild guild) {
         if (!botsNotInUse.containsKey(guild)) return null;
         if (botsNotInUse.get(guild).isEmpty()) return null;
         JDA bot = botsNotInUse.get(guild).get(0);
         botsNotInUse.get(guild).remove(0);
         return bot;
+    }
+
+    public boolean botAvailable(Guild guild) {
+        if (botsNotInUse.get(guild).isEmpty()) return false;
+        else return true;
     }
 
     public void setBotUnsed(Guild guild, JDA bot) {
