@@ -10,4 +10,6 @@ public class Statics {
 
     public static Date lastRestart;
     public static int reconnectCount = 0;
+
+    public static String guildJoinRole = "";
 }

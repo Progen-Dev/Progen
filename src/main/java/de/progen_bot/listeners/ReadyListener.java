@@ -34,7 +34,7 @@ public class ReadyListener extends ListenerAdapter {
         }
 
         Activity[] games = new Activity[]{
-                Activity.playing(""),
+                Activity.playing(" "),
                 Activity.watching("New fantastic features"),
                 Activity.streaming("Webinterface","pwi.progen-bot.de/\n"),
                 Activity.playing("http://progen-bot.de!"),

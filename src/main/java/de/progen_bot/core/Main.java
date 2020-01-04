@@ -126,7 +126,6 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandRestart());
         commandManager.setupCommandHandlers(new CommandKick());
         commandManager.setupCommandHandlers(new CommandInfo());
-        commandManager.setupCommandHandlers(new CommandBan());
     }
 
     /**

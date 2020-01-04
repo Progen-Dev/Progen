@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class CommandPing extends CommandHandler {
     public CommandPing() {
-        super("ping", "ping", "get the bot ping");
+        super("ping", "ing", "get the bot ping");
     }
 
     private String getTime(Date date, String pattern) {
