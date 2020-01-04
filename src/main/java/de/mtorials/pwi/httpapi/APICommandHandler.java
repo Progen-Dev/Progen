@@ -1,13 +1,14 @@
 package de.mtorials.pwi.httpapi;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import de.mtorials.misc.Logger;
 import de.mtorials.pwi.exceptions.APICommandNotFoundException;
 import de.mtorials.pwi.exceptions.APIException;
+import de.mtorials.pwi.exceptions.MusicStillCreatingException;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.entities.Member;
@@ -39,7 +40,7 @@ public class APICommandHandler implements HttpHandler {
         String response = "";
         int rCode;
 
-        Logger.info("Request " + currentInvoke);
+        Logger.info("REQUEST " + currentInvoke);
 
         try {
             APIResponseObject responseObject = handleCommands(currentInvoke, params);
@@ -51,13 +52,13 @@ public class APICommandHandler implements HttpHandler {
             response = "ERROR";
         }
 
+
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         exchange.sendResponseHeaders(rCode, response.getBytes().length);
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
         os.flush();
         os.close();
-
     }
 
     private APIResponseObject handleCommands(String currentInvoke, Map<String, String> params) {
@@ -100,6 +101,13 @@ public class APICommandHandler implements HttpHandler {
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.writeValueAsString(o);
+        } catch (JsonMappingException e) {
+            if (e.getCause() instanceof MusicStillCreatingException)
+                return toJSON(new APIResponseObject(200, false));
+            else {
+                e.printStackTrace();
+                return "ERRORJSON";
+            }
         } catch (JsonProcessingException e) {
             System.out.println("JSON Parser exeption");
             e.printStackTrace();

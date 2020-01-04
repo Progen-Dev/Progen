@@ -1,5 +1,6 @@
 package de.progen_bot.core;
 
+import com.mysql.cj.jdbc.Driver;
 import de.mtorials.commands.ChangePrefix;
 import de.mtorials.commands.Stats;
 import de.mtorials.fortnite.core.Fortnite;
@@ -13,18 +14,27 @@ import de.progen_bot.commands.Moderator.Blacklist.CommandKick;
 import de.progen_bot.commands.User.*;
 import de.progen_bot.commands.Owner.CommandRestart;
 import de.progen_bot.commands.Owner.CommandStop;
-import de.progen_bot.commands.music.Music;
+import de.progen_bot.commands.music.CommandMusic;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
 import de.progen_bot.db.DaoHandler;
+import de.progen_bot.music.Music;
+import de.progen_bot.music.MusicManager;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * The Class Main.
@@ -34,7 +44,12 @@ public class Main {
     /**
      * The jda.
      */
+
+    private static String URL;
+
     private static JDA jda;
+
+    private static Connection sqlConnection;
 
     private static Fortnite fortnite;
 
@@ -44,12 +59,26 @@ public class Main {
 
     private static DaoHandler daoHandler;
 
+    private static MusicBotManager musicBotManager;
+    private static MusicManager musicManager;
+
     /**
      * Instantiates a new main.
      */
     public Main() throws IOException {
 
         Settings.loadSettings();
+
+        URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
+                Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
+
+        try {
+            DriverManager.registerDriver(new Driver());
+            sqlConnection = DriverManager.getConnection(URL, Settings.USER, Settings.PASSWORD);
+        } catch (
+                SQLException ex) {
+            throw new RuntimeException("Error connecting to the database", ex);
+        }
 
         httpapi = new API(8083);
         httpapi.start();
@@ -65,6 +94,9 @@ public class Main {
 
         commandManager = new CommandManager();
         initCommandHandlers(commandManager);
+
+        musicBotManager = new MusicBotManager();
+        musicManager = new MusicManager();
     }
 
     /**
@@ -88,7 +120,7 @@ public class Main {
         commandManager.setupCommandHandlers(new XPrank());
         commandManager.setupCommandHandlers(new XP());
         commandManager.setupCommandHandlers(new XPNotify());
-        commandManager.setupCommandHandlers(new Music());
+        commandManager.setupCommandHandlers(new CommandMusic());
         commandManager.setupCommandHandlers(new Stats());
         commandManager.setupCommandHandlers(new CommandRegisterAPI());
         commandManager.setupCommandHandlers(new WarnList());
@@ -100,7 +132,8 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandRestart());
         commandManager.setupCommandHandlers(new CommandKick());
         commandManager.setupCommandHandlers(new CommandInfo());
-        commandManager.setupCommandHandlers(new CommandBan());    }
+        commandManager.setupCommandHandlers(new CommandBan());
+    }
 
     /**
      * Inits the JDA.
@@ -126,6 +159,10 @@ public class Main {
         return jda;
     }
 
+    public static Connection getSqlConnection() {
+        return sqlConnection;
+    }
+
     public static Fortnite getFortnite() {
         return fortnite;
     }
@@ -136,6 +173,14 @@ public class Main {
 
     public static DaoHandler getDAOs() {
         return daoHandler;
+    }
+
+    // Music
+    public static MusicBotManager getMusicBotManager() {
+        return musicBotManager;
+    }
+    public static MusicManager getMusicManager() {
+        return musicManager;
     }
 
     /**

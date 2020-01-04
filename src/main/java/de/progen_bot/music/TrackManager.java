@@ -1,9 +1,11 @@
-package de.progen_bot.commands.music;
+package de.progen_bot.music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
+import de.progen_bot.core.Main;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
@@ -13,18 +15,24 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class TrackManager extends AudioEventAdapter {
     private final AudioPlayer PLAYER;
-    private final Queue<AudioInfo> queue;
+    private Queue<AudioInfo> queue;
+    private final VoiceChannel voiceChannel;
+    private final JDA bot;
+    private final Member owner;
 
     /**
      * Erstellt eine Instanz der Klasse TrackManager.
-     *
-     * @param player
+     *  @param player
+     * @param bot
+     * @param owner
      */
 
-    public TrackManager(AudioPlayer player) {
+    public TrackManager(AudioPlayer player, VoiceChannel voiceChannel, JDA bot, Member owner) {
         this.PLAYER = player;
+        this.bot = bot;
+        this.owner = owner;
         this.queue = new LinkedBlockingQueue<>();
-
+        this.voiceChannel = voiceChannel;
     }
 
     /**
@@ -71,7 +79,10 @@ public class TrackManager extends AudioEventAdapter {
      */
 
     public void purgeQueue() {
-        queue.clear();
+
+        Queue<AudioInfo> newqueue = new LinkedBlockingQueue<>();
+        newqueue.add(queue.element());
+        queue = newqueue;
     }
 
 
@@ -102,12 +113,11 @@ public class TrackManager extends AudioEventAdapter {
     @Override
     public void onTrackStart(AudioPlayer player, AudioTrack track) {
         AudioInfo info = queue.element();
-        VoiceChannel vChan = info.getAuthor().getVoiceState().getChannel();
+        VoiceChannel vChan = voiceChannel;
         if (vChan == null)
             player.stopTrack();
         else
-            info.getAuthor().getGuild().getAudioManager().openAudioConnection(vChan);
-
+            voiceChannel.getGuild().getAudioManager().openAudioConnection(vChan);
     }
 
     /**
@@ -123,9 +133,11 @@ public class TrackManager extends AudioEventAdapter {
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         Guild g = queue.poll().getAuthor().getGuild();
-        if (queue.isEmpty())
+        if (queue.isEmpty()) {
             g.getAudioManager().closeAudioConnection();
-        else
+            Main.getMusicBotManager().setBotUnsed(voiceChannel.getGuild(), bot);
+            Main.getMusicManager().unregisterMusicByOwner(owner);
+        } else
             player.playTrack(queue.element().getTrack());
     }
 }

@@ -36,5 +36,6 @@ public class BuildManager {
         builder.addEventListeners(new Autochannel());
         builder.addEventListeners(new PrivateVoice());
         builder.addEventListeners(new FourConnectListener());
+        builder.addEventListeners(new MusicListener());
     }
 }

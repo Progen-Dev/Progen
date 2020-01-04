@@ -16,6 +16,9 @@ public class Settings {
     public static String USER;
     public static String PASSWORD;
 
+    public static String MUSICTOKEN1;
+    public static String MUSICTOKEN2;
+
 
     /**
      * Load settings.
@@ -37,6 +40,9 @@ public class Settings {
             properties.setProperty("User", "");
             properties.setProperty("Port", "");
             properties.setProperty("Password", "");
+
+            properties.setProperty("musictoken1", "");
+            properties.setProperty("musictoken2", "");
 
             File f = new File("config.properties");
             OutputStream out;
@@ -61,5 +67,8 @@ public class Settings {
         USER = properties.getProperty("User");
         PASSWORD = properties.getProperty("Password");
         DATABASE = properties.getProperty("Database");
+
+        MUSICTOKEN1 = properties.getProperty("musictoken1");
+        MUSICTOKEN2 = properties.getProperty("musictoken2");
     }
 }

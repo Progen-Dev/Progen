@@ -1,4 +1,4 @@
-package de.progen_bot.commands.music;
+package de.progen_bot.music;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;

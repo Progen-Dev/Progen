@@ -9,7 +9,7 @@ For more information read our [WIKI](https://github.com/ProgenBot/ProgenBot/wiki
 
 * A list of commands for
     * moderation
-    * music
+    * commandMusic
     * games
     * bot customization
     * utility
