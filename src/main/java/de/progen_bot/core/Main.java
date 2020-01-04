@@ -106,7 +106,7 @@ public class Main {
         commandManager.setupCommandHandlers(new Say());
         commandManager.setupCommandHandlers(new CommandUserInfo());
         commandManager.setupCommandHandlers(new Warn());
-        commandManager.setupCommandHandlers(new Mute());
+        commandManager.setupCommandHandlers(new CommandMute());
         commandManager.setupCommandHandlers(new UnMute());
         commandManager.setupCommandHandlers(new PrivateVoiceChannel());
         commandManager.setupCommandHandlers(new Help());
