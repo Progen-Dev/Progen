@@ -37,5 +37,8 @@ public class BuildManager {
         builder.addEventListeners(new PrivateVoice());
         builder.addEventListeners(new FourConnectListener());
         builder.addEventListeners(new MusicListener());
+        builder.addEventListeners(new ServerJoinListener());
+        builder.addEventListeners(new ReconnectListener());
+        builder.addEventListeners(new MuteHandler());
     }
 }
