@@ -40,7 +40,8 @@ public class TrackManager extends AudioEventAdapter {
         AudioInfo info = new AudioInfo(track, author);
         queue.add(info);
         if (PLAYER.getPlayingTrack() == null) {
-            PLAYER.playTrack(queue.remove().getTrack());
+            PLAYER.playTrack(queue.element().getTrack());
+            queue.remove();
         }
     }
 
@@ -124,7 +125,9 @@ public class TrackManager extends AudioEventAdapter {
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if (queue.isEmpty()) {
             music.onTrackEndCallback();
-        } else
-            player.playTrack(queue.remove().getTrack());
+        } else {
+            player.playTrack(queue.element().getTrack());
+            queue.remove();
+        }
     }
 }
