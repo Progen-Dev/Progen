@@ -28,7 +28,7 @@ public class AutoroleDaoImpl extends Dao implements AutoroleDao {
 
     @Override
     public void deleteautorole(Role role, Guild guild) {
-        Connection connection = ConnectionFactory.getConnection()
+        Connection connection = ConnectionFactory.getConnection();
 
     }
 }

@@ -32,6 +32,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+
 /**
  * The Class Main.
  */
@@ -103,11 +105,11 @@ public class Main {
     private void initCommandHandlers(CommandManager commandManager) {
         commandManager.setupCommandHandlers(new Clear());
         commandManager.setupCommandHandlers(new GuildInfo());
-        commandManager.setupCommandHandlers(new Ping());
+        commandManager.setupCommandHandlers(new CommandPing());
         commandManager.setupCommandHandlers(new Say());
         commandManager.setupCommandHandlers(new CommandUserInfo());
         commandManager.setupCommandHandlers(new Warn());
-        commandManager.setupCommandHandlers(new Mute());
+        commandManager.setupCommandHandlers(new CommandMute());
         commandManager.setupCommandHandlers(new UnMute());
         commandManager.setupCommandHandlers(new PrivateVoiceChannel());
         commandManager.setupCommandHandlers(new Help());
