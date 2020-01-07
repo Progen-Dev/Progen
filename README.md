@@ -25,7 +25,7 @@ For more information read our [WIKI](https://github.com/ProgenBot/ProgenBot/wiki
 
 * [Add Progen to your server](https://discordbots.org/bot/495293590503817237)
 
-## Contrubution
+## Contribution
 
 Impatient? Become beta testers and help us get to know a stable version of Progen and get 
 to know the latest features as fast as possible.
