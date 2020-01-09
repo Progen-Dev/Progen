@@ -126,10 +126,6 @@ public class Music {
         player = null;
     }
 
-    public void onTrackEndCallback() {
-        Main.getJda().getGuildById(guildID).getDefaultChannel().sendMessage("The music bot " + getBot().getSelfUser().getName() + "'s queue is empty, you may want to play some more music!").queue();
-    }
-
     public String getTimestamp() {
 
         long seconds = getPlayer().getPlayingTrack().getPosition() / 1000;

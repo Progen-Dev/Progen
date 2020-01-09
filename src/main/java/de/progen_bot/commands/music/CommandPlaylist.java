@@ -72,7 +72,7 @@ public class CommandPlaylist extends CommandHandler {
                 List<String> uris;
                 try {
                     uris = new PlaylistDaoImpl().getPlaylistsByUser(event.getAuthor()).get(parsedCommand.getArgsAsList().get(1));
-                } catch (SQLException e) {
+                } catch (SQLException | NullPointerException e) {
                     event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Could not find playlist!")).queue();
                     return;
                 }
