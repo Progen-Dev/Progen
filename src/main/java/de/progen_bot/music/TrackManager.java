@@ -14,7 +14,7 @@ public class TrackManager extends AudioEventAdapter {
     private final AudioPlayer PLAYER;
     private Queue<AudioInfo> queue;
     private final VoiceChannel voiceChannel;
-    private final Music music;
+    //rivate final Music music;
 
     /**
      * Erstellt eine Instanz der Klasse TrackManager.
@@ -22,11 +22,11 @@ public class TrackManager extends AudioEventAdapter {
      *
      */
 
-    public TrackManager(AudioPlayer player, VoiceChannel voiceChannel, Music music) {
+    public TrackManager(AudioPlayer player, VoiceChannel voiceChannel) {
         this.PLAYER = player;
         this.queue = new LinkedBlockingQueue<>();
         this.voiceChannel = voiceChannel;
-        this.music = music;
+        //this.music = music;
     }
 
     /**
@@ -124,7 +124,7 @@ public class TrackManager extends AudioEventAdapter {
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if (queue.isEmpty()) {
-            music.onTrackEndCallback();
+            System.out.println("Queue is empty!");
         } else {
             player.playTrack(queue.element().getTrack());
             queue.remove();

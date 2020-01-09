@@ -45,7 +45,7 @@ public class Music {
 
     public void createPlayer() {
         player = MANAGER.createPlayer();
-        trackManager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()), this);
+        trackManager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()));
         player.addListener(trackManager);
         jda.getGuildById(owner.getGuild().getId()).getAudioManager().setSendingHandler(new PlayerSendHandler(player));
     }
@@ -122,6 +122,9 @@ public class Music {
     }
 
     public void musicDetach() {
+        System.out.println(botGuild.getAudioManager().getJDA().getSelfUser().getName());
+        System.out.println(botGuild.getAudioManager().getGuild().getJDA().getSelfUser().getName());
+        System.out.println(botGuild.getAudioManager().getConnectedChannel().getJDA().getSelfUser().getName());
         botGuild.getAudioManager().closeAudioConnection();
         Main.getMusicBotManager().setBotUnsed(getChannel().getGuild(), jda);
         Main.getMusicManager().unregisterMusicByOwner(owner);

@@ -28,6 +28,7 @@ public class MusicBotManager {
         // Music bots
         for (String token : tokens) {
             JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(token);
+            builder.setAutoReconnect(true);
             try {
                 JDA jda = builder.build().awaitReady();
                 for (Guild g : jda.getGuilds()) {
