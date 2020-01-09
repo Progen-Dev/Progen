@@ -44,12 +44,12 @@ public class MusicManager {
     public Music registerMusicByMember(Member owner, Music music) {
         if (getMusicByChannel(owner.getVoiceState().getChannel()) != null) throw new TooManyMusicForChannelException();
         if (!musicByGuildIDByOwnerID.containsKey(owner.getGuild().getId())) musicByGuildIDByOwnerID.put(owner.getGuild().getId(), new HashMap<>());
-        musicByGuildIDByOwnerID.get(owner.getGuild()).put(owner.getId(), music);
+        musicByGuildIDByOwnerID.get(owner.getGuild().getId()).put(owner.getId(), music);
         return music;
     }
 
     public void unregisterMusicByOwner(Member owner) {
-        if (!musicByGuildIDByOwnerID.containsKey(owner.getGuild())) return;
-        musicByGuildIDByOwnerID.get(owner.getGuild()).remove(owner);
+        if (!musicByGuildIDByOwnerID.containsKey(owner.getGuild().getId())) return;
+        musicByGuildIDByOwnerID.get(owner.getGuild().getId()).remove(owner.getId());
     }
 }
