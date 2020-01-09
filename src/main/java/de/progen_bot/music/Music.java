@@ -15,7 +15,7 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 
 public class Music {
 
-    private static final int PLAYLIST_LIMIT = 2000;
+    //private static final int PLAYLIST_LIMIT = 2000;
     private static final AudioPlayerManager MANAGER = new DefaultAudioPlayerManager();
 
     private String ownerID;
@@ -117,7 +117,7 @@ public class Music {
 
     public void musicDetach() {
         jda.getGuildById(guildID).getAudioManager().closeAudioConnection();
-        Main.getMusicBotManager().setBotUnsed(getChannel().getGuild(), jda);
+        Main.getMusicBotManager().setBotUnsed(Main.getJda().getGuildById(guildID), jda);
         Main.getMusicManager().unregisterMusicByOwner(Main.getJda().getGuildById(guildID).getMemberById(ownerID));
     }
 
