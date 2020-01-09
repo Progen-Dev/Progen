@@ -30,16 +30,16 @@ public class Music {
         this.ownerID = owner.getId();
         this.jda = jda;
 
-        this.guildID = owner.getId();
+        this.guildID = owner.getGuild().getId();
 
         AudioSourceManagers.registerRemoteSources(MANAGER);
         createPlayer();
-        jda.getGuildById(owner.getGuild().getId()).getAudioManager().openAudioConnection(owner.getVoiceState().getChannel());
+        jda.getGuildById(guildID).getAudioManager().openAudioConnection(jda.getGuildById(guildID).getVoiceChannelById(owner.getVoiceState().getChannel().getId()));
     }
 
     public void createPlayer() {
         player = MANAGER.createPlayer();
-        trackManager = new TrackManager(player, jda.getVoiceChannelById(jda.getGuildById(guildID).getMemberById(ownerID).getVoiceState().getChannel().getId()));
+        trackManager = new TrackManager(player, jda.getGuildById(guildID).getMemberById(ownerID).getVoiceState().getChannel());
         player.addListener(trackManager);
         jda.getGuildById(guildID).getAudioManager().setSendingHandler(new PlayerSendHandler(player));
     }
@@ -112,13 +112,18 @@ public class Music {
     }
 
     public void stop() {
-        musicDetach();
+        detach();
     }
 
-    public void musicDetach() {
+    public void detach() {
+        trackManager.purgeQueue();
+        player.destroy();
         jda.getGuildById(guildID).getAudioManager().closeAudioConnection();
         Main.getMusicBotManager().setBotUnsed(Main.getJda().getGuildById(guildID), jda);
         Main.getMusicManager().unregisterMusicByOwner(Main.getJda().getGuildById(guildID).getMemberById(ownerID));
+        trackManager = null;
+        jda = null;
+        player = null;
     }
 
     public void onTrackEndCallback() {
