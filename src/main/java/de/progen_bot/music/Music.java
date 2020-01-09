@@ -10,33 +10,27 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import de.progen_bot.core.Main;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class Music {
 
     private static final int PLAYLIST_LIMIT = 2000;
     private static final AudioPlayerManager MANAGER = new DefaultAudioPlayerManager();
 
-    private Member owner;
+    private String ownerID;
+    private String guildID;
+
     private JDA jda;
     private AudioPlayer player;
     private TrackManager trackManager;
 
-    // Bots
-    private Guild botGuild;
-
     public Music(Member owner, JDA jda) {
 
-        this.owner = owner;
+        this.ownerID = owner.getId();
         this.jda = jda;
 
-        //Bot
-        this.botGuild = jda.getGuildById(owner.getGuild().getId());
+        this.guildID = owner.getId();
 
         AudioSourceManagers.registerRemoteSources(MANAGER);
         createPlayer();
@@ -45,13 +39,13 @@ public class Music {
 
     public void createPlayer() {
         player = MANAGER.createPlayer();
-        trackManager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()));
+        trackManager = new TrackManager(player, jda.getVoiceChannelById(jda.getGuildById(guildID).getMemberById(ownerID).getVoiceState().getChannel().getId()));
         player.addListener(trackManager);
-        jda.getGuildById(owner.getGuild().getId()).getAudioManager().setSendingHandler(new PlayerSendHandler(player));
+        jda.getGuildById(guildID).getAudioManager().setSendingHandler(new PlayerSendHandler(player));
     }
 
     public Member getOwner() {
-        return owner;
+        return Main.getJda().getGuildById(guildID).getMemberById(ownerID);
     }
 
     public JDA getBot() {
@@ -60,7 +54,7 @@ public class Music {
 
     public VoiceChannel getChannel() {
         // Bot needs time to connect
-        if (!getBot().getGuildById(getOwner().getGuild().getId()).getAudioManager().isConnected()) return owner.getVoiceState().getChannel();
+        if (!getBot().getGuildById(getOwner().getGuild().getId()).getAudioManager().isConnected()) return jda.getGuildById(guildID).getMemberById(ownerID).getVoiceState().getChannel();
         return getBot().getGuildById(getOwner().getGuild().getId()).getAudioManager().getConnectedChannel();
     }
 
@@ -90,7 +84,7 @@ public class Music {
         if (!(input.startsWith("http://") || input.startsWith("https://"))) input = "ytsearch: " + input;
 
         MANAGER.setFrameBufferDuration(1000);
-        MANAGER.loadItemOrdered(botGuild, input, new AudioLoadResultHandler() {
+        MANAGER.loadItemOrdered(jda.getGuildById(guildID), input, new AudioLoadResultHandler() {
 
             @Override
             public void trackLoaded(AudioTrack track) {
@@ -122,16 +116,13 @@ public class Music {
     }
 
     public void musicDetach() {
-        System.out.println(botGuild.getAudioManager().getJDA().getSelfUser().getName());
-        System.out.println(botGuild.getAudioManager().getGuild().getJDA().getSelfUser().getName());
-        System.out.println(botGuild.getAudioManager().getConnectedChannel().getJDA().getSelfUser().getName());
-        botGuild.getAudioManager().closeAudioConnection();
+        jda.getGuildById(guildID).getAudioManager().closeAudioConnection();
         Main.getMusicBotManager().setBotUnsed(getChannel().getGuild(), jda);
-        Main.getMusicManager().unregisterMusicByOwner(owner);
+        Main.getMusicManager().unregisterMusicByOwner(Main.getJda().getGuildById(guildID).getMemberById(ownerID));
     }
 
     public void onTrackEndCallback() {
-        owner.getGuild().getDefaultChannel().sendMessage("The music bot " + getBot().getSelfUser().getName() + "'s queue is empty, you may want to play some more music!").queue();
+        Main.getJda().getGuildById(guildID).getDefaultChannel().sendMessage("The music bot " + getBot().getSelfUser().getName() + "'s queue is empty, you may want to play some more music!").queue();
     }
 
     public String getTimestamp() {
