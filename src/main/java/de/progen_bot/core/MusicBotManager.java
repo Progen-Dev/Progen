@@ -13,6 +13,7 @@ public class MusicBotManager {
 
     private HashMap<Guild, List<JDA>> botsNotInUse = new HashMap<>();
     private List<String> tokens = new ArrayList<>();
+    private List<JDA> allMusicBots = new ArrayList<>();
 
     public MusicBotManager() {
 
@@ -31,6 +32,7 @@ public class MusicBotManager {
             builder.setAutoReconnect(true);
             try {
                 JDA jda = builder.build().awaitReady();
+                allMusicBots.add(jda);
                 for (Guild g : jda.getGuilds()) {
                     if (!botsNotInUse.containsKey(g)) botsNotInUse.put(g, new ArrayList<>());
                     botsNotInUse.get(g).add(jda);
@@ -52,6 +54,22 @@ public class MusicBotManager {
     public boolean botAvailable(Guild guild) {
         if (botsNotInUse.get(guild).isEmpty()) return false;
         else return true;
+    }
+
+    public void loadForNewGuild(Guild guild) {
+
+        // Clear the list in case of reinvite
+        botsNotInUse.remove(guild);
+        botsNotInUse.put(guild, new ArrayList<>());
+
+        // Add Progen
+        botsNotInUse.get(guild).add(Main.getJda());
+
+        // Add music bpots
+        for (JDA bot : allMusicBots) {
+
+            botsNotInUse.get(guild).add(bot);
+        }
     }
 
     public void setBotUnsed(Guild guild, JDA bot) {

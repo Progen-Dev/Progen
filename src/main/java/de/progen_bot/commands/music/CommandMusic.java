@@ -45,7 +45,7 @@ public class CommandMusic extends CommandHandler {
                     return;
                 }
                 //Check if afk channel
-                if (event.getMember().getVoiceState().getChannel().getId().equals(event.getGuild().getAfkChannel().getId())) {
+                if (event.getGuild().getAfkChannel() != null && event.getMember().getVoiceState().getChannel().getId().equals(event.getGuild().getAfkChannel().getId())) {
 
                     event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You can not listen to music in an afk channel!")).queue();
                     return;
