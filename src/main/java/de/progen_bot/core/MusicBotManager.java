@@ -1,5 +1,6 @@
 package de.progen_bot.core;
 
+import de.progen_bot.listeners.GuildJoinReloadListener;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
@@ -30,6 +31,7 @@ public class MusicBotManager {
         for (String token : tokens) {
             JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(token);
             builder.setAutoReconnect(true);
+            builder.addEventListeners(new GuildJoinReloadListener());
             try {
                 JDA jda = builder.build().awaitReady();
                 allMusicBots.add(jda);

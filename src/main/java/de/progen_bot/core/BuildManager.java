@@ -4,7 +4,6 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.listeners.*;
 import net.dv8tion.jda.api.JDABuilder;
 
-
 /**
  * The Class BuildManager.
  */
@@ -40,5 +39,6 @@ public class BuildManager {
         builder.addEventListeners(new ServerJoinListener());
         builder.addEventListeners(new ReconnectListener());
         builder.addEventListeners(new MuteHandler());
+        builder.addEventListeners(new GuildJoinReloadListener());
     }
 }
