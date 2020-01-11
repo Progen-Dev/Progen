@@ -70,7 +70,7 @@ public class MusicBotManager {
         // Add music bpots
         for (JDA bot : allMusicBots) {
 
-            botIDsNotInUse.get(guild.getId()).add(bot);
+            if (bot.getGuilds().contains(guild)) botIDsNotInUse.get(guild.getId()).add(bot);
         }
     }
 
