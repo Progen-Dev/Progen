@@ -16,7 +16,7 @@ public class Vote extends CommandHandler {
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
         event.getAuthor().openPrivateChannel().complete().sendMessage("Thank you for your support." + event.getMember().getEffectiveName() + "Here is the link:\n https://discordbots.org/bot/495293590503817237").queue();
-        event.getTextChannel().sendMessage("Thank you for voting " + event.getMember().getEffectiveName() + ". We thank you for your support!").queue();
+        event.getTextChannel().sendMessage("Thank you for your support " + event.getMember().getEffectiveName() + ".").queue();
 
     }
 

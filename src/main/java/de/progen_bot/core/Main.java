@@ -25,13 +25,14 @@ import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 
 
 /**
@@ -42,6 +43,8 @@ public class Main {
     /**
      * The jda.
      */
+
+    public static final Logger logger = LogManager.getLogger(Main.class);
 
     private static String URL;
 
@@ -63,7 +66,7 @@ public class Main {
     /**
      * Instantiates a new main.
      */
-    public Main() throws IOException {
+    public Main() {
 
         Settings.loadSettings();
 
@@ -145,6 +148,7 @@ public class Main {
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
+        logger.info("JDA loaded");
     }
 
     /**
