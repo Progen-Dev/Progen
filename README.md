@@ -78,8 +78,6 @@ To run Progen you need to set up a MySQL/MariaDB database and configure the conf
 Feel free to join our Progen discord guild.
 https://discord.gg/EjxZNXV
 
-## Roadmap
-
 ## Credits
 @Evoh
 @ShowMeYourSkil

@@ -9,21 +9,21 @@ import java.util.HashMap;
 
 public class MusicManager {
 
-    private HashMap<Guild, HashMap<Member, Music>> musicByGuildByOwner = new HashMap<>();
+    private HashMap<String, HashMap<String, Music>> musicByGuildIDByOwnerID = new HashMap<>();
 
     public Music getMusicByOwner(Member owner) {
-        if (!musicByGuildByOwner.containsKey(owner.getGuild())) return null;
-        if (musicByGuildByOwner.get(owner.getGuild()).isEmpty()) return null;
-        return musicByGuildByOwner.get(owner.getGuild()).get(owner);
+        if (!musicByGuildIDByOwnerID.containsKey(owner.getGuild().getId())) return null;
+        if (musicByGuildIDByOwnerID.get(owner.getGuild().getId()).isEmpty()) return null;
+        return musicByGuildIDByOwnerID.get(owner.getGuild().getId()).get(owner.getId());
     }
 
     public Collection<Music> getMusicsByGuild(Guild guild) {
-        return musicByGuildByOwner.get(guild).values();
+        return musicByGuildIDByOwnerID.get(guild.getId()).values();
     }
 
     public Music getMusicByChannel(VoiceChannel channel) {
-        if (!musicByGuildByOwner.containsKey(channel.getGuild())) return null;
-        for (Music m : musicByGuildByOwner.get(channel.getGuild()).values()) {
+        if (!musicByGuildIDByOwnerID.containsKey(channel.getGuild().getId())) return null;
+        for (Music m : musicByGuildIDByOwnerID.get(channel.getGuild().getId()).values()) {
             if (m.getChannel().getId().equals(channel.getId())) {
                 return m;
             }
@@ -43,13 +43,13 @@ public class MusicManager {
 
     public Music registerMusicByMember(Member owner, Music music) {
         if (getMusicByChannel(owner.getVoiceState().getChannel()) != null) throw new TooManyMusicForChannelException();
-        if (!musicByGuildByOwner.containsKey(owner.getGuild())) musicByGuildByOwner.put(owner.getGuild(), new HashMap<>());
-        musicByGuildByOwner.get(owner.getGuild()).put(owner, music);
+        if (!musicByGuildIDByOwnerID.containsKey(owner.getGuild().getId())) musicByGuildIDByOwnerID.put(owner.getGuild().getId(), new HashMap<>());
+        musicByGuildIDByOwnerID.get(owner.getGuild().getId()).put(owner.getId(), music);
         return music;
     }
 
     public void unregisterMusicByOwner(Member owner) {
-        if (!musicByGuildByOwner.containsKey(owner.getGuild())) return;
-        musicByGuildByOwner.get(owner.getGuild()).remove(owner);
+        if (!musicByGuildIDByOwnerID.containsKey(owner.getGuild().getId())) return;
+        musicByGuildIDByOwnerID.get(owner.getGuild().getId()).remove(owner.getId());
     }
 }

@@ -45,7 +45,7 @@ public class CommandMusic extends CommandHandler {
                     return;
                 }
                 //Check if afk channel
-                if (event.getMember().getVoiceState().getChannel().getId().equals(event.getGuild().getAfkChannel().getId())) {
+                if (event.getGuild().getAfkChannel() != null && event.getMember().getVoiceState().getChannel().getId().equals(event.getGuild().getAfkChannel().getId())) {
 
                     event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You can not listen to music in an afk channel!")).queue();
                     return;
@@ -59,6 +59,8 @@ public class CommandMusic extends CommandHandler {
                 event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg("You have now a music instance in your voice chat! Check out the PWI to control your music more efficient!")).queue();
                 return;
             }
+            event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg("There is already a music bot in your channel!")).queue();
+            return;
         }
 
         music = musicManager.getMusicByChannel(event.getMember().getVoiceState().getChannel());

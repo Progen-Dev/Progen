@@ -54,7 +54,6 @@ public class CommandPlaylist extends CommandHandler {
                 for (AudioInfo info : music.getManager().getQueue()) {
                     newUris.add(info.getTrack().getInfo().uri);
                 }
-                music.skip();
 
                 new PlaylistDaoImpl().savePlaylist(newUris, event.getMember().getUser(), parsedCommand.getArgsAsList().get(1));
                 break;
@@ -73,7 +72,7 @@ public class CommandPlaylist extends CommandHandler {
                 List<String> uris;
                 try {
                     uris = new PlaylistDaoImpl().getPlaylistsByUser(event.getAuthor()).get(parsedCommand.getArgsAsList().get(1));
-                } catch (SQLException e) {
+                } catch (SQLException | NullPointerException e) {
                     event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Could not find playlist!")).queue();
                     return;
                 }

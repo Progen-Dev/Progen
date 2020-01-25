@@ -10,48 +10,42 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import de.progen_bot.core.Main;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 public class Music {
 
-    private static final int PLAYLIST_LIMIT = 2000;
+    //private static final int PLAYLIST_LIMIT = 2000;
     private static final AudioPlayerManager MANAGER = new DefaultAudioPlayerManager();
 
-    private Member owner;
+    private String ownerID;
+    private String guildID;
+
     private JDA jda;
     private AudioPlayer player;
     private TrackManager trackManager;
 
-    // Bots
-    private Guild botGuild;
-
     public Music(Member owner, JDA jda) {
 
-        this.owner = owner;
+        this.ownerID = owner.getId();
         this.jda = jda;
 
-        //Bot
-        this.botGuild = jda.getGuildById(owner.getGuild().getId());
+        this.guildID = owner.getGuild().getId();
 
         AudioSourceManagers.registerRemoteSources(MANAGER);
         createPlayer();
-        jda.getGuildById(owner.getGuild().getId()).getAudioManager().openAudioConnection(owner.getVoiceState().getChannel());
+        jda.getGuildById(guildID).getAudioManager().openAudioConnection(jda.getGuildById(guildID).getVoiceChannelById(owner.getVoiceState().getChannel().getId()));
     }
 
     public void createPlayer() {
         player = MANAGER.createPlayer();
-        trackManager = new TrackManager(player, jda.getVoiceChannelById(owner.getVoiceState().getChannel().getId()), this);
+        trackManager = new TrackManager(player, jda.getGuildById(guildID).getMemberById(ownerID).getVoiceState().getChannel());
         player.addListener(trackManager);
-        jda.getGuildById(owner.getGuild().getId()).getAudioManager().setSendingHandler(new PlayerSendHandler(player));
+        jda.getGuildById(guildID).getAudioManager().setSendingHandler(new PlayerSendHandler(player));
     }
 
     public Member getOwner() {
-        return owner;
+        return Main.getJda().getGuildById(guildID).getMemberById(ownerID);
     }
 
     public JDA getBot() {
@@ -60,7 +54,7 @@ public class Music {
 
     public VoiceChannel getChannel() {
         // Bot needs time to connect
-        if (!getBot().getGuildById(getOwner().getGuild().getId()).getAudioManager().isConnected()) return owner.getVoiceState().getChannel();
+        if (!getBot().getGuildById(getOwner().getGuild().getId()).getAudioManager().isConnected()) return jda.getGuildById(guildID).getMemberById(ownerID).getVoiceState().getChannel();
         return getBot().getGuildById(getOwner().getGuild().getId()).getAudioManager().getConnectedChannel();
     }
 
@@ -86,11 +80,10 @@ public class Music {
         Member auhtorInJDA = jda.getGuildById(author.getGuild().getId()).getMemberById(author.getId());
 
         String input = identifier.trim();
-
         if (!(input.startsWith("http://") || input.startsWith("https://"))) input = "ytsearch: " + input;
 
         MANAGER.setFrameBufferDuration(1000);
-        MANAGER.loadItemOrdered(botGuild, input, new AudioLoadResultHandler() {
+        MANAGER.loadItemOrdered(jda.getGuildById(guildID), input, new AudioLoadResultHandler() {
 
             @Override
             public void trackLoaded(AudioTrack track) {
@@ -118,17 +111,18 @@ public class Music {
     }
 
     public void stop() {
-        musicDetach();
+        detach();
     }
 
-    public void musicDetach() {
-        botGuild.getAudioManager().closeAudioConnection();
-        Main.getMusicBotManager().setBotUnsed(getChannel().getGuild(), jda);
-        Main.getMusicManager().unregisterMusicByOwner(owner);
-    }
-
-    public void onTrackEndCallback() {
-        owner.getGuild().getDefaultChannel().sendMessage("The music bot " + getBot().getSelfUser().getName() + "'s queue is empty, you may want to play some more music!").queue();
+    public void detach() {
+        trackManager.purgeQueue();
+        player.destroy();
+        jda.getGuildById(guildID).getAudioManager().closeAudioConnection();
+        Main.getMusicBotManager().setBotUnsed(Main.getJda().getGuildById(guildID), jda);
+        Main.getMusicManager().unregisterMusicByOwner(Main.getJda().getGuildById(guildID).getMemberById(ownerID));
+        trackManager = null;
+        jda = null;
+        player = null;
     }
 
     public String getTimestamp() {
