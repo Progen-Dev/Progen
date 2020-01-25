@@ -63,6 +63,7 @@ public class CommandInfo extends CommandHandler {
                                         " - **Please use this document to report a Bug or suggest an idea:  \n http://supp.progen-bot.de**\n\n" +
 
                                         " \n-  Discord:  http://discord.progen-bot.de" , false)
+                        .setThumbnail("https://top.gg/api/widget/495293590503817237.svg?usernamecolor=FFFFFF&topcolor=000000")
                         .build()
         ).queue();
     }

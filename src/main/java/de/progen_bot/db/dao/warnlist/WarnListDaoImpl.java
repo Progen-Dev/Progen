@@ -52,7 +52,7 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
     public void deleteWarns(Member member) {
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM `warn` WHERE `userid` = ? AND `guildid` = ?");
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM `warn` WHERE `userid` = ? AND `guildid` AND `reason`= ?");
             ps.setString(1, member.getUser().getId());
             ps.setString(2, member.getGuild().getId());
             ps.execute();
