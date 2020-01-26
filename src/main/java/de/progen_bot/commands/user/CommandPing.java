@@ -39,18 +39,8 @@ public class CommandPing extends CommandHandler {
 
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        event.getTextChannel().sendMessage(
-                new EmbedBuilder()
-                        .setColor(new Color(255, 71,0))
-                        .setDescription(":alarm_clock:   **UPTIME**")
-                        .addField("Last restart", getTime(Statics.lastRestart, "dd.MM.yyyy - HH:mm:ss (z)"), false)
-                        .addField("Online since", getTimeDiff(new Date(), Statics.lastRestart), false)
-                        .addField("Reconnects since last restart", Statics.reconnectCount + "", false)
-                        .build()
-        ).queue();
-
-
-    }
+            event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.green).setDescription("Your Ping: " + event.getJDA().getGatewayPing() + "").build()).queue();
+        }
     @Override
     public String help() {
         return null;
