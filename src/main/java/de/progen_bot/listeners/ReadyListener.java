@@ -1,5 +1,6 @@
 package de.progen_bot.listeners;
 
+import de.progen_bot.util.Statics;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
@@ -34,11 +35,11 @@ public class ReadyListener extends ListenerAdapter {
         }
 
         Activity[] games = new Activity[]{
-                Activity.playing("Play a game"),
-                Activity.watching("New fantastic features"),
-                Activity.streaming("Webinterface","pwi.progen-bot.de/\n"),
-                Activity.playing("http://progen-bot.de!"),
-                Activity.playing("Version: 1.0.0.1")};
+                Activity.playing("I <3 Server power"),
+                Activity.watching("Wonderful servers"),
+                Activity.streaming("Webinterface","https://pwi.progen-bot.de/\n"),
+                Activity.playing("https://progen-bot.de!"),
+                Activity.playing(Statics.Version)};
 
         new Timer().schedule(new TimerTask() {
 
