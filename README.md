@@ -1,9 +1,9 @@
 # Progen
 
-Progen is a very useful discord bot, but still under heavy development.
+Progen is a feature rich discord bot with advanced functionality.
 It features a web interface, the [PWI (Progen Web Interface)](https://github.com/ProgenBot/Webinterface), to manage the bot and moderate your server.
 
-For more information read our [WIKI](https://github.com/ProgenBot/ProgenBot/wiki)
+For more information read our [WIKI](https://github.com/ProgenBot/ProgenBot/wiki) and see our [website](https://progen-bot.de).
 
 ## Features
 
