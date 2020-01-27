@@ -19,6 +19,8 @@ public class Settings {
     public static String MUSICTOKEN1;
     public static String MUSICTOKEN2;
 
+    public static String TOPGGTOKEN;
+
 
     /**
      * Load settings.
@@ -43,6 +45,8 @@ public class Settings {
 
             properties.setProperty("musictoken1", "");
             properties.setProperty("musictoken2", "");
+
+            properties.setProperty("topggtoken", "");
 
             File f = new File("config.properties");
             OutputStream out;
@@ -70,5 +74,7 @@ public class Settings {
 
         MUSICTOKEN1 = properties.getProperty("musictoken1");
         MUSICTOKEN2 = properties.getProperty("musictoken2");
+
+        TOPGGTOKEN = properties.getProperty("topggtoken");
     }
 }

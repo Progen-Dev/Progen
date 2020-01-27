@@ -63,6 +63,8 @@ public class Main {
     private static MusicBotManager musicBotManager;
     private static MusicManager musicManager;
 
+    private static TopGGIntegration topGGIntegration;
+
     /**
      * Instantiates a new main.
      */
@@ -89,6 +91,9 @@ public class Main {
         initJDA();
 
         //TODO MySQL.loadPollTimer();
+
+        topGGIntegration = new TopGGIntegration(getJda(), Settings.TOPGGTOKEN);
+        topGGIntegration.postServerCount();
 
         // DAO Handler
         daoHandler = new DaoHandler();
@@ -133,6 +138,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandInfo());
         commandManager.setupCommandHandlers(new CommandBan());
         commandManager.setupCommandHandlers(new CommandPlaylist());
+        commandManager.setupCommandHandlers(new UserVotet());
     }
 
     /**
@@ -174,6 +180,10 @@ public class Main {
 
     public static DaoHandler getDAOs() {
         return daoHandler;
+    }
+
+    public static TopGGIntegration getTopGG() {
+        return topGGIntegration;
     }
 
     // Music
