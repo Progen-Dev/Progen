@@ -5,7 +5,6 @@ import net.dv8tion.jda.api.entities.User;
 import org.discordbots.api.client.DiscordBotListAPI;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class TopGGIntegration {
 
