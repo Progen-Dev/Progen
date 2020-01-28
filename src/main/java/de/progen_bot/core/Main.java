@@ -87,8 +87,8 @@ public class Main {
 
         //TODO MySQL.loadPollTimer();
 
-        topGGIntegration = new TopGGIntegration(getJda(), Settings.TOPGGTOKEN);
-        topGGIntegration.postServerCount();
+        //topGGIntegration = new TopGGIntegration(getJda(), Settings.TOPGGTOKEN);
+        //topGGIntegration.postServerCount();
 
         // DAO Handler
         daoHandler = new DaoHandler();
