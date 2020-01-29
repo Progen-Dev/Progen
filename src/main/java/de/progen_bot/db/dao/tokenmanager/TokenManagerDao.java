@@ -1,11 +1,13 @@
 package de.progen_bot.db.dao.tokenmanager;
 
+import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import de.progen_bot.core.Main;
 import de.progen_bot.db.connection.ConnectionFactory;
 import de.progen_bot.db.dao.Dao;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -21,8 +23,9 @@ public class TokenManagerDao extends Dao {
 
     public boolean keyExists(String token) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
-        ResultSet rs = connection.prepareStatement("SELECT `token` FROM `tokens` WHERE `token` = '" +
-                token + "'").executeQuery();
+        PreparedStatement ps = connection.prepareStatement("SELECT `token` FROM `tokens` WHERE `token` = ?");
+        ps.setString(1, token);
+        ResultSet rs = ps.executeQuery();
         return rs.next();
     }
 
@@ -35,14 +38,18 @@ public class TokenManagerDao extends Dao {
 
     public void addMember(String token, Member member) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
-        connection.prepareStatement("INSERT INTO tokens (guildid, userid, token) VALUES ('" + member.getGuild().getId() + "', " +
-                "'" + member.getUser().getId() + "', '" + token + "')").execute();
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO tokens (guildid, userid, token) VALUES ('" + member.getGuild().getId() + "', " +
+                "'" + member.getUser().getId() + "', ?)");
+        ps.setString(1, token);
+        ps.execute();
     }
 
     public Member getMember(String token) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
-        ResultSet rs = connection.prepareStatement("SELECT userid, guildid FROM tokens WHERE token = '" + token +
-                "'").executeQuery();
+        PreparedStatement ps = connection.prepareStatement("SELECT userid, guildid FROM tokens WHERE token = ?");
+        ps.setString(1, token);
+        ResultSet rs = ps.executeQuery();
+
         if (!rs.next()) return null;
         return Main.getJda().getGuildById(rs.getString("guildid")).getMemberById(rs.getString("userid"));
     }
