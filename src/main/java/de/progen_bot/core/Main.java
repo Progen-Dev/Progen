@@ -78,7 +78,7 @@ public class Main {
             throw new RuntimeException("Error connecting to the database", ex);
         }
 
-        httpapi = new API(8083);
+        httpapi = new API(Integer.parseInt(Settings.APIPORT));
         httpapi.start();
 
         fortnite = new Fortnite();

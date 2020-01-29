@@ -16,6 +16,8 @@ public class Settings {
     public static String USER;
     public static String PASSWORD;
 
+    public static String APIPORT;
+
     public static String MUSICTOKEN1;
     public static String MUSICTOKEN2;
 
@@ -35,18 +37,21 @@ public class Settings {
         } catch (IOException e) {
             System.err.println("Error can't load properties check the config.properties file");
 
-            properties.setProperty("Prefix", "");
+            properties.setProperty("Prefix", "pb!");
+            properties.setProperty("Token", "");
             // MySQL
-            properties.setProperty("Host", "");
-            properties.setProperty("Database", "");
-            properties.setProperty("User", "");
-            properties.setProperty("Port", "");
-            properties.setProperty("Password", "");
+            properties.setProperty("Host", "localhost");
+            properties.setProperty("Database", "progen");
+            properties.setProperty("User", "progen");
+            properties.setProperty("Port", "3306");
+            properties.setProperty("Password", "progen");
 
-            properties.setProperty("musictoken1", "");
-            properties.setProperty("musictoken2", "");
+            properties.setProperty("APIPort", "8083");
 
-            properties.setProperty("topggtoken", "");
+            properties.setProperty("MusicToken1", "");
+            properties.setProperty("MusicToken2", "");
+
+            properties.setProperty("TopGGToken", "");
 
             File f = new File("config.properties");
             OutputStream out;
@@ -66,15 +71,17 @@ public class Settings {
         PREFIX = properties.getProperty("Prefix");
         TOKEN = properties.getProperty("Token");
 
+        APIPORT = properties.getProperty("APIPort");
+
         HOST = properties.getProperty("Host");
         PORT = properties.getProperty("Port");
         USER = properties.getProperty("User");
         PASSWORD = properties.getProperty("Password");
         DATABASE = properties.getProperty("Database");
 
-        MUSICTOKEN1 = properties.getProperty("musictoken1");
-        MUSICTOKEN2 = properties.getProperty("musictoken2");
+        MUSICTOKEN1 = properties.getProperty("MusicToken1");
+        MUSICTOKEN2 = properties.getProperty("MusicToken2");
 
-        TOPGGTOKEN = properties.getProperty("topggtoken");
+        TOPGGTOKEN = properties.getProperty("TopGGToken");
     }
 }
