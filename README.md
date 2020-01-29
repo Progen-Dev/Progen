@@ -112,4 +112,6 @@ https://discord.gg/EjxZNXV
      - [Discord](http://discord.progen-bot.de)
      - [Support](http://discord.progen-bot.de)
      - [github](http://github.progen-bot.de)
+     
+     (https://travis-ci.org/ProgenBot/ProgenBot.svg?branch=master)](https://travis-ci.org/ProgenBot/ProgenBot)
   
