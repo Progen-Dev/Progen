@@ -37,8 +37,8 @@ public class ReadyListener extends ListenerAdapter {
         Activity[] games = new Activity[]{
                 Activity.playing("I <3 Server power"),
                 Activity.watching("Wonderful servers"),
-                Activity.streaming("Webinterface","https://pwi.progen-bot.de/\n"),
-                Activity.playing("https://progen-bot.de!"),
+                Activity.streaming("Check the Webinterface","https://pwi.progen-bot.de/\n"),
+                Activity.playing("https://pwi.progen-bot.de!"),
                 Activity.playing(Statics.Version)};
 
         new Timer().schedule(new TimerTask() {
