@@ -27,3 +27,6 @@ A clear and concise description of what you expected to happen.
   - error log
 **Additional context**
 Add any other context about the problem here.
+
+**Error photo***
+If available, send a screenshot with the problem. It could help us.
