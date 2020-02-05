@@ -1,9 +1,13 @@
 # Progen
 
 Progen is a feature rich discord bot with advanced functionality.
-It features a web interface, the [PWI (Progen Web Interface)](https://github.com/ProgenBot/Webinterface), to manage the bot and moderate your server.
+It features a web interface, the [PWI (Progen Web Interface)](https://github.com/Progen-Dev/ProgenWebInterface), to manage the bot and moderate your server.
 
-For more information read our [WIKI](https://github.com/ProgenBot/ProgenBot/wiki) and see our [website](https://progen-bot.de).
+For more information read our [WIKI](https://github.com/Progen-Dev/Progen/wiki) and see our [website](https://progen-bot.de).
+
+ <img src="https://top.gg/api/widget/495293590503817237.svg?usernamecolor=FFFFFF&topcolor=000000">
+
+
 
 ## Features
 
@@ -16,13 +20,13 @@ For more information read our [WIKI](https://github.com/ProgenBot/ProgenBot/wiki
     * webinterface
     * prefix
     * other
-* The [PWI](https://github.com/ProgenBot/Webinterface)
+* The [PWI](https://github.com/Progen-Dev/ProgenWebInterface)
 * The [Website](https://progen-bot.de)
 * REST API
 
 ### Commands
 
-* All commands summarized [Commands]("https://github.com/ProgenBot/ProgenBot/wiki")
+* All commands summarized [Commands](https://github.com/Progen-Dev/Progen/wiki)
 
 ## Invite Progen and her Sisters
 
