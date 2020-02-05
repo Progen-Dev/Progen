@@ -5,9 +5,9 @@ It features a web interface, the [PWI (Progen Web Interface)](https://github.com
 
 For more information read our [WIKI](https://github.com/Progen-Dev/Progen/wiki) and see our [website](https://progen-bot.de).
 
- <img src="https://top.gg/api/widget/495293590503817237.svg?usernamecolor=FFFFFF&topcolor=000000">
-
-
+ <a href="https://top.gg/bot/495293590503817237" >
+  <img src="https://top.gg/api/widget/495293590503817237.svg" alt="Progen" />
+</a>
 
 ## Features
 
