@@ -46,7 +46,7 @@ Become beta tester and help us make Progen even better!
 
 ## Support
 Feel free to join our Progen discord guild.
-[Join](https://discordapp.com/invite/YEC3Dw?utm_source=Discord%20Widget&utm_medium=Connect)
+* [Join](https://discordapp.com/invite/YEC3Dw?utm_source=Discord%20Widget&utm_medium=Connect)
 
 ## Credits
 @Evoh
