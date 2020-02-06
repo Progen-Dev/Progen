@@ -74,12 +74,12 @@
     <build>
         <plugins>
             <plugin>
-                <groupId></groupId>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Main</mainClass>
+                            <mainClass>de.progen_bot.core.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

@@ -6,6 +6,7 @@ import de.mtorials.commands.Stats;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.commands.Settings.CommandNotify;
 import de.progen_bot.commands.fun.ConnectFour;
 import de.progen_bot.commands.Help;
 import de.progen_bot.commands.moderator.*;
@@ -139,6 +140,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandBan());
         commandManager.setupCommandHandlers(new CommandPlaylist());
         commandManager.setupCommandHandlers(new UserVotet());
+        commandManager.setupCommandHandlers(new CommandNotify());
     }
 
     /**
