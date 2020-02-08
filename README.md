@@ -1,72 +1,43 @@
 # Progen
 
 Progen is a feature rich discord bot with advanced functionality.
-It features a web interface, the [PWI (Progen Web Interface)](https://github.com/ProgenBot/Webinterface), to manage the bot and moderate your server.
+It features a web interface, the [PWI (Progen Web Interface)](https://github.com/Progen-Dev/ProgenWebInterface), to manage the bot and moderate your server.
 
-For more information read our [WIKI](https://github.com/ProgenBot/ProgenBot/wiki) and see our [website](https://progen-bot.de).
+For more information read our [WIKI](https://github.com/Progen-Dev/Progen/wiki) and see our [website](https://progen-bot.de).
+
+ <a href="https://top.gg/bot/495293590503817237" >
+  <img src="https://top.gg/api/widget/495293590503817237.svg" alt="Progen" />
+</a>
 
 ## Features
 
 * A list of commands for
     * moderation
-    * commandMusic
-    * games
-    * bot customization
-    * utility
-    * server management
-* The [PWI](https://github.com/ProgenBot/Webinterface)
+    * blacklist
+    * music
+    * fun
+    * game stats
+    * webinterface
+    * prefix
+    * other
+* The [PWI](https://github.com/Progen-Dev/ProgenWebInterface)
+* The [Website](https://progen-bot.de)
 * REST API
 
 ### Commands
 
-* All commands summarized [Commands]("http://progen-bot.de/commands")
+* All commands summarized [Commands](https://github.com/Progen-Dev/Progen/wiki)
 
-## Get Progen
+## Invite Progen and her Sisters
 
-* [Add Progen to your server](https://discordbots.org/bot/495293590503817237)
+* [Add Progen to your server](https://discordapp.com/oauth2/authorize?client_id=495293590503817237&scope=bot)
+* [Add ProgenMusic1 for more music](https://discordapp.com/oauth2/authorize?client_id=662647209929605126&scope=bot)
+* [Add ProgenMsuic2 for more msuic](https://discordapp.com/oauth2/authorize?client_id=662647378385305620&scope=bot)
 
 ## Contribution
+Become beta tester and help us make Progen even better!
 
-Impatient? Become beta testers and help us get to know a stable version of Progen and get 
-to know the latest features as fast as possible.
-
-### Jetbrains IntelliJ IDEA
-
-1. Start IntelliJ
-2. If there is a project opened, close it via File -> Close Project
-3. Click "Check out from Version Control" -> Git
-4. Copy ```https://github.com/ProgenBot/ProgenBot``` and insert it into "URL".
-5. Click "Clone".
-
-Now you successfully cloned Progen to your local machine.
-To simply start Progen
-
-1. go to the main class (```src -> main -> java -> progen_bot -> core -> Main```)
-2. Right click and select ```Run 'Main.main()'```
-
-To build Progen as .jar file, see [this](https://blog.jetbrains.com/idea/2010/08/quickly-create-jar-artifact/) post. Now you can go on with chapter __Run__.
-
-### Run
-
-Make sure you have installed the [Java Runtime Enviroment](https://java.com/de/download/).
-
-#### Windows
-
-1. Shift right click in the directory that contains the .jar file
-2. Open PowerShell here
-3. Enter ```java -jar <filename>.jar```
-
-#### Linux
-
-1. Open a shell in the directory containing the .jar file
-2. Enter ```java -jar <filename>.jar```
-
-### Download for self hosting
-
-If you don't want to self host Progen, use [this](https://discordbots.org/bot/495293590503817237) link to get Progen.
-Check the newest [releases](https://github.com/ProgenBot/ProgenBot/releases). Download the newest stable release.
-If you want the newest features and stability is not the problem, you can also download a non stable release.
-To run Progen you need to set up a MySQL/MariaDB database and configure the config.properties.
+=> [Apply here](https://discordapp.com/invite/YEC3Dw?utm_source=Discord%20Widget&utm_medium=Connect)
 
 ## Authors
 * __ShowMeYourSkil__
@@ -74,9 +45,8 @@ To run Progen you need to set up a MySQL/MariaDB database and configure the conf
 * __Evoh__
 
 ## Support
-
 Feel free to join our Progen discord guild.
-https://discord.gg/EjxZNXV
+* [Join](https://discordapp.com/invite/YEC3Dw?utm_source=Discord%20Widget&utm_medium=Connect)
 
 ## Credits
 @Evoh
@@ -84,32 +54,13 @@ https://discord.gg/EjxZNXV
 @M'Torials
 
 ## License
-* [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.en.html)
+* [MIT](https://github.com/Progen-Dev/Progen/blob/master/LICENSE)
+Progen is under an MIT license. Please read the license carefully to avoid annoyance.
+
+
 
 ## Information
+We work Progen. But they are still at the beginning of a major project. If there are any problems, please let us know!
 
- <a href="https://discordbots.org/bot/495293590503817237" >
-  <img src="https://discordbots.org/api/widget/status/495293590503817237.svg?noavatar=true" alt="Progen" />
-</a>
-<p></p>
-<a href="https://discordbots.org/bot/495293590503817237" >
-  <img src="https://discordbots.org/api/widget/servers/495293590503817237.svg?noavatar=true" alt="Progen" />
-</a>
-<p></p>
-<a href="https://discordbots.org/bot/495293590503817237" >
-  <img src="https://discordbots.org/api/widget/upvotes/495293590503817237.svg?noavatar=true" alt="Progen" />
-</a>
-<p></p>
-<a href="https://discordbots.org/bot/495293590503817237" >
-  <img src="https://discordbots.org/api/widget/lib/495293590503817237.svg?noavatar=true" alt="Progen" />
-</a>
-<p></p>
-<a href="https://discordbots.org/bot/495293590503817237" >
-  <img src="https://discordbots.org/api/widget/lib/495293590503817237.svg?noavatar=true" alt="Progen" />
-</a>
-
-     - [Invite Progen](http://invite.progen-bot.de)
-     - [Discord](http://discord.progen-bot.de)
-     - [Support](http://discord.progen-bot.de)
-     - [github](http://github.progen-bot.de)
-  
+ * Current Version: 1.0.0.2
+ * Lastet Version: 1.0.0.1

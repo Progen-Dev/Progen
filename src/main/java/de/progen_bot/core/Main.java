@@ -26,8 +26,6 @@ import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -44,8 +42,6 @@ public class Main {
     /**
      * The jda.
      */
-
-    public static final Logger logger = LogManager.getLogger(Main.class);
 
     private static String URL;
 
@@ -79,12 +75,11 @@ public class Main {
         try {
             DriverManager.registerDriver(new Driver());
             sqlConnection = DriverManager.getConnection(URL, Settings.USER, Settings.PASSWORD);
-        } catch (
-                SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException("Error connecting to the database", ex);
         }
 
-        httpapi = new API(8083);
+        httpapi = new API(Integer.parseInt(Settings.APIPORT));
         httpapi.start();
 
         fortnite = new Fortnite();
@@ -93,8 +88,8 @@ public class Main {
 
         //TODO MySQL.loadPollTimer();
 
-        topGGIntegration = new TopGGIntegration(getJda(), Settings.TOPGGTOKEN);
-        topGGIntegration.postServerCount();
+        //topGGIntegration = new TopGGIntegration(getJda(), Settings.TOPGGTOKEN);
+        //topGGIntegration.postServerCount();
 
         // DAO Handler
         daoHandler = new DaoHandler();
@@ -156,7 +151,6 @@ public class Main {
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
-        logger.info("JDA loaded");
     }
 
     /**
