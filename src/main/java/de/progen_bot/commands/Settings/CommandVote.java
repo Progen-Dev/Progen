@@ -34,7 +34,7 @@ public class CommandVote extends CommandHandler implements Serializable {
     private static HashMap<Guild, Message> tempList = new HashMap<>();
     private static TextChannel channel;
     public CommandVote() {
-        super("vote", "commandUsage", "description");
+        super("vote", "<prefix>vote create <question>|answer1|answer2|...\n <prefix>vote stats\n <prefix>vote secret <question>|answer1|answer2|...\n <prefix>poll close", "Create a survey easily a Poll");
     }
 
     private static void message(String content) {
