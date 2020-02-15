@@ -25,8 +25,9 @@ public class UserVotet extends CommandHandler {
         }
         Main.getTopGG().hasVoted(user, hasVoted -> {
             String msg;
-            if (hasVoted) msg = "User " + user.getName() + "has votet! Thank you!";
-            else msg = "User "+ user.getName() + " has not voted yet!";
+            if (hasVoted) msg = "User " + user.getName() + " has votet! Thank you!";
+            else msg = "User "+ user.getName() + " has not voted yet!\n\n" +
+                    "Vote now for Progen!: <https://top.gg/bot/495293590503817237>";
             event.getTextChannel().sendMessage(msg).queue();
         });
     }
