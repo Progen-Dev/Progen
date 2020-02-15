@@ -34,7 +34,7 @@ public class CommandInfo extends CommandHandler {
 
                                 "Coded by Progen Development Team.\n" +
 
-                                        "© 2019 David Franzen" , false)
+                                        "© 2020 David Franzen" , false)
 
                         .addField("Information and Links" ,
 
@@ -44,7 +44,8 @@ public class CommandInfo extends CommandHandler {
 
                                         "Wiki : \n*https://github.com/ProgenBot/ProgenBot/wiki*\n\n" +
 
-                                        "Webpage: \n*http://progen-bot.de*\n\n" ,false)
+                                        "Webpage: \n*https://progen-bot.de*\n\n" +
+                                        "Webinterface: \n*https://pwi.progen-bot.de*\n\n", false)
 
                         .addField("Libraries and Dependencies" ,
 
@@ -62,7 +63,7 @@ public class CommandInfo extends CommandHandler {
 
                                         " - **Please use this document to report a Bug or suggest an idea:  \n http://supp.progen-bot.de**\n\n" +
 
-                                        " \n-  Discord:  http://discord.progen-bot.de" , false)
+                                        " \n-  Discord:  https://discord.progen-bot.de" , false)
                         .setImage("https://top.gg/api/widget/495293590503817237.svg?usernamecolor=FFFFFF&topcolor=000000")
                         .build()
         ).queue();

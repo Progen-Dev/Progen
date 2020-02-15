@@ -2,17 +2,18 @@ package de.progen_bot.core;
 
 import com.mysql.cj.jdbc.Driver;
 import de.mtorials.commands.ChangePrefix;
-import de.mtorials.commands.Stats;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.Settings.CommandNotify;
+import de.progen_bot.commands.Settings.CommandVote;
 import de.progen_bot.commands.fun.ConnectFour;
 import de.progen_bot.commands.Help;
 import de.progen_bot.commands.moderator.*;
 import de.progen_bot.commands.moderator.Blacklist.CommandBan;
 import de.progen_bot.commands.moderator.Blacklist.CommandKick;
 import de.progen_bot.commands.music.CommandPlaylist;
+import de.progen_bot.commands.owner.CommandLog;
 import de.progen_bot.commands.user.*;
 import de.progen_bot.commands.owner.CommandRestart;
 import de.progen_bot.commands.owner.CommandStop;
@@ -127,7 +128,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CmdTempChannel());
         commandManager.setupCommandHandlers(new ChangePrefix());
         commandManager.setupCommandHandlers(new WarnDelete());
-        commandManager.setupCommandHandlers(new Vote());
+        commandManager.setupCommandHandlers(new CommandVote());
         commandManager.setupCommandHandlers(new CommandStop());
         commandManager.setupCommandHandlers(new CommandRestart());
         commandManager.setupCommandHandlers(new CommandKick());
@@ -136,6 +137,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandPlaylist());
         commandManager.setupCommandHandlers(new UserVotet());
         commandManager.setupCommandHandlers(new CommandNotify());
+        commandManager.setupCommandHandlers(new CommandLog());
     }
 
     /**
