@@ -5,6 +5,7 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
@@ -23,11 +24,12 @@ public class WarnList extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         if (event.getMessage().getMentionedMembers().size() == 1) {
-            List<String> warnTable = new WarnListDaoImpl().loadWarnList(event.getMessage().getMentionedMembers().get(0));
+            Member mentioned = event.getMessage().getMentionedMembers().get(0);
+            List<String> warnTable = new WarnListDaoImpl().loadWarnList(mentioned);
 
             if (!warnTable.isEmpty()) {
                 StringBuilder sb = new StringBuilder();
-                EmbedBuilder eb = new EmbedBuilder().setTitle("WarnTable of " + event.getMember().getEffectiveName()).setColor(Color.ORANGE);
+                EmbedBuilder eb = new EmbedBuilder().setTitle("WarnTable of " + mentioned.getEffectiveName()).setColor(Color.ORANGE);
                 int count = 1;
                 for (String reason : warnTable) {
                     sb.append(count + ". " + reason + "\n");
