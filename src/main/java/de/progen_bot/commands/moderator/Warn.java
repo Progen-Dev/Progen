@@ -47,7 +47,7 @@ public class Warn extends CommandHandler {
                 .setDescription(
                         warned.getAsMention() + "was warned by " + event.getAuthor().getAsMention() + ".")
                 .addField("Reason:", "```" + reason + "```", false)
-                .setFooter(warned.getEffectiveName() + " was warned for" + warnCount + " times.", null).build())
+                .setFooter(warned.getEffectiveName() + " was warned for " + warnCount + " times.", null).build())
                 .queue();
 
     }
