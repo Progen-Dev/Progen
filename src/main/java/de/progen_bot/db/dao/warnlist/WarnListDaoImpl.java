@@ -30,6 +30,7 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
     }
 
     public List<String> loadWarnList(Member member) {
+        List<String> warns = new ArrayList<>();
         Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM `warn` WHERE `userid` = ? AND `guildid` = ?");
@@ -37,22 +38,20 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
             ps.setString(2, member.getGuild().getId());
 
             ResultSet rs = ps.executeQuery();
-            List<String> warnTable = new ArrayList<>();
 
             while (rs.next()) {
-                warnTable.add(rs.getString("reason"));
+                warns.add(rs.getString("reason"));
             }
-            return warnTable;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return warns;
     }
 
     public void deleteWarns(Member member) {
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM `warn` WHERE `userid` = ? AND `guildid` AND `reason`= ?");
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM `warn` WHERE `userid` = ? AND `guildid` = ?");
             ps.setString(1, member.getUser().getId());
             ps.setString(2, member.getGuild().getId());
             ps.execute();

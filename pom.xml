@@ -58,6 +58,7 @@
             <artifactId>DBL-Java-Library</artifactId>
             <version>19abf19859</version>
         </dependency>
+
     </dependencies>
 
     <build>

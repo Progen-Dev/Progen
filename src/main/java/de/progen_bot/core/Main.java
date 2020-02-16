@@ -2,7 +2,6 @@ package de.progen_bot.core;
 
 import com.mysql.cj.jdbc.Driver;
 import de.mtorials.commands.ChangePrefix;
-import de.mtorials.commands.Stats;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandManager;
@@ -98,6 +97,8 @@ public class Main {
 
         musicBotManager = new MusicBotManager();
         musicManager = new MusicManager();
+
+
     }
 
     /**
