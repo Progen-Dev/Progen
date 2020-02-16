@@ -45,9 +45,9 @@ public class Warn extends CommandHandler {
 
         event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setTitle("warn")
                 .setDescription(
-                        warned.getAsMention() + " wurde von " + event.getAuthor().getAsMention() + " verwarnt!")
-                .addField("Grund:", "```" + reason + "```", false)
-                .setFooter(warned.getEffectiveName() + " wurde zum " + warnCount + " mal verwarnt!", null).build())
+                        warned.getAsMention() + "was warned by " + event.getAuthor().getAsMention() + ".")
+                .addField("Reason:", "```" + reason + "```", false)
+                .setFooter(warned.getEffectiveName() + " was warned for" + warnCount + " times.", null).build())
                 .queue();
 
     }

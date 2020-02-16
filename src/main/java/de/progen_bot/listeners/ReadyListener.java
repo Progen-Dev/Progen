@@ -1,5 +1,6 @@
 package de.progen_bot.listeners;
 
+import de.progen_bot.commands.Settings.CommandVote;
 import de.progen_bot.util.Statics;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
@@ -28,17 +29,17 @@ public class ReadyListener extends ListenerAdapter {
      */
     public void onReady(ReadyEvent event) {
 
-        String out = "\nProgen läuft auf:\n" + "----------------------------------\n";
+        String out = "\nProgen is running on:\n" + "----------------------------------\n";
 
         for (Guild g : event.getJDA().getGuilds()) {
             out += "-" + g.getName() + "(" + g.getId() + ")" + "\n";
         }
 
         Activity[] games = new Activity[]{
-                Activity.playing("I <3 Server power"),
-                Activity.watching("Wonderful servers"),
-                Activity.streaming("Webinterface","https://pwi.progen-bot.de/\n"),
-                Activity.playing("https://progen-bot.de!"),
+                Activity.playing("Hello!"),
+                Activity.watching("https://progen-bot.de/"),
+                Activity.streaming("Check the Webinterface","https://pwi.progen-bot.de/"),
+                Activity.playing("https://pwi.progen-bot.de!"),
                 Activity.playing(Statics.Version)};
 
         new Timer().schedule(new TimerTask() {
@@ -51,5 +52,8 @@ public class ReadyListener extends ListenerAdapter {
         }, 0, 10000);
 
         System.out.println(out);
+
+        //CommandPoll
+        CommandVote.loadPolls(event.getJDA());
     }
 }

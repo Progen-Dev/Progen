@@ -42,7 +42,7 @@ public class MessageGenerator {
 
         return new EmbedBuilder()
                 .setColor(Color.GREEN)
-                .setTitle("SUCCESSFUL")
+                .setTitle("SUCCESSFULLY")
                 .setDescription("Successfully executed command " + invokeString + ".")
                 .build();
     }
