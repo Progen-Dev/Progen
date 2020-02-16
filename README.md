@@ -28,7 +28,7 @@ For more information read our [WIKI](https://github.com/Progen-Dev/Progen/wiki) 
 
 * All commands summarized [Commands](https://github.com/Progen-Dev/Progen/wiki)
 
-## Invite Progen and her Sisters
+## Invite Progen
 
 * [Add Progen to your server](https://discordapp.com/oauth2/authorize?client_id=495293590503817237&scope=bot)
 * [Add ProgenMusic1 for more music](https://discordapp.com/oauth2/authorize?client_id=662647209929605126&scope=bot)
