@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
@@ -23,12 +24,10 @@ import java.util.concurrent.ThreadLocalRandom;
  * @see ReadyEvent
  */
 public class ReadyListener extends ListenerAdapter {
-
     /* (non-Javadoc)
      * @see net.dv8tion.jda.de.progen_bot.core.hooks.ListenerAdapter#onReady(net.dv8tion.jda.de.progen_bot.core.events.ReadyEvent)
      */
     public void onReady(ReadyEvent event) {
-
         String out = "\nProgen is running on:\n" + "----------------------------------\n";
 
         for (Guild g : event.getJDA().getGuilds()) {
@@ -36,17 +35,13 @@ public class ReadyListener extends ListenerAdapter {
         }
 
         Activity[] games = new Activity[]{
-                Activity.playing("Hello!"),
-                Activity.watching("https://progen-bot.de/"),
-                Activity.streaming("Check the Webinterface","https://pwi.progen-bot.de/"),
-                Activity.playing("https://pwi.progen-bot.de!"),
-                Activity.playing(Statics.Version)};
+                Activity.playing("Total Servers:" + (event.getGuildTotalCount()))};
 
         new Timer().schedule(new TimerTask() {
 
             @Override
             public void run() {
-                event.getJDA().getPresence().setActivity(games[ThreadLocalRandom.current().nextInt(5)]);
+                event.getJDA().getPresence().setActivity(games[ThreadLocalRandom.current().nextInt(1)]);
             }
 
         }, 0, 10000);
@@ -55,5 +50,8 @@ public class ReadyListener extends ListenerAdapter {
 
         //CommandPoll
         CommandVote.loadPolls(event.getJDA());
+
+        //reconnect
+        Statics.lastRestart = new Date();
     }
 }

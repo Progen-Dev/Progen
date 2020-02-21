@@ -13,6 +13,7 @@ import de.progen_bot.commands.moderator.*;
 import de.progen_bot.commands.moderator.Blacklist.CommandBan;
 import de.progen_bot.commands.moderator.Blacklist.CommandKick;
 import de.progen_bot.commands.music.CommandPlaylist;
+import de.progen_bot.commands.owner.CommandTest;
 import de.progen_bot.commands.user.*;
 import de.progen_bot.commands.owner.CommandRestart;
 import de.progen_bot.commands.owner.CommandStop;
@@ -111,7 +112,7 @@ public class Main {
     private void initCommandHandlers(CommandManager commandManager) {
         commandManager.setupCommandHandlers(new Clear());
         commandManager.setupCommandHandlers(new GuildInfo());
-        commandManager.setupCommandHandlers(new CommandPing());
+        commandManager.setupCommandHandlers(new CommandStatus());
         commandManager.setupCommandHandlers(new Say());
         commandManager.setupCommandHandlers(new CommandUserInfo());
         commandManager.setupCommandHandlers(new Warn());
@@ -138,6 +139,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandPlaylist());
         commandManager.setupCommandHandlers(new UserVotet());
         commandManager.setupCommandHandlers(new CommandNotify());
+        commandManager.setupCommandHandlers(new CommandTest());
     }
 
     /**

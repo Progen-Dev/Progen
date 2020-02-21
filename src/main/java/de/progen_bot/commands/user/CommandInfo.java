@@ -22,8 +22,6 @@ public class CommandInfo extends CommandHandler {
 
                         .setColor(Color.magenta)
 
-                        .setThumbnail("https://github.com/ProgenBot/ProgenBot/blob/master/images/Progen.png")
-
                         .setDescription(":robot:   __**ProgenBot** JDA Discord Bot__")
 
                         .addField("Current Version" , Statics.Version , true)
@@ -63,8 +61,8 @@ public class CommandInfo extends CommandHandler {
 
                                         " - **Please use this document to report a Bug or suggest an idea:  \n http://supp.progen-bot.de**\n\n" +
 
-                                        " \n-  Discord:  https://discord.progen-bot.de" , false)
-                        .setImage("https://top.gg/api/widget/495293590503817237.svg?usernamecolor=FFFFFF&topcolor=000000")
+                                        " \n-  Discord:  https://discord.progen-bot.de \n" +
+                                        "\n- Your Currently Prefix: " + configuration.prefix , false)
                         .build()
         ).queue();
     }

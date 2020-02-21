@@ -55,7 +55,7 @@ public class XP extends CommandHandler {
 
             eb.setTitle("Level: " + data.getLevel() + " (" + Level.remainingXp(data.getTotalXp()) + "/"
                     + Level.xpToLevelUp(data.getLevel()) + ")" + "XP")
-                    .setDescription("Noch " + percent + " % bis zum nächsten Level");
+                    .setDescription(percent + "% to the next Level.");
         } else {
             eb.setTitle("Level: 0 (0/0)XP").setDescription("You have not sent a message yet");
         }

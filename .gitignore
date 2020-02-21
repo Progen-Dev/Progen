@@ -5,11 +5,12 @@
 .idea/
 .images/
 .target/
-Guilds/
+POLL/
 
 ## Java ##
 *.jar
 *.properties
+*.dependency-reduced-pom.xml
 *.json
 *.class
 *.MF

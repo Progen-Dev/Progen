@@ -25,7 +25,7 @@ public class MessageGenerator {
 
         return new EmbedBuilder()
                 .setColor(Color.RED)
-                .setDescription(":no_entry: " + error + ":no_entry:")
+                .setDescription(":no_entry: " + error + " :no_entry:")
                 .build();
     }
 

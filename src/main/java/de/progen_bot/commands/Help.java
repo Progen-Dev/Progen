@@ -38,7 +38,7 @@ public class Help extends CommandHandler {
                     .setAuthor("Progen Development Team")
                     .setTitle("Help")
                     .setDescription("For more information about commands use <prefix>help <command>\n")
-                    .setFooter("Discord Server: http://discord.progen-bot.de");
+                    .setFooter("Discord Server: http://discord.progen-bot.de\nYour Currently Prefix: " + configuration.prefix);
 
             for (String group : commandsByGroup.keySet()) {
                 StringBuilder s = new StringBuilder();

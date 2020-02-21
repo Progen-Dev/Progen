@@ -59,6 +59,26 @@
             <version>19abf19859</version>
         </dependency>
 
+        <dependency>
+            <groupId>fr.bmartel</groupId>
+            <artifactId>http-endec</artifactId>
+            <version>1.04</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+        <groupId>fr.bmartel</groupId>
+        <artifactId>jspeedtest</artifactId>
+        <version>LATEST</version>
+    </dependency>
+
+        <dependency>
+            <groupId>com.github.akinaru</groupId>
+            <artifactId>speedtest</artifactId>
+            <version>1.23</version>
+            <type>pom</type>
+        </dependency>
+
     </dependencies>
 
     <build>

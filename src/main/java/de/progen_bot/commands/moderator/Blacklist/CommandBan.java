@@ -13,7 +13,7 @@ public class CommandBan extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
-        if (PermissionCore.check(2 , event)) ;
+        if (PermissionCore.check(2 , event));
 
 
     }

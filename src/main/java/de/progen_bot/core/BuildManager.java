@@ -41,5 +41,6 @@ public class BuildManager {
         builder.addEventListeners(new MuteHandler());
         builder.addEventListeners(new GuildJoinReloadListener());
         builder.addEventListeners(new ReactionListener());
+        builder.addEventListeners(new ReconnectListener());
     }
 }
