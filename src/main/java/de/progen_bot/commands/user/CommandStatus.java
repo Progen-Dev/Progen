@@ -61,7 +61,7 @@ public class CommandStatus extends CommandHandler {
         Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Speed test running...**\n\nTesting downstream with 10MB file...").build()).complete();
 
         Dspeed.addSpeedTestListener(new ISpeedTestListener() {
-            
+
             @Override
             public void onCompletion(SpeedTestReport report) {
                 sb.append("Downstream:  " + (report.getTransferRateBit().floatValue() / 1024 / 1024) + " MBit/s\n");
