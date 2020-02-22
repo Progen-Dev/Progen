@@ -2,7 +2,8 @@ package de.progen_bot.commands.Settings;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
-import de.progen_bot.core.PermissionCore;
+import de.progen_bot.permissions.AccessLevel;
+import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -17,7 +18,6 @@ public class CommandAutorole extends CommandHandler{
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        if (PermissionCore.check(2, event));
 
         if (parsedCommand.getArgs().length < 1){
             event.getTextChannel().sendMessage(
@@ -46,4 +46,10 @@ public class CommandAutorole extends CommandHandler{
     public String help() {
         return null;
     }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.MODERATOR;
+    }
+
 }

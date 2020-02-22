@@ -3,7 +3,8 @@ package de.progen_bot.commands.Settings;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 
-import de.progen_bot.core.PermissionCore;
+import de.progen_bot.permissions.AccessLevel;
+import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -24,10 +25,16 @@ import java.util.stream.Collectors;
 
 
 public class CommandVote extends CommandHandler implements Serializable {
+
     private static final String[] EMOTES = ( "\uD83C\uDF4F \uD83C\uDF4E \uD83C\uDF50 \uD83C\uDF4A \uD83C\uDF4B \uD83C\uDF4C \uD83C\uDF49 \uD83C\uDF47 \uD83C\uDF53 \uD83C\uDF48 \uD83C\uDF52 \uD83C\uDF51 \uD83C\uDF4D \uD83E\uDD5D ").split(" ");
+
     public static HashMap<Guild, Poll> polls = new HashMap<>();
     private static HashMap<Guild, Message> tempList = new HashMap<>();
     private static TextChannel channel;
+
+    private PermissionCore permissionCore;
+
+
     public CommandVote() {
         super("vote", "<prefix>vote create <question>|answer1|answer2|...\n <prefix>vote stats\n <prefix>vote secret <question>|answer1|answer2|...\n <prefix>poll close", "Create a survey easily a Poll");
     }
@@ -236,7 +243,7 @@ public class CommandVote extends CommandHandler implements Serializable {
             messageGenerators.generateInfoMsg("The running poll is a `secret` poll and can only be accessed from the channel where it was created from!");
         }
 
-        if (!poll.getCreator(g).equals(event.getMember()) && PermissionCore.check(2, event)) {
+        if (!poll.getCreator(g).equals(event.getMember()) && permissionCore.getAccessLevel().getLevel() > AccessLevel.MODERATOR.getLevel()) {
             messageGenerators.generateErrorMsg("Only the creator of the poll (" + poll.getCreator(g).getAsMention() + ") can close this poll!");
         }
 
@@ -251,8 +258,8 @@ public class CommandVote extends CommandHandler implements Serializable {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        if (PermissionCore.check(2, event));
         channel = event.getTextChannel();
+        permissionCore = new PermissionCore(event);
 
         if (parsedCommand.getArgs().length < 1) {
             message(help(), Color.red);
@@ -262,6 +269,10 @@ public class CommandVote extends CommandHandler implements Serializable {
         switch (parsedCommand.getArgs()[0]) {
 
             case "create":
+                if (permissionCore.getAccessLevel().getLevel() > AccessLevel.MODERATOR.getLevel()) {
+                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("No permission!")).queue();
+                    return;
+                }
                 createPoll(parsedCommand.getArgs(), event, false);
                 break;
 
@@ -284,6 +295,11 @@ public class CommandVote extends CommandHandler implements Serializable {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.USER;
     }
 
     public class Poll implements Serializable {
@@ -320,7 +336,6 @@ public class CommandVote extends CommandHandler implements Serializable {
             });
             return messages.isEmpty() ? null : messages.get(0);
         }
-
     }
 }
 

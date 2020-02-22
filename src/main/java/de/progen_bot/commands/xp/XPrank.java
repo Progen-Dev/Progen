@@ -5,6 +5,7 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.dao.xp.XpDaoImpl;
 import de.progen_bot.db.entities.UserData;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -38,6 +39,11 @@ public class XPrank extends CommandHandler {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.USER;
     }
 
 }

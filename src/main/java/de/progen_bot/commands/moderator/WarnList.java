@@ -4,6 +4,7 @@ import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -18,7 +19,6 @@ public class WarnList extends CommandHandler {
     public WarnList() {
         super("warnlist", "warnlist or warnlist<user>",
                 "list all active alerts of your server in a table or retrieve custom alerts from specific users");
-        //TODO warnlist desc
     }
 
     @Override
@@ -60,5 +60,10 @@ public class WarnList extends CommandHandler {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.MODERATOR;
     }
 }

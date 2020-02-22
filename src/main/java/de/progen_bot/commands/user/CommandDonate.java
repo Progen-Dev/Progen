@@ -3,6 +3,7 @@ package de.progen_bot.commands.user;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import okhttp3.internal.http2.Http2Connection;
 
@@ -33,4 +34,10 @@ public class CommandDonate extends CommandHandler {
     public String help() {
         return null;
     }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.USER;
+    }
+
 }

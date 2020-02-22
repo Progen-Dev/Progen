@@ -2,7 +2,8 @@ package de.progen_bot.commands.moderator;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
-import de.progen_bot.core.PermissionCore;
+import de.progen_bot.permissions.AccessLevel;
+import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -20,7 +21,6 @@ public class Warn extends CommandHandler {
 
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        if (PermissionCore.check(2, event)) return;
 
         Member warned;
         if (event.getMessage().getMentionedUsers().size() == 1) {
@@ -56,5 +56,10 @@ public class Warn extends CommandHandler {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.MODERATOR;
     }
 }

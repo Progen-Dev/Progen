@@ -3,6 +3,7 @@ package de.progen_bot.commands.user;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
 import de.progen_bot.util.Statics;
 import fr.bmartel.speedtest.SpeedTestReport;
 import fr.bmartel.speedtest.SpeedTestSocket;
@@ -107,5 +108,10 @@ public class CommandStatus extends CommandHandler {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.USER;
     }
 }

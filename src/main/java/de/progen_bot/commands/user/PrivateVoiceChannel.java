@@ -1,10 +1,11 @@
-package de.progen_bot.commands.moderator;
+package de.progen_bot.commands.user;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.listeners.PrivateVoice;
+import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
@@ -119,5 +120,10 @@ public class PrivateVoiceChannel extends CommandHandler {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.USER;
     }
 }

@@ -2,7 +2,8 @@ package de.progen_bot.commands.user;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
-import de.progen_bot.core.PermissionCore;
+import de.progen_bot.permissions.AccessLevel;
+import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
@@ -37,7 +38,7 @@ public class CommandUserInfo extends CommandHandler {
         String ROLES = "";
         String GAME;
         String AVATAR = memb.getUser().getAvatarUrl();
-        String PERM = PermissionCore.getLevel(memb) + "";
+        String PERM = new PermissionCore(event).getAccessLevel().name() + "";
 
         try {
             GAME = memb.getActivities().get(0).getName();
@@ -84,6 +85,11 @@ public class CommandUserInfo extends CommandHandler {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.USER;
     }
 
 }

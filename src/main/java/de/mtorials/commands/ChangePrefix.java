@@ -4,6 +4,7 @@ import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class ChangePrefix extends CommandHandler {
@@ -37,5 +38,10 @@ public class ChangePrefix extends CommandHandler {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.OWNER;
     }
 }

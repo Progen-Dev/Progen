@@ -4,6 +4,7 @@ import de.mtorials.misc.Logger;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.db.entities.config.GuildConfigurationBuilder;
+import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.util.MessageGenerator;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -54,6 +55,11 @@ public class CommandManager extends ListenerAdapter {
 
         //DEBUG
         Logger.info("Command " + commandHandler.getInvokeString() + " was invoked.");
+
+        if (commandHandler.getAccessLevel().getLevel() > new PermissionCore(event).getAccessLevel().getLevel()) {
+            event.getTextChannel().sendMessage(new MessageGenerator("", "").generateErrorMsg("Your are not allowed to use this command!")).queue();
+            return;
+        }
 
         commandHandler.execute(parsedMessage, event, guildConfiguration);
     }

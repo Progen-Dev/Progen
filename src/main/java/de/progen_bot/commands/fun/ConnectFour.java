@@ -6,6 +6,7 @@ import de.progen_bot.core.Main;
 import de.progen_bot.db.dao.connectfour.ConnectFourDaoImpl;
 import de.progen_bot.db.entities.GameData;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.User;
@@ -88,6 +89,11 @@ public class ConnectFour extends CommandHandler {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.USER;
     }
 
 }

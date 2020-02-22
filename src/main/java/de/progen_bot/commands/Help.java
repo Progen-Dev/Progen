@@ -4,6 +4,7 @@ import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.Main;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -79,4 +80,10 @@ public class Help extends CommandHandler {
     public String help() {
         return null;
     }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.USER;
+    }
+
 }

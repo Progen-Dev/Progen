@@ -10,6 +10,7 @@ import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.music.AudioInfo;
 import de.progen_bot.music.Music;
 import de.progen_bot.music.MusicManager;
+import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -141,4 +142,10 @@ public class CommandPlaylist extends CommandHandler {
     public String help() {
         return null;
     }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.USER;
+    }
+
 }

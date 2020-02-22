@@ -2,7 +2,8 @@ package de.progen_bot.commands.moderator;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
-import de.progen_bot.core.PermissionCore;
+import de.progen_bot.permissions.AccessLevel;
+import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
@@ -37,7 +38,6 @@ public class Clear extends CommandHandler {
 
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        if (PermissionCore.check(1, event)) return;
 
         String[] args = parsedCommand.getArgs();
         int numb = getInt(args[0]);
@@ -91,5 +91,10 @@ public class Clear extends CommandHandler {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.MODERATOR;
     }
 }

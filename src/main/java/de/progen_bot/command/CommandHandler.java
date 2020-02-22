@@ -3,6 +3,7 @@ package de.progen_bot.command;
 import de.progen_bot.core.Main;
 import de.progen_bot.db.DaoHandler;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
 import de.progen_bot.util.MessageGenerator;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -94,4 +95,5 @@ public abstract class CommandHandler {
     }
 
     public abstract String help();
+    public abstract AccessLevel getAccessLevel();
 }
