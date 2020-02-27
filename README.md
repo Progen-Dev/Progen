@@ -54,8 +54,7 @@ Feel free to join our Progen discord guild.
 @M'Torials
 
 ## License
-* [MIT](https://github.com/Progen-Dev/Progen/blob/master/LICENSE)
-Progen is under an MIT license. Please read the license carefully to avoid annoyance.
+GNU GPL v2
 
 
 
