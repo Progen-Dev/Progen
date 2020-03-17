@@ -61,5 +61,5 @@ GNU GPL v2
 ## Information
 We work Progen. But they are still at the beginning of a major project. If there are any problems, please let us know!
 
- * Current Version: 1.0.0.2
- * Lastet Version: 1.0.0.1
+ * Current Version: 1.0.0.4
+ * Lastet Version: 1.0.0.3
