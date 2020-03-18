@@ -1,12 +1,15 @@
 package de.progen_bot.listeners;
 
 import de.progen_bot.commands.Settings.CommandVote;
+import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.util.Statics;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,8 +38,7 @@ public class ReadyListener extends ListenerAdapter {
         }
 
         Activity[] games = new Activity[]{
-                Activity.playing("Total Servers:" + (event.getGuildTotalCount()))};
-
+                Activity.playing(event.getGuildTotalCount() + "members")};
         new Timer().schedule(new TimerTask() {
 
             @Override

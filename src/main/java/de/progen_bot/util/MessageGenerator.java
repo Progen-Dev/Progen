@@ -3,6 +3,7 @@ package de.progen_bot.util;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import org.w3c.dom.css.RGBColor;
 
 import java.awt.*;
 

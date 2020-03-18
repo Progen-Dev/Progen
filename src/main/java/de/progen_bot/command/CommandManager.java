@@ -53,7 +53,7 @@ public class CommandManager extends ListenerAdapter {
         }
 
         //DEBUG
-        Logger.info("Command " + commandHandler.getInvokeString() + " was invoked.");
+        Logger.info("Command " + commandHandler.getInvokeString() + " was invoked in " + event.getGuild().getName());
 
         commandHandler.execute(parsedMessage, event, guildConfiguration);
     }

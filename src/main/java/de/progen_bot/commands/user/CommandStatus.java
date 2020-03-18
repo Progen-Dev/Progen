@@ -65,7 +65,7 @@ public class CommandStatus extends CommandHandler {
             @Override
             public void onCompletion(SpeedTestReport report) {
                 sb.append("Downstream:  " + (report.getTransferRateBit().floatValue() / 1024 / 1024) + " MBit/s\n");
-                msg.editMessage(new EmbedBuilder().setDescription("**Speed test running...**\n\nTesting upstream with 1MB file...").build()).queue();
+                msg.editMessage(new EmbedBuilder().setDescription("**Speed test running...**\n\nTesting upstream with 10MB file...").build()).queue();
                 Uspeed.startUpload("https://testdebit.info/", 1000000);
             }
 

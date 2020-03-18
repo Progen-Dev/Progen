@@ -4,6 +4,7 @@ import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -32,10 +33,6 @@ public class CommandKick extends CommandHandler {
         ).queue();
 
         PrivateChannel pc = event.getMessage().getMentionedUsers().get(0).openPrivateChannel().complete();
-        pc.sendMessage(
-                "Sorry, you got kicked from Server " + event.getGuild().getName() + " by " + event.getAuthor().getAsMention() + " (" + event.getMember().getRoles().get(0).getName() + ").\n\n" +
-                        "Reason: " + reason
-        ).queue();
 
         event.getGuild().kick(
                 event.getGuild().getMember(

@@ -15,6 +15,7 @@ public class Statics {
 
     public static String guildJoinRole = "";
 
+
     public static String BOT_OWNER_ShowMeYourSkil = "402140322525872138";
     public static String BOT_OWNER_MTORIALS = "279271145205923847";
     public static String BOT_OWNER_EVOH = "225327305570910208";

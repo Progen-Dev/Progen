@@ -6,6 +6,9 @@ import de.progen_bot.core.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
+
 public class CommandRestart extends CommandHandler {
     public CommandRestart() {
         super("restart", "restart", "Restart Progen. Only for Owner!");
@@ -13,7 +16,20 @@ public class CommandRestart extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        if (PermissionCore.check(4, event)) ;
+        if (PermissionCore.check(4, event));
+        event.getTextChannel().sendMessage(
+         messageGenerators.generateWarningMsg("Progen will restart now..")
+        ).queue();
+
+        if (System.getProperty("os.name").toLowerCase().contains("Linux")) {
+            try {
+                Runtime.getRuntime().exec("screen phyton restart.py");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.exit(0);
     }
 
     @Override
