@@ -35,10 +35,10 @@ public class Help extends CommandHandler {
             }
 
             EmbedBuilder msg = new EmbedBuilder()
-                    .setAuthor("Progen Development Team")
+                    .setAuthor("Progen")
                     .setTitle("Help")
-                    .setDescription("For more information about commands use <prefix>help <command>\n")
-                    .setFooter("Discord Server: http://discord.progen-bot.de\nYour Currently Prefix: " + configuration.prefix);
+                    .setDescription("For more information about commands use" + configuration.prefix + "help <command>\n")
+                    .setFooter("Discord Server: https://discord.gg/n7csqga\nYour Currently Prefix: " + configuration.prefix);
 
             for (String group : commandsByGroup.keySet()) {
                 StringBuilder s = new StringBuilder();

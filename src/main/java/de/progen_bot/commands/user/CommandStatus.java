@@ -49,7 +49,7 @@ public class CommandStatus extends CommandHandler {
                 new EmbedBuilder()
                         .setDescription(":timer: ***STATUS***")
                         .setColor(new Color(187, 195, 255))
-                        .addField("Ping", String.valueOf(event.getJDA().getGatewayPing()), true)
+                        .addField("Ping", String.valueOf(event.getJDA().getGatewayPing() + "ms"), true)
                         .addField("Last Restart", getTime(Statics.lastRestart, "dd.MM.yyyy - HH:mm:ss (z)"), false)
                         .addField("autoReconnects", Statics.reconnectCount + "", false)
                         .build()

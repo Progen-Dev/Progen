@@ -17,6 +17,6 @@ public class GuildConfiguration {
         this.setAutorole = setAutoRole;
     }
 
-    public void setAutorole(String name, Guild guild) {
+    public void setAutorole(String role, Guild guild) {
     }
 }

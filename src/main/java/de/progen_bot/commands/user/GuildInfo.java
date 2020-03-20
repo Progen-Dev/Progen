@@ -39,7 +39,7 @@ public class GuildInfo extends CommandHandler {
         int voiceChans = g.getVoiceChannels().size();
         int rolesCount = g.getRoles().size();
         int afktime = g.getAfkTimeout().getSeconds() / 60;
-        String afk = g.getAfkChannel() == null ? "Nicht eingestellt" : g.getAfkChannel().getName();
+        String afk = g.getAfkChannel() == null ? "Not set" : g.getAfkChannel().getName();
         Member owner = g.getOwner();
 
         int all = l.size();
@@ -58,14 +58,14 @@ public class GuildInfo extends CommandHandler {
 
         EmbedBuilder eb = new EmbedBuilder().setColor(Color.cyan).addField("Name:", name, false)
                 .addField("ID:", "``" + id + "``", false)
-                .addField("Inhaber:", owner.getUser().getName() + "#" + owner.getUser().getDiscriminator(), false)
+                .addField("Owner:", owner.getUser().getName() + "#" + owner.getUser().getDiscriminator(), false)
                 .addField("Server Region:", region, false)
                 .addField("Channels:", "**TextChannels:**  " + textChans + "\n**VoiceChannels:**  " + voiceChans, false)
-                .addField("Mitglieder (" + all + "):", usersText, false)
-                .addField("Rollen (" + rolesCount + "): ", roles, false)
+                .addField("Members (" + all + "):", usersText, false)
+                .addField("Roles (" + rolesCount + "): ", roles, false)
                 .addField("Stats:",
-                        "**Erstellt am:**  " + create + "\n**Invites:  **" + Invite + "\n**Bans:**  " + bans
-                                + "\n**AFK Timeout:**  " + afktime + " Minuten",
+                        "**Created on:**  " + create + "\n**Invites:  **" + Invite + "\n**Bans:**  " + bans
+                                + "\n**AFK Timeout:**  " + afktime + " minutes",
                         false)
                 .addField("AFK Channel:", afk, false);
 

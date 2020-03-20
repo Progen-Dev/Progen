@@ -14,6 +14,7 @@ public class Say extends CommandHandler {
 
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+        event.getMessage().delete();
         String out = " ";
         for (String s : parsedCommand.getArgs()) {
             out += s + " ";

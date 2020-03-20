@@ -31,7 +31,7 @@ public class ReadyListener extends ListenerAdapter {
      * @see net.dv8tion.jda.de.progen_bot.core.hooks.ListenerAdapter#onReady(net.dv8tion.jda.de.progen_bot.core.events.ReadyEvent)
      */
     public void onReady(ReadyEvent event) {
-        String out = "\nProgen is running on:\n" + "----------------------------------\n";
+        String out = "\nProgen is running on: " + event.getGuildTotalCount() +" guilds " + "----------------------------------\n";
 
         for (Guild g : event.getJDA().getGuilds()) {
             out += "-" + g.getName() + "(" + g.getId() + ")" + "\n";

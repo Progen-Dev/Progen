@@ -36,9 +36,11 @@ public class CommandInfo extends CommandHandler {
 
                         .addField("Information and Links" ,
 
-                                "GitHub Repository: \n*https://github.progen-bot.de*\n\n" +
+                                "GitHub Repositorys: \n*https://github.com/Progen-Dev*\n\n" +
 
-                                        "Readme: \n*https://github.com/ProgenBot/ProgenBot/blob/master/README.md*\n\n" +
+                                        "Readme: \n*https://github.com/Progen-Dev/Progen/blob/master/README.md*\n\n" +
+
+                                        "License: \n*https://github.com/Progen-Dev/Progen/blob/master/LICENSE*\n\n" +
 
                                         "Wiki : \n*https://github.com/ProgenBot/ProgenBot/wiki*\n\n" +
 
@@ -59,10 +61,11 @@ public class CommandInfo extends CommandHandler {
 
                                 "If you got some bugs, please contact us here:\n" +
 
-                                        " - **Please use this document to report a Bug or suggest an idea:  \n http://supp.progen-bot.de**\n\n" +
+                                        " - **Please use this document to report a Bug or suggest an idea:  \n https://github.com/Progen-Dev/Progen/issues**\n\n" +
 
-                                        " \n-  Discord:  https://discord.progen-bot.de \n" +
-                                        "\n- Your Currently Prefix: " + configuration.prefix , false)
+                                        " \n-  Discord:  https://discord.gg/n7csqga \n" +
+                                        "\n- Your Currently Prefix: " + configuration.prefix, false)
+                        .setImage("https://discordbots.org/api/widget/495293590503817237.png?random=")
                         .build()
         ).queue();
     }

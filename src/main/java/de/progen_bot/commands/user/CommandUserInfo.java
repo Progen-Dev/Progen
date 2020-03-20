@@ -51,29 +51,28 @@ public class CommandUserInfo extends CommandHandler {
         if (ROLES.length() > 0)
             ROLES = ROLES.substring(0, ROLES.length() - 2);
         else
-            ROLES = "Keine Rollen auf diesem Server";
-
+            ROLES = "No role on this server";
         if (AVATAR == null) {
             AVATAR = "Kein Avatar";
         }
 
         EmbedBuilder em = new EmbedBuilder().setColor(Color.green);
         if (memb.getUser().isBot()) {
-            em.setDescription("**Bot Informationen für " + memb.getUser().getName() + ":**");
+            em.setDescription("**Bot Information for " + memb.getUser().getName() + ":**");
         } else
-            em.setDescription("**User Informationen für " + memb.getUser().getName() + ":**");
+            em.setDescription("**User Information for " + memb.getUser().getName() + ":**");
 
         em.addField("Name / Nickname", NAME, false);
         em.addField("User Tag", TAG, false);
         em.addField("ID", ID, false);
-        em.addField("Aktueller Status", STATUS, false);
-        em.addField("Aktuelles Spiel", GAME, false);
-        em.addField("Rollen", ROLES, false);
-        em.addField("Guildberechtigungsstufe", "``" + PERM + "``", false);
-        em.addField("Server beigetreten", GUILD_JOIN_DATE, false);
-        em.addField("Discord beigetreten", DISCORD_JOINED_DATE, false);
+        em.addField("Current Status", STATUS, false);
+        em.addField("Current Spiel", GAME, false);
+        em.addField("Roles", ROLES, false);
+        em.addField("Permissonlevel", "``" + PERM + "``", false);
+        em.addField("Server joined", GUILD_JOIN_DATE, false);
+        em.addField("Discord joined", DISCORD_JOINED_DATE, false);
 
-        if (AVATAR != "Kein Avatar") {
+        if (AVATAR != "No Avatar") {
             em.setThumbnail(AVATAR);
         }
 
