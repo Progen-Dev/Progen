@@ -23,7 +23,7 @@ public class CommandRestart extends CommandHandler {
 
         if (System.getProperty("os.name").toLowerCase().contains("Linux")) {
             try {
-                Runtime.getRuntime().exec("screen phyton restart.py");
+                Runtime.getRuntime().exec("screen python restart.py");
             } catch (IOException e) {
                 e.printStackTrace();
             }
