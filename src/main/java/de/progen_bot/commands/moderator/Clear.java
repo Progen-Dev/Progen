@@ -23,7 +23,7 @@ public class Clear extends CommandHandler {
     EmbedBuilder error = new EmbedBuilder().setColor(Color.RED);
 
     public Clear() {
-        super("clear", "clear <anzahl>", "clear some messages that are no older than two weeks");
+        super("clear", "clear <number>", "clear some messages that are no older than two weeks");
     }
 
     private int getInt(String string) {

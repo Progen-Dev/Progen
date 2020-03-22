@@ -6,7 +6,6 @@ import de.progen_bot.core.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 
 public class CommandRestart extends CommandHandler {
