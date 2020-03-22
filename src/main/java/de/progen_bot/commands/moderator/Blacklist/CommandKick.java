@@ -13,7 +13,9 @@ import java.awt.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalTime;
+import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
@@ -21,7 +23,7 @@ import java.util.TimeZone;
 
 public class CommandKick extends CommandHandler {
     public CommandKick() {
-        super("kick" , "kick <user> <reason>" , "Kick a user from this server");
+        super("kick" , "kick <@user> <reason>" , "Kick a user from this server");
     }
 
 
@@ -29,7 +31,7 @@ public class CommandKick extends CommandHandler {
     public void execute(CommandManager.ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
         if (PermissionCore.check(2 , event)) return;
         Message message = event.getMessage();
-        String reason = " ";
+        String reason = "  ";
         if (parsedCommand.getArgs().length > 1) {
             reason = parsedCommand.getArgs()[1];
         }
@@ -44,6 +46,7 @@ public class CommandKick extends CommandHandler {
                                event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(),true)
                        .setDescription(event.getMessageId())
                        .addField("Reason", reason, false)
+                       .setTimestamp(Instant.now())
                 .build())
                 .queue();
 
@@ -57,6 +60,7 @@ public class CommandKick extends CommandHandler {
                                 event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(),true)
                         .setDescription(event.getMessageId())
                         .addField("Reason", reason, false)
+                        .setTimestamp(Instant.now())
                 .build()
         ).queue();
 
@@ -71,6 +75,7 @@ public class CommandKick extends CommandHandler {
                                event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(),true)
                        .setDescription(event.getMessageId())
                        .addField("Reason", reason, false)
+                       .setTimestamp(Instant.now())
                        .build())
                .queue();
 
