@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class TrackManager extends AudioEventAdapter {
-    private final AudioPlayer PLAYER;
+    private final AudioPlayer player;
     private Queue<AudioInfo> queue;
     private final VoiceChannel voiceChannel;
     //rivate final Music music;
@@ -23,7 +23,7 @@ public class TrackManager extends AudioEventAdapter {
      */
 
     public TrackManager(AudioPlayer player, VoiceChannel voiceChannel) {
-        this.PLAYER = player;
+        this.player = player;
         this.queue = new LinkedBlockingQueue<>();
         this.voiceChannel = voiceChannel;
         //this.music = music;
@@ -39,8 +39,8 @@ public class TrackManager extends AudioEventAdapter {
     public void queue(AudioTrack track, Member author) {
         AudioInfo info = new AudioInfo(track, author);
         queue.add(info);
-        if (PLAYER.getPlayingTrack() == null) {
-            PLAYER.playTrack(queue.element().getTrack());
+        if (player.getPlayingTrack() == null) {
+            player.playTrack(queue.element().getTrack());
             queue.remove();
         }
     }
