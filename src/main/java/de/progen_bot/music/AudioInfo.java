@@ -6,8 +6,8 @@ import net.dv8tion.jda.api.entities.Member;
 
 
 public class AudioInfo {
-    private final AudioTrack TRACK;
-    private final Member AUTHOR;
+    private final AudioTrack track;
+    private final Member author;
 
     /**
      * Creates an instance of the AudioInfo class.
@@ -16,16 +16,16 @@ public class AudioInfo {
      * @param author Member
      */
     public AudioInfo(AudioTrack track, Member author) {
-        this.TRACK = track;
-        this.AUTHOR = author;
+        this.track = track;
+        this.author = author;
     }
 
     public AudioTrack getTrack() {
-        return TRACK;
+        return track;
     }
 
     @JsonIgnore
     public Member getAuthor() {
-        return AUTHOR;
+        return author;
     }
 }
