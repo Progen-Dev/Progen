@@ -32,7 +32,7 @@ For more information read our [WIKI](https://github.com/Progen-Dev/Progen/wiki) 
 
 * [Add Progen to your server](https://discordapp.com/oauth2/authorize?client_id=495293590503817237&scope=bot)
 * [Add ProgenMusic1 for more music](https://discordapp.com/oauth2/authorize?client_id=662647209929605126&scope=bot)
-* [Add ProgenMsuic2 for more msuic](https://discordapp.com/oauth2/authorize?client_id=662647378385305620&scope=bot)
+* [Add ProgenMsuic2 for more music](https://discordapp.com/oauth2/authorize?client_id=662647378385305620&scope=bot)
 
 ## Contribution
 Become beta tester and help us make Progen even better!
@@ -62,4 +62,4 @@ GNU GPL v2
 We work Progen. But they are still at the beginning of a major project. If there are any problems, please let us know!
 
  * Current Version: 1.0.0.4
- * Lastet Version: 1.0.0.3
+ * Latest Version: 1.0.0.3
