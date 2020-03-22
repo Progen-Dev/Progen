@@ -3,9 +3,8 @@ package de.progen_bot.util;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import org.w3c.dom.css.RGBColor;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class MessageGenerator {
 
@@ -20,7 +19,8 @@ public class MessageGenerator {
     /**
      * The error.
      *
-     * @param error
+     * @param error error message
+     * @return {@link MessageEmbed error embed}
      */
     public MessageEmbed generateErrorMsg(String error) {
 
@@ -30,6 +30,11 @@ public class MessageGenerator {
                 .build();
     }
 
+    /**
+     * Wrong input error
+     *
+     * @return {@link MessageEmbed error embed}
+     */
     public MessageEmbed generateErrorMsgWrongInput() {
 
         return new EmbedBuilder()
@@ -39,6 +44,11 @@ public class MessageGenerator {
                 .build();
     }
 
+    /**
+     * Success message
+     *
+     * @return {@link MessageEmbed success embed}
+     */
     public MessageEmbed generateSuccessfulMsg() {
 
         return new EmbedBuilder()
@@ -51,8 +61,8 @@ public class MessageGenerator {
     /**
      * The warning
      *
-     * @param warning
-     * @return
+     * @param warning warning message
+     * @return {@link MessageEmbed warning embed}
      */
     public MessageEmbed generateWarningMsg(String warning) {
         return new EmbedBuilder()
@@ -62,6 +72,12 @@ public class MessageGenerator {
                 .build();
     }
 
+    /**
+     * Info message
+     *
+     * @param infomsg info message
+     * @return {@link MessageEmbed info embed}
+     */
     public MessageEmbed generateInfoMsg(String infomsg) {
         return new EmbedBuilder()
                 .setColor(Color.BLUE)
@@ -73,7 +89,8 @@ public class MessageGenerator {
     /**
      * Right
      *
-     * @param right
+     * @param right right message
+     * @return {@link MessageEmbed right embed}
      */
     public MessageEmbed generateRightMsg(String right) {
         return new EmbedBuilder()
