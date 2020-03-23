@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.List;
 
 public class CommandKick extends CommandHandler {
+
     private static final String KICK = "Kick";
     private static final String EXECUTOR = "Executor";
     private static final String VICTIM = "Victim";
@@ -43,7 +44,6 @@ public class CommandKick extends CommandHandler {
         event.getMessage().getMentionedUsers().get(0).openPrivateChannel().queue(
                 privateChannel -> privateChannel.sendMessage(this.getKickEmbed(event, finalReason)).queue()
         );
-
         final Member target = event.getMessage().getMentionedMembers().get(0);
         event.getGuild().kick(target).queue();
 
