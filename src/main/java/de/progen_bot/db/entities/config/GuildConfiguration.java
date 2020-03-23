@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.entities.Guild;
 
 public class GuildConfiguration {
 
+    // Getter and setter
     public String prefix;
     public final String logChannelID;
     public String tempChannelCategoryID;
