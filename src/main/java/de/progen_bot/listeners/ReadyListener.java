@@ -30,15 +30,17 @@ public class ReadyListener extends ListenerAdapter {
     /* (non-Javadoc)
      * @see net.dv8tion.jda.de.progen_bot.core.hooks.ListenerAdapter#onReady(net.dv8tion.jda.de.progen_bot.core.events.ReadyEvent)
      */
+    @Override
     public void onReady(ReadyEvent event) {
-        String out = "\nProgen is running on: " + event.getGuildTotalCount() +" guilds " + "----------------------------------\n";
+        StringBuilder out = new StringBuilder("\nProgen is running on: " + event.getGuildTotalCount() + " guilds " + "----------------------------------\n");
 
         for (Guild g : event.getJDA().getGuilds()) {
-            out += "-" + g.getName() + "(" + g.getId() + ")" + "\n";
+            out.append("-").append(g.getName()).append("(").append(g.getId()).append(")").append("\n");
         }
 
         Activity[] games = new Activity[]{
-                Activity.playing(event.getGuildTotalCount() + "members")};
+                Activity.playing(event.getGuildTotalCount() + " guilds")
+        };
         new Timer().schedule(new TimerTask() {
 
             @Override
@@ -48,7 +50,7 @@ public class ReadyListener extends ListenerAdapter {
 
         }, 0, 10000);
 
-        System.out.println(out);
+        System.out.println(out.toString());
 
         //CommandPoll
         CommandVote.loadPolls(event.getJDA());
