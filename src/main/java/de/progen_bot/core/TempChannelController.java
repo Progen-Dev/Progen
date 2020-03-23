@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 
 public class TempChannelController {
 
-    private Category category;
+    private final Category category;
 
     public TempChannelController(Category category) {
 

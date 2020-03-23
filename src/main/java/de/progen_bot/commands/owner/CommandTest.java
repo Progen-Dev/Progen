@@ -3,11 +3,7 @@ package de.progen_bot.commands.owner;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.entities.config.GuildConfiguration;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-
-import java.awt.*;
-import java.util.Date;
 
 public class CommandTest extends CommandHandler {
     public CommandTest() {

@@ -8,8 +8,8 @@ import java.util.function.Consumer;
 
 public class TopGGIntegration {
 
-    DiscordBotListAPI api;
-    JDA jda;
+    private final DiscordBotListAPI api;
+    private final JDA jda;
 
     public TopGGIntegration(JDA jda, String token) {
         this.jda = jda;

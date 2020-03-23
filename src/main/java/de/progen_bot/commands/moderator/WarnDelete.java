@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class WarnDelete extends CommandHandler {
     public WarnDelete() {
-        super("warndelete", "warndelete <user> <reason>", "warned a user");
+        super("warndelete", "warndelete <user> <reason>", "Delete warn of a user");
     }
 
     @Override
