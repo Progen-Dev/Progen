@@ -43,12 +43,15 @@ public class Warn extends CommandHandler {
         dao.insertWarn(warned, reason);
         int warnCount = dao.loadWarnList(event.getMember()).size();
 
-        event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setTitle("warn")
-                .setDescription(
-                        warned.getAsMention() + "was warned by " + event.getAuthor().getAsMention() + ".")
-                .addField("Description:", "`" + reason + "`", false)
-                .setFooter(warned.getEffectiveName() + " was warned for " + warnCount + " times.", null).build())
-                .queue();
+        event.getChannel().sendMessage(
+                new EmbedBuilder()
+                        .setColor(Color.ORANGE)
+                        .setTitle("warn")
+                        .addField("Victim",
+                                event.getAuthor().getAsMention(), true)
+
+                .build()
+                ).queue();
 
     }
 

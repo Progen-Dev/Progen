@@ -55,9 +55,9 @@ public class CommandKick extends CommandHandler {
                         .setColor(Color.MAGENTA)
                         .setTitle("Kick\n")
                         .addField("Victim",
-                                event.getAuthor().getAsMention(),true)
+                                event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(), true)
                         .addField("Executor",
-                                event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(),true)
+                                event.getAuthor().getAsMention(),true)
                         .setDescription(event.getMessageId())
                         .addField("Reason", reason, false)
                         .setTimestamp(Instant.now())
