@@ -5,6 +5,10 @@ package de.progen_bot.util;
  */
 public class Level {
 
+    private Level() {
+        /* Prevent instantiation */
+    }
+
     /**
      * Calculate the level from totalxp
      *

@@ -3,7 +3,6 @@ package de.progen_bot.commands.owner;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.entities.config.GuildConfiguration;
-import de.progen_bot.permissions.AccessLevel;
 import fr.bmartel.speedtest.SpeedTestReport;
 import fr.bmartel.speedtest.SpeedTestSocket;
 import fr.bmartel.speedtest.inter.ISpeedTestListener;
@@ -66,16 +65,11 @@ public class CommandTest extends CommandHandler {
 
         Dspeed.startDownload("https://testdebit.info/");
 
+
     }
 
     @Override
     public String help() {
         return null;
     }
-
-    @Override
-    public AccessLevel getAccessLevel() {
-        return AccessLevel.OWNER;
-    }
-
 }

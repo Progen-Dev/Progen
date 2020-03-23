@@ -24,7 +24,7 @@ public class Clear extends CommandHandler {
     EmbedBuilder error = new EmbedBuilder().setColor(Color.RED);
 
     public Clear() {
-        super("clear", "clear <anzahl>", "clear some messages that are no older than two weeks");
+        super("clear", "clear <number>", "clear some messages that are no older than two weeks");
     }
 
     private int getInt(String string) {
@@ -69,7 +69,7 @@ public class Clear extends CommandHandler {
             }
 
             Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.GREEN)
-                    .setDescription(messages.size() + messagesTwoWeeksAgo.size() + " gelöschte Nachrichten").build()).complete();
+                    .setDescription(messages.size() + messagesTwoWeeksAgo.size() + " deleted messages").build()).complete();
 
             new Timer().schedule(new TimerTask() {
 
@@ -79,11 +79,11 @@ public class Clear extends CommandHandler {
                 }
             }, 3000);
 
-            System.out.println("[INFO]: Es wurden " + messages.size() + " Nachrichten gelöscht");
+            System.out.println("[INFO]: There were " + messages.size() + " deleted messages");
 
         } else {
             event.getTextChannel()
-                    .sendMessage(error.setDescription("Please use a number between 2 and 500!").build()).queue();
+                    .sendMessage(error.setDescription("Please use a number between 2 and 100!").build()).queue();
         }
     }
 

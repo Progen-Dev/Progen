@@ -7,6 +7,11 @@ import java.util.Properties;
  * The Class Settings.
  */
 public class Settings {
+
+    private Settings() {
+        /* Prevent instantiation */
+    }
+
     public static String PREFIX;
     public static String TOKEN;
 

@@ -1,6 +1,7 @@
 package de.progen_bot.db;
 
 import de.progen_bot.db.dao.Dao;
+import de.progen_bot.db.dao.autorole.AutoroleDaoImpl;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.dao.connectfour.ConnectFourDaoImpl;
 import de.progen_bot.db.dao.playlist.PlaylistDaoImpl;
@@ -23,6 +24,7 @@ public class DaoHandler {
         daoList.add(new TokenManagerDao());
         daoList.add(new ConfigDaoImpl());
         daoList.add(new PlaylistDaoImpl());
+        daoList.add(new AutoroleDaoImpl());
 
         for (Dao dao : daoList) {
             dao.generateTables("");

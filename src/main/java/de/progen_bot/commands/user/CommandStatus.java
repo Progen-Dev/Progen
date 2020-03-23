@@ -50,7 +50,7 @@ public class CommandStatus extends CommandHandler {
                 new EmbedBuilder()
                         .setDescription(":timer: ***STATUS***")
                         .setColor(new Color(187, 195, 255))
-                        .addField("Ping", String.valueOf(event.getJDA().getGatewayPing()), true)
+                        .addField("Ping", String.valueOf(event.getJDA().getGatewayPing() + "ms"), true)
                         .addField("Last Restart", getTime(Statics.lastRestart, "dd.MM.yyyy - HH:mm:ss (z)"), false)
                         .addField("autoReconnects", Statics.reconnectCount + "", false)
                         .build()
@@ -62,11 +62,11 @@ public class CommandStatus extends CommandHandler {
         Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setDescription("**Speed test running...**\n\nTesting downstream with 10MB file...").build()).complete();
 
         Dspeed.addSpeedTestListener(new ISpeedTestListener() {
-            
+
             @Override
             public void onCompletion(SpeedTestReport report) {
                 sb.append("Downstream:  " + (report.getTransferRateBit().floatValue() / 1024 / 1024) + " MBit/s\n");
-                msg.editMessage(new EmbedBuilder().setDescription("**Speed test running...**\n\nTesting upstream with 1MB file...").build()).queue();
+                msg.editMessage(new EmbedBuilder().setDescription("**Speed test running...**\n\nTesting upstream with 10MB file...").build()).queue();
                 Uspeed.startUpload("https://testdebit.info/", 1000000);
             }
 

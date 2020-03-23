@@ -54,7 +54,7 @@ public class CommandManager extends ListenerAdapter {
         }
 
         //DEBUG
-        Logger.info("Command " + commandHandler.getInvokeString() + " was invoked.");
+        Logger.info("Command " + commandHandler.getInvokeString() + " was invoked in " + event.getGuild().getName());
 
         if (commandHandler.getAccessLevel().getLevel() > new PermissionCore(event).getAccessLevel().getLevel()) {
             event.getTextChannel().sendMessage(new MessageGenerator("", "").generateErrorMsg("Your are not allowed to use this command!")).queue();

@@ -4,7 +4,7 @@ package de.progen_bot.util;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class MessageGenerator {
 
@@ -19,16 +19,22 @@ public class MessageGenerator {
     /**
      * The error.
      *
-     * @param error
+     * @param error error message
+     * @return {@link MessageEmbed error embed}
      */
     public MessageEmbed generateErrorMsg(String error) {
 
         return new EmbedBuilder()
                 .setColor(Color.RED)
-                .setDescription(":no_entry: " + error + " :no_entry:")
+                .setDescription(" " + error + " ")
                 .build();
     }
 
+    /**
+     * Wrong input error
+     *
+     * @return {@link MessageEmbed error embed}
+     */
     public MessageEmbed generateErrorMsgWrongInput() {
 
         return new EmbedBuilder()
@@ -38,6 +44,11 @@ public class MessageGenerator {
                 .build();
     }
 
+    /**
+     * Success message
+     *
+     * @return {@link MessageEmbed success embed}
+     */
     public MessageEmbed generateSuccessfulMsg() {
 
         return new EmbedBuilder()
@@ -50,17 +61,23 @@ public class MessageGenerator {
     /**
      * The warning
      *
-     * @param warning
-     * @return
+     * @param warning warning message
+     * @return {@link MessageEmbed warning embed}
      */
     public MessageEmbed generateWarningMsg(String warning) {
         return new EmbedBuilder()
                 .setColor(Color.BLUE)
                 .setTitle("INFO")
-                .setDescription(":warning: " + warning + " :warning:")
+                .setDescription("" + warning + "")
                 .build();
     }
 
+    /**
+     * Info message
+     *
+     * @param infomsg info message
+     * @return {@link MessageEmbed info embed}
+     */
     public MessageEmbed generateInfoMsg(String infomsg) {
         return new EmbedBuilder()
                 .setColor(Color.BLUE)
@@ -72,13 +89,14 @@ public class MessageGenerator {
     /**
      * Right
      *
-     * @param right
+     * @param right right message
+     * @return {@link MessageEmbed right embed}
      */
     public MessageEmbed generateRightMsg(String right) {
         return new EmbedBuilder()
                 .setColor(Color.GREEN)
                 .setTitle("RIGHT")
-                .setDescription("" + right + " :white_check_mark:")
+                .setDescription("" + right + " ")
                 .build();
     }
 }

@@ -5,6 +5,10 @@ import net.dv8tion.jda.api.entities.Message;
 
 public class Util {
 
+    private Util() {
+        /* Prevent instantiation */
+    }
+
     public static String getVotingOptions(String[] input) {
         String options = "";
         for (int i = 2; i < input.length; i++) {
