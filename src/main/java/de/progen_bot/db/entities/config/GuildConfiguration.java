@@ -6,7 +6,7 @@ public class GuildConfiguration {
 
     public String prefix;
     public final String logChannelID;
-    public final String tempChannelCategoryID;
+    public String tempChannelCategoryID;
     public final String setAutorole;
 
     GuildConfiguration(String prefix, String logChannelID, String tempChannelCategoryID, String setAutoRole) {

@@ -16,7 +16,10 @@ public class WarnDelete extends CommandHandler {
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         System.out.println("[INFO] Command pb!WarnDelete wurde ausgeführt!");
 
-        if (event.getMessage().getMentionedMembers().size() == 0) {
+        if (event.getMember() == null)
+            return;
+
+        if (event.getMessage().getMentionedMembers().isEmpty()) {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("No user found")).queue();
             return;
         }
