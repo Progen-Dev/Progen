@@ -1,14 +1,17 @@
 package de.progen_bot.util;
 
-import de.progen_bot.db.entities.config.GuildConfiguration;
-
 import java.util.Date;
 
 public class Statics {
-    public static int XP_GAIN = 2;
-    public static int XP_GAIN_VOTE = 5;
-    public static String Version = "1.0.0.4";
-    public static String LastVersion = "1.0.0.3";
+
+    private Statics() {
+        /* Prevent instantiation */
+    }
+
+    public static final int XP_GAIN = 2;
+    public static final int XP_GAIN_VOTE = 5;
+    public static final String VERSION = "1.0.0.4";
+    public static final String LAST_VERSION = "1.0.0.3";
 
     public static Date lastRestart;
     public static int reconnectCount = 0;

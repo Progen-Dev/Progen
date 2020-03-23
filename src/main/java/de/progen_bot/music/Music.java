@@ -34,10 +34,12 @@ public class Music {
 
         AudioSourceManagers.registerRemoteSources(MANAGER);
         createPlayer();
+        // Guild, member, guildvoicestate and voicestate channel can be null
         jda.getGuildById(guildID).getAudioManager().openAudioConnection(jda.getGuildById(guildID).getVoiceChannelById(owner.getVoiceState().getChannel().getId()));
     }
 
     public void createPlayer() {
+        // Guild, member, guildvoicestate and voicestate channel can be null
         player = MANAGER.createPlayer();
         trackManager = new TrackManager(player, jda.getGuildById(guildID).getMemberById(ownerID).getVoiceState().getChannel());
         player.addListener(trackManager);
@@ -45,6 +47,7 @@ public class Music {
     }
 
     public Member getOwner() {
+        // Guild and member can be null
         return Main.getJda().getGuildById(guildID).getMemberById(ownerID);
     }
 
@@ -54,13 +57,13 @@ public class Music {
 
     public VoiceChannel getChannel() {
         // Bot needs time to connect
+        // Guild can be null
         if (!getBot().getGuildById(getOwner().getGuild().getId()).getAudioManager().isConnected()) return jda.getGuildById(guildID).getMemberById(ownerID).getVoiceState().getChannel();
         return getBot().getGuildById(getOwner().getGuild().getId()).getAudioManager().getConnectedChannel();
     }
 
     public boolean hasPlayer() {
-        if (player != null) return true;
-        return false;
+        return player != null;
     }
 
 
@@ -77,6 +80,7 @@ public class Music {
     }
 
     public void loadTrack(String identifier, Member author) {
+        // Member#getJDA() of author? or author
         Member auhtorInJDA = jda.getGuildById(author.getGuild().getId()).getMemberById(author.getId());
 
         String input = identifier.trim();
@@ -97,6 +101,7 @@ public class Music {
 
             @Override
             public void noMatches() {
+                // nothing
             }
 
             @Override
@@ -117,6 +122,7 @@ public class Music {
     public void detach() {
         trackManager.purgeQueue();
         player.destroy();
+        // Guild can be null here, member too
         jda.getGuildById(guildID).getAudioManager().closeAudioConnection();
         Main.getMusicBotManager().setBotUnsed(Main.getJda().getGuildById(guildID), jda);
         Main.getMusicManager().unregisterMusicByOwner(Main.getJda().getGuildById(guildID).getMemberById(ownerID));
@@ -136,5 +142,3 @@ public class Music {
         return (hours == 0 ? "" : hours + ":") + String.format("%02d", mins) + ":" + String.format("%02d", seconds);
     }
 }
-
-

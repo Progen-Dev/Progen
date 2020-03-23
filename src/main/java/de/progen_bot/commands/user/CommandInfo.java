@@ -24,9 +24,9 @@ public class CommandInfo extends CommandHandler {
 
                         .setDescription(":robot:   __**ProgenBot** JDA Discord Bot__")
 
-                        .addField("Current Version" , Statics.Version , true)
+                        .addField("Current Version" , Statics.VERSION , true)
 
-                        .addField("Latest Version" , Statics.LastVersion , true)
+                        .addField("Latest Version" , Statics.LAST_VERSION , true)
 
                         .addField("Copyright" ,
 

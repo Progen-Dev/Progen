@@ -14,7 +14,7 @@ public class Autochannel extends ListenerAdapter {
         VoiceChannel vc = event.getChannelJoined();
 
         if (vc.getName().contains("⏬")) {
-            VoiceChannel vc1 = (VoiceChannel) event.getGuild().createVoiceChannel(vc.getName().replace("⏬", "⏫"))
+            VoiceChannel vc1 = event.getGuild().createVoiceChannel(vc.getName().replace("⏬", "⏫"))
                     .setBitrate(vc.getBitrate())
                     .setUserlimit(vc.getUserLimit())
                     .complete();
@@ -34,7 +34,7 @@ public class Autochannel extends ListenerAdapter {
         VoiceChannel vc = event.getChannelJoined();
 
         if (vc.getName().contains("⏬")) {
-            VoiceChannel vc1 = (VoiceChannel) event.getGuild().createVoiceChannel(vc.getName().replace("⏬", "⏫"))
+            VoiceChannel vc1 = event.getGuild().createVoiceChannel(vc.getName().replace("⏬", "⏫"))
                     .setBitrate(vc.getBitrate())
                     .setUserlimit(vc.getUserLimit())
                     .complete();
@@ -48,7 +48,7 @@ public class Autochannel extends ListenerAdapter {
 
         vc = event.getChannelLeft();
 
-        if (vc.getName().contains("⏫") && vc.getMembers().size() == 0) {
+        if (vc.getName().contains("⏫") && vc.getMembers().isEmpty()) {
             vc.delete().queue();
         }
     }
@@ -57,7 +57,7 @@ public class Autochannel extends ListenerAdapter {
     public void onGuildVoiceLeave(GuildVoiceLeaveEvent event) {
         VoiceChannel vc = event.getChannelLeft();
 
-        if (vc.getName().contains("⏫") && vc.getMembers().size() == 0) {
+        if (vc.getName().contains("⏫") && vc.getMembers().isEmpty()) {
             vc.delete().queue();
         }
     }
