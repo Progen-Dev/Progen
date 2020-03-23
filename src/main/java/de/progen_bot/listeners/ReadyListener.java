@@ -1,15 +1,12 @@
 package de.progen_bot.listeners;
 
 import de.progen_bot.commands.Settings.CommandVote;
-import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.util.Statics;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,7 +25,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class ReadyListener extends ListenerAdapter {
     /* (non-Javadoc)
-     * @see net.dv8tion.jda.de.progen_bot.core.hooks.ListenerAdapter#onReady(net.dv8tion.jda.de.progen_bot.core.events.ReadyEvent)
+     * @see net.dv8tion.jda.api.hooks.ListenerAdapter#onReady(net.dv8tion.jda.api.events.ReadyEvent)
      */
     @Override
     public void onReady(ReadyEvent event) {

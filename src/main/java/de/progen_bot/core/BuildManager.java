@@ -28,19 +28,20 @@ public class BuildManager {
      * Adds the event de.progen_bot.listeners.
      */
     private void addEventListeners() {
-        builder.addEventListeners(new CommandManager());
-        builder.addEventListeners(new ReadyListener());
-        builder.addEventListeners(new XPListener());
-        builder.addEventListeners(new VotingListener());
-        builder.addEventListeners(new Autochannel());
-        builder.addEventListeners(new PrivateVoice());
-        builder.addEventListeners(new FourConnectListener());
-        builder.addEventListeners(new MusicListener());
-        builder.addEventListeners(new ServerJoinListener());
-        builder.addEventListeners(new ReconnectListener());
-        builder.addEventListeners(new MuteHandler());
-        builder.addEventListeners(new GuildJoinReloadListener());
-        builder.addEventListeners(new ReactionListener());
-        builder.addEventListeners(new ReconnectListener());
+        builder.addEventListeners(
+                new CommandManager(),
+                new ReadyListener(),
+                new XPListener(),
+                new VotingListener(),
+                new Autochannel(),
+                new PrivateVoice(),
+                new FourConnectListener(),
+                new MusicListener(),
+                new ServerJoinListener(),
+                new ReconnectListener(),
+                new MuteHandler(),
+                new GuildJoinReloadListener(),
+                new ReactionListener()
+        );
     }
 }
