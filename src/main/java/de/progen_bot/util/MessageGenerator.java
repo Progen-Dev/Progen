@@ -26,7 +26,7 @@ public class MessageGenerator {
 
         return new EmbedBuilder()
                 .setColor(Color.RED)
-                .setDescription(":no_entry: " + error + " :no_entry:")
+                .setDescription(" " + error + " ")
                 .build();
     }
 
@@ -68,7 +68,7 @@ public class MessageGenerator {
         return new EmbedBuilder()
                 .setColor(Color.BLUE)
                 .setTitle("INFO")
-                .setDescription(":warning: " + warning + " :warning:")
+                .setDescription("" + warning + "")
                 .build();
     }
 
@@ -96,7 +96,7 @@ public class MessageGenerator {
         return new EmbedBuilder()
                 .setColor(Color.GREEN)
                 .setTitle("RIGHT")
-                .setDescription("" + right + " :white_check_mark:")
+                .setDescription("" + right + " ")
                 .build();
     }
 }
