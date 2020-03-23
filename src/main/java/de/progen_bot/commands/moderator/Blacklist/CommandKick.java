@@ -11,12 +11,9 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.List;
 
-
 public class CommandKick extends CommandHandler {
-
     private static final String KICK = "Kick";
     private static final String EXECUTOR = "Executor";
     private static final String VICTIM = "Victim";
