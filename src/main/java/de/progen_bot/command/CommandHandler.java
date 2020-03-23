@@ -57,7 +57,7 @@ public abstract class CommandHandler {
      *
      * @param parsedCommand the parsed de.progen_bot.command
      * @param event         the event
-     * @param configuration
+     * @param configuration {@link GuildConfiguration guild config}
      */
     public abstract void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event,
                                  GuildConfiguration configuration);

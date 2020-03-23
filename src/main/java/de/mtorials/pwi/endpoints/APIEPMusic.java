@@ -24,7 +24,9 @@ public class APIEPMusic extends Endpoint {
     @Override
     public APIResponseObject execute(Map<String, String> params, Member member, GuildConfiguration guildConfiguration) {
 
-        if (!member.getVoiceState().inVoiceChannel()) return new APIResponseObject(200, false);
+        if (member.getVoiceState() == null) return new APIResponseObject(200, false);
+
+        if (!member.getVoiceState().inVoiceChannel() || member.getVoiceState().getChannel() == null) return new APIResponseObject(200, false);
 
         Music music = Main.getMusicManager().getMusicByChannel(member.getVoiceState().getChannel());
         if (music == null) return new APIResponseObject(200, false);

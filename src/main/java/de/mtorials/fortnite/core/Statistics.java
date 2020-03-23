@@ -1,7 +1,7 @@
 package de.mtorials.fortnite.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import de.mtorials.fortnite.exeptions.NotEnoughtDetailsException;
+import de.mtorials.fortnite.exeptions.NotEnoughDetailsException;
 
 public class Statistics {
 
@@ -23,7 +23,7 @@ public class Statistics {
         } catch (NullPointerException e) {
 
             e.printStackTrace();
-            throw new NotEnoughtDetailsException();
+            throw new NotEnoughDetailsException();
         }
 
         if (jsonNode.get("overallData").get("defaultModes").get("kills") != null)
