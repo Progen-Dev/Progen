@@ -62,7 +62,7 @@ public class MemberInfo {
         return member.getRoles();
     }
 
-    public ArrayList<String> getRoleNames() {
+    public List<String> getRoleNames() {
 
         //if (member.getRoles().size() == 0) throw new UserHasNoRoleExceotion();
         ArrayList<String> s = new ArrayList<>();
