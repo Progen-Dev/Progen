@@ -22,6 +22,10 @@ public class API {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        if (httpServer == null)
+            return;
+
         httpServer.createContext("/", new APICommandHandlerBuilder()
                 .setTokenManager(tokenManager)
                 .addCommand(new APIEPMemberinfo())

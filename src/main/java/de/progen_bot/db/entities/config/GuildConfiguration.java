@@ -4,10 +4,10 @@ import net.dv8tion.jda.api.entities.Guild;
 
 public class GuildConfiguration {
 
-    public String prefix;
-    public String logChannelID;
-    public String tempChannelCategoryID;
-    public String setAutorole;
+    public final String prefix;
+    public final String logChannelID;
+    public final String tempChannelCategoryID;
+    public final String setAutorole;
 
     GuildConfiguration(String prefix, String logChannelID, String tempChannelCategoryID, String setAutoRole) {
 
