@@ -25,7 +25,7 @@ public class Help extends CommandHandler {
         if (parsedCommand.getArgs().length == 0) {
 
             HashMap<String, ArrayList<CommandHandler>> commandsByGroup = new HashMap<>();
-            for (CommandHandler commandHandler : Main.getCommandManager().getCommandassociations().values()) {
+            for (CommandHandler commandHandler : Main.getCommandManager().getCommandAssociations().values()) {
 
                 String[] packageSplit = commandHandler.getClass().getPackageName().split("\\.");
                 String packageName = packageSplit[ packageSplit.length - 1 ];
