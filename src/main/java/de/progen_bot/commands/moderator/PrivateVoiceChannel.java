@@ -76,7 +76,10 @@ public class PrivateVoiceChannel extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
-        if (parsedCommand.getArgsAsList().size() == 0) {
+        if (event.getMember() == null)
+            return;
+
+        if (parsedCommand.getArgsAsList().isEmpty()) {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }

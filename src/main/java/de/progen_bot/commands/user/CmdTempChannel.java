@@ -31,8 +31,8 @@ public class CmdTempChannel extends CommandHandler {
         switch (parsedCommand.getArgsAsList().get(0).toLowerCase()) {
 
             case "create":
-
-                createNewTempChannel(parsedCommand.getArgsAsList(), event, configuration);
+                createNewTempChannel((ArrayList<String>) parsedCommand.getArgsAsList(), event, configuration);
+                break;
         }
     }
 

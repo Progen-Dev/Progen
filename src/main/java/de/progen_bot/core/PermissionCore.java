@@ -9,6 +9,10 @@ import java.awt.*;
 
 public class PermissionCore {
 
+    private PermissionCore() {
+        /* Prevent instantiation */
+    }
+
     public static int getLevel(Member member) {
 
         if (member.equals(member.getGuild().getMemberById("402140322525872138")))
