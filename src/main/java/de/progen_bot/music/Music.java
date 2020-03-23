@@ -80,7 +80,7 @@ public class Music {
     }
 
     public void loadTrack(String identifier, Member author) {
-        // Member#getJDA() of author?
+        // Member#getJDA() of author? or author
         Member auhtorInJDA = jda.getGuildById(author.getGuild().getId()).getMemberById(author.getId());
 
         String input = identifier.trim();
