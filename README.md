@@ -32,7 +32,7 @@ For more information read our [WIKI](https://github.com/Progen-Dev/Progen/wiki) 
 
 * [Add Progen to your server](https://discordapp.com/oauth2/authorize?client_id=495293590503817237&scope=bot)
 * [Add ProgenMusic1 for more music](https://discordapp.com/oauth2/authorize?client_id=662647209929605126&scope=bot)
-* [Add ProgenMsuic2 for more music](https://discordapp.com/oauth2/authorize?client_id=662647378385305620&scope=bot)
+* [Add ProgenMusic2 for more music](https://discordapp.com/oauth2/authorize?client_id=662647378385305620&scope=bot)
 
 ## Contribution
 Become beta tester and help us make Progen even better!
