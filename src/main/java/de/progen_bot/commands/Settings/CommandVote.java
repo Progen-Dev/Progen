@@ -3,9 +3,9 @@ package de.progen_bot.commands.Settings;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 
-import de.progen_bot.core.PermissionCore;
+import de.progen_bot.permissions.AccessLevel;
 import de.progen_bot.db.entities.config.GuildConfiguration;
-
+import de.progen_bot.permissions.PermissionCore;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
@@ -236,10 +236,6 @@ public class CommandVote extends CommandHandler implements Serializable {
             messageGenerators.generateInfoMsg("The running poll is a `secret` poll and can only be accessed from the channel where it was created from!");
         }
 
-        if (!poll.getCreator(g).equals(event.getMember()) && PermissionCore.check(2, event)) {
-            messageGenerators.generateErrorMsg("Only the creator of the poll (" + poll.getCreator(g).getAsMention() + ") can close this poll!");
-        }
-
         tempList.get(event.getGuild()).delete().queue();
         polls.remove(g);
         tempList.remove(g);
@@ -251,7 +247,6 @@ public class CommandVote extends CommandHandler implements Serializable {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        if (PermissionCore.check(2, event));
         channel = event.getTextChannel();
 
         if (parsedCommand.getArgs().length < 1) {
@@ -284,6 +279,11 @@ public class CommandVote extends CommandHandler implements Serializable {
     @Override
     public String help() {
         return null;
+    }
+
+    @Override
+    public AccessLevel getAccessLevel() {
+        return AccessLevel.ADMINISTRATOR;
     }
 
     public class Poll implements Serializable {

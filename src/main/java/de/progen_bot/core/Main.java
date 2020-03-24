@@ -118,7 +118,6 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandUserInfo());
         commandManager.setupCommandHandlers(new Warn());
         commandManager.setupCommandHandlers(new CommandMute());
-        commandManager.setupCommandHandlers(new UnMute());
         commandManager.setupCommandHandlers(new PrivateVoiceChannel());
         commandManager.setupCommandHandlers(new Help());
         commandManager.setupCommandHandlers(new ConnectFour());
@@ -142,6 +141,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandNotify());
         commandManager.setupCommandHandlers(new CommandTest());
         commandManager.setupCommandHandlers(new CommandAutorole());
+        commandManager.setupCommandHandlers(new CommandMute());
     }
 
     /**
