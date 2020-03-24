@@ -20,18 +20,36 @@ public class Statics {
     private static Date lastRestart;
     private static int reconnectCount = 0;
 
+    /**
+     * Gets the date of restart
+     *
+     * @return {@link Date} of latest restart
+     */
     public static Date getLastRestart() {
         return lastRestart;
     }
 
+    /**
+     * Sets the date of latest restart
+     *
+     * @param lastRestart {@link Date} of new restart
+     */
     public static void setLastRestart(Date lastRestart) {
         Statics.lastRestart = lastRestart;
     }
 
+    /**
+     * Gets the reconnect count since latest restart
+     *
+     * @return {@link Integer reconnect count}
+     */
     public static int getReconnectCount() {
         return reconnectCount;
     }
 
+    /**
+     * Increases the reconnect count by one
+     */
     public static void increaseReconnectCount() {
         Statics.reconnectCount++;
     }
