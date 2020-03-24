@@ -9,9 +9,7 @@ import de.progen_bot.util.MessageGenerator;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -22,7 +20,7 @@ public class CommandManager extends ListenerAdapter {
     /**
      * The Constant commandAssociations.
      */
-    private final static HashMap<String, CommandHandler> commandAssociations = new HashMap<>();
+    private static final Map<String, CommandHandler> commandAssociations = new HashMap<>();
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -86,7 +84,7 @@ public class CommandManager extends ListenerAdapter {
         return commandAssociations.get(invocationAlias.toLowerCase());
     }
 
-    public HashMap<String, CommandHandler> getCommandassociations() {
+    public Map<String, CommandHandler> getCommandAssociations() {
         return commandAssociations;
     }
 
@@ -151,7 +149,7 @@ public class CommandManager extends ListenerAdapter {
             return args;
         }
 
-        public ArrayList<String> getArgsAsList() {
+        public List<String> getArgsAsList() {
 
             return new ArrayList<>(Arrays.asList(args));
         }

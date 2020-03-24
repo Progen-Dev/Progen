@@ -1,18 +1,21 @@
 package de.mtorials.exceptions;
 
-public class ArgumentExpetionObject {
+public class ArgumentExceptionObject {
 
     private String discordMessage;
 
-    ArgumentExpetionObject(int a) {
+    ArgumentExceptionObject(int a) {
 
         switch (a) {
 
             case 1:
                 this.discordMessage = "TOO_LESS_ARGUMENTS";
-
+                break;
             case 2:
                 this.discordMessage = "TOO_MUCH_ARGUMENTS";
+                break;
+            default:
+                this.discordMessage = null;
         }
     }
 

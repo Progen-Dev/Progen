@@ -6,8 +6,8 @@ import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class Pingpong extends CommandHandler {
-    public Pingpong() {
+public class PingPong extends CommandHandler {
+    public PingPong() {
         super("ping", "pingpong", "pingpong the game");
     }
     @Override

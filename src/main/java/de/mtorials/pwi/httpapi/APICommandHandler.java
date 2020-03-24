@@ -1,14 +1,12 @@
 package de.mtorials.pwi.httpapi;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import de.mtorials.misc.Logger;
 import de.mtorials.pwi.exceptions.APICommandNotFoundException;
 import de.mtorials.pwi.exceptions.APIException;
-import de.mtorials.pwi.exceptions.MusicStillCreatingException;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.entities.Member;

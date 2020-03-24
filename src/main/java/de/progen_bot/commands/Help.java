@@ -26,7 +26,7 @@ public class Help extends CommandHandler {
         if (parsedCommand.getArgs().length == 0) {
 
             HashMap<String, ArrayList<CommandHandler>> commandsByGroup = new HashMap<>();
-            for (CommandHandler commandHandler : Main.getCommandManager().getCommandassociations().values()) {
+            for (CommandHandler commandHandler : Main.getCommandManager().getCommandAssociations().values()) {
 
                 String[] packageSplit = commandHandler.getClass().getPackageName().split("\\.");
                 String packageName = packageSplit[ packageSplit.length - 1 ];
@@ -38,14 +38,14 @@ public class Help extends CommandHandler {
             EmbedBuilder msg = new EmbedBuilder()
                     .setAuthor("Progen")
                     .setTitle("Help")
-                    .setDescription("For more information about commands use" + configuration.prefix + "help <command>\n")
-                    .setFooter("Discord Server: https://discord.gg/n7csqga\nYour Currently Prefix: " + configuration.prefix);
+                    .setDescription("For more information about commands use " + configuration.prefix + "help <command>\n")
+                    .setFooter("Discord Server: https://discord.gg/n7csqga\nYour current Prefix: " + configuration.prefix);
 
             for (String group : commandsByGroup.keySet()) {
                 StringBuilder s = new StringBuilder();
                 for (CommandHandler commandHandler1 : commandsByGroup.get(group)) {
 
-                    s.append("`").append(commandHandler1.getInvokeString()).append("`\n");
+                    s.append('`').append(commandHandler1.getInvokeString()).append('`').append('\n');
                 }
                 msg.addField(group + "\n", s.toString(), true);
             }
@@ -56,21 +56,15 @@ public class Help extends CommandHandler {
             CommandHandler handler = Main.getCommandManager().getCommandHandler(parsedCommand.getArgs()[0]);
 
             if (handler == null) {
-                builder.setColor(Color.red);
-
-                builder.setTitle(":warning: Invalid command");
-
-                builder.setDescription("There is no command named `" + parsedCommand.getArgs()[0] + "`. Use `"
-
+                builder.setColor(Color.red)
+                        .setTitle(":warning: Invalid command")
+                        .setDescription("There is no command named `" + parsedCommand.getArgs()[0] + "`. Use `"
                         + Settings.PREFIX + parsedCommand.getCommand() + "` to get a full command list.");
             } else {
-                builder.setColor(Color.green);
-
-                builder.setTitle("Command Infos");
-
-                builder.setDescription(handler.getDescription());
-
-                builder.addField("Commands:", "`" + handler.getCommandUsage() + "`", true);
+                builder.setColor(Color.green)
+                        .setTitle("Command Infos")
+                        .setDescription(handler.getDescription())
+                        .addField("Commands: ", '`' + handler.getCommandUsage() + '`', true);
             }
             event.getChannel().sendMessage(builder.build()).queue();
         }

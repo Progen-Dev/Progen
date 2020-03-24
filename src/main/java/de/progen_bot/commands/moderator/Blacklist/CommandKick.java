@@ -4,44 +4,88 @@ import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
-import net.dv8tion.jda.api.entities.PrivateChannel;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.apache.commons.net.ntp.TimeStamp;
+
+import java.awt.*;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAccessor;
+import java.util.Calendar;
+import java.util.List;
+import java.util.TimeZone;
 
 
 public class CommandKick extends CommandHandler {
     public CommandKick() {
-        super("kick" , "kick <user> <reason>" , "Kick a user from this server");
+        super("kick" , "kick <@user> <reason>" , "Kick a user from this server");
     }
 
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
         if (PermissionCore.check(2 , event)) return;
-
-        String reason = " ";
-
+        Message message = event.getMessage();
+        String reason = "  ";
         if (parsedCommand.getArgs().length > 1) {
-
             reason = parsedCommand.getArgs()[1];
-
         }
-        event.getTextChannel().sendMessage(
 
-                " " + event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention() + " got kicked by " + event.getAuthor().getAsMention() + " (" + event.getMember().getRoles().get(0).getName() + ").\n\n" +
-                        "Reason: " + reason
+        event.getTextChannel().sendMessage(
+               new EmbedBuilder()
+                       .setColor(Color.MAGENTA)
+                       .setTitle("Kick\n")
+                       .addField("Victim",
+                               event.getAuthor().getAsMention(), true)
+                       .addField("Executor",
+                               event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(),true)
+                       .setDescription(event.getMessageId())
+                       .addField("Reason", reason, false)
+                       .setTimestamp(Instant.now())
+                .build())
+                .queue();
+
+        event.getGuild().getTextChannelsByName("progenlog",true).get(0).sendMessage(
+                new EmbedBuilder()
+                        .setColor(Color.MAGENTA)
+                        .setTitle("Kick\n")
+                        .addField("Victim",
+                                event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(), true)
+                        .addField("Executor",
+                                event.getAuthor().getAsMention(),true)
+                        .setDescription(event.getMessageId())
+                        .addField("Reason", reason, false)
+                        .setTimestamp(Instant.now())
+                .build()
         ).queue();
 
         PrivateChannel pc = event.getMessage().getMentionedUsers().get(0).openPrivateChannel().complete();
-        pc.sendMessage(
-                "Sorry, you got kicked from Server " + event.getGuild().getName() + " by " + event.getAuthor().getAsMention() + " (" + event.getMember().getRoles().get(0).getName() + ").\n\n" +
-                        "Reason: " + reason
-        ).queue();
+       pc.sendMessage(
+               new EmbedBuilder()
+                       .setColor(Color.MAGENTA)
+                       .setTitle("Kick\n")
+                       .addField("Victim",
+                               event.getAuthor().getAsMention(), true)
+                       .addField("Executor",
+                               event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(),true)
+                       .setDescription(event.getMessageId())
+                       .addField("Reason", reason, false)
+                       .setTimestamp(Instant.now())
+                       .build())
+               .queue();
+
 
         event.getGuild().kick(
                 event.getGuild().getMember(
                         event.getMessage().getMentionedUsers().get(0)
                 )
         ).queue();
+
     }
 
     @Override

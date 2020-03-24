@@ -20,6 +20,9 @@ public class UnMute extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
+        if (event.getMember() == null)
+            return;
+
         EmbedBuilder error = new EmbedBuilder().setColor(Color.RED).setTitle("Error");
         Guild guild = event.getGuild();
 

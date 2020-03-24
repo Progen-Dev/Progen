@@ -1,8 +1,8 @@
 package de.mtorials.commands;
 
 import de.mtorials.fortnite.core.Statistics;
-import de.mtorials.fortnite.exeptions.NotEnoughtDetailsException;
-import de.mtorials.fortnite.exeptions.UserNotFoundExeption;
+import de.mtorials.fortnite.exeptions.NotEnoughDetailsException;
+import de.mtorials.fortnite.exeptions.UserNotFoundException;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.Main;
@@ -42,7 +42,7 @@ public class Stats extends CommandHandler {
 
             event.getTextChannel().sendMessage(msg).queue();
 
-        } catch (UserNotFoundExeption e) {
+        } catch (UserNotFoundException e) {
 
             e.printStackTrace();
             event.getTextChannel().sendMessage("Sorry, but we can't find this user.").queue();
@@ -56,7 +56,7 @@ public class Stats extends CommandHandler {
 
             event.getTextChannel().sendMessage("Sorry, but you have to specify the user you want to get the statistics of.").queue();
 
-        } catch (NotEnoughtDetailsException e) {
+        } catch (NotEnoughDetailsException e) {
 
             event.getTextChannel().sendMessage("Sorry, the we have not enough information about the user to create a statistic.").queue();
         }

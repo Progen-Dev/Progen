@@ -5,8 +5,6 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.permissions.AccessLevel;
 import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CommandBan extends CommandHandler {

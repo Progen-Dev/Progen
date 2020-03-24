@@ -16,6 +16,9 @@ public class ChangePrefix extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
+        if (event.getMember() == null)
+            return;
+
         if (!event.getMember().isOwner()) {
 
             event.getTextChannel().sendMessage("You have to be the owner of that guild to change the prefix!").queue();

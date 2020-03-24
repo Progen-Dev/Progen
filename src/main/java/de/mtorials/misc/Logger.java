@@ -2,6 +2,10 @@ package de.mtorials.misc;
 
 public class Logger {
 
+    private Logger() {
+        /* Prevent instantiation */
+    }
+
     public static void log(String msg, int type) {
 
         if (type == 0) {

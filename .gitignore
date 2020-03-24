@@ -15,3 +15,7 @@ POLL/
 *.class
 *.MF
 *.kotlin_module
+
+
+## Visual Studio ''
+.vs/

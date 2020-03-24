@@ -7,7 +7,7 @@ time.sleep(3)
 
 if platform.system() == "Linux":
     os.system("./start.sh")
-    else:
+else:
     os.system("java -jar Progen.jar")
 
-    sys.exit(0)
+sys.exit(0)

@@ -30,12 +30,12 @@ public class ConnectFour extends CommandHandler {
         }
 
         int width = Integer.parseInt(args[0]);
-        int heigh = Integer.parseInt(args[1]);
+        int height = Integer.parseInt(args[1]);
 
         User challenger = event.getAuthor();
         String opponent = args[2];
 
-        if (event.getGuild().getMembersByName(opponent, true).size() == 0) {
+        if (event.getGuild().getMembersByName(opponent, true).isEmpty()) {
             event.getTextChannel()
                     .sendMessage(
                             super.messageGenerators.generateErrorMsgWrongInput())
@@ -49,18 +49,18 @@ public class ConnectFour extends CommandHandler {
         }
 
         if (width > 6 && width < 9) {
-            if (heigh == width - 1) {
-                if (!opponent.toLowerCase().equals(challenger.getName().toLowerCase())) {
+            if (height == width - 1) {
+                if (!opponent.equalsIgnoreCase(challenger.getName())) {
                     GameData gameData = new GameData();
                     gameData.setOpponentId(event.getGuild().getMembersByName(opponent, true).get(0).getUser().getId());
                     gameData.setChallengerId(challenger.getId());
-                    gameData.setHeigh(heigh);
+                    gameData.setHeigh(height);
                     gameData.setWidth(width);
                     gameData.setChannel(event.getChannel().getId());
 
                     jda.getUsersByName(opponent, true).get(0).openPrivateChannel().queue(privateChannel -> {
                         privateChannel.sendMessage(challenger.getName() + " hat dich zu einer Runde Vier-Gewinnt("
-                                + heigh + "x" + width + ") herausgefordert!").queue(msg -> {
+                                + height + "x" + width + ") herausgefordert!").queue(msg -> {
                             msg.addReaction("✅").queue();
                             msg.addReaction("❌").queue();
                             gameData.setMessageId(msg.getId());
@@ -71,18 +71,15 @@ public class ConnectFour extends CommandHandler {
                     event.getTextChannel()
                             .sendMessage(super.messageGenerators.generateErrorMsg("You can't challenge yourself!"))
                             .queue();
-                    return;
                 }
             } else {
                 event.getTextChannel()
                         .sendMessage(super.messageGenerators.generateErrorMsg("The Height must be 1 smaller then the width."))
                         .queue();
-                return;
             }
         } else {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("The width has to be between 7 and 8."))
                     .queue();
-            return;
         }
     }
 

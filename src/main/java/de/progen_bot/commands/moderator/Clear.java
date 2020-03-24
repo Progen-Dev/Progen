@@ -40,13 +40,14 @@ public class Clear extends CommandHandler {
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
         String[] args = parsedCommand.getArgs();
-        int numb = getInt(args[0]);
 
         if (args.length < 1) {
             event.getTextChannel().sendMessage(error
                     .setDescription("Please specify how many messages should be deleted.").build())
                     .queue();
+            return;
         }
+        int numb = getInt(args[0]);
         if (numb > 1 && numb <= 100) {
             event.getMessage().delete().queue();
 

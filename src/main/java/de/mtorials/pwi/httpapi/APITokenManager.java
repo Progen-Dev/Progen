@@ -45,7 +45,7 @@ public class APITokenManager {
         int n = 10;
 
         // chose a Character random from this String
-        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        final String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "0123456789"
                 + "abcdefghijklmnopqrstuvxyz";
 
@@ -57,11 +57,11 @@ public class APITokenManager {
             // generate a random number between
             // 0 to AlphaNumericString variable length
             int index
-                    = (int) (AlphaNumericString.length()
+                    = (int) (alphaNumericString.length()
                     * Math.random());
 
             // add Character one by one in end of sb
-            sb.append(AlphaNumericString
+            sb.append(alphaNumericString
                     .charAt(index));
         }
 
