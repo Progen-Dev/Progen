@@ -26,16 +26,9 @@ public class XPListener extends ListenerAdapter {
      *
      * @param event the event
      */
+    @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getAuthor().isBot()) {
-            return;
-        }
-
-        if (event.getMessage().getContentRaw().startsWith(Settings.PREFIX)) {
-            return;
-        }
-
-        if (spamFilter.contains(event.getAuthor().getId())) {
+        if (event.getAuthor().isBot() || event.getMessage().getContentRaw().startsWith(Settings.PREFIX) || spamFilter.contains(event.getAuthor().getId())) {
             return;
         }
 
