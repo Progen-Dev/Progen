@@ -2,7 +2,7 @@ package de.mtorials.pwi.httpapi;
 
 import com.sun.net.httpserver.HttpServer;
 import de.mtorials.pwi.endpoints.APIEPChangePrefix;
-import de.mtorials.pwi.endpoints.APIEPMemberinfo;
+import de.mtorials.pwi.endpoints.APIEPMemberInfo;
 import de.mtorials.pwi.endpoints.APIEPGetWarns;
 import de.mtorials.pwi.endpoints.APIEPMusic;
 
@@ -22,9 +22,13 @@ public class API {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        if (httpServer == null)
+            return;
+
         httpServer.createContext("/", new APICommandHandlerBuilder()
                 .setTokenManager(tokenManager)
-                .addCommand(new APIEPMemberinfo())
+                .addCommand(new APIEPMemberInfo())
                 .addCommand(new APIEPGetWarns())
                 .addCommand(new APIEPChangePrefix())
                 .addCommand(new APIEPMusic())

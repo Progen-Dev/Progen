@@ -9,14 +9,17 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class WarnDelete extends CommandHandler {
     public WarnDelete() {
-        super("warndelete", "warndelete <user> <reason>", "warned a user");
+        super("warndelete", "warndelete <user> <reason>", "Delete warn of a user");
     }
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         System.out.println("[INFO] Command pb!WarnDelete wurde ausgeführt!");
 
-        if (event.getMessage().getMentionedMembers().size() == 0) {
+        if (event.getMember() == null)
+            return;
+
+        if (event.getMessage().getMentionedMembers().isEmpty()) {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("No user found")).queue();
             return;
         }

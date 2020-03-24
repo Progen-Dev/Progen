@@ -1,8 +1,8 @@
 ---
 name: new  command
 about: Create a report of what the command should do
-title: ''
-labels: ''
+title: '[New Command] '
+labels: enhancement
 assignees: ''
 
 ---

@@ -15,7 +15,7 @@ import java.awt.*;
 public class Warn extends CommandHandler {
 
     public Warn() {
-        super("warn", "warn <user> <reason>", "warned a user");
+        super("warn", "warn <user> <reason>", "Warn a user");
     }
 
     @Override

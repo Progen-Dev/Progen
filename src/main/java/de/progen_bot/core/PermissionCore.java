@@ -9,6 +9,10 @@ import java.awt.*;
 
 public class PermissionCore {
 
+    private PermissionCore() {
+        /* Prevent instantiation */
+    }
+
     public static int getLevel(Member member) {
 
         if (member.equals(member.getGuild().getMemberById("402140322525872138")))
@@ -30,9 +34,12 @@ public class PermissionCore {
     }
 
     public static boolean check(int level, MessageReceivedEvent event) {
+        if (event.getMember() == null)
+            return false;
+
         if (level > getLevel(event.getMember())) {
             event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.red).setDescription(
-                    "I'm sorry, but you do not have permission to use this de.progen_bot.command."
+                    "I'm sorry, but you do not have permission to use this command"
             ).build()).queue();
             return true;
         }

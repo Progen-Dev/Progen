@@ -5,23 +5,21 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import org.apache.commons.net.ntp.TimeStamp;
 
-import java.awt.*;
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.awt.Color;
 import java.time.Instant;
-import java.time.LocalTime;
-import java.time.temporal.TemporalAccessor;
-import java.util.Calendar;
 import java.util.List;
-import java.util.TimeZone;
-
 
 public class CommandKick extends CommandHandler {
+
+    private static final String KICK = "Kick";
+    private static final String EXECUTOR = "Executor";
+    private static final String VICTIM = "Victim";
+    private static final String REASON = "Reason";
+
     public CommandKick() {
         super("kick" , "kick <@user> <reason>" , "Kick a user from this server");
     }
@@ -30,62 +28,36 @@ public class CommandKick extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
         if (PermissionCore.check(2 , event)) return;
-        Message message = event.getMessage();
-        String reason = "  ";
-        if (parsedCommand.getArgs().length > 1) {
-            reason = parsedCommand.getArgs()[1];
-        }
 
-        event.getTextChannel().sendMessage(
-               new EmbedBuilder()
-                       .setColor(Color.MAGENTA)
-                       .setTitle("Kick\n")
-                       .addField("Victim",
-                               event.getAuthor().getAsMention(), true)
-                       .addField("Executor",
-                               event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(),true)
-                       .setDescription(event.getMessageId())
-                       .addField("Reason", reason, false)
-                       .setTimestamp(Instant.now())
-                .build())
-                .queue();
+        final List<String> argsWithoutMention = parsedCommand.getArgsAsList().subList(1, parsedCommand.getArgsAsList().size());
 
-        event.getGuild().getTextChannelsByName("progenlog",true).get(0).sendMessage(
-                new EmbedBuilder()
-                        .setColor(Color.MAGENTA)
-                        .setTitle("Kick\n")
-                        .addField("Victim",
-                                event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(), true)
-                        .addField("Executor",
-                                event.getAuthor().getAsMention(),true)
-                        .setDescription(event.getMessageId())
-                        .addField("Reason", reason, false)
-                        .setTimestamp(Instant.now())
-                .build()
-        ).queue();
+        String reason;
+        if (argsWithoutMention.isEmpty())
+            reason = "No reason";
+        else
+            reason = String.join(" ", argsWithoutMention);
 
-        PrivateChannel pc = event.getMessage().getMentionedUsers().get(0).openPrivateChannel().complete();
-       pc.sendMessage(
-               new EmbedBuilder()
-                       .setColor(Color.MAGENTA)
-                       .setTitle("Kick\n")
-                       .addField("Victim",
-                               event.getAuthor().getAsMention(), true)
-                       .addField("Executor",
-                               event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0)).getAsMention(),true)
-                       .setDescription(event.getMessageId())
-                       .addField("Reason", reason, false)
-                       .setTimestamp(Instant.now())
-                       .build())
-               .queue();
+        event.getTextChannel().sendMessage(this.getKickEmbed(event, reason)).queue();
+        event.getGuild().getTextChannelsByName("progenlog",true).get(0).sendMessage(this.getKickEmbed(event, reason)).queue();
 
+        final String finalReason = reason;
+        event.getMessage().getMentionedUsers().get(0).openPrivateChannel().queue(
+                privateChannel -> privateChannel.sendMessage(this.getKickEmbed(event, finalReason)).queue()
+        );
+        final Member target = event.getMessage().getMentionedMembers().get(0);
+        event.getGuild().kick(target).queue();
 
-        event.getGuild().kick(
-                event.getGuild().getMember(
-                        event.getMessage().getMentionedUsers().get(0)
-                )
-        ).queue();
+    }
 
+    private MessageEmbed getKickEmbed(MessageReceivedEvent event, String reason) {
+        return new EmbedBuilder()
+                .setColor(Color.MAGENTA)
+                .setTitle(KICK)
+                .addField(VICTIM, event.getMessage().getMentionedMembers().get(0).getAsMention(), true)
+                .addField(EXECUTOR, event.getMember().getAsMention(),true)
+                .setDescription(event.getMessageId())
+                .addField(REASON, reason, false)
+                .setTimestamp(Instant.now()).build();
     }
 
     @Override

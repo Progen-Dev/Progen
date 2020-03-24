@@ -1,6 +1,5 @@
 package de.progen_bot.db.dao.tokenmanager;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import de.progen_bot.core.Main;
 import de.progen_bot.db.connection.ConnectionFactory;
 import de.progen_bot.db.dao.Dao;
@@ -12,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TokenManagerDao extends Dao {
-    final private String sqlQuery = "CREATE TABLE if not exists `tokens`(`guildid` VARCHAR(18) NOT NULL, `userid` " +
+    private final String sqlQuery = "CREATE TABLE if not exists `tokens`(`guildid` VARCHAR(18) NOT NULL, `userid` " +
             "VARCHAR(18) NOT NULL , `token` VARCHAR(10) NOT NULL , `time` TIMESTAMP NOT NULL DEFAULT " +
             "CURRENT_TIMESTAMP, PRIMARY KEY (`token`)) ENGINE = InnoDB;";
 

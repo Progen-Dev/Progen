@@ -1,7 +1,7 @@
 package de.mtorials.fortnite.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.mtorials.fortnite.exeptions.UserNotFoundExeption;
+import de.mtorials.fortnite.exeptions.UserNotFoundException;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -28,7 +28,7 @@ public class Fortnite {
 
         } catch (IOException e) {
             e.printStackTrace();
-            throw new UserNotFoundExeption();
+            throw new UserNotFoundException();
         }
     }
 }
