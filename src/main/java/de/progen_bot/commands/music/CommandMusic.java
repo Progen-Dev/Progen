@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class CommandMusic extends CommandHandler {
 
     public CommandMusic() {
-        super("music", "`music play/p <name or link>` adds music to queue, `music stop` stops it, `music skip/s` skips a song, 'music pauseplay/pp' pauses the music/resumes. `music queue/q` shows the queue, `music info/i` shows the current track", "Plays music of all kind with progen in your voice channel");
+        super("music", "music play/p <name oder URL>` adds music to queue.\n`music stop` Stops the Music\n `music skip/s` skips a song\n `music pp` pauses the music\n `music info/i` See information about the current song", "Plays music of all kind with progen in your voice channel");
     }
 
     @Override
