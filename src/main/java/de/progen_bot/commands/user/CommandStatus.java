@@ -51,8 +51,8 @@ public class CommandStatus extends CommandHandler {
                         .setDescription(":timer: ***STATUS***")
                         .setColor(new Color(187, 195, 255))
                         .addField("Ping", String.valueOf(event.getJDA().getGatewayPing() + "ms"), true)
-                        .addField("Last Restart", getTime(Statics.lastRestart, "dd.MM.yyyy - HH:mm:ss (z)"), false)
-                        .addField("autoReconnects", Statics.reconnectCount + "", false)
+                        .addField("Last Restart", getTime(Statics.getLastRestart(), "dd.MM.yyyy - HH:mm:ss (z)"), false)
+                        .addField("autoReconnects", Statics.getReconnectCount() + "", false)
                         .build()
         ).queue();
         SpeedTestSocket Dspeed = new SpeedTestSocket();
@@ -65,7 +65,7 @@ public class CommandStatus extends CommandHandler {
 
             @Override
             public void onCompletion(SpeedTestReport report) {
-                sb.append("Downstream:  " + (report.getTransferRateBit().floatValue() / 1024 / 1024) + " MBit/s\n");
+                sb.append("Downstream:  ").append(report.getTransferRateBit().floatValue() / 1024 / 1024).append(" MBit/s\n");
                 msg.editMessage(new EmbedBuilder().setDescription("**Speed test running...**\n\nTesting upstream with 10MB file...").build()).queue();
                 Uspeed.startUpload("https://testdebit.info/", 1000000);
             }
@@ -84,7 +84,7 @@ public class CommandStatus extends CommandHandler {
         Uspeed.addSpeedTestListener(new ISpeedTestListener() {
             @Override
             public void onCompletion(SpeedTestReport report) {
-                sb.append("Upstream:    " + (report.getTransferRateBit().floatValue() / 1024 / 1024) + " MBit/s");
+                sb.append("Upstream:    ").append(report.getTransferRateBit().floatValue() / 1024 / 1024).append(" MBit/s");
                 msg.editMessage(new EmbedBuilder().setDescription("**Speed test finished.**\n\n```" + sb.toString() + "```").build()).queue();
             }
 
