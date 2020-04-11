@@ -1,21 +1,16 @@
 ##Intellij##
 .resources/
 .out/
-.github/
 .idea/
 .images/
-.target/
+target/
 POLL/
 
 ## Java ##
 *.jar
 *.properties
-*.dependency-reduced-pom.xml
+dependency-reduced-pom.xml
 *.json
 *.class
 *.MF
 *.kotlin_module
-
-
-## Visual Studio ''
-.vs/

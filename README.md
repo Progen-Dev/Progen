@@ -43,6 +43,7 @@ Become beta tester and help us make Progen even better!
 * __ShowMeYourSkil__
 * __M'Torials__
 * __Evoh__
+* __[byNoobiYT](https://github.com/byNoobiYT)__
 
 ## Support
 Feel free to join our Progen discord guild.
@@ -52,6 +53,7 @@ Feel free to join our Progen discord guild.
 @Evoh
 @ShowMeYourSkil
 @M'Torials
+[@byNoobiYT](https://github.com/byNoobiYT)
 
 ## License
 GNU GPL v2

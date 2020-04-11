@@ -35,9 +35,9 @@ public class XP extends CommandHandler {
         String id = "";
         if (parsedCommand.getArgs().length == 0) {
             id = event.getAuthor().getId();
-        } else if (event.getMessage().getMentionedMembers().size() > 0) {
+        } else if (event.getMessage().getMentionedMembers().isEmpty()) {
             id = event.getMessage().getMentionedMembers().get(0).getUser().getId();
-        } else if (event.getGuild().getMembersByEffectiveName(parsedCommand.getArgs()[0], true).size() > 0) {
+        } else if (event.getGuild().getMembersByEffectiveName(parsedCommand.getArgs()[0], true).isEmpty()) {
             id = event.getGuild().getMembersByEffectiveName(parsedCommand.getArgs()[0], true).get(0).getUser().getId();
         } else {
             return;
@@ -51,8 +51,8 @@ public class XP extends CommandHandler {
                 event.getGuild().getMemberById(id).getUser().getAvatarUrl());
 
         if (data != null) {
-            double percent = 100 - Double.valueOf(Level.remainingXp(data.getTotalXp()))
-                    / Double.valueOf(Level.xpToLevelUp(data.getLevel())) * 100;
+            double percent = 100 - (double) Level.remainingXp(data.getTotalXp())
+                    / (double) Level.xpToLevelUp(data.getLevel()) * 100;
 
             eb.setTitle("Level: " + data.getLevel() + " (" + Level.remainingXp(data.getTotalXp()) + "/"
                     + Level.xpToLevelUp(data.getLevel()) + ")" + "XP")
