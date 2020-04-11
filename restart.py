@@ -5,9 +5,9 @@ import sys
 
 time.sleep(3)
 
-if platform.system() == "Linux":
-    os.system("./start.sh")
+if platform.system() == 'Windows':
+    os.system('echo It works on Windows')
 else:
-    os.system("java -jar Progen.jar")
+    os.system('echo It works on UNIX')
 
 sys.exit(0)
