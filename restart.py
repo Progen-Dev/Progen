@@ -6,8 +6,10 @@ import sys
 time.sleep(3)
 
 if platform.system() == 'Windows':
-    os.system('echo It works on Windows')
+    # Command on Windows
+    os.system('java -jar target/Progen-1.2-beta.jar')
 else:
-    os.system('echo It works on UNIX')
+    # Command on UNIX (Linux, MacOS)
+    os.system('java -jar target/Progen-1.2-beta.jar')
 
 sys.exit(0)
