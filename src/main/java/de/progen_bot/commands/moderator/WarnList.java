@@ -32,7 +32,7 @@ public class WarnList extends CommandHandler {
                 EmbedBuilder eb = new EmbedBuilder().setTitle("WarnTable of " + mentioned.getEffectiveName()).setColor(Color.ORANGE);
                 int count = 1;
                 for (String reason : warnTable) {
-                    sb.append(count + ". " + reason + "\n");
+                    sb.append(count).append('.').append(' ').append(reason).append('\n');
                     count++;
                 }
                 event.getTextChannel().sendMessage(eb.setDescription(sb.toString()).build()).queue();
