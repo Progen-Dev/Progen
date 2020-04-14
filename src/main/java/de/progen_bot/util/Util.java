@@ -86,7 +86,7 @@ public class Util {
     }
 
     public static int[] getOptionFromMessage(PollData pData, String emoteName) {
-        int options[] = pData.getOptions();
+        int[] options = pData.getOptions();
         switch (emoteName) {
             case "1⃣":
                 options[0] += 1;

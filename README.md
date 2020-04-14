@@ -32,7 +32,7 @@ For more information read our [WIKI](https://github.com/Progen-Dev/Progen/wiki) 
 
 * [Add Progen to your server](https://discordapp.com/oauth2/authorize?client_id=495293590503817237&scope=bot)
 * [Add ProgenMusic1 for more music](https://discordapp.com/oauth2/authorize?client_id=662647209929605126&scope=bot)
-* [Add ProgenMsuic2 for more music](https://discordapp.com/oauth2/authorize?client_id=662647378385305620&scope=bot)
+* [Add ProgenMusic2 for more music](https://discordapp.com/oauth2/authorize?client_id=662647378385305620&scope=bot)
 
 ## Contribution
 Become beta tester and help us make Progen even better!
@@ -43,6 +43,7 @@ Become beta tester and help us make Progen even better!
 * __ShowMeYourSkil__
 * __M'Torials__
 * __Evoh__
+* __[byNoobiYT](https://github.com/byNoobiYT)__
 
 ## Support
 Feel free to join our Progen discord guild.
@@ -52,14 +53,13 @@ Feel free to join our Progen discord guild.
 @Evoh
 @ShowMeYourSkil
 @M'Torials
+[@byNoobiYT](https://github.com/byNoobiYT)
 
 ## License
 GNU GPL v2
 
-
-
 ## Information
-We work Progen. But they are still at the beginning of a major project. If there are any problems, please let us know!
+We work on Progen. But they are still at the beginning of a major project. If there are any problems, please let us know!
 
  * Current Version: 1.0.0.4
- * Latest Version: 1.0.0.3
+ * Last Version: 1.0.0.3

@@ -24,7 +24,7 @@ import java.util.Map;
 public class CommandPlaylist extends CommandHandler {
 
     public CommandPlaylist() {
-        super("playlist", "`playlist save <playlist name>` saves the current queue as a playlist, `playlist load <playlist name>` loads a previously saves playlist, `playlist list` lists all your playlists, `playlist delete <playlist name>` deletes the playlist.", "Handles Playlists! Playlists are globally available. That means you can use them on every guild with Progen!");
+        super("playlist", "playlist save <playlist name>` saves the current queue as a playlist\n `playlist load <playlist name>` loads a previously saves playlist \n`playlist list` lists all your playlists \n`playlist delete <playlist name> deletes the playlist", "Handles Playlists! Playlists are globally available. That means you can use them on every guild with Progen!");
     }
 
     @Override

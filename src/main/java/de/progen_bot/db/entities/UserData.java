@@ -3,6 +3,7 @@ package de.progen_bot.db.entities;
 import de.progen_bot.core.Main;
 import de.progen_bot.db.dao.xp.XpDaoImpl;
 import de.progen_bot.util.Level;
+import net.dv8tion.jda.api.entities.User;
 
 /**
  * The Class UserData.
@@ -105,9 +106,10 @@ public class UserData {
         if (level > this.level) {
             if (this.lvlupNotify) {
                 try {
-                    Main.getJda().getUserById(this.userId).openPrivateChannel().queue((channel) -> {
-                        channel.sendMessage("Herzlichen Glückwunsch, du bist nun Level " + level + "! :tada: ").queue();
-                    });
+                    final User user = Main.getJda().getUserById(this.userId);
+                    if (user != null)
+                        user.openPrivateChannel().queue(channel ->
+                                channel.sendMessage("Herzlichen Glückwunsch, du bist nun Level " + level + "! :tada: ").queue());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

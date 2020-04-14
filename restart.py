@@ -5,9 +5,11 @@ import sys
 
 time.sleep(3)
 
-if platform.system() == "Linux":
-    os.system("./start.sh")
+if platform.system() == 'Windows':
+    # Command on Windows
+    os.system('java -jar target/Progen-1.2-beta.jar')
 else:
-    os.system("java -jar Progen.jar")
+    # Command on UNIX (Linux, MacOS)
+    os.system('java -jar target/Progen-1.2-beta.jar')
 
 sys.exit(0)
