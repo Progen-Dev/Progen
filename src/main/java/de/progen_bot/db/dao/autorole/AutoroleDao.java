@@ -9,6 +9,6 @@ import java.util.List;
 public interface AutoroleDao {
 
     void insertautorole(Role role, Guild guild);
-    List<String>loadautorole(Role role, Guild guild);
-        void deleteautorole(Role role, Guild guild);
+    List<String> loadautorole(Role role, Guild guild);
+    void deleteautorole(Role role, Guild guild);
 }

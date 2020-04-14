@@ -35,7 +35,7 @@ public class AutoroleDaoImpl extends Dao implements AutoroleDao {
         List<String> roles = new ArrayList<>();
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM `autorole` WHERE `guildid` =? and `roleid` =?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM `autorole` WHERE `guildid` = ? and `roleid` = ?");
             ps.setString(1, role.getRoleName());
             ps.setString(2, guild.getId());
 
@@ -61,5 +61,10 @@ public class AutoroleDaoImpl extends Dao implements AutoroleDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void generateTables(String sqlQuery) {
+        super.generateTables(this.sqlQuery);
     }
 }
