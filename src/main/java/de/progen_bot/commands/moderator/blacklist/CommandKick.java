@@ -1,4 +1,4 @@
-package de.progen_bot.commands.moderator.Blacklist;
+package de.progen_bot.commands.moderator.blacklist;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;

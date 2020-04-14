@@ -1,6 +1,6 @@
 package de.progen_bot.listeners;
 
-import de.progen_bot.commands.Settings.CommandVote;
+import de.progen_bot.commands.settings.CommandVote;
 import de.progen_bot.util.Statics;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;

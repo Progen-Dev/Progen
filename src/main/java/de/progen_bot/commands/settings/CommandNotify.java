@@ -1,4 +1,4 @@
-package de.progen_bot.commands.Settings;
+package de.progen_bot.commands.settings;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;

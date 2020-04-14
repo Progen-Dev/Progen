@@ -1,6 +1,6 @@
 package de.progen_bot.listeners;
 
-import de.progen_bot.commands.Settings.CommandVote;
+import de.progen_bot.commands.settings.CommandVote;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
