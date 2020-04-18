@@ -37,7 +37,7 @@ For more information read our [WIKI](https://github.com/Progen-Dev/Progen/wiki) 
 ## Contribution
 Become beta tester and help us make Progen even better!
 
-=> [Apply here](https://discordapp.com/invite/YEC3Dw?utm_source=Discord%20Widget&utm_medium=Connect)
+=> [Apply here](https://discord.gg/rPeBPkr)
 
 ## Authors
 * __ShowMeYourSkil__
@@ -47,7 +47,7 @@ Become beta tester and help us make Progen even better!
 
 ## Support
 Feel free to join our Progen discord guild.
-* [Join](https://discordapp.com/invite/YEC3Dw?utm_source=Discord%20Widget&utm_medium=Connect)
+* [Join](https://discord.gg/rPeBPkr)
 
 ## Credits
 @Evoh
