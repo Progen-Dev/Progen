@@ -8,6 +8,7 @@ import de.progen_bot.music.*;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.*;
@@ -21,6 +22,9 @@ public class CommandMusic extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+
+        if (event.getMember() == null || event.getMember().getVoiceState() == null)
+            return;
 
         MusicManager musicManager = Main.getMusicManager();
 
@@ -36,6 +40,9 @@ public class CommandMusic extends CommandHandler {
             return;
         }
 
+        if (event.getMember().getVoiceState().getChannel() == null)
+            return;
+
         music = musicManager.getMusicByChannel(event.getMember().getVoiceState().getChannel());
 
         // Check: create new Music
@@ -48,7 +55,7 @@ public class CommandMusic extends CommandHandler {
                     return;
                 }
                 //Check if afk channel
-                if (event.getGuild().getAfkChannel() != null && event.getMember().getVoiceState().getChannel().getId().equals(event.getGuild().getAfkChannel().getId())) {
+                if (event.getGuild().getAfkChannel() != null && event.getMember().getVoiceState().getChannel() != null &&  event.getMember().getVoiceState().getChannel().getId().equals(event.getGuild().getAfkChannel().getId())) {
 
                     event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You can not listen to music in an afk channel!")).queue();
                     return;
@@ -88,8 +95,7 @@ public class CommandMusic extends CommandHandler {
 
             case "playpause":
             case "pp":
-                if (music.getPlayer().isPaused()) music.getPlayer().setPaused(false);
-                else music.getPlayer().setPaused(true);
+                music.getPlayer().setPaused(!music.getPlayer().isPaused());
                 break;
 
             case "queue":
@@ -131,6 +137,11 @@ public class CommandMusic extends CommandHandler {
 
         long seconds = millis / 1000;
 
+        return getTimestampBySeconds(seconds);
+    }
+
+    @NotNull
+    public static String getTimestampBySeconds(long seconds) {
         long hours = Math.floorDiv(seconds, 3600);
         seconds = seconds - (hours * 3600);
         long mins = Math.floorDiv(seconds, 60);
