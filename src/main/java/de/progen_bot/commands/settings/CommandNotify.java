@@ -5,6 +5,7 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -15,13 +16,14 @@ public class CommandNotify extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
-        Guild guild = event.getGuild();
+        final Guild guild = event.getGuild();
+        final Role notify = guild.getRolesByName("Notify", true).get(0);
+        final Member member = event.getMember();
 
-        Role Notify = guild.getRolesByName("Notify", true).get(0);
+        if (member == null)
+            return;
 
-        event.getGuild().addRoleToMember(event.getMember(), Notify).complete();
-
-        if(parsedCommand.getArgs().equals("Notify")) guild.addRoleToMember(event.getMember(), Notify).queue();
+        event.getGuild().addRoleToMember(member, notify).queue();
     }
 
     @Override
