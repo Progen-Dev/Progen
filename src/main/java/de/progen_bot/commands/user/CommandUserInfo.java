@@ -23,39 +23,39 @@ public class CommandUserInfo extends CommandHandler {
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         Member memb;
 
-        if (event.getMessage().getMentionedUsers().size() == 1) {
-            memb = event.getGuild().getMember(event.getMessage().getMentionedUsers().get(0));
+        if (event.getMessage().getMentionedMembers().size() == 1) {
+            memb = event.getMessage().getMentionedMembers().get(0);
         } else {
             memb = event.getMember();
         }
 
-        String NAME = memb.getEffectiveName();
-        String TAG = memb.getUser().getName() + "#" + memb.getUser().getDiscriminator();
-        String GUILD_JOIN_DATE = memb.getTimeJoined().format(DateTimeFormatter.RFC_1123_DATE_TIME);
-        String DISCORD_JOINED_DATE = memb.getUser().getTimeCreated().format(DateTimeFormatter.RFC_1123_DATE_TIME);
-        String ID = memb.getUser().getId();
-        String STATUS = memb.getOnlineStatus().name();
-        String ROLES = "";
-        String GAME;
-        String AVATAR = memb.getUser().getAvatarUrl();
-        String PERM = new PermissionCore(event).getAccessLevel().name() + "";
+        if (memb == null)
+            return;
+
+        final String name = memb.getEffectiveName();
+        final String tag = memb.getUser().getAsTag();
+        final String guildJoinDate = memb.getTimeJoined().format(DateTimeFormatter.RFC_1123_DATE_TIME);
+        final String discordJoinedDate = memb.getUser().getTimeCreated().format(DateTimeFormatter.RFC_1123_DATE_TIME);
+        final String id = memb.getUser().getId();
+        final String status = memb.getOnlineStatus().name();
+        final String avatarUrl = memb.getUser().getEffectiveAvatarUrl();
+        final String perm = new PermissionCore(event).getAccessLevel().name() + "";
+        StringBuilder roles = new StringBuilder();
+        String game;
 
         try {
-            GAME = memb.getActivities().get(0).getName();
+            game = memb.getActivities().get(0).getName();
         } catch (Exception e) {
-            GAME = "-/-";
+            game = "-/-";
         }
 
         for (Role r : memb.getRoles()) {
-            ROLES += r.getAsMention() + ", ";
+            roles.append(r.getAsMention()).append(", ");
         }
-        if (ROLES.length() > 0)
-            ROLES = ROLES.substring(0, ROLES.length() - 2);
+        if (roles.length() > 0)
+            roles = new StringBuilder(roles.substring(0, roles.length() - 2));
         else
-            ROLES = "No role on this server";
-        if (AVATAR == null) {
-            AVATAR = "Kein Avatar";
-        }
+            roles = new StringBuilder("No role on this server");
 
         EmbedBuilder em = new EmbedBuilder().setColor(Color.green);
         if (memb.getUser().isBot()) {
@@ -63,19 +63,16 @@ public class CommandUserInfo extends CommandHandler {
         } else
             em.setDescription("**User Information for " + memb.getUser().getName() + ":**");
 
-        em.addField("Name / Nickname", NAME, false);
-        em.addField("User Tag", TAG, false);
-        em.addField("ID", ID, false);
-        em.addField("Current Status", STATUS, false);
-        em.addField("Current Spiel", GAME, false);
-        em.addField("Roles", ROLES, false);
-        em.addField("Permissonlevel", "``" + PERM + "``", false);
-        em.addField("Server joined", GUILD_JOIN_DATE, false);
-        em.addField("Discord joined", DISCORD_JOINED_DATE, false);
-
-        if (AVATAR != "No Avatar") {
-            em.setThumbnail(AVATAR);
-        }
+        em.addField("Name / Nickname", name, false)
+                .addField("User Tag", tag, false)
+                .addField("id", id, false)
+                .addField("Current Status", status, false)
+                .addField("Current Game", game, false)
+                .addField("Roles", roles.toString(), false)
+                .addField("Permission level", "``" + perm + "``", false)
+                .addField("Server joined", guildJoinDate, false)
+                .addField("Discord joined", discordJoinedDate, false)
+                .setThumbnail(avatarUrl);
 
         event.getTextChannel().sendMessage(em.build()).queue();
 

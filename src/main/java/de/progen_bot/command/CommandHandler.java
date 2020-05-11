@@ -20,22 +20,22 @@ public abstract class CommandHandler {
     /**
      * The invoke string.
      */
-    private String invokeString;
+    private final String invokeString;
 
     /**
      * The de.progen_bot.command usage.
      */
-    private String commandUsage;
+    private final String commandUsage;
 
     /**
      * The description.
      */
-    private String description;
+    private final String description;
 
     /**
      * The DAO handling class
      */
-    private DaoHandler daoHandler = Main.getDAOs();
+    private final DaoHandler daoHandler = Main.getDAOs();
 
     private GuildConfiguration guildConfiguration;
 
