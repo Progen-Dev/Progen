@@ -1,6 +1,7 @@
 package de.progen_bot.listeners;
 
 import de.progen_bot.core.Main;
+import de.progen_bot.music.Music;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -24,6 +25,6 @@ public class MusicListener extends ListenerAdapter {
 
     private void checkOwner(GuildVoiceLeaveEvent event) {
         boolean isOwner = Main.getMusicManager().isMusicOwner(event.getEntity());
-        if (isOwner) Main.getMusicManager().getMusicByOwner(event.getMember()).stop();
+        if (event.getChannelLeft().getMembers().size() <= 1) Main.getMusicManager().getMusicByOwner(event.getMember()).stop();
     }
 }
