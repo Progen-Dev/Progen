@@ -25,6 +25,6 @@ public class MusicListener extends ListenerAdapter {
 
     private void checkOwner(GuildVoiceLeaveEvent event) {
         boolean isOwner = Main.getMusicManager().isMusicOwner(event.getEntity());
-        if (event.getChannelLeft().getMembers().size() <= 1) Main.getMusicManager().getMusicByOwner(event.getMember()).stop();
+        if (isOwner) Main.getMusicManager().getMusicByOwner(event.getMember()).stop();
     }
 }
