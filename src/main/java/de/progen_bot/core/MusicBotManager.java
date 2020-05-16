@@ -18,8 +18,8 @@ public class MusicBotManager {
 
     public MusicBotManager() {
 
-        tokens.add(Settings.MUSICTOKEN1);
-        tokens.add(Settings.MUSICTOKEN2);
+        tokens.add(Settings.MUSIC_TOKEN_1);
+        tokens.add(Settings.MUSIC_TOKEN_2);
 
         //Progen
         for (Guild g : Main.getJda().getGuilds()) {
