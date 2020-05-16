@@ -54,8 +54,7 @@ public class MusicBotManager {
     }
 
     public boolean botAvailable(Guild guild) {
-        if (botIDsNotInUse.get(guild.getId()).isEmpty()) return false;
-        else return true;
+        return !botIDsNotInUse.get(guild.getId()).isEmpty();
     }
 
     public void loadForNewGuild(Guild guild) {
