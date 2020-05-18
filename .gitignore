@@ -17,4 +17,5 @@ dependency-reduced-pom.xml
 
 ## Eclipse / VSC ##
 .project
+.classpath
 .settings/
