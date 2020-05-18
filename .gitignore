@@ -14,3 +14,7 @@ dependency-reduced-pom.xml
 *.class
 *.MF
 *.kotlin_module
+
+## Eclipse / VSC ##
+.project
+.settings/

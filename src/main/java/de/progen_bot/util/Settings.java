@@ -2,7 +2,10 @@ package de.progen_bot.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,25 +30,25 @@ public class Settings {
         /* Prevent instantiation */
     }
 
-    public static final String PREFIX = CONFIG.getAsJsonObject("bot").get("prefix").getAsString();
-    public static final String TOKEN = CONFIG.getAsJsonObject("bot").get("token").getAsString();
+    public static final String PREFIX           =   get("bot", "prefix").getAsString();
+    public static final String TOKEN            =   get("bot", "token").getAsString();
 
-    public static final String HOST = CONFIG.getAsJsonObject("database").get("host").getAsString();
-    public static final String DATABASE = CONFIG.getAsJsonObject("database").get("database").getAsString();
-    public static final String PORT = String.valueOf(CONFIG.getAsJsonObject("database").get("port").getAsInt());
-    public static final String USER = CONFIG.getAsJsonObject("database").get("user").getAsString();
-    public static final String PASSWORD = CONFIG.getAsJsonObject("database").get("password").getAsString();
+    public static final String HOST             =   get("database", "host").getAsString();
+    public static final String DATABASE         =   get("database", "database").getAsString();
+    public static final String PORT             =   String.valueOf(get("database", "port").getAsInt());
+    public static final String USER             =   get("database", "user").getAsString();
+    public static final String PASSWORD         =   get("database", "password").getAsString();
 
-    public static final String API_PORT = String.valueOf(CONFIG.getAsJsonObject("bot").get("apiPort").getAsInt());
+    public static final String API_PORT         =   String.valueOf(get("bot", "apiPort").getAsInt());
 
-    public static final String MUSIC_TOKEN_1 = CONFIG.getAsJsonObject("bot").get("musicToken1").getAsString();
-    public static final String MUSIC_TOKEN_2 = CONFIG.getAsJsonObject("bot").get("musicToken2").getAsString();
+    public static final String MUSIC_TOKEN_1    =   get("bot", "musicToken1").getAsString();
+    public static final String MUSIC_TOKEN_2    =   get("bot", "musicToken2").getAsString();
 
-    public static final String TOP_GG_TOKEN = CONFIG.getAsJsonObject("bot").get("topGGToken").getAsString();
+    public static final String TOP_GG_TOKEN     =   get("bot", "topGGToken").getAsString();
 
     /**
-     * Load settings.
-     *
+     * Load config/settings of Progen.
+     * If exists create new one, else load existing
      */
     public static void loadSettings() {
         try {
@@ -83,5 +86,19 @@ public class Settings {
                 ex.printStackTrace();
             }
         }
+    }
+
+    public static JsonElement get(String jsonObjectName, String property) {
+        loadSettings();
+
+        final JsonElement propertyObject;
+
+        try {
+            propertyObject = CONFIG.getAsJsonObject(jsonObjectName).get(property);
+        } catch(JSONException e) {
+            throw new IllegalArgumentException(jsonObjectName + "." + property + "does not exist in config");
+        }
+
+        return propertyObject;
     }
 }
