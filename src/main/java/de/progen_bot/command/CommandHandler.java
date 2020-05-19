@@ -37,10 +37,10 @@ public abstract class CommandHandler {
      */
     private final DaoHandler daoHandler = Main.getDAOs();
 
-    private GuildConfiguration guildConfiguration;
+    //private GuildConfiguration guildConfiguration;
 
     /**
-     * Instantiates a new de.progen_bot.command handler.
+     * Instantiates a command handler.
      *
      * @param invokeString the invoke string
      * @param commandUsage the de.progen_bot.command usage

@@ -1,22 +1,21 @@
 package de.progen_bot.commands.moderator;
 
-import de.progen_bot.command.CommandHandler;
-import de.progen_bot.command.CommandManager.ParsedCommandString;
-import de.progen_bot.permissions.AccessLevel;
-import de.progen_bot.permissions.PermissionCore;
-import de.progen_bot.db.entities.config.GuildConfiguration;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageHistory;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-
-import java.awt.*;
+import java.awt.Color;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
+
+import de.progen_bot.command.CommandHandler;
+import de.progen_bot.command.CommandManager.ParsedCommandString;
+import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageHistory;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 
 public class Clear extends CommandHandler {

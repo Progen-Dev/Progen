@@ -1,7 +1,7 @@
 package de.mtorials.pwi.exceptions;
 
 public class APICommandNotFoundException extends APIException {
-
+    private static final long serialVersionUID = 1L;
     private final APICommandNotFoundExceptionObject commandNotFoundExceptionObject = new APICommandNotFoundExceptionObject();
 
     @Override

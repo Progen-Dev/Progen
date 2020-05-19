@@ -1,16 +1,15 @@
 package de.progen_bot.commands.moderator;
 
+import java.awt.Color;
+
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
-import de.progen_bot.permissions.AccessLevel;
-import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-
-import java.awt.*;
 
 
 public class Warn extends CommandHandler {
@@ -41,14 +40,14 @@ public class Warn extends CommandHandler {
 
         WarnListDaoImpl dao = new WarnListDaoImpl();
         dao.insertWarn(warned, reason);
-        int warnCount = dao.loadWarnList(event.getMember()).size();
 
-        event.getChannel().sendMessage(
+        event.getChannel()
+                .sendMessage(
                 new EmbedBuilder()
                         .setColor(Color.ORANGE)
                         .setTitle("warn")
                         .addField("Victim",
-                                event.getAuthor().getAsMention(), true)
+                                warned.getAsMention(), true)
 
                 .build()
                 ).queue();

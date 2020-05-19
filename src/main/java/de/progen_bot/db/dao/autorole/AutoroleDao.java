@@ -1,10 +1,10 @@
 package de.progen_bot.db.dao.autorole;
 
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
+import java.util.List;
 
 import javax.management.relation.Role;
-import java.util.List;
+
+import net.dv8tion.jda.api.entities.Guild;
 
 public interface AutoroleDao {
 

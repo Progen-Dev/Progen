@@ -27,23 +27,6 @@ public class CommandStatus extends CommandHandler {
         return new SimpleDateFormat(pattern).format(date);
     }
 
-    private String getTimeDiff(Date date1, Date date2){
-        long diff = date1.getTime() - date2.getTime();
-        long DiffSecond = diff / 100 % 60;
-        long DiffMinutes = diff / (60 * 1000) % 60;
-        long DiffHours = diff / (24 * 60 * 60 * 1000) % 60;
-        long DiffDays = diff / (24 * 60 * 60 * 1000);
-        return DiffDays + "d, " + parseTimeNumbs(DiffHours) + "h, " + parseTimeNumbs(DiffMinutes) + parseTimeNumbs(DiffSecond) + "sec";
-    }
-
-    private String parseTimeNumbs(long time){
-        String timeString = time + "";
-        if (timeString.length() < 2)
-            timeString = "0" + time;
-        return timeString;
-    }
-
-
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         event.getTextChannel().sendMessage(

@@ -1,17 +1,17 @@
 package de.progen_bot.db.dao.autorole;
 
-import de.progen_bot.db.connection.ConnectionFactory;
-import de.progen_bot.db.dao.Dao;
-import net.dv8tion.jda.api.entities.Guild;
-
-import javax.management.relation.Role;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SimpleTimeZone;
+
+import javax.management.relation.Role;
+
+import de.progen_bot.db.connection.ConnectionFactory;
+import de.progen_bot.db.dao.Dao;
+import net.dv8tion.jda.api.entities.Guild;
 
 public class AutoroleDaoImpl extends Dao implements AutoroleDao {
     final private String sqlQuery = "CREATE TABLE IF NOT EXISTS autorole(`id` INT(11) NOT NULL AUTO_INCREMENT, ´guildid´" + "VARCHAR(50) NOT NULL, `roleid`VARCHAR(50) NOT NULL" +

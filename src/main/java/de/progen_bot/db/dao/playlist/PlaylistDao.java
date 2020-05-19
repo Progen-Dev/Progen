@@ -1,11 +1,10 @@
 package de.progen_bot.db.dao.playlist;
 
-import net.dv8tion.jda.api.entities.User;
-
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import net.dv8tion.jda.api.entities.User;
 
 public interface PlaylistDao {
 

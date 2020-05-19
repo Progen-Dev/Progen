@@ -1,19 +1,24 @@
 package de.progen_bot.commands.moderator;
 
-import de.progen_bot.command.CommandHandler;
-import de.progen_bot.command.CommandManager;
-import de.progen_bot.permissions.AccessLevel;
-import de.progen_bot.permissions.PermissionCore;
-import de.progen_bot.db.entities.config.GuildConfiguration;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-
-import javax.imageio.IIOException;
-import java.awt.*;
-import java.io.*;
+import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+
+import de.progen_bot.command.CommandHandler;
+import de.progen_bot.command.CommandManager;
+import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CommandMute extends CommandHandler {
 
@@ -28,14 +33,12 @@ public class CommandMute extends CommandHandler {
 
         if (!SAVE.exists()) return;
 
-        try {
-            BufferedReader br;
-            br = new BufferedReader(new FileReader(SAVE));
+        try (BufferedReader br = new BufferedReader(new FileReader(SAVE))) {
             br.lines().forEach(l -> {
                 String[] split = l.replace("\n", "").split(":::");
                 mutes.put(split[0], split[1]);
             });
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -46,8 +49,6 @@ public class CommandMute extends CommandHandler {
     }
 
     private void save() {
-
-
         if (!SAVE.exists()) {
             try {
                 SAVE.createNewFile();
@@ -95,9 +96,6 @@ public class CommandMute extends CommandHandler {
     }
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration guildConfiguration) {
-
-        Guild guild = event.getGuild();
-        Member author = event.getMember();
         TextChannel tc = event.getTextChannel();
         Message msg = event.getMessage();
 

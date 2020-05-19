@@ -30,21 +30,24 @@ public class Settings {
         /* Prevent instantiation */
     }
 
+    //#region Bot
     public static final String PREFIX           =   get("bot", "prefix").getAsString();
     public static final String TOKEN            =   get("bot", "token").getAsString();
-
-    public static final String HOST             =   get("database", "host").getAsString();
-    public static final String DATABASE         =   get("database", "database").getAsString();
-    public static final String PORT             =   String.valueOf(get("database", "port").getAsInt());
-    public static final String USER             =   get("database", "user").getAsString();
-    public static final String PASSWORD         =   get("database", "password").getAsString();
-
     public static final String API_PORT         =   String.valueOf(get("bot", "apiPort").getAsInt());
 
     public static final String MUSIC_TOKEN_1    =   get("bot", "musicToken1").getAsString();
     public static final String MUSIC_TOKEN_2    =   get("bot", "musicToken2").getAsString();
 
     public static final String TOP_GG_TOKEN     =   get("bot", "topGGToken").getAsString();
+    //#endregion
+
+    //#region Database
+    public static final String HOST             =   get("database", "host").getAsString();
+    public static final String DATABASE         =   get("database", "database").getAsString();
+    public static final String PORT             =   String.valueOf(get("database", "port").getAsInt());
+    public static final String USER             =   get("database", "user").getAsString();
+    public static final String PASSWORD         =   get("database", "password").getAsString();
+    //#endregion
 
     /**
      * Load config/settings of Progen.
