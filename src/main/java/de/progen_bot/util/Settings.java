@@ -2,6 +2,7 @@ package de.progen_bot.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.List;
 
 /**
  * The Class Settings.
@@ -34,9 +36,11 @@ public class Settings {
     public static final String PREFIX           =   get("bot", "prefix").getAsString();
     public static final String TOKEN            =   get("bot", "token").getAsString();
     public static final String API_PORT         =   String.valueOf(get("bot", "apiPort").getAsInt());
+    @SuppressWarnings("unchecked")
+    public static final List<String> BOT_OWNERS =   GSON.fromJson(get("bot", "owners").getAsJsonArray(), List.class);
 
-    public static final String MUSIC_TOKEN_1    =   get("bot", "musicToken1").getAsString();
-    public static final String MUSIC_TOKEN_2    =   get("bot", "musicToken2").getAsString();
+    @SuppressWarnings("unchecked")
+    public static final List<String> MUSIC      =   GSON.fromJson(get("bot", "music").getAsJsonArray(), List.class);
 
     public static final String TOP_GG_TOKEN     =   get("bot", "topGGToken").getAsString();
     //#endregion
@@ -51,12 +55,12 @@ public class Settings {
 
     /**
      * Load config/settings of Progen.
-     * If exists create new one, else load existing
+     * If not exists create new one, else load existing
      */
     public static void loadSettings() {
         try {
             json = new String(Files.readAllBytes(new File("config.json").toPath()));
-        } catch (IOException e) {
+        } catch (final IOException e) {
             System.err.println("Failed to read config file");
 
             final JsonObject object = new JsonObject();
@@ -66,8 +70,16 @@ public class Settings {
             bot.addProperty("token", "");
             bot.addProperty("apiPort", 8083);
             bot.addProperty("topGGToken", "");
-            bot.addProperty("musicToken1", "");
-            bot.addProperty("musicToken2", "");
+
+            final JsonArray musicTokens = new JsonArray();
+            bot.add("music", musicTokens);
+
+            final JsonArray owners = new JsonArray();
+            owners.add("402140322525872138");
+            owners.add("279271145205923847");
+            owners.add("225327305570910208");
+            owners.add("321227144791326730");
+            bot.add("owners", owners);
 
             object.add("bot", bot);
 
@@ -84,21 +96,21 @@ public class Settings {
 
             try {
                 Files.write(new File("config.json").toPath(), json.getBytes(StandardCharsets.UTF_8));
-            } catch (IOException ex) {
+            } catch (final IOException ex) {
                 System.err.println("Failed to write to config file");
                 ex.printStackTrace();
             }
         }
     }
 
-    public static JsonElement get(String jsonObjectName, String property) {
+    public static JsonElement get(final String jsonObjectName, final String property) {
         loadSettings();
 
         final JsonElement propertyObject;
 
         try {
             propertyObject = CONFIG.getAsJsonObject(jsonObjectName).get(property);
-        } catch(JSONException e) {
+        } catch (final JSONException e) {
             throw new IllegalArgumentException(jsonObjectName + "." + property + "does not exist in config");
         }
 

@@ -13,19 +13,19 @@ import java.util.*;
 public class MusicBotManager {
 
     private HashMap<String, List<JDA>> botIDsNotInUse = new HashMap<>();
-    private List<String> tokens = new ArrayList<>();
+    private List<String> tokens = Settings.MUSIC;
     private List<JDA> allMusicBots = new ArrayList<>();
 
     public MusicBotManager() {
-
-        tokens.add(Settings.MUSIC_TOKEN_1);
-        tokens.add(Settings.MUSIC_TOKEN_2);
 
         //Progen
         for (Guild g : Main.getJda().getGuilds()) {
             if (!botIDsNotInUse.containsKey(g.getId())) botIDsNotInUse.put(g.getId(), new ArrayList<>());
             botIDsNotInUse.get(g.getId()).add(Main.getJda());
         }
+
+        if (tokens.isEmpty())
+            return;
 
         // Music bots
         for (String token : tokens) {

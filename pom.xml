@@ -79,6 +79,12 @@
             <type>pom</type>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.jdiscordbots</groupId>
+            <artifactId>nightdream-logging</artifactId>
+            <version>1.1.9</version>
+        </dependency>
+
     </dependencies>
 
     <build>

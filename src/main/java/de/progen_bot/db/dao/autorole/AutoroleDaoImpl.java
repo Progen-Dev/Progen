@@ -14,8 +14,8 @@ import de.progen_bot.db.dao.Dao;
 import net.dv8tion.jda.api.entities.Guild;
 
 public class AutoroleDaoImpl extends Dao implements AutoroleDao {
-    final private String sqlQuery = "CREATE TABLE IF NOT EXISTS autorole(`id` INT(11) NOT NULL AUTO_INCREMENT, ´guildid´" + "VARCHAR(50) NOT NULL, `roleid`VARCHAR(50) NOT NULL" +
-            "PRIMARY KEY(`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8";
+    final private String sqlQuery = "CREATE TABLE IF NOT EXISTS autorole(`id` INT(11) NOT NULL AUTO_INCREMENT, ´guildid´ VARCHAR(50) NOT NULL, `roleid` VARCHAR(50) NOT NULL " +
+            "PRIMARY KEY(`id`) ENGINE = InnoDB DEFAULT CHARSET = utf8";
 
     @Override
     public void insertautorole(Role role, Guild guild) {
