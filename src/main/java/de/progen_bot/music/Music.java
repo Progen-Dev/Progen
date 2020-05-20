@@ -8,6 +8,7 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import de.progen_bot.commands.music.CommandMusic;
 import de.progen_bot.core.Main;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
@@ -135,10 +136,6 @@ public class Music {
 
         long seconds = getPlayer().getPlayingTrack().getPosition() / 1000;
 
-        long hours = Math.floorDiv(seconds, 3600);
-        seconds = seconds - (hours * 3600);
-        long mins = Math.floorDiv(seconds, 60);
-        seconds = seconds - (mins * 60);
-        return (hours == 0 ? "" : hours + ":") + String.format("%02d", mins) + ":" + String.format("%02d", seconds);
+        return CommandMusic.getTimestampBySeconds(seconds);
     }
 }

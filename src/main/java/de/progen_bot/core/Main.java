@@ -81,7 +81,7 @@ public class Main {
             throw new RuntimeException("Error connecting to the database", ex);
         }
 
-        httpapi = new API(Integer.parseInt(Settings.APIPORT));
+        httpapi = new API(Integer.parseInt(Settings.API_PORT));
         httpapi.start();
 
         fortnite = new Fortnite();
@@ -90,7 +90,7 @@ public class Main {
 
         //TODO MySQL.loadPollTimer();
 
-        topGGIntegration = new TopGGIntegration(getJda(), Settings.TOPGGTOKEN);
+        topGGIntegration = new TopGGIntegration(getJda(), Settings.TOP_GG_TOKEN);
         topGGIntegration.postServerCount();
 
         // DAO Handler

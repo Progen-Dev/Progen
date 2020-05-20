@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class MusicManager {
 
-    private HashMap<String, HashMap<String, Music>> musicByGuildIDByOwnerID = new HashMap<>();
+    private final HashMap<String, HashMap<String, Music>> musicByGuildIDByOwnerID = new HashMap<>();
 
     public Music getMusicByOwner(Member owner) {
         if (!musicByGuildIDByOwnerID.containsKey(owner.getGuild().getId())) return null;

@@ -1,7 +1,5 @@
 package de.progen_bot.commands.music;
 
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import de.mtorials.misc.Logger;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.Main;
@@ -9,13 +7,12 @@ import de.progen_bot.db.dao.playlist.PlaylistDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.music.AudioInfo;
 import de.progen_bot.music.Music;
-import de.progen_bot.music.MusicManager;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
-import java.lang.reflect.Member;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +27,11 @@ public class CommandPlaylist extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
+        final Member member = event.getMember();
+
+        if (member == null || member.getVoiceState() == null || member.getVoiceState().getChannel() == null)
+            return;
+
         if (parsedCommand.getArgs().length < 1) {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
@@ -42,8 +44,8 @@ public class CommandPlaylist extends CommandHandler {
             case "save":
             case "s":
 
-                if (!checkForMusic(event)) return;
-                music = Main.getMusicManager().getMusicByChannel(event.getMember().getVoiceState().getChannel());
+                if (checkForMusic(event)) return;
+                music = Main.getMusicManager().getMusicByChannel(member.getVoiceState().getChannel());
 
                 if (parsedCommand.getArgs().length < 2) {
                     event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
@@ -56,14 +58,14 @@ public class CommandPlaylist extends CommandHandler {
                     newUris.add(info.getTrack().getInfo().uri);
                 }
 
-                new PlaylistDaoImpl().savePlaylist(newUris, event.getMember().getUser(), parsedCommand.getArgsAsList().get(1));
+                new PlaylistDaoImpl().savePlaylist(newUris, member.getUser(), parsedCommand.getArgsAsList().get(1));
                 break;
 
             case "load":
             case "l":
 
-                if (!checkForMusic(event)) return;
-                music = Main.getMusicManager().getMusicByChannel(event.getMember().getVoiceState().getChannel());
+                if (checkForMusic(event)) return;
+                music = Main.getMusicManager().getMusicByChannel(member.getVoiceState().getChannel());
 
                 if (parsedCommand.getArgs().length < 2) {
                     event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
@@ -79,7 +81,7 @@ public class CommandPlaylist extends CommandHandler {
                 }
                 music.getManager().purgeQueue();
                 for (String uri : uris) {
-                    music.loadTrack(uri, event.getMember());
+                    music.loadTrack(uri, member);
                 }
                 event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg("Playlist is loaded in queue after this song!")).queue();
                 break;
@@ -121,21 +123,29 @@ public class CommandPlaylist extends CommandHandler {
 
     private boolean checkForMusic(MessageReceivedEvent event) {
 
-        Music music;
+        final Music music;
+        final Member member = event.getMember();
+
+        if (member == null || member.getVoiceState() == null)
+            return true;
+
         // Is not in voice channel
-        if (!event.getMember().getVoiceState().inVoiceChannel()) {
+        if (!member.getVoiceState().inVoiceChannel()) {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You are not in a voice channel!")).queue();
-            return false;
+            return true;
         }
 
-        music = Main.getMusicManager().getMusicByChannel(event.getMember().getVoiceState().getChannel());
+        if (member.getVoiceState().getChannel() == null)
+            return true;
+
+        music = Main.getMusicManager().getMusicByChannel(member.getVoiceState().getChannel());
 
         if (music == null) {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Execute the command `music start` fist")).queue();
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     @Override
