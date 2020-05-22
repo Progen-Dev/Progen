@@ -18,8 +18,8 @@ public class MusicBotManager {
 
     public MusicBotManager() {
 
-        tokens.add(Settings.MUSICTOKEN1);
-        tokens.add(Settings.MUSICTOKEN2);
+        tokens.add(Settings.MUSIC_TOKEN_1);
+        tokens.add(Settings.MUSIC_TOKEN_2);
 
         //Progen
         for (Guild g : Main.getJda().getGuilds()) {
@@ -54,8 +54,7 @@ public class MusicBotManager {
     }
 
     public boolean botAvailable(Guild guild) {
-        if (botIDsNotInUse.get(guild.getId()).isEmpty()) return false;
-        else return true;
+        return !botIDsNotInUse.get(guild.getId()).isEmpty();
     }
 
     public void loadForNewGuild(Guild guild) {

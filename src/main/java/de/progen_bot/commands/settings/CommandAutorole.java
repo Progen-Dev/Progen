@@ -18,14 +18,17 @@ public class CommandAutorole extends CommandHandler{
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
+        if (!event.isFromGuild())
+            return;
+
         if (parsedCommand.getArgs().length < 1){
             event.getTextChannel().sendMessage(messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        Arrays.stream(parsedCommand.getArgs()).forEach(s -> stringBuilder.append(s + "  "));
-        List<Role> autoRole = event.getGuild().getRolesByName(stringBuilder.toString().substring(0, stringBuilder.length() -1), true);
+        Arrays.stream(parsedCommand.getArgs()).forEach(s -> stringBuilder.append(s).append("  "));
+        List<Role> autoRole = event.getGuild().getRolesByName(stringBuilder.toString().substring(0, stringBuilder.length() - 1), true);
 
         if (event.getMessage().getMentionedRoles().size() > 0){
             configuration.setAutorole(event.getMessage().getMentionedRoles().get(0).getName(), event.getGuild());
