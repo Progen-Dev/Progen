@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class VotingListener extends ListenerAdapter {
@@ -28,11 +29,11 @@ public class VotingListener extends ListenerAdapter {
         }
 
         event.getReaction().removeReaction(event.getUser()).queue();
-        List<String> usersVoted = null;
+        List<String> usersVoted;
         if (pData.getUsers() != null) {
-            usersVoted = new ArrayList<String>(Arrays.asList(pData.getUsers().split(",")));
+            usersVoted = new ArrayList<>(Arrays.asList(pData.getUsers().split(",")));
         } else {
-            usersVoted = new ArrayList<String>(Arrays.asList());
+            usersVoted = new ArrayList<>(Collections.emptyList());
         }
 
         if (usersVoted.contains(event.getUser().getId())) {
@@ -44,7 +45,7 @@ public class VotingListener extends ListenerAdapter {
 
         StringBuilder users = new StringBuilder();
         for (String tmp : usersVoted) {
-            users.append(tmp + ",");
+            users.append(tmp).append(",");
         }
 
         pData.setUsers(users.toString());

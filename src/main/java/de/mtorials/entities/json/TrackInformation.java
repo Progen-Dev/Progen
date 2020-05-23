@@ -4,7 +4,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 
 public class TrackInformation {
 
-    AudioTrack track;
+    final AudioTrack track;
 
     TrackInformation(AudioTrack track) {
         this.track = track;

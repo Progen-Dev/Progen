@@ -20,7 +20,7 @@ public class APIEPChangePrefix extends Endpoint {
         if (!params.containsKey("newPrefix")) return new APIResponseObject(400, null);
         if (!member.isOwner()) return new APIResponseObject(401, null);
 
-        configuration.prefix = params.get("newPrefix");
+        configuration.setPrefix(params.get("newPrefix"));
         new ConfigDaoImpl().writeConfig(configuration, member.getGuild());
 
         return new APIResponseObject(200, null);

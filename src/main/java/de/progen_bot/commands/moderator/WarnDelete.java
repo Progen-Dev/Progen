@@ -31,11 +31,6 @@ public class WarnDelete extends CommandHandler {
     }
 
     @Override
-    public String help() {
-        return null;
-    }
-
-    @Override
     public AccessLevel getAccessLevel() {
         return AccessLevel.MODERATOR;
     }

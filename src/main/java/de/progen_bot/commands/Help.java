@@ -1,9 +1,5 @@
 package de.progen_bot.commands;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.core.Main;
@@ -12,6 +8,10 @@ import de.progen_bot.permissions.AccessLevel;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Help extends CommandHandler {
     public Help() {
@@ -37,8 +37,8 @@ public class Help extends CommandHandler {
             EmbedBuilder msg = new EmbedBuilder()
                     .setAuthor("Progen")
                     .setTitle("Help")
-                    .setDescription("For more information about commands use " + configuration.prefix + "help <command>\n")
-                    .setFooter("Discord Server: https://discord.gg/Xbtn9zG\nYour current Prefix: " + configuration.prefix);
+                    .setDescription("For more information about commands use " + configuration.getPrefix() + "help <command>\n")
+                    .setFooter("Discord Server: https://discord.gg/Xbtn9zG\nYour current Prefix: " + configuration.getPrefix());
 
             for (String group : commandsByGroup.keySet()) {
                 StringBuilder s = new StringBuilder();
@@ -67,11 +67,6 @@ public class Help extends CommandHandler {
             }
             event.getChannel().sendMessage(builder.build()).queue();
         }
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

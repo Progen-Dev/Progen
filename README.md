@@ -20,7 +20,7 @@ For more information read our [WIKI](https://github.com/Progen-Dev/Progen/wiki) 
     * webinterface
     * prefix
     * other
-* The [PWI](pwi.progen-bot.de)
+* The [PWI](https://pwi.progen-bot.de)
 * The [Website](https://progen-bot.de)
 * REST API
 
@@ -59,7 +59,7 @@ Feel free to join our Progen discord guild.
 GNU GPL v2
 
 ## Information
-We work on Progen. But they are still at the beginning of a major project. If there are any problems, please let us know!
+We work on Progen, but they are still at the beginning of a major project. If there are any problems, please file an issue and let us know!
 
  * Current Version: 1.0.0.6
  * Last Version: 1.0.0.5

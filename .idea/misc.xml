@@ -1,5 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="de.mtorials.fortnite.core.ModelStatistics data" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.pwi.exceptions.APIWrongParametersException error" />
+      <entry_point TYPE="field" FQNAME="de.progen_bot.util.Statics GUILD_JOIN_ROLE" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.fortnite.core.User platforms" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.fortnite.core.User seasons" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.pwi.exceptions.APICommandNotFoundException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.pwi.exceptions.APIException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.pwi.exceptions.APIUserNotRegistered serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.pwi.exceptions.APIWrongParametersException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.exceptions.ArgumentException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.progen_bot.commands.settings.CommandVote serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.progen_bot.commands.settings.CommandVote.Poll serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.exceptions.GuildHasNoConfigException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.pwi.exceptions.MusicStillCreatingException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.fortnite.exeptions.NotEnoughDetailsException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.exceptions.ProgenException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.progen_bot.music.TooManyMusicForChannelException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.exceptions.UserHasNoRoleException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.fortnite.exeptions.UserNotFoundException serialVersionUID" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.exceptions.ArgumentException TOO_LESS_ARGS" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.exceptions.ArgumentException TOO_MUCH_ARGS" />
+      <entry_point TYPE="field" FQNAME="de.progen_bot.permissions.AccessLevel TRUSTED" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.fortnite.core.User uid" />
+      <entry_point TYPE="field" FQNAME="de.mtorials.fortnite.core.User username" />
+      <entry_point TYPE="field" FQNAME="de.progen_bot.util.Statics XP_GAIN_VOTE" />
+    </entry_points>
+    <pattern value="de.progen_bot.permissions.AccessLevel" />
+    <pattern value="de.progen_bot.util.Util" method="addReactionsToMessage" />
+    <pattern value="de.mtorials.pwi.exceptions.APICommandNotFoundException" />
+    <pattern value="de.mtorials.pwi.exceptions.APICommandNotFoundExceptionObject" />
+    <pattern value="de.mtorials.pwi.exceptions.APIException" />
+    <pattern value="de.mtorials.pwi.httpapi.APIResponseObject" />
+    <pattern value="de.mtorials.pwi.exceptions.APIUserNotRegistered" />
+    <pattern value="de.mtorials.pwi.exceptions.APIWrongParametersException" />
+    <pattern value="de.mtorials.exceptions.ArgumentException" />
+    <pattern value="de.mtorials.exceptions.ArgumentException" method="ArgumentException" />
+    <pattern value="de.mtorials.exceptions.ArgumentExceptionObject" />
+    <pattern value="de.mtorials.exceptions.ArgumentExceptionObject" method="ArgumentExceptionObject" />
+    <pattern value="de.progen_bot.music.AudioInfo" />
+    <pattern value="de.progen_bot.db.dao.autorole.AutoroleDao" />
+    <pattern value="de.progen_bot.core.PermissionCore" method="check" />
+    <pattern value="de.progen_bot.command.CommandHandler" />
+    <pattern value="de.progen_bot.commands.owner.CommandLog" />
+    <pattern value="de.progen_bot.commands.owner.CommandLog" method="CommandLog" />
+    <pattern value="de.progen_bot.commands.settings.CommandVote" />
+    <pattern value="de.progen_bot.db.dao.config.ConfigDao" />
+    <pattern value="de.progen_bot.db.dao.connectfour.ConnectFourDao" />
+    <pattern value="de.progen_bot.db.entities.ConnectFourModel" />
+    <pattern value="de.progen_bot.db.entities.ConnectFourModel" method="ConnectFourModel" />
+    <pattern value="de.progen_bot.db.dao.autorole.AutoroleDao" method="deleteAutorole" />
+    <pattern value="de.progen_bot.db.dao.playlist.PlaylistDao" method="deletePlaylist" />
+    <pattern value="de.progen_bot.db.dao.warnlist.WarnListDao" method="deleteWarns" />
+    <pattern value="de.mtorials.pwi.httpapi.Endpoint" />
+    <pattern value="de.progen_bot.commands.owner.CommandLog" method="execute" />
+    <pattern value="de.progen_bot.commands.fun.PingPong" method="execute" />
+    <pattern value="de.mtorials.commands.Stats" method="execute" />
+    <pattern value="de.progen_bot.commands.owner.CommandLog" method="getAccessLevel" />
+    <pattern value="de.progen_bot.commands.fun.PingPong" method="getAccessLevel" />
+    <pattern value="de.mtorials.commands.Stats" method="getAccessLevel" />
+    <pattern value="de.progen_bot.music.AudioInfo" method="getAuthor" />
+    <pattern value="de.mtorials.entities.json.TrackInformation" method="getAuthor" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfiguration" method="getAutoRole" />
+    <pattern value="de.progen_bot.db.dao.connectfour.ConnectFourDao" method="getConnectFourData" />
+    <pattern value="de.mtorials.entities.json.MusicInfo" method="getCurrentTrackInformation" />
+    <pattern value="de.progen_bot.command.CommandHandler" method="getDAOs" />
+    <pattern value="de.mtorials.pwi.httpapi.Endpoint" method="getDAOs" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" method="getDiscordJoinDate" />
+    <pattern value="de.mtorials.exceptions.ArgumentException" method="getDiscordMessage" />
+    <pattern value="de.progen_bot.db.dao.connectfour.ConnectFourDao" method="getGameData" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" method="getGuildJoinDate" />
+    <pattern value="de.progen_bot.music.TrackManager" method="getInfo" />
+    <pattern value="de.mtorials.entities.json.TrackInformation" method="getLength" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfiguration" method="getLogChannelID" />
+    <pattern value="de.progen_bot.db.entities.ConnectFourModel" method="getMarker" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" method="getMember" />
+    <pattern value="de.mtorials.entities.json.MusicInfo" method="getMusicBotName" />
+    <pattern value="de.progen_bot.music.MusicManager" method="getMusicsByGuild" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" method="getName" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" method="getNameAndTag" />
+    <pattern value="de.mtorials.pwi.httpapi.APIResponseObject" method="getObject" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" method="getOnlineStatus" />
+    <pattern value="de.mtorials.fortnite.core.User" method="getPlatforms" />
+    <pattern value="de.progen_bot.db.dao.playlist.PlaylistDao" method="getPlaylistsByUser" />
+    <pattern value="de.progen_bot.db.dao.poll.PollDao" method="getPollData" />
+    <pattern value="de.mtorials.entities.json.TrackInformation" method="getPosition" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfiguration" method="getPrefix" />
+    <pattern value="de.mtorials.entities.json.MusicInfo" method="getQueue" />
+    <pattern value="de.mtorials.pwi.exceptions.APICommandNotFoundExceptionObject" method="getrCode" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" method="getRoleNames" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" method="getRoles" />
+    <pattern value="de.mtorials.fortnite.core.User" method="getSeasons" />
+    <pattern value="de.mtorials.fortnite.core.ModelStatistics" method="getSoloPlacetop1" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" method="getTag" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfiguration" method="getTempChannelCategoryID" />
+    <pattern value="de.mtorials.entities.json.MusicInfo" method="getTimestamp" />
+    <pattern value="de.mtorials.entities.json.TrackInformation" method="getTitle" />
+    <pattern value="de.progen_bot.db.dao.xp.XpDao" method="getTop10Ranks" />
+    <pattern value="de.mtorials.fortnite.core.User" method="getUid" />
+    <pattern value="de.mtorials.entities.json.TrackInformation" method="getURI" />
+    <pattern value="de.mtorials.fortnite.core.Statistics" method="getUser" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" method="getUserID" />
+    <pattern value="de.progen_bot.util.Util" method="getVotingOptions" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfiguration" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfigurationBuilder" />
+    <pattern value="de.mtorials.exceptions.GuildHasNoConfigException" />
+    <pattern value="de.progen_bot.command.CommandHandler" method="help" />
+    <pattern value="de.progen_bot.listeners.JoinLogListener" />
+    <pattern value="de.mtorials.fortnite.core.ModelStatistics" />
+    <pattern value="de.mtorials.pwi.exceptions.MusicStillCreatingException" />
+    <pattern value="de.mtorials.fortnite.core.User" />
+    <pattern value="de.mtorials.exceptions.UserHasNoRoleException" />
+    <pattern value="de.progen_bot.db.dao.autorole.AutoroleDao" method="insertAutorole" />
+    <pattern value="de.progen_bot.db.dao.connectfour.ConnectFourDao" method="insertConnectFourData" />
+    <pattern value="de.progen_bot.db.dao.connectfour.ConnectFourDao" method="insertGameData" />
+    <pattern value="de.progen_bot.db.dao.warnlist.WarnListDao" method="insertWarn" />
+    <pattern value="de.mtorials.entities.json.MusicInfo" method="isIdle" />
+    <pattern value="de.progen_bot.db.dao.autorole.AutoroleDao" method="loadAutorole" />
+    <pattern value="de.progen_bot.db.dao.config.ConfigDao" method="loadConfig" />
+    <pattern value="de.progen_bot.db.dao.xp.XpDao" method="loadFromId" />
+    <pattern value="de.progen_bot.db.dao.poll.PollDao" method="loadPollTimer" />
+    <pattern value="de.progen_bot.db.dao.warnlist.WarnListDao" method="loadWarnList" />
+    <pattern value="de.progen_bot.core.Main" />
+    <pattern value="de.progen_bot.core.Main" method="main" />
+    <pattern value="de.mtorials.entities.json.MemberInfo" />
+    <pattern value="de.mtorials.entities.json.MusicInfo" />
+    <pattern value="de.progen_bot.music.MusicManager" />
+    <pattern value="de.mtorials.fortnite.exeptions.NotEnoughDetailsException" />
+    <pattern value="de.progen_bot.core.PermissionCore" />
+    <pattern value="de.progen_bot.commands.fun.PingPong" />
+    <pattern value="de.progen_bot.commands.fun.PingPong" method="PingPong" />
+    <pattern value="de.progen_bot.db.dao.playlist.PlaylistDao" />
+    <pattern value="de.progen_bot.commands.settings.CommandVote.Poll" />
+    <pattern value="de.progen_bot.db.dao.poll.PollDao" />
+    <pattern value="de.mtorials.exceptions.ProgenException" />
+    <pattern value="de.progen_bot.db.dao.playlist.PlaylistDao" method="savePlaylist" />
+    <pattern value="de.progen_bot.db.dao.poll.PollDao" method="savePollData" />
+    <pattern value="de.progen_bot.db.dao.xp.XpDao" method="saveUserData" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfiguration" method="setAutoRole" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfigurationBuilder" method="setAutorole" />
+    <pattern value="de.progen_bot.db.entities.ConnectFourModel" method="setBoard" />
+    <pattern value="de.progen_bot.db.entities.ConnectFourModel" method="setCounter" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfiguration" method="setLogChannelID" />
+    <pattern value="de.progen_bot.db.entities.ConnectFourModel" method="setMarker" />
+    <pattern value="de.progen_bot.db.entities.ConnectFourModel" method="setPlayer1" />
+    <pattern value="de.progen_bot.db.entities.ConnectFourModel" method="setPlayer2" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfiguration" method="setPrefix" />
+    <pattern value="de.progen_bot.db.entities.config.GuildConfiguration" method="setTempChannelCategoryID" />
+    <pattern value="de.progen_bot.music.TrackManager" method="shuffleQueue" />
+    <pattern value="de.progen_bot.util.Statics" />
+    <pattern value="de.mtorials.fortnite.core.Statistics" />
+    <pattern value="de.mtorials.fortnite.core.Statistics" method="Statistics" />
+    <pattern value="de.mtorials.commands.Stats" />
+    <pattern value="de.mtorials.commands.Stats" method="Stats" />
+    <pattern value="de.progen_bot.music.TooManyMusicForChannelException" />
+    <pattern value="de.mtorials.entities.json.TrackInformation" />
+    <pattern value="de.mtorials.entities.json.TrackInformation" method="TrackInformation" />
+    <pattern value="de.progen_bot.music.TrackManager" />
+    <pattern value="de.mtorials.fortnite.exeptions.UserNotFoundException" />
+    <pattern value="de.progen_bot.util.Util" />
+    <pattern value="de.progen_bot.db.dao.warnlist.WarnListDao" />
+    <pattern value="de.progen_bot.db.dao.config.ConfigDao" method="writeConfig" />
+    <pattern value="de.progen_bot.db.dao.xp.XpDao" />
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />

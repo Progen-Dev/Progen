@@ -19,7 +19,7 @@ import java.util.TimerTask;
  * appropriate method is invoked.
  */
 public class XPListener extends ListenerAdapter {
-    private List<String> spamFilter = new ArrayList<>();
+    private final List<String> spamFilter = new ArrayList<>();
 
     /**
      * On guild message received.

@@ -12,9 +12,8 @@ import java.util.*;
 
 public class MusicBotManager {
 
-    private HashMap<String, List<JDA>> botIDsNotInUse = new HashMap<>();
-    private List<String> tokens = Settings.MUSIC;
-    private List<JDA> allMusicBots = new ArrayList<>();
+    private final HashMap<String, List<JDA>> botIDsNotInUse = new HashMap<>();
+    private final List<JDA> allMusicBots = new ArrayList<>();
 
     public MusicBotManager() {
 
@@ -24,6 +23,7 @@ public class MusicBotManager {
             botIDsNotInUse.get(g.getId()).add(Main.getJda());
         }
 
+        List<String> tokens = Settings.MUSIC;
         if (tokens.isEmpty())
             return;
 
@@ -54,8 +54,7 @@ public class MusicBotManager {
     }
 
     public boolean botAvailable(Guild guild) {
-        if (botIDsNotInUse.get(guild.getId()).isEmpty()) return false;
-        else return true;
+        return !botIDsNotInUse.get(guild.getId()).isEmpty();
     }
 
     public void loadForNewGuild(Guild guild) {
@@ -67,14 +66,14 @@ public class MusicBotManager {
         // Add Progen
         botIDsNotInUse.get(guild.getId()).add(Main.getJda());
 
-        // Add music bpots
+        // Add music bots
         for (JDA bot : allMusicBots) {
 
             if (bot.getGuilds().contains(guild)) botIDsNotInUse.get(guild.getId()).add(bot);
         }
     }
 
-    public void setBotUnsed(Guild guild, JDA bot) {
+    public void setBotUnused(Guild guild, JDA bot) {
         botIDsNotInUse.get(guild.getId()).add(bot);
     }
 }

@@ -2,7 +2,7 @@ package de.mtorials.exceptions;
 
 public class ArgumentExceptionObject {
 
-    private String discordMessage;
+    private final String discordMessage;
 
     ArgumentExceptionObject(int a) {
 

@@ -54,19 +54,17 @@ public class ConnectFour extends CommandHandler {
                     GameData gameData = new GameData();
                     gameData.setOpponentId(event.getGuild().getMembersByName(opponent, true).get(0).getUser().getId());
                     gameData.setChallengerId(challenger.getId());
-                    gameData.setHeigh(height);
+                    gameData.setHeight(height);
                     gameData.setWidth(width);
                     gameData.setChannel(event.getChannel().getId());
 
-                    jda.getUsersByName(opponent, true).get(0).openPrivateChannel().queue(privateChannel -> {
-                        privateChannel.sendMessage(challenger.getName() + " hat dich zu einer Runde Vier-Gewinnt("
-                                + height + "x" + width + ") herausgefordert!").queue(msg -> {
-                            msg.addReaction("✅").queue();
-                            msg.addReaction("❌").queue();
-                            gameData.setMessageId(msg.getId());
-                            new ConnectFourDaoImpl().insertGameData(gameData);
-                        });
-                    });
+                    jda.getUsersByName(opponent, true).get(0).openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(challenger.getName() + " hat dich zu einer Runde Vier-Gewinnt("
+                            + height + "x" + width + ") herausgefordert!").queue(msg -> {
+                        msg.addReaction("✅").queue();
+                        msg.addReaction("❌").queue();
+                        gameData.setMessageId(msg.getId());
+                        new ConnectFourDaoImpl().insertGameData(gameData);
+                    }));
                 } else {
                     event.getTextChannel()
                             .sendMessage(super.messageGenerators.generateErrorMsg("You can't challenge yourself!"))
@@ -81,11 +79,6 @@ public class ConnectFour extends CommandHandler {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("The width has to be between 7 and 8."))
                     .queue();
         }
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

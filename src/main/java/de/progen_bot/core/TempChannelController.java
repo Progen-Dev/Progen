@@ -13,20 +13,18 @@ public class TempChannelController {
         this.category = category;
     }
 
-    public TextChannel createTextChannel(String name, int userlimit) {
+    public void createTextChannel(String name, int userlimit) {
 
         TextChannel channel = category.createTextChannel(name).complete();
         channel.getManager().setParent(category).queue();
         channel.getManager().setUserLimit(userlimit).queue();
-        return channel;
-    }
+	}
 
-    public TextChannel createTextChannel(String name) {
+    public void createTextChannel(String name) {
 
         TextChannel channel = category.createTextChannel(name).complete();
         channel.getManager().setParent(category).queue();
-        return channel;
-    }
+	}
 
 
     public int getTempChannelCount() {

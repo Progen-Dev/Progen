@@ -40,7 +40,7 @@ public class CommandManager extends ListenerAdapter {
 
             new ConfigDaoImpl().writeConfig(guildConfiguration, event.getGuild());
         }
-        ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.prefix);
+        ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.getPrefix());
 
         if (parsedMessage == null) return;
 

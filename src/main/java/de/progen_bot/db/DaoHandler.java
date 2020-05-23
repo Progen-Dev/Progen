@@ -14,10 +14,9 @@ import java.util.ArrayList;
 
 public class DaoHandler {
 
-    private ArrayList<Dao> daoList = new ArrayList<>();
-
-    public DaoHandler() {
-        daoList.add(new XpDaoImpl());
+	public DaoHandler() {
+		ArrayList<Dao> daoList = new ArrayList<>();
+		daoList.add(new XpDaoImpl());
         daoList.add(new WarnListDaoImpl());
         daoList.add(new PollDaoImpl());
         daoList.add(new ConnectFourDaoImpl());

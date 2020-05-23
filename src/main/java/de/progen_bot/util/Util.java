@@ -10,42 +10,42 @@ public class Util {
     }
 
     public static String getVotingOptions(String[] input) {
-        String options = "";
+        StringBuilder options = new StringBuilder();
         for (int i = 2; i < input.length; i++) {
             switch (i - 1) {
                 case 1:
-                    options += " :one: ";
+                    options.append(" :one: ");
                     break;
                 case 2:
-                    options += ":two: ";
+                    options.append(":two: ");
                     break;
                 case 3:
-                    options += ":three: ";
+                    options.append(":three: ");
                     break;
                 case 4:
-                    options += ":four: ";
+                    options.append(":four: ");
                     break;
                 case 5:
-                    options += ":five: ";
+                    options.append(":five: ");
                     break;
                 case 6:
-                    options += ":six: ";
+                    options.append(":six: ");
                     break;
                 case 7:
-                    options += ":seven: ";
+                    options.append(":seven: ");
                     break;
                 case 8:
-                    options += ":eight: ";
+                    options.append(":eight: ");
                     break;
                 case 9:
-                    options += ":nine: ";
+                    options.append(":nine: ");
                     break;
                 default:
                     break;
             }
-            options += input[i] + "\n";
+            options.append(input[i]).append("\n");
         }
-        return options;
+        return options.toString();
     }
 
     public static void addReactionsToMessage(Message message, int length) {

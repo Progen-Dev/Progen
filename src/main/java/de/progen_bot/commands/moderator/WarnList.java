@@ -39,9 +39,9 @@ public class WarnList extends CommandHandler {
             } else {
                 event.getChannel().sendMessage(super.messageGenerators.generateErrorMsg("No Warns")).queue();
             }
-        } else {
+        } /* else {
 
-      /*TODO      HashMap<Member, ArrayList<Warn>> x =
+      TODO      HashMap<Member, ArrayList<Warn>> x =
                     super.getDAOs().getWarnList().getWarnsByMembersForGuild(event.getGuild());
 
             EmbedBuilder embedBuilder = new EmbedBuilder()
@@ -53,13 +53,8 @@ public class WarnList extends CommandHandler {
                 embedBuilder.addField(m.getEffectiveName(), String.valueOf(x.get(m).size()), true);
             }
 
-            event.getMessage().getTextChannel().sendMessage(embedBuilder.build()).queue();*/
-        }
-    }
-
-    @Override
-    public String help() {
-        return null;
+            event.getMessage().getTextChannel().sendMessage(embedBuilder.build()).queue();
+        } */
     }
 
     @Override

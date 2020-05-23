@@ -14,12 +14,11 @@ import net.dv8tion.jda.api.entities.User;
 
 public class PlaylistDaoImpl extends Dao implements PlaylistDao{
 
-    private final String sqlString = "CREATE TABLE IF NOT EXISTS playlist (`id` INT(11) NOT NULL AUTO_INCREMENT KEY, `userid` VARCHAR(18) NOT NULL, `playlistname` VARCHAR(30) NOT NULL, uri VARCHAR(100) NOT NULL) ENGINE = INNODB;";
-
-    @Override
+	@Override
     public void generateTables(String sqlQuery) {
 
-        super.generateTables(this.sqlString);
+		String sqlString = "CREATE TABLE IF NOT EXISTS playlist (`id` INT(11) NOT NULL AUTO_INCREMENT KEY, `userid` VARCHAR(18) NOT NULL, `playlistname` VARCHAR(30) NOT NULL, uri VARCHAR(100) NOT NULL) ENGINE = INNODB;";
+		super.generateTables(sqlString);
     }
 
     @Override

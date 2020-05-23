@@ -23,7 +23,10 @@ public class CommandBan extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
-        Member selfmember = event.getMember();
+        Member selfMember = event.getMember();
+
+        if (selfMember == null)
+            return;
 
         final List<String> argsWithoutMention = parsedCommand.getArgsAsList().subList(1, parsedCommand.getArgsAsList().size());
 
@@ -32,23 +35,33 @@ public class CommandBan extends CommandHandler {
             reason = "No reason";
         else
             reason = String.join(" ", argsWithoutMention);
-        event.getGuild().getTextChannelsByName("progenlog", true).get(0).sendMessage(this.getBanEmbed(event, reason)).queue();
-        event.getTextChannel().sendMessage(this.getBanEmbed(event,reason)).queue();
-        final String finalReason = reason;
+
+        final MessageEmbed eb = this.getBanEmbed(event, reason);
+        if (eb == null)
+            return;
+
+        event.getGuild().getTextChannelsByName("progenlog", true).get(0).sendMessage(eb).queue();
+        event.getTextChannel().sendMessage(eb).queue();
         event.getMessage().getMentionedUsers().get(0).openPrivateChannel().queue(
-                privateChannel -> privateChannel.sendMessage(this.getBanEmbed(event, finalReason)).queue()
+                privateChannel -> privateChannel.sendMessage(eb).queue()
         );
         if(parsedCommand.getArgs().length > 0){
             List<User> mentioned = event.getMessage().getMentionedUsers();
             for (User user : mentioned){
                 Member member = event.getGuild().getMember(user);
-                if (selfmember.canInteract(member)){
+
+                if (member == null)
+                    return;
+
+                if (selfMember.canInteract(member)){
                     event.getGuild().ban(member, 7).queue();
                 }
             }
         }
     }
     private MessageEmbed getBanEmbed(MessageReceivedEvent event, String reason){
+        if (event.getMember() == null)
+            return null;
         return new EmbedBuilder()
                 .setColor(Color.red)
                 .setTitle(BAN)
@@ -57,11 +70,6 @@ public class CommandBan extends CommandHandler {
                 .setDescription(event.getMessageId())
                 .addField(REASON, reason, false)
                 .setTimestamp(Instant.now()).build();
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

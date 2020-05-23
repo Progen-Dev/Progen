@@ -19,6 +19,9 @@ import java.util.List;
  */
 public class Settings {
 
+    private static final String BOT_KEY = "bot";
+    private static final String DATABASE_KEY = "database";
+    
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static String json = null;
 
@@ -33,24 +36,24 @@ public class Settings {
     }
 
     //#region Bot
-    public static final String PREFIX           =   get("bot", "prefix").getAsString();
-    public static final String TOKEN            =   get("bot", "token").getAsString();
-    public static final String API_PORT         =   String.valueOf(get("bot", "apiPort").getAsInt());
+    public static final String PREFIX           =   get(BOT_KEY, "prefix").getAsString();
+    public static final String TOKEN            =   get(BOT_KEY, "token").getAsString();
+    public static final String API_PORT         =   String.valueOf(get(BOT_KEY, "apiPort").getAsInt());
     @SuppressWarnings("unchecked")
-    public static final List<String> BOT_OWNERS =   GSON.fromJson(get("bot", "owners").getAsJsonArray(), List.class);
+    public static final List<String> BOT_OWNERS =   GSON.fromJson(get(BOT_KEY, "owners").getAsJsonArray(), List.class);
 
     @SuppressWarnings("unchecked")
-    public static final List<String> MUSIC      =   GSON.fromJson(get("bot", "music").getAsJsonArray(), List.class);
+    public static final List<String> MUSIC      =   GSON.fromJson(get(BOT_KEY, "music").getAsJsonArray(), List.class);
 
-    public static final String TOP_GG_TOKEN     =   get("bot", "topGGToken").getAsString();
+    public static final String TOP_GG_TOKEN     =   get(BOT_KEY, "topGGToken").getAsString();
     //#endregion
 
     //#region Database
-    public static final String HOST             =   get("database", "host").getAsString();
-    public static final String DATABASE         =   get("database", "database").getAsString();
-    public static final String PORT             =   String.valueOf(get("database", "port").getAsInt());
-    public static final String USER             =   get("database", "user").getAsString();
-    public static final String PASSWORD         =   get("database", "password").getAsString();
+    public static final String HOST             =   get(DATABASE_KEY, "host").getAsString();
+    public static final String DATABASE         =   get(DATABASE_KEY, DATABASE_KEY).getAsString();
+    public static final String PORT             =   String.valueOf(get(DATABASE_KEY, "port").getAsInt());
+    public static final String USER             =   get(DATABASE_KEY, "user").getAsString();
+    public static final String PASSWORD         =   get(DATABASE_KEY, "password").getAsString();
     //#endregion
 
     /**
@@ -81,16 +84,16 @@ public class Settings {
             owners.add("321227144791326730");
             bot.add("owners", owners);
 
-            object.add("bot", bot);
+            object.add(BOT_KEY, bot);
 
             final JsonObject database = new JsonObject();
             database.addProperty("host", "localhost");
-            database.addProperty("database", "progen");
+            database.addProperty(DATABASE_KEY, "progen");
             database.addProperty("user", "progen");
             database.addProperty("password", "progen");
             database.addProperty("port", 3306);
 
-            object.add("database", database);
+            object.add(DATABASE_KEY, database);
 
             json = GSON.toJson(object);
 

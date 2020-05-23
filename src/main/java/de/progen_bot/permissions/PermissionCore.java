@@ -23,7 +23,7 @@ public class PermissionCore {
             return AccessLevel.USER;
 
         if (owners.stream().anyMatch(id -> id.equals(member.getId())))
-            return AccessLevel.BOTOWNER;
+            return AccessLevel.BOT_OWNER;
 
         if (member.isOwner())
             return AccessLevel.OWNER;

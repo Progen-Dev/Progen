@@ -7,6 +7,7 @@ import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import de.progen_bot.util.Level;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
@@ -32,7 +33,7 @@ public class XP extends CommandHandler {
      */
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        String id = "";
+        String id;
         if (parsedCommand.getArgs().length == 0) {
             id = event.getAuthor().getId();
         } else if (event.getMessage().getMentionedMembers().isEmpty()) {
@@ -45,10 +46,13 @@ public class XP extends CommandHandler {
 
         UserData data = UserData.fromId(id);
 
+        final Member member = event.getGuild().getMemberById(id);
+        if (member == null)
+            return;
+
         EmbedBuilder eb = new EmbedBuilder().setColor(Color.green).setFooter(
-                event.getGuild().getMemberById(id).getUser().getName() + "#"
-                        + event.getGuild().getMemberById(id).getUser().getDiscriminator(),
-                event.getGuild().getMemberById(id).getUser().getAvatarUrl());
+                member.getUser().getAsTag(),
+                member.getUser().getAvatarUrl());
 
         if (data != null) {
             double percent = 100 - (double) Level.remainingXp(data.getTotalXp())
@@ -62,11 +66,6 @@ public class XP extends CommandHandler {
         }
         event.getTextChannel().sendMessage(eb.build()).queue();
 
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

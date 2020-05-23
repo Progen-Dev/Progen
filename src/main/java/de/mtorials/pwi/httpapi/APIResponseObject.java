@@ -2,8 +2,8 @@ package de.mtorials.pwi.httpapi;
 
 public class APIResponseObject {
 
-    private int rCode;
-    private Object object;
+    private final int rCode;
+    private final Object object;
 
     public APIResponseObject(int rCode, Object object) {
         this.rCode = rCode;

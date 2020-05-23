@@ -7,8 +7,14 @@ import de.progen_bot.db.entities.GameData;
 import de.progen_bot.util.Util;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 
 public class FourConnectGame {
+
+    private FourConnectGame() {
+        /* Prevent instantiation */
+    }
 
     public static void createGame(GameData gameData, int height, int width, JDA jda) {
         ConnectFourModel conFourMod = new ConnectFourModel(width, height, gameData.getChallengerId(),
@@ -16,7 +22,11 @@ public class FourConnectGame {
 
         String field = generateBoardString(conFourMod.getBoard(), conFourMod.getPlayer1());
 
-        jda.getTextChannelById(gameData.getChannelId()).sendMessage(field).queue(msg -> {
+        final TextChannel channel = jda.getTextChannelById(gameData.getChannelId());
+        if (channel == null)
+            return;
+
+        channel.sendMessage(field).queue(msg -> {
             addReaction(msg, gameData.getWidth());
             conFourMod.setMsgId(msg.getId());
             conFourMod.setActPlayer(conFourMod.getPlayer1());
@@ -25,15 +35,18 @@ public class FourConnectGame {
     }
 
     private static String generateBoardString(char[][] board, String userId) {
-        String field = Main.getJda().getUserById(userId).getAsMention() + " :red_circle: fängt an\n";
+        final User[] user = new User[1];
+        Main.getJda().retrieveUserById(userId).queue(u -> user[0] = u);
+
+        StringBuilder field = new StringBuilder(user[0].getAsMention() + " :red_circle: fängt an\n");
 
         for (int j = 0; j < board.length; j++) {
             for (int i = 0; i < board[0].length; i++) {
-                field += ":white_circle:";
+                field.append(":white_circle:");
             }
-            field += "\n";
+            field.append("\n");
         }
-        return Util.addTableNumbers(field, board[0].length);
+        return Util.addTableNumbers(field.toString(), board[0].length);
     }
 
     private static void addReaction(Message message, int count) {

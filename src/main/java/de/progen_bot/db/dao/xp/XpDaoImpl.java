@@ -12,11 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class XpDaoImpl extends Dao implements XpDao {
-    private final String sqlQuery = "CREATE TABLE IF NOT EXISTS xp(`id` INT(11) NOT NULL AUTO_INCREMENT, `userid` " +
-            "VARCHAR(50) NOT NULL, `totalxp` BIGINT(12) NOT NULL, `level` INT(11) NOT NULL, `notify` BOOLEAN NOT NULL, "
-            + "PRIMARY KEY(`id`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8";
 
-    @Override
+	@Override
     public void saveUserData(UserData data) {
         Connection connection = ConnectionFactory.getConnection();
         try {
@@ -62,7 +59,7 @@ public class XpDaoImpl extends Dao implements XpDao {
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM `xp` ORDER BY `totalxp` DESC LIMIT 10");
             ResultSet rs = ps.executeQuery();
-            List<String> top10 = new ArrayList<String>();
+            List<String> top10 = new ArrayList<>();
             while (rs.next()) {
                 top10.add(rs.getString(2));
             }
@@ -75,6 +72,9 @@ public class XpDaoImpl extends Dao implements XpDao {
 
     @Override
     public void generateTables(String query) {
-        super.generateTables(sqlQuery);
+		String sqlQuery = "CREATE TABLE IF NOT EXISTS xp(`id` INT(11) NOT NULL AUTO_INCREMENT, `userid` " +
+				"VARCHAR(50) NOT NULL, `totalxp` BIGINT(12) NOT NULL, `level` INT(11) NOT NULL, `notify` BOOLEAN NOT NULL, "
+				+ "PRIMARY KEY(`id`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8";
+		super.generateTables(sqlQuery);
     }
 }

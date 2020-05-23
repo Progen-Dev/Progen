@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class APITokenManager {
 
-    private TokenManagerDao dao = new TokenManagerDao();
+    private final TokenManagerDao dao = new TokenManagerDao();
 
     public String register(Member member) {
 

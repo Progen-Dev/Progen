@@ -17,7 +17,7 @@ public class MusicListener extends ListenerAdapter {
 
     private void checkBot(GuildVoiceLeaveEvent event) {
         VoiceChannel channelOld = event.getOldValue();
-        if (!Main.getMusicManager().isMusicInChannel(channelOld)) return;
+        if (Main.getMusicManager().isNotMusicInChannel(channelOld)) return;
         boolean isBot = Main.getMusicManager().getMusicByChannel(channelOld).getBot().getSelfUser().getId().equals(event.getEntity().getId());
         if (isBot) Main.getMusicManager().getMusicByChannel(channelOld).stop();
     }

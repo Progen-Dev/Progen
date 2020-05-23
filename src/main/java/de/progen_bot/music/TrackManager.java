@@ -12,13 +12,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class TrackManager extends AudioEventAdapter {
     private final AudioPlayer player;
-    private Queue<AudioInfo> queue;
+    private final Queue<AudioInfo> queue;
     private final VoiceChannel voiceChannel;
-    //rivate final Music music;
 
     /**
      * Erstellt eine Instanz der Klasse TrackManager.
-     * @param player
+     * @param player {@link AudioPlayer audio player}
      *
      */
 
@@ -116,9 +115,9 @@ public class TrackManager extends AudioEventAdapter {
      * Wenn die Queue zuende ist, verlässt der Bot den Audio Channel.
      * Sonst wird der nächste Track in der Queue wiedergegeben.
      *
-     * @param player
-     * @param track
-     * @param endReason
+     * @param player {@link AudioPlayer audio player}
+     * @param track {@link AudioTrack audio track}
+     * @param endReason {@link AudioTrackEndReason audio track end reason}
      */
 
     @Override

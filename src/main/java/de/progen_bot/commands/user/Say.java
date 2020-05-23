@@ -16,17 +16,12 @@ public class Say extends CommandHandler {
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         event.getMessage().delete();
-        String out = " ";
+        StringBuilder out = new StringBuilder(" ");
         for (String s : parsedCommand.getArgs()) {
-            out += s + " ";
+            out.append(s).append(" ");
         }
 
-        event.getTextChannel().sendMessage(out).queue();
-    }
-
-    @Override
-    public String help() {
-        return null;
+        event.getTextChannel().sendMessage(out.toString()).queue();
     }
 
     @Override

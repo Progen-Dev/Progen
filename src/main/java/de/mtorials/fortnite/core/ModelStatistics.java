@@ -2,7 +2,7 @@ package de.mtorials.fortnite.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = false)
+@JsonIgnoreProperties()
 class ModelStatistics {
 
     private int data;

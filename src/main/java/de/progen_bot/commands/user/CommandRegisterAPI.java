@@ -15,15 +15,12 @@ public class CommandRegisterAPI extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+        if (event.getMember() == null)
+            return;
 
         String token = API.getTokenManager().register(event.getMember());
         event.getMember().getUser().openPrivateChannel().complete().sendMessage("This is your new token only for the guild `" + event.getGuild().getName() + "` : ||" +
                 token + "||" + "\n*Go to <http://pwi.progen-bot.de> to sign in*\n").queue();
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

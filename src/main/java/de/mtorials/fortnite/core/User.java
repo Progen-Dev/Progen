@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.mtorials.fortnite.exeptions.UserNotFoundException;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 import java.io.IOException;
 
@@ -27,7 +28,11 @@ public class User {
         try {
 
             Response response = Fortnite.httpClient.newCall(request).execute();
-            resp = response.body().string();
+            final ResponseBody body = response.body();
+            if (body == null)
+                throw new IllegalStateException("Response body is empty");
+
+            resp = body.string();
 
         } catch (IOException e) {
             e.printStackTrace();
