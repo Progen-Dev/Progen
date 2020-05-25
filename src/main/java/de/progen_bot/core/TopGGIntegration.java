@@ -1,5 +1,6 @@
 package de.progen_bot.core;
 
+import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
 import org.discordbots.api.client.DiscordBotListAPI;
@@ -11,10 +12,10 @@ public class TopGGIntegration {
     private final DiscordBotListAPI api;
     private final JDA jda;
 
-    public TopGGIntegration(JDA jda, String token) {
+    public TopGGIntegration(JDA jda) {
         this.jda = jda;
         api = new DiscordBotListAPI.Builder()
-                .token(token)
+                .token(Settings.TOP_GG_TOKEN)
                 .botId(jda.getSelfUser().getId())
                 .build();
     }

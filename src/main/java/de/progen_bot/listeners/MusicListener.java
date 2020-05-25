@@ -1,12 +1,11 @@
 package de.progen_bot.listeners;
 
+import javax.annotation.Nonnull;
+
 import de.progen_bot.core.Main;
-import de.progen_bot.music.Music;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
-import javax.annotation.Nonnull;
 
 public class MusicListener extends ListenerAdapter {
 
@@ -18,7 +17,7 @@ public class MusicListener extends ListenerAdapter {
 
     private void checkBot(GuildVoiceLeaveEvent event) {
         VoiceChannel channelOld = event.getOldValue();
-        if (!Main.getMusicManager().isMusicInChannel(channelOld)) return;
+        if (Main.getMusicManager().isNotMusicInChannel(channelOld)) return;
         boolean isBot = Main.getMusicManager().getMusicByChannel(channelOld).getBot().getSelfUser().getId().equals(event.getEntity().getId());
         if (isBot) Main.getMusicManager().getMusicByChannel(channelOld).stop();
     }

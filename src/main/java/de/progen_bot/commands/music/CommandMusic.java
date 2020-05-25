@@ -46,30 +46,29 @@ public class CommandMusic extends CommandHandler {
         music = musicManager.getMusicByChannel(event.getMember().getVoiceState().getChannel());
 
         // Check: create new Music
-        if (music == null) {
-            // If no Music in Channel
-            if (!musicManager.isMusicInChannel(event.getMember().getVoiceState().getChannel())) {
+        if (music == null && musicManager.isNotMusicInChannel(event.getMember().getVoiceState().getChannel())) {
 
-                if (musicManager.isMusicOwner(event.getMember())) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You have already created an music player. Please go back to your channel to use it!")).queue();
-                    return;
-                }
-                //Check if afk channel
-                if (event.getGuild().getAfkChannel() != null && event.getMember().getVoiceState().getChannel() != null &&  event.getMember().getVoiceState().getChannel().getId().equals(event.getGuild().getAfkChannel().getId())) {
-
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You can not listen to music in an afk channel!")).queue();
-                    return;
-                }
-                //Check if bot available
-                if (!Main.getMusicBotManager().botAvailable(event.getGuild())) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("There is no music bot available!")).queue();
-                    return;
-                }
-                musicManager.registerMusicByMember(event.getMember(), new Music(event.getMember(), Main.getMusicBotManager().getUnusedBot(event.getGuild())));
-                event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg("You have now a music instance in your voice chat! Check out the PWI (http://pwi.progen-bot.de/) to control your music more efficient!")).queue();
-                music = musicManager.getMusicByChannel(event.getMember().getVoiceState().getChannel());
+            if (musicManager.isMusicOwner(event.getMember())) {
+                event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You have already created an music player. Please go back to your channel to use it!")).queue();
+                return;
             }
+            //Check if afk channel
+            if (event.getGuild().getAfkChannel() != null && event.getMember().getVoiceState().getChannel() != null &&  event.getMember().getVoiceState().getChannel().getId().equals(event.getGuild().getAfkChannel().getId())) {
+                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("You can not listen to music in an afk channel!")).queue();
+                return;
+            }
+            //Check if bot available
+            if (!Main.getMusicBotManager().botAvailable(event.getGuild())) {
+                event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("There is no music bot available!")).queue();
+                return;
+            }
+            musicManager.registerMusicByMember(event.getMember(), new Music(event.getMember(), Main.getMusicBotManager().getUnusedBot(event.getGuild())));
+            event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg("You have now a music instance in your voice chat! Check out the PWI (http://pwi.progen-bot.de/) to control your music more efficient!")).queue();
+            music = musicManager.getMusicByChannel(event.getMember().getVoiceState().getChannel());
         }
+
+        if (music == null)
+            return;
 
         switch (parsedCommand.getArgs()[0].toLowerCase()) {
             case "play":
@@ -147,11 +146,6 @@ public class CommandMusic extends CommandHandler {
         long mins = Math.floorDiv(seconds, 60);
         seconds = seconds - (mins * 60);
         return (hours == 0 ? "" : hours + ":") + String.format("%02d", mins) + ":" + String.format("%02d", seconds);
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

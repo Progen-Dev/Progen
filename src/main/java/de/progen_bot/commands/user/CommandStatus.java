@@ -23,26 +23,9 @@ public class CommandStatus extends CommandHandler {
         super("status", "status", "Status of Progen");
     }
 
-    private String getTime(Date date, String pattern){
-        return new SimpleDateFormat(pattern).format(date);
+    private String getTime(Date date){
+        return new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss (z)").format(date);
     }
-
-    private String getTimeDiff(Date date1, Date date2){
-        long diff = date1.getTime() - date2.getTime();
-        long DiffSecond = diff / 100 % 60;
-        long DiffMinutes = diff / (60 * 1000) % 60;
-        long DiffHours = diff / (24 * 60 * 60 * 1000) % 60;
-        long DiffDays = diff / (24 * 60 * 60 * 1000);
-        return DiffDays + "d, " + parseTimeNumbs(DiffHours) + "h, " + parseTimeNumbs(DiffMinutes) + parseTimeNumbs(DiffSecond) + "sec";
-    }
-
-    private String parseTimeNumbs(long time){
-        String timeString = time + "";
-        if (timeString.length() < 2)
-            timeString = "0" + time;
-        return timeString;
-    }
-
 
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
@@ -50,8 +33,8 @@ public class CommandStatus extends CommandHandler {
                 new EmbedBuilder()
                         .setDescription(":timer: ***STATUS***")
                         .setColor(new Color(187, 195, 255))
-                        .addField("Ping", String.valueOf(event.getJDA().getGatewayPing() + "ms"), true)
-                        .addField("Last Restart", getTime(Statics.getLastRestart(), "dd.MM.yyyy - HH:mm:ss (z)"), false)
+                        .addField("Ping", event.getJDA().getGatewayPing() + "ms", true)
+                        .addField("Last Restart", getTime(Statics.getLastRestart()), false)
                         .addField("autoReconnects", Statics.getReconnectCount() + "", false)
                         .build()
         ).queue();
@@ -103,11 +86,6 @@ public class CommandStatus extends CommandHandler {
         Dspeed.startDownload("https://testdebit.info/");
 
 
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

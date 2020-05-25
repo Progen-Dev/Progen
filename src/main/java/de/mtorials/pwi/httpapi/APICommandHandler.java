@@ -21,8 +21,8 @@ import java.util.Map;
 
 public class APICommandHandler implements HttpHandler {
 
-    private ArrayList<Endpoint> registeredCommands;
-    private APITokenManager tokenManager;
+    private final ArrayList<Endpoint> registeredCommands;
+    private final APITokenManager tokenManager;
 
     APICommandHandler(ArrayList<Endpoint> commands, APITokenManager tokenManager) {
 
@@ -35,7 +35,7 @@ public class APICommandHandler implements HttpHandler {
         String uri = exchange.getRequestURI().toString();
         Map<String, String> params = parseQueryString(uri.split("\\?", 2)[1]);
         String currentInvoke = uri.split("/")[1].split("\\?")[0];
-        String response = "";
+        String response;
         int rCode;
 
         Logger.info("REQUEST " + currentInvoke);
@@ -100,7 +100,7 @@ public class APICommandHandler implements HttpHandler {
         try {
             return mapper.writeValueAsString(o);
         } catch (JsonProcessingException e) {
-            System.out.println("JSON Parser exeption");
+            System.out.println("JSON Parser exception");
             e.printStackTrace();
             return "ERRORJSON";
         }

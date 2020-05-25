@@ -8,6 +8,8 @@ import de.progen_bot.game.FourConnectGame;
 import de.progen_bot.util.Util;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.PrivateChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.priv.react.PrivateMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -23,62 +25,63 @@ public class FourConnectListener extends ListenerAdapter {
     public void onPrivateMessageReactionAdd(PrivateMessageReactionAddEvent event) {
         jda = Main.getJda();
         dao = new ConnectFourDaoImpl();
+
+        if (event.getUser() == null)
+            return;
+
         // check if reactionMessage is an invite
-        if (dao.getGameData(event.getMessageId()) != null) {
-            if (!event.getUser().isBot()) {
-                GameData gameData = dao.getGameData(event.getMessageId());
-                String emoteName = event.getReactionEmote().getName();
+        if (dao.getGameData(event.getMessageId()) != null && !event.getUser().isBot()) {
+            final GameData gameData = dao.getGameData(event.getMessageId());
+            final String emoteName = event.getReactionEmote().getName();
 
-                jda.getPrivateChannelById(event.getChannel().getId())
-                        .deleteMessageById(event.getReaction().getMessageId()).queue();
+            final PrivateChannel channel = jda.getPrivateChannelById(event.getChannel().getId());
+            if (channel == null)
+                return;
 
-                switch (emoteName) {
+            channel.deleteMessageById(event.getReaction().getMessageId()).queue();
 
-                    case "✅":
-
-                        event.getChannel()
-                                .sendMessage(new EmbedBuilder().setColor(Color.DARK_GRAY)
-                                        .setDescription("Spiel wird vorbereitet...").build())
-                                .queue(msg -> msg.delete().queueAfter(9, TimeUnit.SECONDS));
-
-                        startGame(gameData);
-                        break;
-
-                    case "❌":
-
-                        event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.HSBtoRGB(85, 1, 100))
-                                .setDescription("Spielanfrage abgelehnt!").build()).queue();
-
-                        closeGame(gameData);
-                        break;
-                }
+            if (emoteName.equals("✅")) {
+                event.getChannel().sendMessage(
+                        new EmbedBuilder().setColor(Color.DARK_GRAY).setDescription("Spiel wird vorbereitet").build()
+                ).queue(msg -> msg.delete().queueAfter(9, TimeUnit.SECONDS));
+                startGame(gameData);
+            } else if (emoteName.equals("❌")) {
+                event.getChannel().sendMessage(
+                        new EmbedBuilder().setColor(Color.HSBtoRGB(85, 1, 100)).setDescription("Spielanfrage abgelehnt!").build()
+                ).queue();
+                closeGame(gameData);
             }
         }
     }
 
     private static void startGame(GameData gameData) {
-        jda.getUserById(gameData.getChallengerId()).openPrivateChannel().queue(privateChannel -> {
-            privateChannel.sendMessage(jda.getUserById(gameData.getOpponentId()).getName()
-                    + " hat deine Spielanfrage angenommen und eine Spielinstanz wird erstellt!").queue(msg -> {
+        final User[] user = new User[1];
+        final User[] opponent = new User[1];
+        jda.retrieveUserById(gameData.getChallengerId()).queue(u -> user[0] = u);
+        jda.retrieveUserById(gameData.getOpponentId()).queue(u -> opponent[0] = u);
+        user[0].openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(opponent[0].getName()
+                + " hat deine Spielanfrage angenommen und eine Spielinstanz wird erstellt!").queue(msg -> {
 
-                int heigh = gameData.getHeigh();
-                int width = gameData.getWidth();
+            int height = gameData.getHeight();
+            int width = gameData.getWidth();
 
-                FourConnectGame.createGame(gameData, heigh, width, jda);
-                msg.delete().queueAfter(10, TimeUnit.SECONDS);
-            });
-        });
+            FourConnectGame.createGame(gameData, height, width, jda);
+            msg.delete().queueAfter(10, TimeUnit.SECONDS);
+        }));
     }
 
     private static void closeGame(GameData gameData) {
-        jda.getUserById(gameData.getChallengerId()).openPrivateChannel().queue(privateChannel -> {
-            privateChannel
-                    .sendMessage(
-                            jda.getUserById(gameData.getOpponentId()).getName() + " hat deine Spielanfrage abgelehnt!")
-                    .queue();
-        });
+        final User[] user = new User[1];
+        final User[] opponent = new User[1];
+        jda.retrieveUserById(gameData.getChallengerId()).queue(u -> user[0] = u);
+        jda.retrieveUserById(gameData.getOpponentId()).queue(u -> opponent[0] = u);
+        user[0].openPrivateChannel().queue(privateChannel -> privateChannel
+                .sendMessage(
+                        opponent[0].getName() + " hat deine Spielanfrage abgelehnt!")
+                .queue());
     }
 
+    @Override
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
         dao = new ConnectFourDaoImpl();
 
@@ -101,8 +104,8 @@ public class FourConnectListener extends ListenerAdapter {
 
                 gameData.setField(emote);
 
-                event.getJDA().getTextChannelById(event.getChannel().getId()).retrieveMessageById(event.getMessageId())
-                        .queue(msgid -> gameData.updateBoard(msgid));
+                event.getChannel().retrieveMessageById(event.getMessageId())
+                        .queue(gameData::updateBoard);
 
                 if (gameData.isGameOver()) {
                     String text = event.getUser().getAsMention() + " hat gewonnen!";

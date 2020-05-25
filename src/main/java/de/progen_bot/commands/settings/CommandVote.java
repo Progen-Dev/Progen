@@ -24,7 +24,9 @@ import java.util.stream.Collectors;
 
 
 public class CommandVote extends CommandHandler implements Serializable {
-    private static final String[] EMOTES = ( "\uD83C\uDF4F \uD83C\uDF4E \uD83C\uDF50 \uD83C\uDF4A \uD83C\uDF4B \uD83C\uDF4C \uD83C\uDF49 \uD83C\uDF47 \uD83C\uDF53 \uD83C\uDF48 \uD83C\uDF52 \uD83C\uDF51 \uD83C\uDF4D \uD83E\uDD5D ").split(" ");
+    private static final long serialVersionUID = -5977967282764066009L;
+    private static final String[] EMOTES = ("\uD83C\uDF4F \uD83C\uDF4E \uD83C\uDF50 \uD83C\uDF4A \uD83C\uDF4B \uD83C\uDF4C \uD83C\uDF49 \uD83C\uDF47 \uD83C\uDF53 \uD83C\uDF48 \uD83C\uDF52 \uD83C\uDF51 \uD83C\uDF4D \uD83E\uDD5D ")
+            .split(" ");
     private static final Map<Guild, Poll> POLLS = new HashMap<>();
     private static final Map<Guild, Message> TEMP_MAP = new HashMap<>();
     private static TextChannel channel;
@@ -87,7 +89,7 @@ public class CommandVote extends CommandHandler implements Serializable {
         final Guild guild = event.getGuild();
         final Member member = event.getMember();
 
-        if (guild == null || member == null)
+        if (member == null)
             return;
 
         if (POLLS.containsKey(guild)) {
@@ -188,6 +190,9 @@ public class CommandVote extends CommandHandler implements Serializable {
             toAddEmotes.add(randEmotes);
         });
 
+        if (event.getMember() == null)
+            return;
+
         Poll poll = new Poll(event.getMember(), heading, answers, toAddEmotes, msg, secret);
 
         POLLS.put(event.getGuild(), poll);
@@ -258,7 +263,7 @@ public class CommandVote extends CommandHandler implements Serializable {
         setChannel(event.getTextChannel());
 
         if (parsedCommand.getArgs().length < 1) {
-            message(help());
+            message("Work in Progress!"); // TODO: 23.05.2020
             return;
         }
 
@@ -288,11 +293,6 @@ public class CommandVote extends CommandHandler implements Serializable {
     }
 
     @Override
-    public String help() {
-        return null;
-    }
-
-    @Override
     public AccessLevel getAccessLevel() {
         return AccessLevel.ADMINISTRATOR;
     }
@@ -319,8 +319,9 @@ public class CommandVote extends CommandHandler implements Serializable {
         }
 
         private Member getCreator(Guild guild) {
-            // TODO return this.creator;
-            return guild.getMember(guild.getJDA().getUserById(creator));
+            Member[] member = new Member[1];
+            guild.retrieveMemberById(creator).queue(m -> member[0] = m);
+            return member[0];
         }
 
         public Message getMessage(Guild guild) {

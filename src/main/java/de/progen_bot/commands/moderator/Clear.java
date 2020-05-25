@@ -2,9 +2,8 @@ package de.progen_bot.commands.moderator;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
-import de.progen_bot.permissions.AccessLevel;
-import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class Clear extends CommandHandler {
 
-    EmbedBuilder error = new EmbedBuilder().setColor(Color.RED);
+    final EmbedBuilder error = new EmbedBuilder().setColor(Color.RED);
 
     public Clear() {
         super("clear", "clear <number>", "clear some messages that are no older than two weeks");
@@ -86,12 +85,6 @@ public class Clear extends CommandHandler {
             event.getTextChannel()
                     .sendMessage(error.setDescription("Please use a number between 2 and 100!").build()).queue();
         }
-    }
-
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

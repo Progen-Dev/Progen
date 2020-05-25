@@ -15,8 +15,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-;
-
 public class GuildInfo extends CommandHandler {
 
     public GuildInfo() {
@@ -57,6 +55,9 @@ public class GuildInfo extends CommandHandler {
         String usersText = String.format("**Members:**   %d   (Online:  %d)\n" + "**Bots:**   %d   (Online:  %d)",
                 users, onlineUsers, bots, onlineBots);
 
+        if (owner == null)
+            return;
+
         EmbedBuilder eb = new EmbedBuilder().setColor(Color.cyan).addField("Name:", name, false)
                 .addField("ID:", "``" + id + "``", false)
                 .addField("Owner:", owner.getUser().getName() + "#" + owner.getUser().getDiscriminator(), false)
@@ -74,11 +75,6 @@ public class GuildInfo extends CommandHandler {
             eb.setThumbnail(avatar);
 
         event.getTextChannel().sendMessage(eb.build()).queue();
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

@@ -15,7 +15,7 @@ public abstract class CommandHandler {
     /**
      * MessageGenerators
      */
-    protected MessageGenerator messageGenerators;
+    protected final MessageGenerator messageGenerators;
 
     /**
      * The invoke string.
@@ -37,10 +37,10 @@ public abstract class CommandHandler {
      */
     private final DaoHandler daoHandler = Main.getDAOs();
 
-    private GuildConfiguration guildConfiguration;
+    //private GuildConfiguration guildConfiguration;
 
     /**
-     * Instantiates a new de.progen_bot.command handler.
+     * Instantiates a command handler.
      *
      * @param invokeString the invoke string
      * @param commandUsage the de.progen_bot.command usage
@@ -93,7 +93,6 @@ public abstract class CommandHandler {
     public DaoHandler getDAOs() {
         return daoHandler;
     }
-
-    public abstract String help();
+    
     public abstract AccessLevel getAccessLevel();
 }

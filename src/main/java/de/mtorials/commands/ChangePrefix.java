@@ -31,16 +31,11 @@ public class ChangePrefix extends CommandHandler {
             return;
         }
 
-        configuration.prefix = parsedCommand.getArgsAsList().get(0);
+        configuration.setPrefix(parsedCommand.getArgsAsList().get(0));
 
         new ConfigDaoImpl().writeConfig(configuration, event.getGuild());
 
-        event.getTextChannel().sendMessage("Prefix has changed to " + configuration.prefix).queue();
-    }
-
-    @Override
-    public String help() {
-        return null;
+        event.getTextChannel().sendMessage("Prefix has changed to " + configuration.getPrefix()).queue();
     }
 
     @Override

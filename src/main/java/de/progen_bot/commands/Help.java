@@ -7,7 +7,6 @@ import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
@@ -38,8 +37,8 @@ public class Help extends CommandHandler {
             EmbedBuilder msg = new EmbedBuilder()
                     .setAuthor("Progen")
                     .setTitle("Help")
-                    .setDescription("For more information about commands use " + configuration.prefix + "help <command>\n")
-                    .setFooter("Discord Server: https://discord.gg/Xbtn9zG\nYour current Prefix: " + configuration.prefix);
+                    .setDescription("For more information about commands use " + configuration.getPrefix() + "help <command>\n")
+                    .setFooter("Discord Server: https://discord.gg/Xbtn9zG\nYour current Prefix: " + configuration.getPrefix());
 
             for (String group : commandsByGroup.keySet()) {
                 StringBuilder s = new StringBuilder();
@@ -68,11 +67,6 @@ public class Help extends CommandHandler {
             }
             event.getChannel().sendMessage(builder.build()).queue();
         }
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

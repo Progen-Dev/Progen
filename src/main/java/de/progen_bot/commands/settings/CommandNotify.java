@@ -27,11 +27,6 @@ public class CommandNotify extends CommandHandler {
     }
 
     @Override
-    public String help() {
-        return null;
-    }
-
-    @Override
     public AccessLevel getAccessLevel() {
         return AccessLevel.USER;
     }

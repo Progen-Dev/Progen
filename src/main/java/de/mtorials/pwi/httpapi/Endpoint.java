@@ -9,8 +9,8 @@ import java.util.Map;
 
 public abstract class Endpoint {
 
-    private String invoke;
-    private DaoHandler daos = Main.getDAOs();
+    private final String invoke;
+    private final DaoHandler daos = Main.getDAOs();
 
     public Endpoint(String invoke) {
         this.invoke = invoke;

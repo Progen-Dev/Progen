@@ -2,14 +2,14 @@ package de.mtorials.pwi.exceptions;
 
 public class APICommandNotFoundExceptionObject {
 
-    private String msg = "Command not found!";
-    private int rCode = 404;
+	private static final String MESSAGE = "Command not found!";
+	private static final int ERROR_CODE = 404;
 
-    public String getMsg() {
-        return msg;
+	public String getMsg() {
+		return MESSAGE;
     }
 
     public int getrCode() {
-        return rCode;
+		return ERROR_CODE;
     }
 }

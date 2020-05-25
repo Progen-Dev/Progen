@@ -1,19 +1,15 @@
 package de.mtorials.pwi.endpoints;
 
+import java.util.Map;
+
 import de.mtorials.entities.json.MusicInfo;
 import de.mtorials.pwi.exceptions.APIWrongParametersException;
 import de.mtorials.pwi.httpapi.APIResponseObject;
 import de.mtorials.pwi.httpapi.Endpoint;
-import de.progen_bot.commands.music.CommandMusic;
 import de.progen_bot.core.Main;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.music.Music;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.VoiceChannel;
-
-import javax.sound.midi.VoiceStatus;
-import java.util.Map;
 
 public class APIEPMusic extends Endpoint {
 

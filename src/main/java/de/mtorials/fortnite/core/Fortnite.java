@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Fortnite {
 
-    static OkHttpClient httpClient = new OkHttpClient();
+    static final OkHttpClient httpClient = new OkHttpClient();
 
     public User getUserByName(String name) {
 
@@ -23,6 +23,8 @@ public class Fortnite {
         try {
 
             Response response = httpClient.newCall(request).execute();
+            if (response.body() == null)
+                throw new IllegalStateException("Response body is null");
             resp = response.body().string();
             return new ObjectMapper().readValue(resp, User.class);
 

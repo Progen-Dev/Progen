@@ -1,6 +1,3 @@
-/**
- *
- */
 package de.progen_bot.commands.xp;
 
 import de.progen_bot.command.CommandHandler;
@@ -42,11 +39,6 @@ public class XPNotify extends CommandHandler {
             event.getTextChannel().sendMessage("LevelUp message successfully enabled").queue();
         }
         data.save(data);
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

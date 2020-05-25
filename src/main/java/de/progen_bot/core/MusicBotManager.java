@@ -12,20 +12,20 @@ import java.util.*;
 
 public class MusicBotManager {
 
-    private HashMap<String, List<JDA>> botIDsNotInUse = new HashMap<>();
-    private List<String> tokens = new ArrayList<>();
-    private List<JDA> allMusicBots = new ArrayList<>();
+    private final HashMap<String, List<JDA>> botIDsNotInUse = new HashMap<>();
+    private final List<JDA> allMusicBots = new ArrayList<>();
 
     public MusicBotManager() {
-
-        tokens.add(Settings.MUSIC_TOKEN_1);
-        tokens.add(Settings.MUSIC_TOKEN_2);
 
         //Progen
         for (Guild g : Main.getJda().getGuilds()) {
             if (!botIDsNotInUse.containsKey(g.getId())) botIDsNotInUse.put(g.getId(), new ArrayList<>());
             botIDsNotInUse.get(g.getId()).add(Main.getJda());
         }
+
+        List<String> tokens = Settings.MUSIC;
+        if (tokens.isEmpty())
+            return;
 
         // Music bots
         for (String token : tokens) {
@@ -66,14 +66,14 @@ public class MusicBotManager {
         // Add Progen
         botIDsNotInUse.get(guild.getId()).add(Main.getJda());
 
-        // Add music bpots
+        // Add music bots
         for (JDA bot : allMusicBots) {
 
             if (bot.getGuilds().contains(guild)) botIDsNotInUse.get(guild.getId()).add(bot);
         }
     }
 
-    public void setBotUnsed(Guild guild, JDA bot) {
+    public void setBotUnused(Guild guild, JDA bot) {
         botIDsNotInUse.get(guild.getId()).add(bot);
     }
 }
