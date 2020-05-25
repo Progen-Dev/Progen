@@ -11,6 +11,7 @@ POLL/
 *.properties
 dependency-reduced-pom.xml
 *.json
+!config.sample.json
 *.class
 *.MF
 *.kotlin_module
