@@ -1,13 +1,26 @@
 package de.progen_bot.core;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.security.auth.login.LoginException;
+
 import com.mysql.cj.jdbc.Driver;
+
 import de.mtorials.commands.ChangePrefix;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.Help;
 import de.progen_bot.commands.fun.ConnectFour;
-import de.progen_bot.commands.moderator.*;
+import de.progen_bot.commands.moderator.Clear;
+import de.progen_bot.commands.moderator.CommandMute;
+import de.progen_bot.commands.moderator.Warn;
+import de.progen_bot.commands.moderator.WarnDelete;
+import de.progen_bot.commands.moderator.WarnList;
 import de.progen_bot.commands.moderator.blacklist.CommandBan;
 import de.progen_bot.commands.moderator.blacklist.CommandKick;
 import de.progen_bot.commands.music.CommandMusic;
@@ -18,7 +31,15 @@ import de.progen_bot.commands.owner.CommandTest;
 import de.progen_bot.commands.settings.CommandAutorole;
 import de.progen_bot.commands.settings.CommandNotify;
 import de.progen_bot.commands.settings.CommandVote;
-import de.progen_bot.commands.user.*;
+import de.progen_bot.commands.user.CmdTempChannel;
+import de.progen_bot.commands.user.CommandInfo;
+import de.progen_bot.commands.user.CommandRegisterAPI;
+import de.progen_bot.commands.user.CommandStatus;
+import de.progen_bot.commands.user.CommandUserInfo;
+import de.progen_bot.commands.user.GuildInfo;
+import de.progen_bot.commands.user.PrivateVoiceChannel;
+import de.progen_bot.commands.user.Say;
+import de.progen_bot.commands.user.UserVotet;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
@@ -28,11 +49,6 @@ import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-
-import javax.security.auth.login.LoginException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 
 /**
@@ -82,7 +98,14 @@ public class Main {
         //TODO MySQL.loadPollTimer();
 
         topGGIntegration = new TopGGIntegration(getJda());
-        topGGIntegration.postServerCount();
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                topGGIntegration.postServerCount();
+            }
+        }, 0, 30*60*1000); //every 30 mins
+       
 
         // DAO Handler
         daoHandler = new DaoHandler();
