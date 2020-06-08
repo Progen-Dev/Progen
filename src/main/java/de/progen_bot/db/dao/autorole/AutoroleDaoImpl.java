@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoroleDaoImpl extends Dao implements AutoroleDao {
-    private static final String SQL_QUERY = "CREATE TABLE IF NOT EXISTS autorole(`id` INT(11) NOT NULL AUTO_INCREMENT, ´guildid´ VARCHAR(50) NOT NULL, `roleid` VARCHAR(50) NOT NULL " +
-            "PRIMARY KEY(`id`) ENGINE = InnoDB DEFAULT CHARSET = utf8";
+    private static final String SQL_QUERY = "CREATE TABLE IF NOT EXISTS autorole(id INT(11) NOT NULL AUTO_INCREMENT,"
+            + "guildid VARCHAR(50) NOT NULL, roleid VARCHAR(50) NOT NULL, PRIMARY KEY(id)) ENGINE = InnoDB DEFAULT CHARSET = utf8";
 
     @Override
     public void insertAutorole(Role role, Guild guild) {
         Connection connection = ConnectionFactory.getConnection();
-        try{
+        try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO `autorole` (guildid, role) VALUES (?,?)");
             ps.setString(1, role.getRoleName());
             ps.setString(2, guild.getId());
@@ -34,13 +34,14 @@ public class AutoroleDaoImpl extends Dao implements AutoroleDao {
         List<String> roles = new ArrayList<>();
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM `autorole` WHERE `guildid` = ? and `roleid` = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT * FROM `autorole` WHERE `guildid` = ? and `roleid` = ?");
             ps.setString(1, role.getRoleName());
             ps.setString(2, guild.getId());
 
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 roles.add(rs.getString("autorole"));
             }
         } catch (SQLException e) {
@@ -53,7 +54,8 @@ public class AutoroleDaoImpl extends Dao implements AutoroleDao {
     public void deleteAutorole(Role role, Guild guild) {
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM `autorole` WHERE `guildid` = ? AND `roleid` = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("DELETE FROM `autorole` WHERE `guildid` = ? AND `roleid` = ?");
             ps.setString(1, role.getRoleName());
             ps.setString(2, guild.getId());
             ps.execute();
