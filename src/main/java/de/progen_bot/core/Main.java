@@ -25,7 +25,6 @@ import de.progen_bot.commands.xp.XPrank;
 import de.progen_bot.db.DaoHandler;
 import de.progen_bot.music.MusicManager;
 import de.progen_bot.util.Settings;
-import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -39,6 +38,9 @@ import java.sql.SQLException;
  * The Class Main.
  */
 public class Main {
+
+    private static final String URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
+            Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
 
     private static JDA jda;
 
@@ -62,9 +64,6 @@ public class Main {
 
         Settings.loadSettings();
 
-        String URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
-                Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
-
         try {
             DriverManager.registerDriver(new Driver());
             sqlConnection = DriverManager.getConnection(URL, Settings.USER, Settings.PASSWORD);
@@ -72,8 +71,8 @@ public class Main {
             throw new RuntimeException("Error connecting to the database", ex);
         }
 
-        API httpapi = new API(Integer.parseInt(Settings.API_PORT));
-        httpapi.start();
+        API httpApi = new API(Integer.parseInt(Settings.API_PORT));
+        httpApi.start();
 
         fortnite = new Fortnite();
 
@@ -101,7 +100,7 @@ public class Main {
      *
      * @param commandManager the de.progen_bot.command manager
      */
-    private void initCommandHandlers(CommandManager commandManager) {
+    private static void initCommandHandlers(CommandManager commandManager) {
         commandManager.setupCommandHandlers(new Clear());
         commandManager.setupCommandHandlers(new GuildInfo());
         commandManager.setupCommandHandlers(new CommandStatus());
@@ -138,10 +137,8 @@ public class Main {
     /**
      * Inits the JDA.
      */
-    private void initJDA() {
-        JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Settings.TOKEN);
-        builder.setAutoReconnect(true);
-        new BuildManager(builder);
+    private static void initJDA() {
+        final JDABuilder builder = JDABuilder.createDefault(Settings.TOKEN);
 
         try {
             jda = builder.build().awaitReady();
