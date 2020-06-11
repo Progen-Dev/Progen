@@ -17,7 +17,7 @@ public class CmdTempChannel extends CommandHandler {
 
     private void createNewTempChannel(ArrayList<String> args, MessageReceivedEvent event, GuildConfiguration configuration) {
 
-        TempChannelController tempChannelController = new TempChannelController(event.getGuild().getCategoryById(configuration.tempChannelCategoryID));
+        TempChannelController tempChannelController = new TempChannelController(event.getGuild().getCategoryById(configuration.getTempChannelCategoryID()));
 
         if (tempChannelController.getTempChannelCount() >= 3) tempChannelController.removeOldestTempChannel();
         if (args.size() >= 3) tempChannelController.createTextChannel(args.get(1), Integer.getInteger(args.get(3)));
@@ -29,17 +29,9 @@ public class CmdTempChannel extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
-        switch (parsedCommand.getArgsAsList().get(0).toLowerCase()) {
-
-            case "create":
-                createNewTempChannel((ArrayList<String>) parsedCommand.getArgsAsList(), event, configuration);
-                break;
+        if ("create".equalsIgnoreCase(parsedCommand.getArgsAsList().get(0))) {
+            createNewTempChannel((ArrayList<String>) parsedCommand.getArgsAsList(), event, configuration);
         }
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

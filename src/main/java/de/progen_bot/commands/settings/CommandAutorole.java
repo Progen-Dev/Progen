@@ -31,24 +31,19 @@ public class CommandAutorole extends CommandHandler{
         List<Role> autoRole = event.getGuild().getRolesByName(stringBuilder.toString().substring(0, stringBuilder.length() - 1), true);
 
         if (event.getMessage().getMentionedRoles().size() > 0){
-            configuration.setAutorole(event.getMessage().getMentionedRoles().get(0).getName(), event.getGuild());
+            configuration.setAutoRole(event.getMessage().getMentionedRoles().get(0).getName());
             event.getTextChannel().sendMessage(
                     messageGenerators.generateRightMsg("Successfully set autorole to `" + event.getMessage().getMentionedRoles().get(0).getName() +  "`.")
             ).queue();
         }else if (autoRole.size() > 0){
-            configuration.setAutorole(autoRole.get(0).getName(), event.getGuild());
+            configuration.setAutoRole(autoRole.get(0).getName());
             event.getTextChannel().sendMessage(
                     messageGenerators.generateRightMsg("Successfully set autorole to `" + autoRole.get(0).getName() + "`.")
             ).queue();
-        }else {
-            configuration.setAutorole("", event.getGuild());
+        } else {
+            configuration.setAutoRole("");
             event.getTextChannel().sendMessage(messageGenerators.generateRightMsg("Successfully deactivated autorole.")).queue();
         }
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

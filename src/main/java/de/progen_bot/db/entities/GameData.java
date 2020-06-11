@@ -6,7 +6,7 @@ public class GameData {
     private String challengerId;
     private String channelId;
 
-    private int heigh;
+    private int height;
     private int width;
 
     public String getMessageId() {
@@ -33,12 +33,12 @@ public class GameData {
         this.challengerId = challengerId;
     }
 
-    public int getHeigh() {
-        return heigh;
+    public int getHeight() {
+        return height;
     }
 
-    public void setHeigh(int heigh) {
-        this.heigh = heigh;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public int getWidth() {

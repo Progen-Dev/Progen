@@ -5,20 +5,20 @@ import de.mtorials.commands.ChangePrefix;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandManager;
-import de.progen_bot.commands.settings.CommandAutorole;
-import de.progen_bot.commands.settings.CommandNotify;
-import de.progen_bot.commands.settings.CommandVote;
-import de.progen_bot.commands.fun.ConnectFour;
 import de.progen_bot.commands.Help;
+import de.progen_bot.commands.fun.ConnectFour;
 import de.progen_bot.commands.moderator.*;
 import de.progen_bot.commands.moderator.blacklist.CommandBan;
 import de.progen_bot.commands.moderator.blacklist.CommandKick;
+import de.progen_bot.commands.music.CommandMusic;
 import de.progen_bot.commands.music.CommandPlaylist;
-import de.progen_bot.commands.owner.CommandTest;
-import de.progen_bot.commands.user.*;
 import de.progen_bot.commands.owner.CommandRestart;
 import de.progen_bot.commands.owner.CommandStop;
-import de.progen_bot.commands.music.CommandMusic;
+import de.progen_bot.commands.owner.CommandTest;
+import de.progen_bot.commands.settings.CommandAutorole;
+import de.progen_bot.commands.settings.CommandNotify;
+import de.progen_bot.commands.settings.CommandVote;
+import de.progen_bot.commands.user.*;
 import de.progen_bot.commands.xp.XP;
 import de.progen_bot.commands.xp.XPNotify;
 import de.progen_bot.commands.xp.XPrank;
@@ -30,7 +30,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
 import javax.security.auth.login.LoginException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -41,19 +40,11 @@ import java.sql.SQLException;
  */
 public class Main {
 
-    /**
-     * The jda.
-     */
-
-    private static String URL;
-
     private static JDA jda;
 
     private static Connection sqlConnection;
 
     private static Fortnite fortnite;
-
-    private static API httpapi;
 
     private static CommandManager commandManager;
 
@@ -71,7 +62,7 @@ public class Main {
 
         Settings.loadSettings();
 
-        URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
+        String URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
                 Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
 
         try {
@@ -81,7 +72,7 @@ public class Main {
             throw new RuntimeException("Error connecting to the database", ex);
         }
 
-        httpapi = new API(Integer.parseInt(Settings.API_PORT));
+        API httpapi = new API(Integer.parseInt(Settings.API_PORT));
         httpapi.start();
 
         fortnite = new Fortnite();
@@ -90,7 +81,7 @@ public class Main {
 
         //TODO MySQL.loadPollTimer();
 
-        topGGIntegration = new TopGGIntegration(getJda(), Settings.TOP_GG_TOKEN);
+        topGGIntegration = new TopGGIntegration(getJda());
         topGGIntegration.postServerCount();
 
         // DAO Handler
@@ -201,7 +192,7 @@ public class Main {
      *
      * @param args the arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Main();
     }
 }

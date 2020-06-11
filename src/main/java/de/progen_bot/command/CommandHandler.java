@@ -15,7 +15,7 @@ public abstract class CommandHandler {
     /**
      * MessageGenerators
      */
-    protected MessageGenerator messageGenerators;
+    protected final MessageGenerator messageGenerators;
 
     /**
      * The invoke string.
@@ -93,7 +93,6 @@ public abstract class CommandHandler {
     public DaoHandler getDAOs() {
         return daoHandler;
     }
-
-    public abstract String help();
+    
     public abstract AccessLevel getAccessLevel();
 }

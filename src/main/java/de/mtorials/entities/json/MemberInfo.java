@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MemberInfo {
 
-    private Member member;
+    private final Member member;
 
     public MemberInfo(Member member) {
 

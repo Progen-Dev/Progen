@@ -1,23 +1,49 @@
 package de.progen_bot.db.entities.config;
 
-import net.dv8tion.jda.api.entities.Guild;
-
 public class GuildConfiguration {
 
-    // create getter and setter
-    public String prefix;
-    public final String logChannelID;
-    public String tempChannelCategoryID;
-    public final String setAutorole;
+    private String prefix;
+    private String logChannelID;
+    private String tempChannelCategoryID;
+    private String autoRole;
 
-    GuildConfiguration(String prefix, String logChannelID, String tempChannelCategoryID, String setAutoRole) {
+    GuildConfiguration(String prefix, String logChannelID, String tempChannelCategoryID, String autoRole) {
 
         this.prefix = prefix;
         this.logChannelID = logChannelID;
         this.tempChannelCategoryID = tempChannelCategoryID;
-        this.setAutorole = setAutoRole;
+        this.autoRole = autoRole;
     }
 
-    public void setAutorole(String role, Guild guild) {
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public String getLogChannelID() {
+        return logChannelID;
+    }
+
+    public void setLogChannelID(String logChannelID) {
+        this.logChannelID = logChannelID;
+    }
+
+    public String getTempChannelCategoryID() {
+        return tempChannelCategoryID;
+    }
+
+    public void setTempChannelCategoryID(String tempChannelCategoryID) {
+        this.tempChannelCategoryID = tempChannelCategoryID;
+    }
+
+    public String getAutoRole() {
+        return autoRole;
+    }
+
+    public void setAutoRole(String autoRole) {
+        this.autoRole = autoRole;
     }
 }

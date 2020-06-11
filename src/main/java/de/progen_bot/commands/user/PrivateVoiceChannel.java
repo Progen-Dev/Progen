@@ -7,6 +7,7 @@ import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.listeners.PrivateVoice;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -19,14 +20,17 @@ public class PrivateVoiceChannel extends CommandHandler {
                         "access to your channel. If no one is in it, it will be removed.");
     }
 
-    private String privateChannelPrefix = PrivateVoice.PRIVATEVOICECHANNELPREFIX;
+    private static final String PRIVATE_CHANNEL_PREFIX = PrivateVoice.PRIVATEVOICECHANNELPREFIX;
 
     private boolean checkOwnership(VoiceChannel channel, Member member) {
 
-        return channel.getName().equals(privateChannelPrefix + " " + member.getUser().getName());
+        return channel.getName().equals(PRIVATE_CHANNEL_PREFIX + " " + member.getUser().getName());
     }
 
     private void addUserToChannel(MessageReceivedEvent event) {
+        final Member member = event.getMember();
+        if (member == null)
+            return;
 
         // Check if user is specified
         if (event.getMessage().getMentionedMembers().size() != 1) {
@@ -34,50 +38,63 @@ public class PrivateVoiceChannel extends CommandHandler {
             return;
         }
 
+        final GuildVoiceState voiceState = member.getVoiceState();
+        if (voiceState == null)
+            return;
+
         //Check if user is in voice channel
-        if (!event.getMember().getVoiceState().inVoiceChannel()) {
+        if (!voiceState.inVoiceChannel()) {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Your not in a voice channel!")).queue();
             return;
         }
 
+        final VoiceChannel channel = voiceState.getChannel();
+        if (channel == null)
+            return;
+
         //Check if user is owner
-        if (!checkOwnership(event.getMember().getVoiceState().getChannel(), event.getMember())) {
+        if (!checkOwnership(channel, member)) {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("This is not your voice channel!")).queue();
             return;
         }
 
-        event.getMember().getVoiceState().getChannel().createPermissionOverride(event.getMessage().getMentionedMembers().get(0)).setAllow(Permission.VOICE_CONNECT).queue();
+        channel.createPermissionOverride(event.getMessage().getMentionedMembers().get(0)).setAllow(Permission.VOICE_CONNECT).queue();
         event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg(event.getMessage().getMentionedMembers().get(0).getEffectiveName() + " can now join the voice channel")).queue();
-        event.getMessage().getMentionedMembers().get(0).getUser().openPrivateChannel().complete().sendMessage(event.getMember().getEffectiveName() + " gave you the permission to join his/her voice channel").queue();
+        event.getMessage().getMentionedMembers().get(0).getUser().openPrivateChannel().complete().sendMessage(member.getEffectiveName() + " gave you the permission to join his/her voice channel").queue();
     }
 
-    private VoiceChannel createChannel(MessageReceivedEvent event, String categoryID) {
+    private void createChannel(MessageReceivedEvent event, String categoryID) {
+        final Member member = event.getMember();
+        if (member == null)
+            return;
 
-        //Check if user is in voice channel
-        if (!event.getMember().getVoiceState().inVoiceChannel()) {
+        final GuildVoiceState guildVoiceState = member.getVoiceState();
+        if (guildVoiceState == null)
+            return;
+
+        if (!member.getVoiceState().inVoiceChannel()) {
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Your not in a voice channel! Please join any voice channel.")).queue();
-            return null;
+            return;
         }
 
         // create new channel
         VoiceChannel channel =
-                event.getGuild().createVoiceChannel(privateChannelPrefix + " " + event.getMember().getUser().getName()).complete();
+                event.getGuild().createVoiceChannel(PRIVATE_CHANNEL_PREFIX + " " + member.getUser().getName()).complete();
         // set permissions
         channel.putPermissionOverride(event.getGuild().getPublicRole()).setDeny(Permission.VOICE_CONNECT).complete();
         // set category
         channel.getManager().setParent(event.getGuild().getCategoryById(categoryID)).queue();
         // move member
-        event.getGuild().moveVoiceMember(event.getMember(), channel).queue();
+        event.getGuild().moveVoiceMember(member, channel).queue();
 
         event.getTextChannel().sendMessage(super.messageGenerators.generateSuccessfulMsg()).queue();
 
-        return channel;
     }
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-
-        if (event.getMember() == null)
+        final Member member = event.getMember();
+        if (member == null)
             return;
 
         if (parsedCommand.getArgsAsList().isEmpty()) {
@@ -92,12 +109,12 @@ public class PrivateVoiceChannel extends CommandHandler {
                 break;
 
             case "create":
-                createChannel(event, configuration.tempChannelCategoryID);
+                createChannel(event, configuration.getTempChannelCategoryID());
                 break;
 
             case "category":
                 // If not owner
-                if (!event.getMember().isOwner()) {
+                if (!member.isOwner()) {
                     event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Sorry, you have to be the owner of the guild to create the category.")).queue();
                     return;
                 }
@@ -109,20 +126,14 @@ public class PrivateVoiceChannel extends CommandHandler {
                 }
 
                 // create channel
-                String id = event.getGuild().createCategory(parsedCommand.getArgsAsList().get(1)).complete().getId();
 
-                configuration.tempChannelCategoryID = id;
+                event.getGuild().createCategory(parsedCommand.getArgsAsList().get(1)).queue(c -> configuration.setTempChannelCategoryID(c.getId()));
                 new ConfigDaoImpl().writeConfig(configuration, event.getGuild());
                 break;
 
             default:
                 event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
         }
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 
     @Override

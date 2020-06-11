@@ -6,6 +6,8 @@ import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.db.entities.config.GuildConfigurationBuilder;
 import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.util.MessageGenerator;
+import de.progen_bot.util.Settings;
+import de.progen_bot.util.Statics;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -29,6 +31,19 @@ public class CommandManager extends ListenerAdapter {
             return;
         }
 
+        // Universal info command
+        if (event.getMessage().getContentRaw().equals(Settings.PREFIX + Statics.UNIVERSAL_INFO_CMD_WITHOUT_PREFIX)) {
+            CommandHandler commandHandler = commandAssociations.get(Statics.UNIVERSAL_INFO_CMD_WITHOUT_PREFIX);
+            Logger.info("Universal info command was invoked by " + event.getGuild().getName());
+            ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), Settings.PREFIX);
+            commandHandler.execute(parsedMessage, event, new GuildConfigurationBuilder()
+                    .setLogChannelID(null)
+                    .setPrefix("pb!")
+                    .setTempChannelCategoryID(null)
+                    .build());
+            return;
+        }
+
         GuildConfiguration guildConfiguration = new ConfigDaoImpl().loadConfig(event.getGuild());
 
         if (guildConfiguration == null) {
@@ -40,7 +55,7 @@ public class CommandManager extends ListenerAdapter {
 
             new ConfigDaoImpl().writeConfig(guildConfiguration, event.getGuild());
         }
-        ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.prefix);
+        ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.getPrefix());
 
         if (parsedMessage == null) return;
 
@@ -51,8 +66,7 @@ public class CommandManager extends ListenerAdapter {
             return;
         }
 
-        //DEBUG
-        Logger.info("Command " + commandHandler.getInvokeString() + " was invoked in " + event.getGuild().getName());
+        Logger.info("Command " + commandHandler.getInvokeString() + " was invoked by " + event.getGuild().getName());
 
         if (commandHandler.getAccessLevel().getLevel() > new PermissionCore(event).getAccessLevel().getLevel()) {
             event.getTextChannel().sendMessage(new MessageGenerator("", "").generateErrorMsg("Your are not allowed to use this command!")).queue();

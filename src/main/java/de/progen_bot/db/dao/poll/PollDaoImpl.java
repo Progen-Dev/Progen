@@ -5,6 +5,7 @@ import de.progen_bot.db.connection.ConnectionFactory;
 import de.progen_bot.db.dao.Dao;
 import de.progen_bot.db.entities.PollData;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.awt.*;
 import java.sql.*;
@@ -12,15 +13,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class PollDaoImpl extends Dao implements PollDao {
-    private final String sqlQuery = "CREATE TABLE IF NOT EXISTS poll ( `pollid` INT(11) NOT NULL AUTO_INCREMENT, " +
-            "`userid` VARCHAR(50) NOT NULL, `messageid` VARCHAR(50) NOT NULL, `users` TEXT(1000),`open` BOOLEAN NOT NULL," +
-            "`option1` VARCHAR(50) NOT NULL,`option2` VARCHAR(50) NOT NULL,`option3` VARCHAR(50) NOT NULL," +
-            "`option4` VARCHAR(50) NOT NULL,`option5` VARCHAR(50) NOT NULL,`option6` VARCHAR(50) NOT NULL," +
-            "`option7` VARCHAR(50) NOT NULL,`option8` VARCHAR(50) NOT NULL,`option9` VARCHAR(50) NOT NULL," +
-            "`time` TIMESTAMP NOT NULL,`channelId` VARCHAR(50) NOT NULL, PRIMARY KEY(`pollid`) ) ENGINE = InnoDB " +
-            "DEFAULT CHARSET = utf8";
 
-    public void savePollData(PollData data) {
+	public void savePollData(PollData data) {
         Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement(
@@ -89,10 +83,12 @@ public class PollDaoImpl extends Dao implements PollDao {
                     }
                 } else if (data.isOpen()) {
                     data.setOpen(false);
-                    if (Main.getJda().getTextChannelById(data.getChannelId()) != null) {
-                        Main.getJda().getTextChannelById(data.getChannelId()).sendMessage(
-                                new EmbedBuilder().setColor(Color.blue).setDescription("Poll closed!").build())
-                                .queue();
+
+                    final TextChannel channel = Main.getJda().getTextChannelById(data.getChannelId());
+                    if (channel != null) {
+                        channel.sendMessage(
+                                new EmbedBuilder().setColor(Color.blue).setDescription("Poll closed!").build()
+                        ).queue();
                     }
                     data.saveToDb(data);
                 }
@@ -130,6 +126,13 @@ public class PollDaoImpl extends Dao implements PollDao {
 
     @Override
     public void generateTables(String query) {
-        super.generateTables(sqlQuery);
+		String sqlQuery = "CREATE TABLE IF NOT EXISTS poll ( `pollid` INT(11) NOT NULL AUTO_INCREMENT, " +
+				"`userid` VARCHAR(50) NOT NULL, `messageid` VARCHAR(50) NOT NULL, `users` TEXT(1000),`open` BOOLEAN NOT NULL," +
+				"`option1` VARCHAR(50) NOT NULL,`option2` VARCHAR(50) NOT NULL,`option3` VARCHAR(50) NOT NULL," +
+				"`option4` VARCHAR(50) NOT NULL,`option5` VARCHAR(50) NOT NULL,`option6` VARCHAR(50) NOT NULL," +
+				"`option7` VARCHAR(50) NOT NULL,`option8` VARCHAR(50) NOT NULL,`option9` VARCHAR(50) NOT NULL," +
+				"`time` TIMESTAMP NOT NULL,`channelId` VARCHAR(50) NOT NULL, PRIMARY KEY(`pollid`) ) ENGINE = InnoDB " +
+				"DEFAULT CHARSET = utf8";
+		super.generateTables(sqlQuery);
     }
 }

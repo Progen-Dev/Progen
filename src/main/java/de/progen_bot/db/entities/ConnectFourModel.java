@@ -4,10 +4,12 @@ import de.progen_bot.core.Main;
 import de.progen_bot.db.dao.connectfour.ConnectFourDaoImpl;
 import de.progen_bot.util.Util;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.User;
 
 /**
  * The Class ConnectFourModel.
  */
+@SuppressWarnings("DuplicatedCode")
 public class ConnectFourModel {
 
     private boolean gameOver = false;
@@ -275,24 +277,27 @@ public class ConnectFourModel {
      * @param message the message
      */
     public void updateBoard(Message message) {
-        String output = Main.getJda().getUserById(getActPlayer()).getAsMention() + " " + nextPlayerMoveColor() + " ist am Zug!" + "\n";
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                switch (board[i][j]) {
-                    case '\0':
-                        output += ":white_circle:";
-                        break;
-                    case 'x':
-                        output += ":red_circle:";
-                        break;
-                    case 'o':
-                        output += ":blue_circle:";
-                        break;
-                }
-            }
-            output += "\n";
-        }
-        message.editMessage(Util.addTableNumbers(output, board[0].length)).queue();
+        final User[] user = new User[1];
+        Main.getJda().retrieveUserById(getActPlayer()).queue(u -> user[0] = u);
+
+        StringBuilder output = new StringBuilder(user[0].getAsMention() + " " + nextPlayerMoveColor() + " ist am Zug!" + "\n");
+		for (char[] chars : board) {
+			for (int j = 0; j < board[0].length; j++) {
+				switch (chars[j]) {
+					case '\0':
+						output.append(":white_circle:");
+						break;
+					case 'x':
+						output.append(":red_circle:");
+						break;
+					case 'o':
+						output.append(":blue_circle:");
+						break;
+				}
+			}
+			output.append("\n");
+		}
+        message.editMessage(Util.addTableNumbers(output.toString(), board[0].length)).queue();
         new ConnectFourDaoImpl().insertConnectFourData(this);
     }
 

@@ -5,11 +5,11 @@ import de.mtorials.fortnite.exeptions.NotEnoughDetailsException;
 
 public class Statistics {
 
-    private User user;
-    private int overallScore;
-    private int overallPlaceTop1;
-    private int overallKills;
-    private int overallMatchesPlayed;
+    private final User user;
+    private final int overallScore;
+    private final int overallPlaceTop1;
+    private final int overallKills;
+    private final int overallMatchesPlayed;
 
     Statistics(User user, JsonNode jsonNode) {
 

@@ -8,8 +8,8 @@ import java.awt.Color;
 
 public class MessageGenerator {
 
-    private String commandUsage;
-    private String invokeString;
+    private final String commandUsage;
+    private final String invokeString;
 
     public MessageGenerator(String commandUsage, String invokeString) {
         this.commandUsage = commandUsage;

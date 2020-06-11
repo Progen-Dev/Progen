@@ -32,17 +32,24 @@ public class CommandKick extends CommandHandler {
                 reason = "No reason";
             else
                 reason = String.join(" ", argsWithoutMention);
-            event.getTextChannel().sendMessage(this.getKickEmbed(event, reason)).queue();
-            event.getGuild().getTextChannelsByName("progenlog",true).get(0).sendMessage(this.getKickEmbed(event, reason)).queue();
-            final String finalReason = reason;
+
+            final MessageEmbed eb = this.getKickEmbed(event, reason);
+            if (eb == null)
+                return;
+
+            event.getTextChannel().sendMessage(eb).queue();
+            event.getGuild().getTextChannelsByName("progenlog",true).get(0).sendMessage(eb).queue();
             event.getMessage().getMentionedUsers().get(0).openPrivateChannel().queue(
-                    privateChannel -> privateChannel.sendMessage(this.getKickEmbed(event, finalReason)).queue()
+                    privateChannel -> privateChannel.sendMessage(eb).queue()
             );
             final Member target = event.getMessage().getMentionedMembers().get(0);
             event.getGuild().kick(target).queue();
         }
 
     private MessageEmbed getKickEmbed(MessageReceivedEvent event, String reason) {
+        if (event.getMember() == null)
+            return null;
+
         return new EmbedBuilder()
                 .setColor(Color.MAGENTA)
                 .setTitle(KICK)
@@ -51,12 +58,6 @@ public class CommandKick extends CommandHandler {
                 .setDescription(event.getMessageId())
                 .addField(REASON, reason, false)
                 .setTimestamp(Instant.now()).build();
-    }
-
-    @Override
-    public String help() {
-        return null;
-
     }
 
     @Override

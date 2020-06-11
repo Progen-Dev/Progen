@@ -12,20 +12,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConfigDaoImpl extends Dao implements ConfigDao {
-    private final String sqlQuery = "CREATE TABLE IF NOT EXISTS config (guildid VARCHAR(18) NOT NULL, prefix VARCHAR" +
-            "(18) NOT NULL , logChannelID VARCHAR(18), tempChannelCategoryID VARCHAR(18), UNIQUE " +
-            "(guildid)) ENGINE = InnoDB;";
 
-    @Override
+	@Override
     public void writeConfig(GuildConfiguration configuration, Guild guild) {
         Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement("REPLACE INTO `config` (`guildid`, `prefix`, " +
                     "`logChannelID`, `tempChannelCategoryID`) VALUES (?, ?, ?, ?);");
             ps.setString(1, guild.getId());
-            ps.setString(2, configuration.prefix);
-            ps.setString(3, configuration.logChannelID);
-            ps.setString(4, configuration.tempChannelCategoryID);
+            ps.setString(2, configuration.getPrefix());
+            ps.setString(3, configuration.getLogChannelID());
+            ps.setString(4, configuration.getTempChannelCategoryID());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,6 +50,9 @@ public class ConfigDaoImpl extends Dao implements ConfigDao {
 
     @Override
     public void generateTables(String query) {
-        super.generateTables(sqlQuery);
+		String sqlQuery = "CREATE TABLE IF NOT EXISTS config (guildid VARCHAR(18) NOT NULL, prefix VARCHAR" +
+				"(18) NOT NULL , logChannelID VARCHAR(18), tempChannelCategoryID VARCHAR(18), UNIQUE " +
+				"(guildid)) ENGINE = InnoDB;";
+		super.generateTables(sqlQuery);
     }
 }

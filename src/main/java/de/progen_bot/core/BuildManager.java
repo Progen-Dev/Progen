@@ -12,7 +12,7 @@ public class BuildManager {
     /**
      * The builder.
      */
-    private JDABuilder builder;
+    private final JDABuilder builder;
 
     /**
      * Instantiates a new builds the manager.

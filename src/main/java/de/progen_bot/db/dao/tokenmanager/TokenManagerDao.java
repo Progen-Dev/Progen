@@ -3,6 +3,7 @@ package de.progen_bot.db.dao.tokenmanager;
 import de.progen_bot.core.Main;
 import de.progen_bot.db.connection.ConnectionFactory;
 import de.progen_bot.db.dao.Dao;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.sql.Connection;
@@ -11,13 +12,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TokenManagerDao extends Dao {
-    private final String sqlQuery = "CREATE TABLE if not exists `tokens`(`guildid` VARCHAR(18) NOT NULL, `userid` " +
-            "VARCHAR(18) NOT NULL , `token` VARCHAR(10) NOT NULL , `time` TIMESTAMP NOT NULL DEFAULT " +
-            "CURRENT_TIMESTAMP, PRIMARY KEY (`token`)) ENGINE = InnoDB;";
 
-    @Override
+	@Override
     public void generateTables(String query) {
-        super.generateTables(sqlQuery);
+		String sqlQuery = "CREATE TABLE if not exists `tokens`(`guildid` VARCHAR(18) NOT NULL, `userid` " +
+				"VARCHAR(18) NOT NULL , `token` VARCHAR(10) NOT NULL , `time` TIMESTAMP NOT NULL DEFAULT " +
+				"CURRENT_TIMESTAMP, PRIMARY KEY (`token`)) ENGINE = InnoDB;";
+		super.generateTables(sqlQuery);
     }
 
     public boolean keyExists(String token) throws SQLException {
@@ -49,8 +50,14 @@ public class TokenManagerDao extends Dao {
         ps.setString(1, token);
         ResultSet rs = ps.executeQuery();
 
-        if (!rs.next()) return null;
-        return Main.getJda().getGuildById(rs.getString("guildid")).getMemberById(rs.getString("userid"));
+        if (!rs.next())
+            return null;
+
+        final Guild guild = Main.getJda().getGuildById(rs.getString("guildid"));
+        if (guild == null)
+            return null;
+
+        return guild.getMemberById(rs.getString("userid"));
     }
 
     public void deleteMember(Member member) throws SQLException {

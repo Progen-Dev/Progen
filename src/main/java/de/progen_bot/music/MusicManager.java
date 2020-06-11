@@ -31,8 +31,8 @@ public class MusicManager {
         return null;
     }
 
-    public boolean isMusicInChannel(VoiceChannel channel) {
-        return getMusicByChannel(channel) != null;
+    public boolean isNotMusicInChannel(VoiceChannel channel) {
+        return getMusicByChannel(channel) == null;
     }
 
     public boolean isMusicOwner(Member member) {
@@ -40,14 +40,13 @@ public class MusicManager {
     }
 
     // I would suggest, that this method will be void
-    public Music registerMusicByMember(Member owner, Music music) {
+    public void registerMusicByMember(Member owner, Music music) {
         if (owner == null || owner.getVoiceState() == null || owner.getVoiceState().getChannel() == null)
-            return null;
+            return;
 
         if (getMusicByChannel(owner.getVoiceState().getChannel()) != null) throw new TooManyMusicForChannelException();
         if (!musicByGuildIDByOwnerID.containsKey(owner.getGuild().getId())) musicByGuildIDByOwnerID.put(owner.getGuild().getId(), new HashMap<>());
         musicByGuildIDByOwnerID.get(owner.getGuild().getId()).put(owner.getId(), music);
-        return music;
     }
 
     public void unregisterMusicByOwner(Member owner) {

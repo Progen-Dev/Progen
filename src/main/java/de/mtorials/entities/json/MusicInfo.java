@@ -13,7 +13,7 @@ import java.util.List;
 
     public class MusicInfo {
 
-        private Music music;
+        private final Music music;
 
         public MusicInfo(Music music) {
             this.music = music;
