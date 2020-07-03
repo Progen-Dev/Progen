@@ -64,9 +64,8 @@ public class CommandInfo extends CommandHandler {
 
                                         " - **Please use this document to report a Bug or suggest an idea:  \n https://github.com/Progen-Dev/Progen/issues**\n\n" +
 
-                                        " \n-  Discord:  https://discord.gg/Xbtn9zG \n" +
+                                        " \n-  Discord:  https://discord.gg/rPeBPkr \n" +
                                         "\n- your current Prefix: " + configuration.getPrefix(), false)
-                        .setImage("https://discordbots.org/api/widget/495293590503817237.png?random=")
                         .build()
         ).queue();
     }
