@@ -40,7 +40,7 @@ public class Oauth2Handler {
       scopes = new Scope[]{Scope.IDENTIFY};
       DefaultSessionController sessionController = new DefaultSessionController();
       DefaultStateController stateController = new DefaultStateController();
-      oAuth2Client = new OAuth2ClientImpl(495293590503817237L, "5HxydRvFhTK-ScSfE1qEtJThYo5D9NV2" ,sessionController, stateController, main.httpClient);
+      oAuth2Client = new OAuth2ClientImpl(YOUR CLIENT-ID, "YOUR CLIENT-SECRET" ,sessionController, stateController, main.httpClient);
 
     URL url = null;
     try {
