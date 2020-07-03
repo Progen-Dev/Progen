@@ -36,9 +36,13 @@ public class CommandKick extends CommandHandler {
             final MessageEmbed eb = this.getKickEmbed(event, reason);
             if (eb == null)
                 return;
-
-            event.getTextChannel().sendMessage(eb).queue();
-            event.getGuild().getTextChannelsByName("progenlog",true).get(0).sendMessage(eb).queue();
+            final List<TextChannel> channels = event.getGuild().getTextChannelsByName("progenlog", true);
+            if (channels.isEmpty()){
+                System.out.println("progenlog is not available on the Guild " + event.getGuild());
+            }else {
+                event.getTextChannel().sendMessage(eb).queue();
+                channels.get(0).sendMessage(eb).queue();
+            }
             event.getMessage().getMentionedUsers().get(0).openPrivateChannel().queue(
                     privateChannel -> privateChannel.sendMessage(eb).queue()
             );

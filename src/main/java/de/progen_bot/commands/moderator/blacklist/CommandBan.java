@@ -7,8 +7,10 @@ import de.progen_bot.db.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.internal.requests.Route;
 
 import java.awt.*;
+import java.nio.channels.Channels;
 import java.time.Instant;
 import java.util.List;
 
@@ -40,8 +42,12 @@ public class CommandBan extends CommandHandler {
         if (eb == null)
             return;
 
-        event.getGuild().getTextChannelsByName("progenlog", true).get(0).sendMessage(eb).queue();
-        event.getTextChannel().sendMessage(eb).queue();
+        List<TextChannel> channels = event.getGuild().getTextChannelsByName("progenlog", true);
+        if (channels.isEmpty()){
+           event.getTextChannel().sendMessage(eb).queue();
+       }else {
+           System.out.println("progenlog is not available on the Guild" + event.getGuild());
+       }
         event.getMessage().getMentionedUsers().get(0).openPrivateChannel().queue(
                 privateChannel -> privateChannel.sendMessage(eb).queue()
         );
