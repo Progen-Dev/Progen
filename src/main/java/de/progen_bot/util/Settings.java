@@ -45,6 +45,9 @@ public class Settings {
     public static final List<String> MUSIC      =   GSON.fromJson(get(BOT_KEY, "music").getAsJsonArray(), List.class);
 
     public static final String TOP_GG_TOKEN     =   get(BOT_KEY, "topGGToken").getAsString();
+
+    public static final Long CLIENT_ID          =   Long.valueOf(get(BOT_KEY, "oauth2").getAsJsonObject().get("clientId").getAsString());
+    public static final String CLIENT_SECRET    =   get(BOT_KEY, "oauth2").getAsJsonObject().get("clientSecret").getAsString();
     //#endregion
 
     //#region Database

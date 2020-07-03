@@ -1,17 +1,27 @@
 {
   "bot": {
-    "prefix": "<Prefix>",
-    "token": "<PlaceYourTokenHere>",
+    "prefix": "pb!",
+    "token": "<token>",
     "apiPort": 8083,
-    "topGGToken": "<PlaceYourTopGGTokenHere>",
-    "musicToken1": "<PlaceYourTokenOfFirstMusicBotHere>",
-    "musicToken2": "<PlaceYourTokenOfSecondMusicBotHere>"
+    "topGGToken": "",
+    "music": [
+      "1",
+      "2"
+    ],
+    "owners": [
+      "1",
+      "2"
+    ],
+    "oauth2": {
+      "clientId": "id",
+      "clientSecret": "clientSecret"
+    }
   },
   "database": {
-    "host": "<Host>",
-    "database": "<database>",
-    "user": "<user>",
+    "host": "localhost",
+    "database": "progen-dev",
+    "user": "root",
     "password": "",
-    "port": <port>
+    "port": 3306
   }
 }

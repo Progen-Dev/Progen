@@ -27,6 +27,7 @@ import de.progen_bot.music.MusicManager;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import okhttp3.OkHttpClient;
 
 import javax.security.auth.login.LoginException;
 import java.sql.Connection;
@@ -42,6 +43,7 @@ public class Main {
     private static final String URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
             Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
 
+    private static OkHttpClient client;
     private static JDA jda;
 
     private static Connection sqlConnection;
@@ -70,6 +72,8 @@ public class Main {
         } catch (SQLException ex) {
             throw new RuntimeException("Error connecting to the database", ex);
         }
+
+        client = new OkHttpClient();
 
         API httpApi = new API(Integer.parseInt(Settings.API_PORT));
         httpApi.start();
@@ -182,6 +186,10 @@ public class Main {
     }
     public static MusicManager getMusicManager() {
         return musicManager;
+    }
+
+    public static OkHttpClient getClient() {
+        return client;
     }
 
     /**
