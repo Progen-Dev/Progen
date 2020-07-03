@@ -1,15 +1,6 @@
 package de.progen_bot.core;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.security.auth.login.LoginException;
-
 import com.mysql.cj.jdbc.Driver;
-
 import de.mtorials.commands.ChangePrefix;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.pwi.httpapi.API;
@@ -17,18 +8,32 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.Help;
 import de.progen_bot.commands.fun.ConnectFour;
 import de.progen_bot.commands.moderator.*;
-import de.progen_bot.commands.moderator.blacklist.*;
-import de.progen_bot.commands.music.*;
-import de.progen_bot.commands.owner.*;
-import de.progen_bot.commands.settings.*;
+import de.progen_bot.commands.moderator.blacklist.CommandBan;
+import de.progen_bot.commands.moderator.blacklist.CommandKick;
+import de.progen_bot.commands.music.CommandMusic;
+import de.progen_bot.commands.music.CommandPlaylist;
+import de.progen_bot.commands.owner.CommandRestart;
+import de.progen_bot.commands.owner.CommandStop;
+import de.progen_bot.commands.owner.CommandTest;
+import de.progen_bot.commands.settings.CommandAutorole;
+import de.progen_bot.commands.settings.CommandNotify;
+import de.progen_bot.commands.settings.CommandVote;
 import de.progen_bot.commands.user.*;
-import de.progen_bot.commands.xp.*;
+import de.progen_bot.commands.xp.XP;
+import de.progen_bot.commands.xp.XPNotify;
+import de.progen_bot.commands.xp.XPrank;
 import de.progen_bot.db.DaoHandler;
 import de.progen_bot.music.MusicManager;
 import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+
+import javax.security.auth.login.LoginException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 
 /**
  * The Class Main.
@@ -57,8 +62,8 @@ public class Main {
 
         Settings.loadSettings();
 
-        String URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" + Settings.DATABASE
-                + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
+        String URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
+                Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
 
         try {
             DriverManager.registerDriver(new Driver());
@@ -74,16 +79,10 @@ public class Main {
 
         initJDA();
 
-        // TODO MySQL.loadPollTimer();
+        //TODO MySQL.loadPollTimer();
 
         topGGIntegration = new TopGGIntegration(getJda());
-
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                topGGIntegration.postServerCount();
-            }
-        }, 0, 30 * 60 * 1000); // every 30 mins
+        topGGIntegration.postServerCount();
 
         // DAO Handler
         daoHandler = new DaoHandler();
@@ -93,6 +92,7 @@ public class Main {
 
         musicBotManager = new MusicBotManager();
         musicManager = new MusicManager();
+
 
     }
 
@@ -183,7 +183,6 @@ public class Main {
     public static MusicBotManager getMusicBotManager() {
         return musicBotManager;
     }
-
     public static MusicManager getMusicManager() {
         return musicManager;
     }
