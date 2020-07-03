@@ -1,17 +1,17 @@
 {
   "bot": {
-    "prefix": "pd!",
-    "token": "NTE2MzI3MzA3NzAzNzQ2NTcz.XujKzw.gKUs9T1OFPvTKrFi_qxcbiYR7kw",
+    "prefix": "<Prefix>",
+    "token": "<PlaceYourTokenHere>",
     "apiPort": 8083,
     "topGGToken": "<PlaceYourTopGGTokenHere>",
     "musicToken1": "<PlaceYourTokenOfFirstMusicBotHere>",
     "musicToken2": "<PlaceYourTokenOfSecondMusicBotHere>"
   },
   "database": {
-    "host": "localhost",
-    "database": "test",
-    "user": "root",
+    "host": "<Host>",
+    "database": "<database>",
+    "user": "<user>",
     "password": "",
-    "port": 3306
+    "port": <port>
   }
 }
