@@ -28,7 +28,6 @@ public class BuildManager
                 new PrivateVoice(),
                 new FourConnectListener(),
                 new MusicListener(),
-                new ServerJoinListener(),
                 new ReconnectListener(),
                 new MuteHandler(),
                 new GuildJoinReloadListener(),
