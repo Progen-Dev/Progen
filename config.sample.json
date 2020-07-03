@@ -1,7 +1,7 @@
 {
   "bot": {
-    "prefix": "pb!",
-    "token": "<PlaceYourDiscordTokenHere>",
+    "prefix": "pd!",
+    "token": "NTE2MzI3MzA3NzAzNzQ2NTcz.XujKzw.gKUs9T1OFPvTKrFi_qxcbiYR7kw",
     "apiPort": 8083,
     "topGGToken": "<PlaceYourTopGGTokenHere>",
     "musicToken1": "<PlaceYourTokenOfFirstMusicBotHere>",
@@ -9,9 +9,9 @@
   },
   "database": {
     "host": "localhost",
-    "database": "progen",
-    "user": "progen",
-    "password": "progen",
+    "database": "test",
+    "user": "root",
+    "password": "",
     "port": 3306
   }
 }
