@@ -48,15 +48,5 @@
     <orderEntry type="library" name="Maven: com.diogonunes:JCDP:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:5.5.0" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna-platform:5.5.0" level="project" />
-    <orderEntry type="library" name="Maven: com.github.Mokulu:discord-oauth2-api:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.2" level="project" />
-    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
-    <orderEntry type="library" name="Maven: com.jagrosh:jda-utilities-commons:3.0.4" level="project" />
-    <orderEntry type="library" name="Maven: com.jagrosh:jda-utilities-doc:3.0.4" level="project" />
-    <orderEntry type="library" name="Maven: com.jagrosh:jda-utilities-examples:3.0.4" level="project" />
-    <orderEntry type="library" name="Maven: com.jagrosh:jda-utilities-menu:3.0.4" level="project" />
-    <orderEntry type="library" name="Maven: com.jagrosh:jda-utilities-oauth2:3.0.4" level="project" />
-    <orderEntry type="library" name="Maven: com.jagrosh:jda-utilities-command:3.0.4" level="project" />
-    <orderEntry type="library" name="Maven: com.github.kevinsawicki:http-request:6.0" level="project" />
   </component>
 </module>
