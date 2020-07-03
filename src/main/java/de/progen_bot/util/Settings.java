@@ -18,10 +18,9 @@ import java.util.List;
  * The Class Settings.
  */
 public class Settings {
-
     private static final String BOT_KEY = "bot";
     private static final String DATABASE_KEY = "database";
-    
+
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static String json = null;
 

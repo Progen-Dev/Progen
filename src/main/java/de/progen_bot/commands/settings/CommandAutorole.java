@@ -2,8 +2,11 @@ package de.progen_bot.commands.settings;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.db.dao.autorole.AutoroleDaoImpl;
+import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.permissions.AccessLevel;
 import de.progen_bot.db.entities.config.GuildConfiguration;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -44,8 +47,8 @@ public class CommandAutorole extends CommandHandler{
             configuration.setAutoRole("");
             event.getTextChannel().sendMessage(messageGenerators.generateRightMsg("Successfully deactivated autorole.")).queue();
         }
-    }
 
+    }
     @Override
     public AccessLevel getAccessLevel() {
         return AccessLevel.MODERATOR;
