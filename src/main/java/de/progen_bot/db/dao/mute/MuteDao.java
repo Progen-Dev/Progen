@@ -85,8 +85,8 @@ public class MuteDao extends Dao
     public void generateTables(String sqlQuery)
     {
         final String query = "CREATE TABLE IF NOT EXISTS mute(`victim` VARCHAR(50) NOT NULL, `reason` " +
-                "VARCHAR(255) NOT NULL, `executor` VARCHAR(50) NOT NULL, `guild` VARCHAR(50) NOT NULL, "
-                + "PRIMARY KEY(`victim`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8";
+                "VARCHAR(255) NOT NULL, `executor` VARCHAR(50) NOT NULL, `guild` VARCHAR(50) NOT NULL)"
+                + "ENGINE = InnoDB DEFAULT CHARSET = utf8";
         super.generateTables(query);
     }
 }
