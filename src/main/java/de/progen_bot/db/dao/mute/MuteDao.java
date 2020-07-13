@@ -76,7 +76,7 @@ public class MuteDao extends Dao
         return null;
     }
 
-    private MuteData setMuteDataFromResultSet(ResultSet set) throws SQLException
+    private static MuteData setMuteDataFromResultSet(ResultSet set) throws SQLException
     {
         return new MuteData(set.getString(1), set.getString(2), set.getString(3), set.getString(4));
     }
@@ -85,7 +85,7 @@ public class MuteDao extends Dao
     public void generateTables(String sqlQuery)
     {
         final String query = "CREATE TABLE IF NOT EXISTS mute(`victim` VARCHAR(50) NOT NULL, `reason` " +
-                "VARCHAR(255) NOT NULL, `executor` VARCHAR(50) NOT NULL, `guild` VARCHAR(50) NOT NULL "
+                "VARCHAR(255) NOT NULL, `executor` VARCHAR(50) NOT NULL, `guild` VARCHAR(50) NOT NULL, "
                 + "PRIMARY KEY(`victim`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8";
         super.generateTables(query);
     }
