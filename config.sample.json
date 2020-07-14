@@ -13,7 +13,7 @@
       "2"
     ],
     "oauth2": {
-      "clientId": "id",
+      "clientId": "12345678",
       "clientSecret": "clientSecret"
     }
   },

@@ -18,6 +18,7 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -80,7 +81,7 @@ public class Oauth2Handler {
             /**
              * connect to database generate uniquekey
              */
-            Session session = oAuth2Client.startSession(code, state, String.valueOf(scopes)).complete();
+            Session session = oAuth2Client.startSession(code, state, Arrays.toString(scopes)).complete();
             OAuth2User oAuth2User = oAuth2Client.getUser(session).complete();
             /**
              * add session to database (user.getID and key)

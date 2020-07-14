@@ -20,6 +20,7 @@ public class BuildManager
     public static void addEventListeners(JDABuilder builder)
     {
         builder.addEventListeners(
+                new MuteHandler(),
                 new CommandManager(),
                 new ReadyListener(),
                 new XPListener(),
@@ -29,7 +30,6 @@ public class BuildManager
                 new FourConnectListener(),
                 new MusicListener(),
                 new ReconnectListener(),
-                new MuteHandler(),
                 new GuildJoinReloadListener(),
                 new ReactionListener()
         );
