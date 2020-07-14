@@ -33,15 +33,19 @@ public class Mute extends CommandHandler
 
     private void toggle(String[] args, MessageReceivedEvent event)
     {
-        // TODO: 13.07.2020 ASYNC
-        final User victim = event.getMessage().getMentionedUsers().isEmpty() ? event.getJDA().retrieveUserById(args[0]).complete() : event.getMessage().getMentionedUsers().get(0);
-        if (victim == null)
+        final User[] victim = new User[1];
+        if (!event.getMessage().getMentionedMembers().isEmpty())
+            victim[0] = event.getMessage().getMentionedUsers().get(0);
+        else
+            event.getJDA().retrieveUserById(args[0]).queue(user -> victim[0] = user);
+
+        if (victim[0] == null)
         {
             event.getChannel().sendMessage(messageGenerators.generateErrorMsg("Please enter a valid mention or user ID!")).queue();
             return;
         }
 
-        final String victimId = victim.getId();
+        final String victimId = victim[0].getId();
         final MuteData data = MuteData.getMuteData(victimId);
         if (data == null)
         {
@@ -52,13 +56,13 @@ public class Mute extends CommandHandler
             new MuteData(victimId, reason, event.getAuthor().getId(), event.getGuild().getId())
                     .save();
 
-            event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setDescription(String.format("%s muted %s.%n%nReason: `%s`", event.getAuthor().getAsMention(), victim.getAsMention(), reason)).build()).queue();
+            event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setDescription(String.format("%s muted %s.%n%nReason: `%s`", event.getAuthor().getAsMention(), victim[0].getAsMention(), reason)).build()).queue();
         }
         else
         {
             data.delete();
 
-            event.getChannel().sendMessage(messageGenerators.generateRightMsg(String.format("%s unmuted %s.", event.getAuthor().getAsMention(), victim.getAsMention()))).queue();
+            event.getChannel().sendMessage(messageGenerators.generateRightMsg(String.format("%s unmuted %s.", event.getAuthor().getAsMention(), victim[0].getAsMention()))).queue();
         }
     }
 

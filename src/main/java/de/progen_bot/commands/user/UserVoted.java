@@ -8,10 +8,10 @@ import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class UserVotet extends CommandHandler {
+public class UserVoted extends CommandHandler {
 
-    public UserVotet() {
-        super("hasvoted", "`hasVotet <user>`", "Shows if a user has voted for Progen");
+    public UserVoted() {
+        super("hasvoted", "`hasVoted <user>`", "Shows if a user has voted for Progen");
     }
 
     @Override

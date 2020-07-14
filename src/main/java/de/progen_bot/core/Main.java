@@ -131,7 +131,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandInfo());
         commandManager.setupCommandHandlers(new CommandBan());
         commandManager.setupCommandHandlers(new CommandPlaylist());
-        commandManager.setupCommandHandlers(new UserVotet());
+        commandManager.setupCommandHandlers(new UserVoted());
         commandManager.setupCommandHandlers(new CommandNotify());
         commandManager.setupCommandHandlers(new CommandTest());
         commandManager.setupCommandHandlers(new CommandAutorole());
