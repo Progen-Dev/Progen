@@ -7,13 +7,13 @@
   <img src="https://top.gg/api/widget/495293590503817237.svg" alt="Progen" />
 </a>
 </div>
-<h1>Welcome</h1>
-<h1>Invite</h1>
-<h1>Features</h1>
-<h1>Moderation</h1>
-<h1>Music</h1>
-<h1>Web interface</h1>
-<h1>Logging</h1>
+<h2>Welcome</h2>
+<h2>Invite</h2>
+<h2>Features</h2>
+<h2>Moderation</h2>
+<h2>Music</h2>
+<h2>Web interface</h2>
+<h2>Logging</h2>
 ### Commands
 
 * All commands summarized [Commands](https://github.com/Progen-Dev/Progen/wiki)
