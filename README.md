@@ -1,6 +1,8 @@
 <div align="center">
-<img src="https://github.com/Progen-Dev/Progen-Graphics/blob/master/logo_round.446a0937.png" height="300"/>
-
+<img src="https://github.com/Progen-Dev/Progen-Graphics/blob/master/logo_round.446a0937.png" height="400"/>
+ <h1>Progen</h1>
+ <strong>Multi purpose discord bot with webinterface, music, administration, tools, games and more!</strong>
+ <br>
 Progen is a feature rich discord bot with advanced functionality.
 It features a web interface, the [PWI (Progen Web Interface)](https://pwi.progen-bot.de), to manage the bot and moderate your server.
 
