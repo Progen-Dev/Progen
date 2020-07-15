@@ -14,42 +14,8 @@
 <h2>Music</h2>
 <h2>Web interface</h2>
 <h2>Logging</h2>
-### Commands
 
-* All commands summarized [Commands](https://github.com/Progen-Dev/Progen/wiki)
+<strong>
+ Copyright © 2018-now Progen-Dev
+ Protected by GNU General Public License v3.0
 
-## Invite Progen
-
-* [Add Progen to your server](https://discordapp.com/oauth2/authorize?client_id=495293590503817237&scope=bot)
-* [Add ProgenMusic1 for more music](https://discordapp.com/oauth2/authorize?client_id=662647209929605126&scope=bot)
-* [Add ProgenMusic2 for more music](https://discordapp.com/oauth2/authorize?client_id=662647378385305620&scope=bot)
-
-## Contribution
-Become beta tester and help us make Progen even better!
-
-=> [Apply here](https://discord.gg/rPeBPkr)
-
-## Authors
-* __ShowMeYourSkil__
-* __M'Torials__
-* __Evoh__
-* __[byNoobiYT](https://github.com/byNoobiYT)__
-
-## Support
-Feel free to join our Progen discord guild.
-* [Join](https://discord.gg/rPeBPkr)
-
-## Credits
-@Evoh
-@ShowMeYourSkil
-@M'Torials
-[@byNoobiYT](https://github.com/byNoobiYT)
-
-## License
-GNU GPL v2
-
-## Information
-We work on Progen, but they are still at the beginning of a major project. If there are any problems, please file an issue and let us know!
-
- * Current Version: 1.0.0.6
- * Last Version: 1.0.0.5
