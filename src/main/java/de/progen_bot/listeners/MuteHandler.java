@@ -17,6 +17,8 @@ public class MuteHandler extends ListenerAdapter
         final MuteData data = MuteData.getMuteData(sender.getId());
         if (data != null && data.getGuildId().equals(e.getGuild().getId()))
         {
+            e.getMessage().delete().queue();
+
             sender.openPrivateChannel().queue(pc -> pc.sendMessage(
                     new EmbedBuilder().setColor(Color.orange).setDescription(
                             "You can not write on this server, because you are muted in text channels!\n" +
@@ -28,7 +30,6 @@ public class MuteHandler extends ListenerAdapter
                 System.err.println("Failed to send message to user\n");
                 err.printStackTrace();
             });
-            e.getMessage().delete().queue();
         }
     }
 
