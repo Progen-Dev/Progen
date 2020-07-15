@@ -7,28 +7,20 @@ import net.dv8tion.jda.api.JDABuilder;
 /**
  * The Class BuildManager.
  */
-public class BuildManager {
-
-    /**
-     * The builder.
-     */
-    private final JDABuilder builder;
-
-    /**
-     * Instantiates a new builds the manager.
-     *
-     * @param builder the builder
-     */
-    public BuildManager(JDABuilder builder) {
-        this.builder = builder;
-        addEventListeners();
+public class BuildManager
+{
+    private BuildManager()
+    {
+        /* Prevent instantiation */
     }
 
     /**
      * Adds the event de.progen_bot.listeners.
      */
-    private void addEventListeners() {
+    public static void addEventListeners(JDABuilder builder)
+    {
         builder.addEventListeners(
+                new MuteHandler(),
                 new CommandManager(),
                 new ReadyListener(),
                 new XPListener(),
@@ -37,9 +29,7 @@ public class BuildManager {
                 new PrivateVoice(),
                 new FourConnectListener(),
                 new MusicListener(),
-                new ServerJoinListener(),
                 new ReconnectListener(),
-                new MuteHandler(),
                 new GuildJoinReloadListener(),
                 new ReactionListener()
         );

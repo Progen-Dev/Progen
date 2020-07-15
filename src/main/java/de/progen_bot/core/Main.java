@@ -25,9 +25,9 @@ import de.progen_bot.commands.xp.XPrank;
 import de.progen_bot.db.DaoHandler;
 import de.progen_bot.music.MusicManager;
 import de.progen_bot.util.Settings;
-import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import okhttp3.OkHttpClient;
 
 import javax.security.auth.login.LoginException;
 import java.sql.Connection;
@@ -40,6 +40,10 @@ import java.sql.SQLException;
  */
 public class Main {
 
+    private static final String URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
+            Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
+
+    private static OkHttpClient client;
     private static JDA jda;
 
     private static Connection sqlConnection;
@@ -62,9 +66,6 @@ public class Main {
 
         Settings.loadSettings();
 
-        String URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
-                Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
-
         try {
             DriverManager.registerDriver(new Driver());
             sqlConnection = DriverManager.getConnection(URL, Settings.USER, Settings.PASSWORD);
@@ -72,8 +73,10 @@ public class Main {
             throw new RuntimeException("Error connecting to the database", ex);
         }
 
-        API httpapi = new API(Integer.parseInt(Settings.API_PORT));
-        httpapi.start();
+        client = new OkHttpClient();
+
+        API httpApi = new API(Integer.parseInt(Settings.API_PORT));
+        httpApi.start();
 
         fortnite = new Fortnite();
 
@@ -101,14 +104,14 @@ public class Main {
      *
      * @param commandManager the de.progen_bot.command manager
      */
-    private void initCommandHandlers(CommandManager commandManager) {
+    private static void initCommandHandlers(CommandManager commandManager) {
         commandManager.setupCommandHandlers(new Clear());
         commandManager.setupCommandHandlers(new GuildInfo());
         commandManager.setupCommandHandlers(new CommandStatus());
         commandManager.setupCommandHandlers(new Say());
         commandManager.setupCommandHandlers(new CommandUserInfo());
         commandManager.setupCommandHandlers(new Warn());
-        commandManager.setupCommandHandlers(new CommandMute());
+        commandManager.setupCommandHandlers(new Mute());
         commandManager.setupCommandHandlers(new PrivateVoiceChannel());
         commandManager.setupCommandHandlers(new Help());
         commandManager.setupCommandHandlers(new ConnectFour());
@@ -128,21 +131,18 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandInfo());
         commandManager.setupCommandHandlers(new CommandBan());
         commandManager.setupCommandHandlers(new CommandPlaylist());
-        commandManager.setupCommandHandlers(new UserVotet());
+        commandManager.setupCommandHandlers(new UserVoted());
         commandManager.setupCommandHandlers(new CommandNotify());
         commandManager.setupCommandHandlers(new CommandTest());
         commandManager.setupCommandHandlers(new CommandAutorole());
-        commandManager.setupCommandHandlers(new CommandMute());
     }
 
     /**
      * Inits the JDA.
      */
-    private void initJDA() {
-        JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Settings.TOKEN);
-        builder.setAutoReconnect(true);
-        new BuildManager(builder);
-
+    private static void initJDA() {
+        final JDABuilder builder = JDABuilder.createDefault(Settings.TOKEN);
+        BuildManager.addEventListeners(builder);
         try {
             jda = builder.build().awaitReady();
         } catch (LoginException | InterruptedException e) {
@@ -185,6 +185,10 @@ public class Main {
     }
     public static MusicManager getMusicManager() {
         return musicManager;
+    }
+
+    public static OkHttpClient getClient() {
+        return client;
     }
 
     /**

@@ -11,13 +11,14 @@ import com.jagrosh.jdautilities.oauth2.session.DefaultSessionController;
 import com.jagrosh.jdautilities.oauth2.session.Session;
 import com.jagrosh.jdautilities.oauth2.state.DefaultStateController;
 import de.progen_bot.core.Main;
+import de.progen_bot.util.Settings;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -27,20 +28,16 @@ import java.util.List;
  */
 
 public class Oauth2Handler {
-  private String OK = "{\"status\":200}";
+  private static final String OK = "{\"status\":200}";
+  private final Scope[] scopes;
+  private final OAuth2Client oAuth2Client;
+  private final String originUrl;
 
-  private Main main;
-  private Scope[] scopes;
-  private OAuth2Client oAuth2Client;
-  private String orginurl;
-
-  public Oauth2Handler(Main main, int port){
-      this.main = main;
-
+  public Oauth2Handler() {
       scopes = new Scope[]{Scope.IDENTIFY};
       DefaultSessionController sessionController = new DefaultSessionController();
       DefaultStateController stateController = new DefaultStateController();
-      oAuth2Client = new OAuth2ClientImpl(495293590503817237L, "5HxydRvFhTK-ScSfE1qEtJThYo5D9NV2" ,sessionController, stateController, main.httpClient);
+      oAuth2Client = new OAuth2ClientImpl(Settings.CLIENT_ID, Settings.CLIENT_SECRET ,sessionController, stateController, Main.getClient());
 
     URL url = null;
     try {
@@ -48,33 +45,29 @@ public class Oauth2Handler {
     } catch (MalformedURLException e) {
         e.printStackTrace();
     }
-    orginurl = String.format("%s://%s", url.getProtocol(),url.getHost());
 
+    if (url == null)
+        throw new IllegalStateException("URL is null");
+
+    originUrl = String.format("%s://%s", url.getProtocol(),url.getHost());
   }
     private void cors(Request request, Response response) {
         List<String> accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-        if (accessControlRequestHeaders != null) {
-            response.header("Access-Control-Allow-Headers", String.valueOf(accessControlRequestHeaders));
-        }
+        response.header("Access-Control-Allow-Headers", String.valueOf(accessControlRequestHeaders));
         List<String> accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-        if (accessControlRequestMethod != null) {
-            response.header("Access-Control-Allow-Methods", String.valueOf(accessControlRequestMethod));
-        }
+        response.header("Access-Control-Allow-Methods", String.valueOf(accessControlRequestMethod));
     }
 
     private void headers(Request request, Response response){
-      response.header("AccessControlAllow", orginurl);
+      response.header("AccessControlAllow", originUrl);
       response.header("AccessControlAllowMethods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
       response.header("AccessControlAllowHeaders", "Origin, Content-Type, X-Auth-Token");
     }
 
     private void loginwithdiscord(Request request, Response response){
-      List<String> key = request.headers("Authorization");
-      if (key == null){
-          response.isRedirect(); oAuth2Client.generateAuthorizationURL("https://pwi.progen-bot.de", scopes);
-      }else {
-          response.isRedirect();
-      }
+      String auth = request.header("Authorization");
+      if (auth != null)
+        response.isRedirect();
     }
 
     private void login(Request request, Response response){
@@ -88,7 +81,7 @@ public class Oauth2Handler {
             /**
              * connect to database generate uniquekey
              */
-            Session session = oAuth2Client.startSession(code, state, String.valueOf(scopes)).complete();
+            Session session = oAuth2Client.startSession(code, state, Arrays.toString(scopes)).complete();
             OAuth2User oAuth2User = oAuth2Client.getUser(session).complete();
             /**
              * add session to database (user.getID and key)

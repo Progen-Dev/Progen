@@ -12,6 +12,7 @@ import java.util.List;
 
 public class VotingListener extends ListenerAdapter {
 
+    @Override
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event) {
         if (event.getMember().getUser().isBot()) {
             return;
