@@ -2,7 +2,7 @@
 <img src="https://github.com/Progen-Dev/Progen-Graphics/blob/master/logo_round.446a0937.png" height="400"/>
  <h1>Progen</h1>
  <strong>Multi purpose discord bot with webinterface, music, administration, tools, games and more!</strong>
- <br>
+ <br><br>
  <a href="https://top.gg/bot/495293590503817237" >
   <img src="https://top.gg/api/widget/495293590503817237.svg" alt="Progen" />
 </a>
