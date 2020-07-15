@@ -1,4 +1,5 @@
-# Progen
+<div align="center">
+<img src="https://github.com/Progen-Dev/Progen-Graphics/blob/master/logo_round.446a0937.png" height="300"/>
 
 Progen is a feature rich discord bot with advanced functionality.
 It features a web interface, the [PWI (Progen Web Interface)](https://pwi.progen-bot.de), to manage the bot and moderate your server.
@@ -8,7 +9,7 @@ For more information read our [WIKI](https://github.com/Progen-Dev/Progen/wiki) 
  <a href="https://top.gg/bot/495293590503817237" >
   <img src="https://top.gg/api/widget/495293590503817237.svg" alt="Progen" />
 </a>
-
+</div>
 ## Features
 
 * A list of commands for
