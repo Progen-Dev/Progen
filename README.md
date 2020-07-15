@@ -7,20 +7,13 @@
   <img src="https://top.gg/api/widget/495293590503817237.svg" alt="Progen" />
 </a>
 </div>
-
-* A list of commands for
-    * moderation
-    * blacklist
-    * music
-    * fun
-    * game stats
-    * webinterface
-    * prefix
-    * other
-* The [PWI](https://pwi.progen-bot.de)
-* The [Website](https://progen-bot.de)
-* REST API
-
+<h1>Welcome</h1>
+<h1>Invite</h1>
+<h1>Features</h1>
+<h1>Moderation</h1>
+<h1>Music</h1>
+<h1>Web interface</h1>
+<h1>Logging</h1>
 ### Commands
 
 * All commands summarized [Commands](https://github.com/Progen-Dev/Progen/wiki)
