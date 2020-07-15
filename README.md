@@ -7,7 +7,6 @@
   <img src="https://top.gg/api/widget/495293590503817237.svg" alt="Progen" />
 </a>
 </div>
----
 
 * A list of commands for
     * moderation
