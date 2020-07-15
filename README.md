@@ -17,5 +17,6 @@
 
 <strong>
  Copyright © 2018-now Progen-Dev
+ <br>
  Protected by GNU General Public License v3.0
-
+</strong>
