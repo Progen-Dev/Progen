@@ -67,13 +67,13 @@ public class MuteDao extends Dao
             final ResultSet set = ps.executeQuery();
             if (set.next())
                 return setMuteDataFromResultSet(set);
+            else
+                return null;
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
     private static MuteData setMuteDataFromResultSet(ResultSet set) throws SQLException
