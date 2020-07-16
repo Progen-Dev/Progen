@@ -8,6 +8,8 @@
 </a>
 </div>
 <h2>Welcome</h2>
+Progen is a bot that can do almost anything. It supports you with moderation and administration of your Discord Server, you can listen to all kinds of music in a voice channel, play games with your friends and much more! 
+<br>Best you get Progen yourself and have a look at the countless commands. Progen is continuously being expanded, improved and freed from bugs.
 <h2>Invite</h2>
 <h2>Features</h2>
 <h2>Moderation</h2>
