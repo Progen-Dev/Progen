@@ -1,102 +1,68 @@
 package de.mtorials.pwi.oauth2;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.jagrosh.jdautilities.oauth2.OAuth2Client;
 import com.jagrosh.jdautilities.oauth2.Scope;
-import com.jagrosh.jdautilities.oauth2.entities.OAuth2User;
 import com.jagrosh.jdautilities.oauth2.entities.impl.OAuth2ClientImpl;
-import com.jagrosh.jdautilities.oauth2.exceptions.InvalidStateException;
 import com.jagrosh.jdautilities.oauth2.session.DefaultSessionController;
-import com.jagrosh.jdautilities.oauth2.session.Session;
 import com.jagrosh.jdautilities.oauth2.state.DefaultStateController;
 import de.progen_bot.core.Main;
-import de.progen_bot.util.Settings;
-import okhttp3.Request;
-import okhttp3.Response;
+import io.javalin.Javalin;
+import io.javalin.http.Context;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
-
+import static io.javalin.apibuilder.ApiBuilder.*;
 /**
  * Thank you @ToπSenpai for your help at ask.
  * https://github.com/TopiSenpai
  */
 
+
+
 public class Oauth2Handler {
-  private static final String OK = "{\"status\":200}";
-  private final Scope[] scopes;
-  private final OAuth2Client oAuth2Client;
-  private final String originUrl;
+    private static final String OK = "{\"status\":200}";
+    private final Scope[] scopes;
+    private final OAuth2Client oAuth2Client;
+    private Main main;
 
-  public Oauth2Handler() {
-      scopes = new Scope[]{Scope.IDENTIFY};
-      DefaultSessionController sessionController = new DefaultSessionController();
-      DefaultStateController stateController = new DefaultStateController();
-      oAuth2Client = new OAuth2ClientImpl(Settings.CLIENT_ID, Settings.CLIENT_SECRET ,sessionController, stateController, Main.getClient());
+    public Oauth2Handler(Main main, int port) {
+        this.main = main;
+        scopes = new Scope[]{Scope.IDENTIFY};
 
-    URL url = null;
-    try {
-        url = new URL("https://discord.com");
-    } catch (MalformedURLException e) {
-        e.printStackTrace();
-    }
+        DefaultStateController stateController = new DefaultStateController();
+        DefaultSessionController sessionController = new DefaultSessionController();
+        oAuth2Client = new OAuth2ClientImpl(495293590503817237L, "5HxydRvFhTK-ScSfE1qEtJThYo5D9NV2", sessionController, stateController, main.httpClient);
 
-    if (url == null)
-        throw new IllegalStateException("URL is null");
+        Javalin.create(config -> {
+            config.enableCorsForOrigin("https://pwi.progen-bot.de");
+        }).routes(() ->{
+            get("/oauth",    this::oauthgenerate);
+            post("/login",   this::loginwithdiscord);
+            path("/user", () -> {
+                before("/*", this::checkDiscordLogin);
+                get("/me",   this::userinfo);
+            });
+            path("/guilds", () -> {
+                before("/*", this::guildPerms);
+            });
+            }).start(port);
+        }
 
-    originUrl = String.format("%s://%s", url.getProtocol(),url.getHost());
-  }
-    private void cors(Request request, Response response) {
-        List<String> accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-        response.header("Access-Control-Allow-Headers", String.valueOf(accessControlRequestHeaders));
-        List<String> accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-        response.header("Access-Control-Allow-Methods", String.valueOf(accessControlRequestMethod));
-    }
-
-    private void headers(Request request, Response response){
-      response.header("AccessControlAllow", originUrl);
-      response.header("AccessControlAllowMethods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
-      response.header("AccessControlAllowHeaders", "Origin, Content-Type, X-Auth-Token");
-    }
-
-    private void loginwithdiscord(Request request, Response response){
-      String auth = request.header("Authorization");
-      if (auth != null)
-        response.isRedirect();
-    }
-
-    private void login(Request request, Response response){
-        JsonObject json;
-        JsonParser parser = new JsonParser();
-        json = parser.parse(String.valueOf(request.body())).getAsJsonObject();
-
-        String code = json.get("code").getAsString();
-        String state = json.get("state").getAsString();
-        try {
-            /**
-             * connect to database generate uniquekey
-             */
-            Session session = oAuth2Client.startSession(code, state, Arrays.toString(scopes)).complete();
-            OAuth2User oAuth2User = oAuth2Client.getUser(session).complete();
-            /**
-             * add session to database (user.getID and key)
-             */
-            //return "{\"key\": " + JSONObject.quote() + "}";
-        } catch (InvalidStateException e) {
-            System.out.println("401");
-            System.out.println("State Invalid/expired please try again");
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void oauthgenerate(Context context){
+        String key = context.header("Authorization");
+        if (key == null){
+            
         }
     }
-    private void setSession(Session session){
-      session.getAccessToken();
-      session.getRefreshToken();
-      session.getTokenType();
+    private void loginwithdiscord(Context context){
     }
+    private void checkDiscordLogin(Context context){
+    }
+    private void getGuilds(Context context){
+    }
+    private void guildPerms(Context context){
+    }
+    private void userinfo(Context context){
+    }
+
 }
