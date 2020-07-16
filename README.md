@@ -31,7 +31,7 @@ Don't you believe us? Try it yourself. <br>
 With the additional offers ProgenMusic1 & 2 you can easily listen to music in three channels. 
 <h2>Web interface</h2>
 With the web interface (pwi) you can easily control Progen and your discord server via browser.<br>
-All you need to do is to load the page https://progen-bot.de.<br>
+All you need to do is to load the page https://pwi.progen-bot.de.<br>
 A clearly arranged graphic makes it easy to control it.<br>
 <strong>The PWI ist currently being rewritten to improve the service</strong>
 <h2>Logging</h2>
