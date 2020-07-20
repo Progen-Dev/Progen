@@ -28,7 +28,7 @@ The Progenlog.
 Listen to any kind of music with Progen in a voice channel. <br>
 We can proudly say that we have a clean and powerful sound. <br>
 Don't you believe us? Try it yourself. <br>
-With the additional offers ProgenMusic1 & 2 you can easily listen to music in three channels. 
+With the additional offers ProgenMusic1 & 2 you can easily listen to music in three channels indipendently. 
 <h2>Web interface</h2>
 With the web interface (pwi) you can easily control Progen and your discord server via browser.<br>
 All you need to do is to load the page https://pwi.progen-bot.de.<br>
