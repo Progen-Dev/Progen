@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>de.discorddevmembers</groupId>
+    <groupId>Progen-Dev</groupId>
     <artifactId>Progen</artifactId>
-    <version>1.2-beta</version>
+    <version>1.0.0.7</version>
     <packaging>jar</packaging>
     <name>Progen</name>
     <url>http://maven.apache.org</url>
@@ -44,7 +44,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>4.2.0_179</version>
+            <version>4.2.0_181</version>
         </dependency>
 
         <dependency>
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>org.discordbots</groupId>
             <artifactId>DBL-Java-Library</artifactId>
-            <version>19abf19859</version>
+            <version>2.0.1</version>
         </dependency>
 
         <dependency>
@@ -73,10 +73,10 @@
         </dependency>
 
         <dependency>
-        <groupId>fr.bmartel</groupId>
-        <artifactId>jspeedtest</artifactId>
-        <version>LATEST</version>
-    </dependency>
+            <groupId>fr.bmartel</groupId>
+            <artifactId>jspeedtest</artifactId>
+            <version>LATEST</version>
+        </dependency>
 
         <dependency>
             <groupId>com.github.akinaru</groupId>
@@ -89,12 +89,6 @@
             <groupId>io.github.jdiscordbots</groupId>
             <artifactId>nightdream-logging</artifactId>
             <version>1.1.9</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.Mokulu</groupId>
-            <artifactId>discord-oauth2-api</artifactId>
-            <version>1.0.0</version>
         </dependency>
 
         <dependency>
@@ -120,16 +114,10 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.12</artifactId>
-            <version>3.0.0</version>
+            <groupId>io.javalin</groupId>
+            <artifactId>javalin</artifactId>
+            <version>3.9.1</version>
         </dependency>
-        <dependency>
-                  <groupId>io.javalin</groupId>
-                  <artifactId>javalin</artifactId>
-                  <version>3.9.1</version>
-         </dependency>
-
     </dependencies>
 
     <build>
@@ -209,3 +197,4 @@
         </plugins>
     </build>
 </project>
+
