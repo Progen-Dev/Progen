@@ -18,11 +18,12 @@ public class ConfigDaoImpl extends Dao implements ConfigDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement("REPLACE INTO `config` (`guildid`, `prefix`, " +
-                    "`logChannelID`, `tempChannelCategoryID`) VALUES (?, ?, ?, ?);");
+                    "`logChannelID`, `tempChannelCategoryID`, `autorole`) VALUES (?, ?, ?, ?, ?);");
             ps.setString(1, guild.getId());
             ps.setString(2, configuration.getPrefix());
             ps.setString(3, configuration.getLogChannelID());
             ps.setString(4, configuration.getTempChannelCategoryID());
+            ps.setString(5, configuration.getAutoRole());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,7 +41,8 @@ public class ConfigDaoImpl extends Dao implements ConfigDao {
             if (rs.next()) {
                 return new GuildConfigurationBuilder().setPrefix(rs.getString("prefix"))
                         .setLogChannelID(rs.getString("logChannelID"))
-                        .setTempChannelCategoryID(rs.getString("TempChannelCategoryID")).build();
+                        .setTempChannelCategoryID(rs.getString("tempChannelCategoryID"))
+                        .setAutorole(rs.getString("autorole")).build();
             }
         } catch (SQLException e) {
             e.printStackTrace();

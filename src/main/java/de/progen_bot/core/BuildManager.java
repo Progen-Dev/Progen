@@ -31,7 +31,8 @@ public class BuildManager
                 new MusicListener(),
                 new ReconnectListener(),
                 new GuildJoinReloadListener(),
-                new ReactionListener()
+                new ReactionListener(),
+                new AutoroleListener()
         );
     }
 }
