@@ -18,13 +18,8 @@ public class CommandAutorole extends CommandHandler{
         if (!event.isFromGuild())
             return;
 
-        if (parsedCommand.getArgs().length < 1){
-            event.getTextChannel().sendMessage(messageGenerators.generateErrorMsgWrongInput()).queue();
-            return;
-        }
-
         if (!event.getMessage().getMentionedRoles().isEmpty()){
-            configuration.setAutoRole(event.getMessage().getMentionedRoles().get(0).getName());
+            configuration.setAutoRole(event.getMessage().getMentionedRoles().get(0).getId());
             event.getTextChannel().sendMessage(
                     messageGenerators.generateRightMsg("Successfully set autorole to `" + event.getMessage().getMentionedRoles().get(0).getName() +  "`.")
             ).queue();

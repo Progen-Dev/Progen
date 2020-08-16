@@ -53,7 +53,7 @@ public class ConfigDaoImpl extends Dao implements ConfigDao {
     @Override
     public void generateTables(String query) {
 		String sqlQuery = "CREATE TABLE IF NOT EXISTS config (guildid VARCHAR(18) NOT NULL, prefix VARCHAR" +
-				"(18) NOT NULL , logChannelID VARCHAR(18), tempChannelCategoryID VARCHAR(18), UNIQUE " +
+				"(18) NOT NULL , logChannelID VARCHAR(18), tempChannelCategoryID VARCHAR(18), autorole VARCHAR(18), UNIQUE " +
 				"(guildid)) ENGINE = InnoDB;";
 		super.generateTables(sqlQuery);
     }
