@@ -39,22 +39,7 @@ public class WarnList extends CommandHandler {
             } else {
                 event.getChannel().sendMessage(super.messageGenerators.generateErrorMsg("No Warns")).queue();
             }
-        } /* else {
-
-      TODO      HashMap<Member, ArrayList<Warn>> x =
-                    super.getDAOs().getWarnList().getWarnsByMembersForGuild(event.getGuild());
-
-            EmbedBuilder embedBuilder = new EmbedBuilder()
-                    .setTitle("The warns board of your guild")
-                    .setColor(Color.ORANGE);
-
-            for (Member m : x.keySet()) {
-
-                embedBuilder.addField(m.getEffectiveName(), String.valueOf(x.get(m).size()), true);
-            }
-
-            event.getMessage().getTextChannel().sendMessage(embedBuilder.build()).queue();
-        } */
+        }
     }
 
     @Override

@@ -263,7 +263,7 @@ public class CommandVote extends CommandHandler implements Serializable {
         setChannel(event.getTextChannel());
 
         if (parsedCommand.getArgs().length < 1) {
-            message("Work in Progress!"); // TODO: 23.05.2020
+            message("Work in Progress!"); 
             return;
         }
 

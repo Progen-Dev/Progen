@@ -13,7 +13,6 @@ public class CommandLog extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        /* TODO implement command */
     }
 
     @Override

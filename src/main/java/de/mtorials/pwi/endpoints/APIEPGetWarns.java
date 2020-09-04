@@ -18,6 +18,6 @@ public class APIEPGetWarns extends Endpoint {
     @Override
     public APIResponseObject execute(Map<String, String> params, Member member, GuildConfiguration configuration) {
         List<String> warns = new WarnListDaoImpl().loadWarnList(member);
-        return new APIResponseObject(200, warns); //TODO check if correct
+        return new APIResponseObject(200, warns);
     }
 }
