@@ -1,7 +1,7 @@
 {
   "bot": {
-    "prefix": "PREFIX",
-    "token": "TOKEN",
+    "prefix": "pd!",
+    "token": "NTE2MzI3MzA3NzAzNzQ2NTcz.W_rxRw.2nMOLZa1B_VLlCyrKeVE0Wxw4LM",
     "apiPort": 8083,
     "topGGToken": "",
     "music": [
@@ -9,7 +9,7 @@
       "2"
     ],
     "owners": [
-      "1",
+      "402140322525872138",
       "2"
     ],
     "oauth2": {
@@ -18,9 +18,9 @@
     }
   },
   "database": {
-    "host": "",
-    "database": "",
-    "user": "",
+    "host": "localhost",
+    "database": "test",
+    "user": "root",
     "password": "",
     "port": 3306
   }

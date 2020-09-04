@@ -21,3 +21,4 @@ dependency-reduced-pom.xml
 .classpath
 .settings/
 .vscode/
+config.sample.json

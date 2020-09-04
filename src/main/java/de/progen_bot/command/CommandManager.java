@@ -26,7 +26,6 @@ public class CommandManager extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-
         if (event.getAuthor().isBot() || event.getAuthor().isFake() || !event.getChannelType().isGuild()) {
             return;
         }
@@ -54,8 +53,8 @@ public class CommandManager extends ListenerAdapter {
                     .build();
 
             new ConfigDaoImpl().writeConfig(guildConfiguration, event.getGuild());
-        }
-        ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.getPrefix());
+                }
+            ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.getPrefix());
 
         if (parsedMessage == null) return;
 
@@ -74,6 +73,7 @@ public class CommandManager extends ListenerAdapter {
         }
 
         commandHandler.execute(parsedMessage, event, guildConfiguration);
+        event.getMessage().delete().queue();
     }
 
     /**
