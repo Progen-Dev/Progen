@@ -40,6 +40,7 @@ There all activities of a moderator or administrator are documented. <br>
 To use the #progenlog you just need to create a Textchannel named progenlog. <br>
 The log will be made mor comfortable in the future. A #voicelog is also planned.
 <strong>
+ <br>
  Copyright © 2018-now Progen-Dev
  <br>
  Protected by GNU General Public License v3.0
