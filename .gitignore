@@ -5,7 +5,6 @@
 .images/
 target/
 POLL/
-*.iml
 
 ## Java ##
 *.jar
