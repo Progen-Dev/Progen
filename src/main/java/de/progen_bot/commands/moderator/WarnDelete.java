@@ -5,8 +5,10 @@ import de.progen_bot.command.CommandManager;
 import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import java.awt.Color;
 
 public class WarnDelete extends CommandHandler {
     public WarnDelete() {
@@ -14,7 +16,8 @@ public class WarnDelete extends CommandHandler {
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event,
+            GuildConfiguration configuration) {
 
         if (event.getMember() == null)
             return;
@@ -24,7 +27,16 @@ public class WarnDelete extends CommandHandler {
             return;
         }
 
-        new WarnListDaoImpl().deleteWarns(event.getMember());
+        if (parsedCommand.getArgs().length <= 1) {
+            event.getChannel()
+                    .sendMessage(new EmbedBuilder().setColor(Color.red).setDescription("No reason found").build())
+                    .queue();
+            return;
+        }
+
+        String reason = String.join(" ", parsedCommand.getArgs()).replace(parsedCommand.getArgs()[0] + " ", "");
+
+        new WarnListDaoImpl().deleteWarn(event.getMember(), reason);
 
         event.getTextChannel().sendMessage(super.messageGenerators.generateSuccessfulMsg()).queue();
     }

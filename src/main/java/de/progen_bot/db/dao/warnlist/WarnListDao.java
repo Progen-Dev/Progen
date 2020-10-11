@@ -8,5 +8,5 @@ public interface WarnListDao {
 
     void insertWarn(Member member, String reason);
     List<String> loadWarnList(Member member);
-    void deleteWarns(Member member);
+    void deleteWarn(Member member, String reason);
 }
