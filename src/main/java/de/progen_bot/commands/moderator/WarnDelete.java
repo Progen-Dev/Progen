@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.Color;
+import java.util.Arrays;
 
 public class WarnDelete extends CommandHandler {
     public WarnDelete() {
@@ -34,7 +35,7 @@ public class WarnDelete extends CommandHandler {
             return;
         }
 
-        String reason = String.join(" ", parsedCommand.getArgs()).replace(parsedCommand.getArgs()[0] + " ", "");
+        String reason = String.join(" ", Arrays.copyOfRange(parsedCommand.getArgs(), 1, parsedCommand.getArgs().length));
 
         new WarnListDaoImpl().deleteWarn(event.getMember(), reason);
 

@@ -3,6 +3,7 @@ package de.progen_bot.commands.moderator;
 import java.awt.Color;
 import java.time.Instant;
 import java.util.List;
+import java.util.Arrays;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
@@ -55,7 +56,7 @@ public class Warn extends CommandHandler {
             return;
         }
 
-        String reason = String.join(" ", parsedCommand.getArgs()).replace(parsedCommand.getArgs()[0] + " ", "");
+        String reason = String.join(" ", Arrays.copyOfRange(parsedCommand.getArgs(), 1, parsedCommand.getArgs().length));
 
         final MessageEmbed eb = getWarnEmbed(event, reason);
             if(eb == null)
