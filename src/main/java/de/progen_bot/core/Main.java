@@ -137,6 +137,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandTest());
         commandManager.setupCommandHandlers(new CommandAutorole());
         commandManager.setupCommandHandlers(new CommandUpdate());
+        commandManager.setupCommandHandlers(new MuteList());
     }
 
     /**
