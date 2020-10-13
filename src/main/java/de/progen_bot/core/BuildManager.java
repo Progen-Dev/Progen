@@ -32,7 +32,8 @@ public class BuildManager
                 new ReconnectListener(),
                 new GuildJoinReloadListener(),
                 new ReactionListener(),
-                new AutoroleListener()
+                new AutoroleListener(),
+                new StarBoardListener()
         );
     }
 }

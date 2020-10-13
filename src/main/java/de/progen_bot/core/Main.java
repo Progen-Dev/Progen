@@ -150,7 +150,8 @@ public class Main {
             GatewayIntent.GUILD_MESSAGES,
             GatewayIntent.GUILD_MEMBERS,
             GatewayIntent.GUILD_VOICE_STATES,
-            GatewayIntent.GUILD_PRESENCES);
+            GatewayIntent.GUILD_PRESENCES,
+            GatewayIntent.GUILD_MESSAGE_REACTIONS);
         BuildManager.addEventListeners(builder);
         try {
             jda = builder.build().awaitReady();
