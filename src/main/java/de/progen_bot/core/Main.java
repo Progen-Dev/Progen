@@ -147,12 +147,15 @@ public class Main {
         final JDABuilder 
         builder = JDABuilder.createDefault(
             Settings.TOKEN,
-            GatewayIntent.GUILD_BANS,
+            GatewayIntent.GUILD_BANS,            
             GatewayIntent.GUILD_MESSAGES,
             GatewayIntent.GUILD_MEMBERS,
             GatewayIntent.GUILD_VOICE_STATES,
             GatewayIntent.GUILD_PRESENCES,
-            GatewayIntent.GUILD_MESSAGE_REACTIONS);
+            GatewayIntent.GUILD_MESSAGE_REACTIONS,
+            GatewayIntent.DIRECT_MESSAGE_REACTIONS,
+            GatewayIntent.DIRECT_MESSAGES);
+
         BuildManager.addEventListeners(builder);
         try {
             jda = builder.build().awaitReady();

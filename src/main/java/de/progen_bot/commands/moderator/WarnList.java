@@ -22,14 +22,16 @@ public class WarnList extends CommandHandler {
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event,
+            GuildConfiguration configuration) {
         if (event.getMessage().getMentionedMembers().size() == 1) {
             Member mentioned = event.getMessage().getMentionedMembers().get(0);
             List<String> warnTable = new WarnListDaoImpl().loadWarnList(mentioned);
 
             if (!warnTable.isEmpty()) {
                 StringBuilder sb = new StringBuilder();
-                EmbedBuilder eb = new EmbedBuilder().setTitle("WarnTable of " + mentioned.getEffectiveName()).setColor(Color.ORANGE);
+                EmbedBuilder eb = new EmbedBuilder().setTitle("WarnTable of " + mentioned.getEffectiveName())
+                        .setColor(Color.ORANGE);
                 int count = 1;
                 for (String reason : warnTable) {
                     sb.append(count).append('.').append(' ').append(reason).append('\n');
@@ -39,6 +41,9 @@ public class WarnList extends CommandHandler {
             } else {
                 event.getChannel().sendMessage(super.messageGenerators.generateErrorMsg("No Warns")).queue();
             }
+        } else {
+            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("No user found")).queue();
+            return;
         }
     }
 

@@ -1,5 +1,12 @@
 package de.progen_bot.listeners;
 
+import java.awt.Color;
+import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
 import de.progen_bot.core.Main;
 import de.progen_bot.db.dao.connectfour.ConnectFourDaoImpl;
 import de.progen_bot.db.entities.ConnectFourModel;
@@ -14,12 +21,11 @@ import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEve
 import net.dv8tion.jda.api.events.message.priv.react.PrivateMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.awt.*;
-import java.util.concurrent.TimeUnit;
-
 public class FourConnectListener extends ListenerAdapter {
     private static JDA jda;
     ConnectFourDaoImpl dao;
+
+    private final HashMap<String, ScheduledFuture<?>> timerMap = new HashMap<>();
 
     @Override
     public void onPrivateMessageReactionAdd(PrivateMessageReactionAddEvent event) {
@@ -41,14 +47,14 @@ public class FourConnectListener extends ListenerAdapter {
             channel.deleteMessageById(event.getReaction().getMessageId()).queue();
 
             if (emoteName.equals("✅")) {
-                event.getChannel().sendMessage(
-                        new EmbedBuilder().setColor(Color.DARK_GRAY).setDescription("Spiel wird vorbereitet").build()
-                ).queue(msg -> msg.delete().queueAfter(9, TimeUnit.SECONDS));
+                event.getChannel()
+                        .sendMessage(new EmbedBuilder().setColor(Color.DARK_GRAY)
+                                .setDescription("Spiel wird vorbereitet").build())
+                        .queue(msg -> msg.delete().queueAfter(9, TimeUnit.SECONDS));
                 startGame(gameData);
             } else if (emoteName.equals("❌")) {
-                event.getChannel().sendMessage(
-                        new EmbedBuilder().setColor(Color.HSBtoRGB(85, 1, 100)).setDescription("Spielanfrage abgelehnt!").build()
-                ).queue();
+                event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.HSBtoRGB(85, 1, 100))
+                        .setDescription("Spielanfrage abgelehnt!").build()).queue();
                 closeGame(gameData);
             }
         }
@@ -59,15 +65,18 @@ public class FourConnectListener extends ListenerAdapter {
         final User[] opponent = new User[1];
         jda.retrieveUserById(gameData.getChallengerId()).queue(u -> user[0] = u);
         jda.retrieveUserById(gameData.getOpponentId()).queue(u -> opponent[0] = u);
-        user[0].openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(opponent[0].getName()
-                + " hat deine Spielanfrage angenommen und eine Spielinstanz wird erstellt!").queue(msg -> {
+        user[0].openPrivateChannel()
+                .queue(privateChannel -> privateChannel
+                        .sendMessage(opponent[0].getName()
+                                + " hat deine Spielanfrage angenommen und eine Spielinstanz wird erstellt!")
+                        .queue(msg -> {
 
-            int height = gameData.getHeight();
-            int width = gameData.getWidth();
+                            int height = gameData.getHeight();
+                            int width = gameData.getWidth();
 
-            FourConnectGame.createGame(gameData, height, width, jda);
-            msg.delete().queueAfter(10, TimeUnit.SECONDS);
-        }));
+                            FourConnectGame.createGame(gameData, height, width, jda);
+                            msg.delete().queueAfter(10, TimeUnit.SECONDS);
+                        }));
     }
 
     private static void closeGame(GameData gameData) {
@@ -76,9 +85,7 @@ public class FourConnectListener extends ListenerAdapter {
         jda.retrieveUserById(gameData.getChallengerId()).queue(u -> user[0] = u);
         jda.retrieveUserById(gameData.getOpponentId()).queue(u -> opponent[0] = u);
         user[0].openPrivateChannel().queue(privateChannel -> privateChannel
-                .sendMessage(
-                        opponent[0].getName() + " hat deine Spielanfrage abgelehnt!")
-                .queue());
+                .sendMessage(opponent[0].getName() + " hat deine Spielanfrage abgelehnt!").queue());
     }
 
     @Override
@@ -101,19 +108,38 @@ public class FourConnectListener extends ListenerAdapter {
                 if (emote == 0) {
                     return;
                 }
+                if (timerMap.get(gameData.getMsgId()) != null)
+                    timerMap.get(gameData.getMsgId()).cancel(true);
 
                 gameData.setField(emote);
 
-                event.getChannel().retrieveMessageById(event.getMessageId())
-                        .queue(gameData::updateBoard);
+                event.getChannel().retrieveMessageById(event.getMessageId()).queue(gameData::updateBoard);
 
                 if (gameData.isGameOver()) {
-                    String text = event.getUser().getAsMention() + " hat gewonnen!";
+                    final String text = event.getUser().getAsMention() + " hat gewonnen!";
                     event.getChannel().sendMessage(text).queue();
                     return;
                 }
+
+                setTimer(gameData, event);
             }
             event.getReaction().removeReaction(event.getUser()).queue();
         }
+    }
+
+    private void setTimer(ConnectFourModel gameData, GuildMessageReactionAddEvent event) {
+        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        ScheduledFuture<?> countdown = scheduler.schedule(new Runnable() {
+            @Override
+            public void run() {
+                gameData.setGameOver(true);
+                final String text = "Timeout: " + event.getUser().getAsMention() + " hat gewonnen!";
+                event.getChannel().sendMessage(text).queue();
+
+            }
+        }, 1, TimeUnit.DAYS);
+        timerMap.put(gameData.getMsgId(), countdown);
+        scheduler.shutdown();
     }
 }
