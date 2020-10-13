@@ -4,6 +4,7 @@
 .idea/
 .images/
 target/
+/POLL/
 
 ## Java ##
 *.jar
