@@ -22,3 +22,4 @@ dependency-reduced-pom.xml
 .settings/
 .vscode/
 config.sample.json
+.factorypath
