@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MuteDao extends Dao
 {
@@ -79,6 +81,24 @@ public class MuteDao extends Dao
     private static MuteData setMuteDataFromResultSet(ResultSet set) throws SQLException
     {
         return new MuteData(set.getString(1), set.getString(2), set.getString(3), set.getString(4));
+    }
+
+    public List<MuteData> getMutesByGuild(String guildId) {
+        final Connection con = ConnectionFactory.getConnection();
+        List<MuteData> mutes = new ArrayList<>();
+
+        try {
+            final PreparedStatement ps = con.prepareStatement("SELECT * FROM `mute` WHERE `guild` = ?");
+            ps.setString(1, guildId);
+
+            final ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                mutes.add(setMuteDataFromResultSet(rs));
+            }
+            return mutes;
+        } catch (SQLException e) {
+            return null;
+        }
     }
 
     @Override
