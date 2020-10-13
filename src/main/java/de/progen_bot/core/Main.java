@@ -137,6 +137,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandTest());
         commandManager.setupCommandHandlers(new CommandAutorole());
         commandManager.setupCommandHandlers(new CommandUpdate());
+        commandManager.setupCommandHandlers(new MuteList());
     }
 
     /**
@@ -154,6 +155,7 @@ public class Main {
             GatewayIntent.GUILD_MESSAGE_REACTIONS,
             GatewayIntent.DIRECT_MESSAGE_REACTIONS,
             GatewayIntent.DIRECT_MESSAGES);
+
         BuildManager.addEventListeners(builder);
         try {
             jda = builder.build().awaitReady();
