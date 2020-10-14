@@ -75,26 +75,13 @@
         <dependency>
         <groupId>fr.bmartel</groupId>
         <artifactId>jspeedtest</artifactId>
-        <version>LATEST</version>
+        <version>1.32.1</version>
     </dependency>
-
-        <dependency>
-            <groupId>com.github.akinaru</groupId>
-            <artifactId>speedtest</artifactId>
-            <version>1.23</version>
-            <type>pom</type>
-        </dependency>
 
         <dependency>
             <groupId>io.github.jdiscordbots</groupId>
             <artifactId>nightdream-logging</artifactId>
             <version>1.1.10</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.Mokulu</groupId>
-            <artifactId>discord-oauth2-api</artifactId>
-            <version>1.0.0</version>
         </dependency>
 
         <dependency>
@@ -130,6 +117,12 @@
                   <version>3.9.1</version>
          </dependency>
 
+    
+      <dependency>
+        <groupId>com.google.android</groupId>
+        <artifactId>android</artifactId>
+        <version>4.1.1.4</version>
+      </dependency>
     </dependencies>
 
     <build>

@@ -58,7 +58,6 @@ public class ReadyListener extends ListenerAdapter {
         // CommandPoll
         CommandVote.loadPolls(event.getJDA());
 
-        // reconnect
         Statics.setLastRestart(new Date());
     }
 }

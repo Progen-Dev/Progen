@@ -1,6 +1,7 @@
 package de.progen_bot.core;
 
 import com.mysql.cj.jdbc.Driver;
+
 import de.mtorials.commands.ChangePrefix;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.pwi.httpapi.API;

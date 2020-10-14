@@ -21,7 +21,7 @@ public class CommandUpdate extends CommandHandler {
             new EmbedBuilder()
             .setColor(Color.blue)
             .setTitle("Update")
-            .setDescription("Hey guys, after a long wait it is now time and version `1.0.7` is released. During the last four months we could fix many bugs, extend commands and finish a long awaited command.")
+            .setDescription("Hey guys, `1.0.8` is released. During the last four months we could fix many bugs, extend commands and finish a long awaited command.")
             .addField("Version", "1.0.7", false)
             .addField("Troubleshooting",
              "• Command Ban and Kick can now be executed without the `progenlog`.\n"+

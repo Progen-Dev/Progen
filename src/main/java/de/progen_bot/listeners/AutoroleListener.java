@@ -14,8 +14,6 @@ public class AutoroleListener extends ListenerAdapter
     {
         final String roleId = new ConfigDaoImpl().loadConfig(event.getGuild()).getAutoRole();
 
-        if (!roleId.isEmpty())
-        {
             event.getGuild().retrieveMember(event.getUser()).queue(member ->
             {
                 final Role role = event.getGuild().getRoleById(roleId);
@@ -24,4 +22,3 @@ public class AutoroleListener extends ListenerAdapter
             });
         }
     }
-}

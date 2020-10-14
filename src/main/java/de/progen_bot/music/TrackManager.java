@@ -123,7 +123,7 @@ public class TrackManager extends AudioEventAdapter {
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if (queue.isEmpty()) {
-            System.out.println("Queue is empty!");
+            voiceChannel.getGuild().getAudioManager().closeAudioConnection();
         } else {
             player.playTrack(queue.element().getTrack());
             queue.remove();
