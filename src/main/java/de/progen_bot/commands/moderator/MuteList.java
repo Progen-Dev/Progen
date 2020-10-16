@@ -2,6 +2,7 @@ package de.progen_bot.commands.moderator;
 
 import java.awt.Color;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import de.progen_bot.command.CommandHandler;
@@ -30,14 +31,13 @@ public class MuteList extends CommandHandler {
                     .setColor(Color.ORANGE);
             int[] count = { 1 };
 
-            List<Long> idList = mutes.stream().map(mute -> Long.parseLong(mute.getVictimId()))
-                    .collect(Collectors.toList());
+            Map<Long, String> muteMap = mutes.stream()
+                    .collect(Collectors.toMap(mute -> Long.parseLong(mute.getVictimId()), MuteData::getReason));
 
-            event.getGuild().retrieveMembersByIds(idList).onSuccess(members -> {
+            event.getGuild().retrieveMembersByIds(muteMap.keySet()).onSuccess(members -> {
                 members.forEach(member -> {
                     sb.append(count[0]).append('.').append(' ')
-                            .append(member.getAsMention() + " " + new MuteDao().getMute(member.getId()).getReason())
-                            .append('\n');
+                            .append(member.getAsMention() + " " + muteMap.get(member.getIdLong())).append('\n');
                     count[0]++;
                 });
                 event.getTextChannel().sendMessage(eb.setDescription(sb.toString()).build()).queue();
