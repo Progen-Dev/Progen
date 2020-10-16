@@ -2,6 +2,7 @@ package de.progen_bot.commands.moderator;
 
 import java.awt.Color;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
@@ -29,14 +30,18 @@ public class MuteList extends CommandHandler {
                     .setColor(Color.ORANGE);
             int[] count = { 1 };
 
-            mutes.forEach(mute -> {
-                sb.append(count[0]).append('.').append(' ').append(
-                        event.getGuild().getMemberById(mute.getVictimId()).getAsMention() + " " + mute.getReason())
-                        .append('\n');
-                count[0]++;
-            });
+            List<Long> idList = mutes.stream().map(mute -> Long.parseLong(mute.getVictimId()))
+                    .collect(Collectors.toList());
 
-            event.getTextChannel().sendMessage(eb.setDescription(sb.toString()).build()).queue();
+            event.getGuild().retrieveMembersByIds(idList).onSuccess(members -> {
+                members.forEach(member -> {
+                    sb.append(count[0]).append('.').append(' ')
+                            .append(member.getAsMention() + " " + new MuteDao().getMute(member.getId()).getReason())
+                            .append('\n');
+                    count[0]++;
+                });
+                event.getTextChannel().sendMessage(eb.setDescription(sb.toString()).build()).queue();
+            });
         } else {
             event.getChannel().sendMessage(super.messageGenerators.generateErrorMsg("No mutes found.")).queue();
         }
