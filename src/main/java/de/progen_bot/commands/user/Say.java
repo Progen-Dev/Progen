@@ -1,5 +1,7 @@
 package de.progen_bot.commands.user;
 
+import java.time.Instant;
+
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.db.entities.config.GuildConfiguration;
@@ -25,10 +27,13 @@ public class Say extends CommandHandler {
         }
 
         SayModel sayModel = new SayModel(event.getTextChannel().getId(),
-                new EmbedBuilder().setDescription(out.toString()));
+                new EmbedBuilder().setDescription(out.toString())
+                        .setAuthor(event.getAuthor().getAsTag())
+                        .setTimestamp(Instant.now()));
         SayListener.addSayModel(event.getAuthor().getId(), sayModel);
 
-        event.getAuthor().openPrivateChannel().queue(channel -> channel.sendMessage("Please choose a color in hex <#fff>").queue());
+        event.getAuthor().openPrivateChannel()
+                .queue(channel -> channel.sendMessage("Please choose a color in hex <#fff>").queue());
     }
 
     @Override

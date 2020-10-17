@@ -31,19 +31,44 @@ public class SayListener extends ListenerAdapter {
 
                         mSayModel.setEmbedBuilder(
                                 mSayModel.getEmbedBuilder().setColor(Color.decode(event.getMessage().getContentRaw())));
-                        mSayModel.setStage(7);
+                        mSayModel.setStage(1);
+                        // Replace old sayModel in every stage
                         sayStorage.replace(userId, mSayModel);
-                        event.getChannel().sendMessage("Preview: if you want to send it send <y/n>").embed(mSayModel.getEmbedBuilder().build())
-                                .queue();
+                        event.getChannel().sendMessage("Please enter a title for your embed.").queue();
                     } else {
                         event.getChannel().sendMessage("This is not a valid color!").queue();
                     }
                     break;
+                case 1:
+                    mSayModel.setEmbedBuilder(mSayModel.getEmbedBuilder().setTitle(event.getMessage().getContentRaw()));
+                    mSayModel.setStage(2);
+                    sayStorage.replace(userId, mSayModel);
+                    event.getChannel().sendMessage("Do you want to set an url for the title? <y/n>").queue();
+                    break;
+                case 2:
+                    if (event.getMessage().getContentRaw().equals("y")) {
+                        sayStorage.replace(userId, mSayModel);
+                        mSayModel.setStage(3);
+                        event.getChannel().sendMessage("Enter the url for the title.").queue();
+                    } else if (event.getMessage().getContentRaw().equals("n")) {
+                        mSayModel.setStage(7);
+                        event.getChannel().sendMessage("Preview: if you want to send this embed, send <y/n>")
+                                .embed(mSayModel.getEmbedBuilder().build()).queue();
+                    }
+                    break;
+                case 3: // Set TitleUrl
+                    mSayModel.setEmbedBuilder(mSayModel.getEmbedBuilder().setTitle(
+                            mSayModel.getEmbedBuilder().build().getTitle(), event.getMessage().getContentRaw()));
+                    mSayModel.setStage(7);
+                    sayStorage.replace(userId, mSayModel);
+                    event.getChannel().sendMessage("Preview: if you want to send this embed, send <y/n>")
+                            .embed(mSayModel.getEmbedBuilder().build()).queue();
+                    break;
                 case 7:
-                    if(event.getMessage().getContentRaw().equals("y")){
+                    if (event.getMessage().getContentRaw().equals("y")) {
                         event.getJDA().getTextChannelById(mSayModel.getTextchannelId())
-                            .sendMessage(mSayModel.getEmbedBuilder().build()).queue();
-                    }else{
+                                .sendMessage(mSayModel.getEmbedBuilder().build()).queue();
+                    } else {
                         sayStorage.remove(userId);
                     }
                     break;
