@@ -46,6 +46,7 @@ public class ConnectFourModel {
 
     private String msgId;
 
+
     /**
      * Instantiates a new connect four model.
      *
@@ -94,7 +95,7 @@ public class ConnectFourModel {
     }
 
     public String nextPlayerMoveColor() {
-        return (counter % 2 == 0) ? ":red_circle:" : ":large_blue_circle:";
+        return (counter % 2 == 0) ? ":red_circle:" : ":blue_circle:";
     }
 
     /**
@@ -369,6 +370,11 @@ public class ConnectFourModel {
 
     public boolean isGameOver() {
         return gameOver;
+    }
+
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 
 }

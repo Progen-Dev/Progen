@@ -1,5 +1,10 @@
 package de.progen_bot.commands.moderator;
 
+import java.awt.Color;
+import java.time.Instant;
+import java.util.List;
+import java.util.Arrays;
+
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
@@ -10,9 +15,6 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-
-import java.awt.*;
-import java.time.Instant;
 
 
 public class Warn extends CommandHandler {
@@ -54,16 +56,17 @@ public class Warn extends CommandHandler {
             return;
         }
 
-        String reason = String.join(" ", parsedCommand.getArgs()).replace(parsedCommand.getArgs()[0] + " ", "");
+        String reason = String.join(" ", Arrays.copyOfRange(parsedCommand.getArgs(), 1, parsedCommand.getArgs().length));
 
         final MessageEmbed eb = getWarnEmbed(event, reason);
             if(eb == null)
             return;
         
         event.getChannel().sendMessage(eb).queue();
-        final TextChannel channel = event.getGuild().getTextChannelsByName("progenlog", true).get(0);
-        if(channel != null)
-            channel.sendMessage(eb).queue();
+        final List<TextChannel> channel = event.getGuild().getTextChannelsByName("progenlog", true);
+        
+        if(!channel.isEmpty())
+            channel.get(0).sendMessage(eb).queue();
 
         WarnListDaoImpl dao = new WarnListDaoImpl();
         dao.insertWarn(warned, reason);

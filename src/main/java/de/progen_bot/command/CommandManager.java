@@ -26,7 +26,7 @@ public class CommandManager extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getAuthor().isBot() || event.getAuthor().isFake() || !event.getChannelType().isGuild()) {
+        if (event.getAuthor().isBot() || !event.getChannelType().isGuild()) {
             return;
         }
 
