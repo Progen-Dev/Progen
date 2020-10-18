@@ -25,12 +25,6 @@
             <name>jcenter-bintray</name>
             <url>https://jcenter.bintray.com</url>
         </repository>
-
-        <repository>
-            <id>central</id>
-            <name>bintray</name>
-            <url>http://jcenter.bintray.com</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -48,12 +42,6 @@
         </dependency>
 
         <dependency>
-            <groupId>net.sf.trove4j</groupId>
-            <artifactId>trove4j</artifactId>
-            <version>3.0.3</version>
-        </dependency>
-
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.17</version>
@@ -64,14 +52,7 @@
             <artifactId>DBL-Java-Library</artifactId>
             <version>19abf19859</version>
         </dependency>
-
-        <dependency>
-            <groupId>fr.bmartel</groupId>
-            <artifactId>http-endec</artifactId>
-            <version>1.04</version>
-            <type>pom</type>
-        </dependency>
-
+        
         <dependency>
         <groupId>fr.bmartel</groupId>
         <artifactId>jspeedtest</artifactId>

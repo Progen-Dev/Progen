@@ -7,6 +7,7 @@ import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
+import de.progen_bot.util.Statics;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -21,26 +22,21 @@ public class CommandUpdate extends CommandHandler {
             new EmbedBuilder()
             .setColor(Color.blue)
             .setTitle("Update")
-            .setDescription("Hey guys, `1.0.8` is released. During the last four months we could fix many bugs, extend commands and finish a long awaited command.")
-            .addField("Version", "1.0.7", false)
-            .addField("Troubleshooting",
-             "• Command Ban and Kick can now be executed without the `progenlog`.\n"+
-             "• If you are muted on one guild you are no longer muted on all guilds. \n"+
-             "• The Server Count display no longer updates only after each restart.\n"+ 
-             "• The strange reason when a person has been warned is adapted.\n"+
-             "• The music command works again without problems. ", false)
-            .addField("New Command", 
-             "In the command collection of Progen we can now also call command `autorole` Welcome. With this command, new members can automatically get the role `user`.\n"+
-             "Active: `pb!autorole @role | Disable: pb!autorle disable`", false)
-             .addField("Command changes", 
-             "• Mute\n"+
-             "• Ban\n"+
-             "• Kick\n"+
-             "• Info \n"+
-             "• Warn \n"+
-             "• Music" ,false)
+            .setDescription("Hey @everyone, `1.0.8` is released.")
+            .addField("Version", Statics.VERSION , false)
+            .addField("Bug fixes \n",
+             "• Command `Warndelete` now deletes warnings again.\n"+
+             "• Progen and ProgenMusic now leave the voice channel when they leave.\n" +
+             "• Timeout (1day) for Progen's minigame\n" +
+             "• Progen status now works correctly again.",false)
+            .addField("New Commands/Features\n",
+            "`Mutelist`: List your total Guild mutes\n" +
+            "`Startboard`: The best comments and pictures belong in the Starboard. Create the text channel Starboard and mark the coolest pictures or messages with a star. After 24 hours the message with the most messages will be placed in the Starboard.\n"+
+            "`Delete Execute messages`: Progen immediately deletes messages you write to it. This is to keep order and the chat empty. It is also practical."
+            ,false)
              .addField("Bug", "You have found a bug or have an idea? Please help us!\n"+ "[Bugs](https://github.com/Progen-Dev/Progen/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D+)"  +  "      [Idea](https://github.com/Progen-Dev/Progen/issues/new?assignees=&labels=enhancement&template=new_command.md&title=%5BNew+Command%5D+)" + "     [Join](https://discord.gg/rPeBPkr)", false)
-            .setTimestamp(Instant.now())
+             .setDescription("For more information click [here](https://github.com/Progen-Dev/Progen/blob/master/RELEASE.md)")
+             .setTimestamp(Instant.now())
          .build()
         ).queue();
     }
