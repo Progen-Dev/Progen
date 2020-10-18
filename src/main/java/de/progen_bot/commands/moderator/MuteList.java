@@ -52,4 +52,3 @@ public class MuteList extends CommandHandler {
         return AccessLevel.MODERATOR;
     }
 }
-
