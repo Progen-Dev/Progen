@@ -1,10 +1,9 @@
 package de.progen_bot.commands.user;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-import android.graphics.Color;
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
 import de.progen_bot.db.entities.config.GuildConfiguration;
