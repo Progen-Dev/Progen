@@ -15,7 +15,7 @@ public class SayListener extends ListenerAdapter {
 
     @Override
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
-        String userId = event.getAuthor().getId();
+        final String userId = event.getAuthor().getId();
 
         if (sayStorage.containsKey(userId)) {
 
@@ -48,8 +48,8 @@ public class SayListener extends ListenerAdapter {
                 case 2:
                     if (event.getMessage().getContentRaw().equals("y")) {
                         mSayModel.setStage(3);
-                        sayStorage.replace(userId, mSayModel);                        
-                        event.getChannel().sendMessage("Enter the url for the title.").queue();
+                        sayStorage.replace(userId, mSayModel);
+                        event.getChannel().sendMessage("Enter the url with http(s) for the title.").queue();
                     } else if (event.getMessage().getContentRaw().equals("n")) {
                         mSayModel.setStage(7);
                         sayStorage.replace(userId, mSayModel);
@@ -81,7 +81,7 @@ public class SayListener extends ListenerAdapter {
         sayStorage.put(userId, sayModel);
     }
 
-    Pattern colorPattern = Pattern.compile("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
+    final Pattern colorPattern = Pattern.compile("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
 
     private boolean isHexadecimal(String input) {
         final Matcher matcher = colorPattern.matcher(input);

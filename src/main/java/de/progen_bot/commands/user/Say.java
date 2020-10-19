@@ -28,7 +28,7 @@ public class Say extends CommandHandler {
         SayListener.addSayModel(event.getAuthor().getId(), sayModel);
 
         event.getAuthor().openPrivateChannel()
-                .queue(channel -> channel.sendMessage("Please choose a color in hex <#fff>").queue());
+                .queue(channel -> channel.sendMessage("Please choose a color in hex <#fff> or <#ffffff>").queue());
     }
 
     @Override
