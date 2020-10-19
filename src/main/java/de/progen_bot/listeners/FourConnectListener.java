@@ -130,14 +130,11 @@ public class FourConnectListener extends ListenerAdapter {
     private void setTimer(ConnectFourModel gameData, GuildMessageReactionAddEvent event) {
         final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-        ScheduledFuture<?> countdown = scheduler.schedule(new Runnable() {
-            @Override
-            public void run() {
-                gameData.setGameOver(true);
-                final String text = "Timeout: " + event.getUser().getAsMention() + " hat gewonnen!";
-                event.getChannel().sendMessage(text).queue();
+        ScheduledFuture<?> countdown = scheduler.schedule(() -> {
+            gameData.setGameOver(true);
+            final String text = "Timeout: " + event.getUser().getAsMention() + " hat gewonnen!";
+            event.getChannel().sendMessage(text).queue();
 
-            }
         }, 1, TimeUnit.DAYS);
         timerMap.put(gameData.getMsgId(), countdown);
         scheduler.shutdown();

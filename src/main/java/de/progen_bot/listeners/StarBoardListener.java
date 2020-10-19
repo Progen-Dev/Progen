@@ -23,15 +23,12 @@ public class StarBoardListener extends ListenerAdapter {
     final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public StarBoardListener() {
-        scheduler.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                starMessage.forEach((k, v) -> {
-                    printResult(k, v, starCount.get(k));
-                });
-                starMessage.clear();
-                starCount.clear();
-            }
+        scheduler.scheduleAtFixedRate(() -> {
+            starMessage.forEach((k, v) -> {
+                printResult(k, v, starCount.get(k));
+            });
+            starMessage.clear();
+            starCount.clear();
         }, 0, 1, TimeUnit.DAYS);
     }
 
