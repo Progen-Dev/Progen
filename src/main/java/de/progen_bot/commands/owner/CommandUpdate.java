@@ -22,7 +22,7 @@ public class CommandUpdate extends CommandHandler {
             new EmbedBuilder()
             .setColor(Color.blue)
             .setTitle("Update")
-            .setDescription("Hey @everyone, `1.0.8` is released.\n" + "https://github.com/Progen-Dev/Progen/releases/")
+            .setDescription("Hey @everyone, `" + Statics.VERSION + "is released.\n" + "https://github.com/Progen-Dev/Progen/releases/")
             .addField("Version", Statics.VERSION , false)
             .setTimestamp(Instant.now())
          .build()
