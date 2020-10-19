@@ -71,7 +71,6 @@ public class CommandManager extends ListenerAdapter {
             event.getTextChannel().sendMessage(new MessageGenerator("", "").generateErrorMsg("Your are not allowed to use this command!")).queue();
             return;
         }
-
         commandHandler.execute(parsedMessage, event, guildConfiguration);
         event.getMessage().delete().queue();
     }
