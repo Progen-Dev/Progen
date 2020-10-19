@@ -21,15 +21,10 @@ public class Say extends CommandHandler {
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event,
             GuildConfiguration configuration) {
 
-        StringBuilder out = new StringBuilder(" ");
-        for (String s : parsedCommand.getArgs()) {
-            out.append(s).append(" ");
-        }
+        final String out = String.join(" ", parsedCommand.getArgs());
 
-        SayModel sayModel = new SayModel(event.getTextChannel().getId(),
-                new EmbedBuilder().setDescription(out.toString())
-                        .setAuthor(event.getAuthor().getAsTag())
-                        .setTimestamp(Instant.now()));
+        final SayModel sayModel = new SayModel(event.getTextChannel().getId(), new EmbedBuilder().setDescription(out)
+                .setAuthor(event.getAuthor().getAsTag()).setTimestamp(Instant.now()));
         SayListener.addSayModel(event.getAuthor().getId(), sayModel);
 
         event.getAuthor().openPrivateChannel()

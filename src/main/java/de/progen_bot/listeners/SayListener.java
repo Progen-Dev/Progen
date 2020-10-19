@@ -47,11 +47,12 @@ public class SayListener extends ListenerAdapter {
                     break;
                 case 2:
                     if (event.getMessage().getContentRaw().equals("y")) {
-                        sayStorage.replace(userId, mSayModel);
                         mSayModel.setStage(3);
+                        sayStorage.replace(userId, mSayModel);                        
                         event.getChannel().sendMessage("Enter the url for the title.").queue();
                     } else if (event.getMessage().getContentRaw().equals("n")) {
                         mSayModel.setStage(7);
+                        sayStorage.replace(userId, mSayModel);
                         event.getChannel().sendMessage("Preview: if you want to send this embed, send <y/n>")
                                 .embed(mSayModel.getEmbedBuilder().build()).queue();
                     }
@@ -80,7 +81,7 @@ public class SayListener extends ListenerAdapter {
         sayStorage.put(userId, sayModel);
     }
 
-    Pattern colorPattern = Pattern.compile("#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})");
+    Pattern colorPattern = Pattern.compile("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
 
     private boolean isHexadecimal(String input) {
         final Matcher matcher = colorPattern.matcher(input);
