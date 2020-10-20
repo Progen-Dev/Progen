@@ -37,7 +37,6 @@ public class Clear extends CommandHandler {
 
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-
         String[] args = parsedCommand.getArgs();
 
         if (args.length < 1) {
@@ -85,7 +84,7 @@ public class Clear extends CommandHandler {
             event.getTextChannel()
                     .sendMessage(error.setDescription("Please use a number between 2 and 100!").build()).queue();
         }
-    }
+   }
 
     @Override
     public AccessLevel getAccessLevel() {

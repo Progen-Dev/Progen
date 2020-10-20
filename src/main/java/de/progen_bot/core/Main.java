@@ -1,28 +1,20 @@
 package de.progen_bot.core;
 
 import com.mysql.cj.jdbc.Driver;
+
 import de.mtorials.commands.ChangePrefix;
 import de.mtorials.fortnite.core.Fortnite;
 import de.mtorials.pwi.httpapi.API;
 import de.progen_bot.command.CommandManager;
-import de.progen_bot.commands.Help;
-import de.progen_bot.commands.fun.ConnectFour;
 import de.progen_bot.commands.moderator.*;
-import de.progen_bot.commands.moderator.blacklist.CommandBan;
-import de.progen_bot.commands.moderator.blacklist.CommandKick;
-import de.progen_bot.commands.music.CommandMusic;
-import de.progen_bot.commands.music.CommandPlaylist;
-import de.progen_bot.commands.owner.CommandRestart;
-import de.progen_bot.commands.owner.CommandStop;
-import de.progen_bot.commands.owner.CommandTest;
-import de.progen_bot.commands.settings.CommandAutorole;
-import de.progen_bot.commands.settings.CommandNotify;
-import de.progen_bot.commands.settings.CommandVote;
-import de.progen_bot.commands.owner.CommandUpdate;
+import de.progen_bot.commands.moderator.blacklist.*;
+import de.progen_bot.commands.music.*;
+import de.progen_bot.commands.owner.*;
+import de.progen_bot.commands.settings.*;
 import de.progen_bot.commands.user.*;
-import de.progen_bot.commands.xp.XP;
-import de.progen_bot.commands.xp.XPNotify;
-import de.progen_bot.commands.xp.XPrank;
+import de.progen_bot.commands.xp.*;
+import de.progen_bot.commands.fun.*;
+import de.progen_bot.commands.*;
 import de.progen_bot.db.DaoHandler;
 import de.progen_bot.music.MusicManager;
 import de.progen_bot.util.Settings;
@@ -35,6 +27,8 @@ import javax.security.auth.login.LoginException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -87,7 +81,13 @@ public class Main {
         // MySQL.loadPollTimer();
 
         topGGIntegration = new TopGGIntegration(getJda());
-        topGGIntegration.postServerCount();
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                topGGIntegration.postServerCount();
+            }
+        }, 0, 30*60*1000); //every 30 mins
 
         // DAO Handler
         daoHandler = new DaoHandler();
@@ -137,6 +137,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandTest());
         commandManager.setupCommandHandlers(new CommandAutorole());
         commandManager.setupCommandHandlers(new CommandUpdate());
+        commandManager.setupCommandHandlers(new MuteList());
     }
 
     /**
@@ -146,11 +147,15 @@ public class Main {
         final JDABuilder 
         builder = JDABuilder.createDefault(
             Settings.TOKEN,
-            GatewayIntent.GUILD_BANS,
+            GatewayIntent.GUILD_BANS,            
             GatewayIntent.GUILD_MESSAGES,
             GatewayIntent.GUILD_MEMBERS,
             GatewayIntent.GUILD_VOICE_STATES,
-            GatewayIntent.GUILD_PRESENCES);
+            GatewayIntent.GUILD_PRESENCES,
+            GatewayIntent.GUILD_MESSAGE_REACTIONS,
+            GatewayIntent.DIRECT_MESSAGE_REACTIONS,
+            GatewayIntent.DIRECT_MESSAGES);
+
         BuildManager.addEventListeners(builder);
         try {
             jda = builder.build().awaitReady();

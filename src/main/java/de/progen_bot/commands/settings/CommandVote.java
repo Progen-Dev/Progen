@@ -176,7 +176,7 @@ public class CommandVote extends CommandHandler implements Serializable {
             return;
         }
 
-        String sb = String.join(" ", new ArrayList<>(Arrays.asList(args).subList(1, args.length)));
+        String sb = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
         List<String> content = Arrays.asList(sb.split("\\|"));
         String heading = content.get(0);
         List<String> answers = new ArrayList<>(content.subList(1, content.size()));

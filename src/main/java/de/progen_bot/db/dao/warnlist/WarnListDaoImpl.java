@@ -13,10 +13,11 @@ import java.util.List;
 
 public class WarnListDaoImpl extends Dao implements WarnListDao {
 
-	public void insertWarn(Member member, String reason) {
+    public void insertWarn(Member member, String reason) {
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO `warn` (userid , reason, guildid) VALUES(?,?,?)");
+            PreparedStatement ps = connection
+                    .prepareStatement("INSERT INTO `warn` (userid , reason, guildid) VALUES(?,?,?)");
             ps.setString(1, member.getUser().getId());
             ps.setString(2, reason);
             ps.setString(3, member.getGuild().getId());
@@ -30,7 +31,8 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
         List<String> warns = new ArrayList<>();
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM `warn` WHERE `userid` = ? AND `guildid` = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT * FROM `warn` WHERE `userid` = ? AND `guildid` = ?");
             ps.setString(1, member.getUser().getId());
             ps.setString(2, member.getGuild().getId());
 
@@ -45,12 +47,14 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
         return warns;
     }
 
-    public void deleteWarns(Member member) {
+    public void deleteWarn(Member member, String reason) {
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM `warn` WHERE `userid` = ? AND `guildid` = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("DELETE FROM `warn` WHERE `userid` = ? AND `guildid` = ? AND `reason` = ?");
             ps.setString(1, member.getUser().getId());
             ps.setString(2, member.getGuild().getId());
+            ps.setString(3, reason);
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,9 +63,9 @@ public class WarnListDaoImpl extends Dao implements WarnListDao {
 
     @Override
     public void generateTables(String query) {
-		String sqlQuery = "CREATE TABLE IF NOT EXISTS warn(`id` INT(11) NOT NULL AUTO_INCREMENT, `guildid` " +
-				"VARCHAR(50) NOT NULL, `userid` VARCHAR(50) NOT NULL, " +
-				"`reason` VARCHAR(50) NOT NULL, PRIMARY KEY(`id`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8";
-		super.generateTables(sqlQuery);
+        String sqlQuery = "CREATE TABLE IF NOT EXISTS warn(`id` INT(11) NOT NULL AUTO_INCREMENT, `guildid` "
+                + "VARCHAR(50) NOT NULL, `userid` VARCHAR(50) NOT NULL, "
+                + "`reason` VARCHAR(50) NOT NULL, PRIMARY KEY(`id`) ) ENGINE = InnoDB DEFAULT CHARSET = utf8";
+        super.generateTables(sqlQuery);
     }
 }

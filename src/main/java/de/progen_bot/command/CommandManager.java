@@ -26,7 +26,7 @@ public class CommandManager extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getAuthor().isBot() || event.getAuthor().isFake() || !event.getChannelType().isGuild()) {
+        if (event.getAuthor().isBot() || !event.getChannelType().isGuild()) {
             return;
         }
 
@@ -71,7 +71,6 @@ public class CommandManager extends ListenerAdapter {
             event.getTextChannel().sendMessage(new MessageGenerator("", "").generateErrorMsg("Your are not allowed to use this command!")).queue();
             return;
         }
-
         commandHandler.execute(parsedMessage, event, guildConfiguration);
         event.getMessage().delete().queue();
     }
