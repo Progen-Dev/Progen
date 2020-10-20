@@ -29,7 +29,7 @@ public class CommandAutorole extends CommandHandler{
                     messageGenerators.generateRightMsg("Successfully set autorole to `" + parsedCommand.getArgs()[0] + "`.")
             ).queue();
         } else {
-            configuration.setAutoRole("");
+            configuration.setAutoRole(null);
             event.getTextChannel().sendMessage(messageGenerators.generateRightMsg("Successfully deactivated autorole.")).queue();
         }
 

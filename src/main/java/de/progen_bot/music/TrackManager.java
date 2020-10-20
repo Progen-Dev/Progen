@@ -16,7 +16,7 @@ public class TrackManager extends AudioEventAdapter {
     private final VoiceChannel voiceChannel;
 
     /**
-     * Erstellt eine Instanz der Klasse TrackManager.
+     * Creates an instance of the TrackManager class.
      * @param player {@link AudioPlayer audio player}
      *
      */
@@ -29,10 +29,10 @@ public class TrackManager extends AudioEventAdapter {
     }
 
     /**
-     * Reiht den übergebenen Track in die Queue ein.
+     *Lines the transferred track into the queue.
      *
      * @param track  AudioTrack
-     * @param author Member, der den Track eingereiht hat
+     * @param author Member who was queue the track
      */
 
     public void queue(AudioTrack track, Member author) {
@@ -45,7 +45,7 @@ public class TrackManager extends AudioEventAdapter {
     }
 
     /**
-     * Returnt die momentane Queue als LinkedHashSet.
+     * Returns the current queue as LinkedHashSet.
      *
      * @return Queue
      */
@@ -55,7 +55,7 @@ public class TrackManager extends AudioEventAdapter {
     }
 
     /**
-     * Returnt AudioInfo des Tracks aus der Queue.
+     * Returns audioinfo of the Track from the Queue.
      *
      * @param track AudioTrack
      * @return AudioInfo
@@ -69,7 +69,7 @@ public class TrackManager extends AudioEventAdapter {
     }
 
     /**
-     * Leert die gesammte Queue.
+     * Empties the entire Queue
      */
 
     public void purgeQueue() {
@@ -79,7 +79,7 @@ public class TrackManager extends AudioEventAdapter {
 
 
     /**
-     * Shufflet die momentane Queue.
+     * Shufflet the current Queue.
      */
 
     public void shuffleQueue() {
@@ -93,10 +93,9 @@ public class TrackManager extends AudioEventAdapter {
     }
 
     /**
-     * PLAYER EVENT: TRACK STARTET
-     * Wenn Einreiher nicht im VoiceChannel ist, wird der Player gestoppt.
-     * Sonst connectet der Bot in den Voice Channel des Einreihers.
-     *
+     * PLAYER EVENT: TRACK LAUNCHES
+     * If single row is not in the voice channel, the player will stop.
+     * Otherwise the bot will connect to the voice channel of the Track Owner.
      * @param player AudioPlayer
      * @param track  AudioTrack
      */
@@ -112,8 +111,8 @@ public class TrackManager extends AudioEventAdapter {
 
     /**
      * PLAYER EVENT: TRACK ENDE
-     * Wenn die Queue zuende ist, verlässt der Bot den Audio Channel.
-     * Sonst wird der nächste Track in der Queue wiedergegeben.
+     * Bot leave the Voice Channel, when track is end.
+     * If not an new track start.
      *
      * @param player {@link AudioPlayer audio player}
      * @param track {@link AudioTrack audio track}
@@ -123,7 +122,7 @@ public class TrackManager extends AudioEventAdapter {
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if (queue.isEmpty()) {
-            System.out.println("Queue is empty!");
+            voiceChannel.getGuild().getAudioManager().closeAudioConnection();
         } else {
             player.playTrack(queue.element().getTrack());
             queue.remove();
