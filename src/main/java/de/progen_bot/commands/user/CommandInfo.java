@@ -20,7 +20,8 @@ public class CommandInfo extends CommandHandler {
                  new EmbedBuilder()
                  .setColor(Color.BLUE)
                  .setTitle("Info")
-                 .setDescription("Multi purpose discord bot with webinterface, music, administration, tools, games and more!")
+                 .setDescription("Multi purpose discord bot with webinterface, music, administration, tools, games and more!\n"
+                    + "Prefix:" + configuration.getPrefix())
                  .addField("Github","[Github.com/Progen-Dev](https://github.com/Progen-Dev)", false)
                  .addField("Website & Web interface", "[progen-bot.de](https://progen-bot.de) [ProgenWebinterface PWI](https://pwi.progen-bot.de)", false)
                  .addField("Invite", "[Progen](https://discord.com/oauth2/authorize?client_id=495293590503817237&scope=bot&permissions=8) [ProgenMusic1](https://discord.com/oauth2/authorize?client_id=662647209929605126&scope=bot&permissions=3145728) [ProgenMusic2](https://discord.com/oauth2/authorize?client_id=662647378385305620&scope=bot&permissions=3145728)", false)

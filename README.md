@@ -24,6 +24,8 @@ Progen can take over your discord server moderation & administration. <br>
 You can warn,mute,ban and kick users. <br>
 All this can also be displayed in a clearly arranged modlog. <br>
 The Progenlog.
+<img src="./images/README/moderation.png">
+
 <h2>Music</h2>
 Listen to any kind of music with Progen in a voice channel. <br>
 We can proudly say that we have a clean and powerful sound. <br>

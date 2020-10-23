@@ -38,9 +38,9 @@ public class ReadyListener extends ListenerAdapter {
             out.append("-").append(g.getName()).append("(").append(g.getId()).append(")").append("\n");
         }
 
-        Activity[] games = new Activity[] { Activity.playing("Runs on x  guilds"),
+        Activity[] games = new Activity[] { 
                 Activity.playing("pb!help | pwi.progen-bot.de"),
-                Activity.playing(Statics.VERSION) };
+         };
 
         new Timer().schedule(new TimerTask() {
 
@@ -51,14 +51,13 @@ public class ReadyListener extends ListenerAdapter {
                 event.getJDA().getPresence().setActivity(games[ThreadLocalRandom.current().nextInt(games.length)]);
             }
 
-        }, 0, 10000);
+        }, 0, 30*60*1000);
 
         System.out.println(out.toString());
 
         // CommandPoll
         CommandVote.loadPolls(event.getJDA());
-
-        // reconnect
+        // Set new date
         Statics.setLastRestart(new Date());
     }
 }
