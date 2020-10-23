@@ -38,7 +38,7 @@ public class StarBoardListener extends ListenerAdapter {
             });
             starMessage.clear();
             starCount.clear();
-        }, 0, 1, TimeUnit.SECONDS);
+        }, 0, 1, TimeUnit.DAYS);
     }
 
     @Override
