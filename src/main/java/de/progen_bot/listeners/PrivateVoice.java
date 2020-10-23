@@ -14,14 +14,14 @@ public class PrivateVoice extends ListenerAdapter {
 
         if (!event.getChannelLeft().getName().contains(PRIVATEVOICECHANNELPREFIX)) return;
         if (event.getChannelLeft().getMembers().size() == 0) {
-            event.getChannelLeft().delete().complete();
+            event.getChannelLeft().delete().queue();
         }
     }
 
     public void onGuildVoiceMove(GuildVoiceMoveEvent event) {
         if (!event.getChannelLeft().getName().contains(PRIVATEVOICECHANNELPREFIX)) return;
         if (event.getChannelLeft().getMembers().size() == 0) {
-            event.getChannelLeft().delete().complete();
+            event.getChannelLeft().delete().queue();
         }
     }
 }
