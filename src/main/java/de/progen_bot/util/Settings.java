@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -36,12 +37,12 @@ public class Settings {
     }
 
     //#region Bot
-    public static final List<String> BOT_OWNERS =   Arrays.asList(GSON.fromJson(get(BOT_KEY, "owners").getAsJsonArray(), String[].class));
+    public static final List<String> BOT_OWNERS =   Collections.unmodifiableList(Arrays.asList(GSON.fromJson(get(BOT_KEY, "owners").getAsJsonArray(), String[].class)));
     public static final String PREFIX           =   get(BOT_KEY, "prefix").getAsString();
     public static final String TOKEN            =   get(BOT_KEY, "token").getAsString();
     public static final String API_PORT         =   String.valueOf(get(BOT_KEY, "apiPort").getAsInt());
 
-    public static final List<String> MUSIC      =   Arrays.asList(GSON.fromJson(get(BOT_KEY, "music").getAsJsonArray(), String[].class));
+    public static final List<String> MUSIC      =   Collections.unmodifiableList(Arrays.asList(GSON.fromJson(get(BOT_KEY, "music").getAsJsonArray(), String[].class)));
 
     public static final String TOP_GG_TOKEN     =   get(BOT_KEY, "topGGToken").getAsString();
 
