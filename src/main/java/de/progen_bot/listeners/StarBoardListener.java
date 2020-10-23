@@ -38,7 +38,7 @@ public class StarBoardListener extends ListenerAdapter {
             });
             starMessage.clear();
             starCount.clear();
-        }, 0, 1, TimeUnit.DAYS);
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
     @Override
@@ -73,7 +73,9 @@ public class StarBoardListener extends ListenerAdapter {
                             .setTitle("Jump to message", message.getJumpUrl())
                             .setDescription(message.getContentDisplay())
                             .setImage(message.getAttachments().isEmpty() ? null
-                                    : message.getAttachments().get(0).getUrl())
+                                    : (message.getAttachments().get(0).isImage()
+                                            ? message.getAttachments().get(0).getUrl()
+                                            : null))
                             .build();
 
                     final List<TextChannel> channelList = Main.getJda().getGuildById(guildId)
