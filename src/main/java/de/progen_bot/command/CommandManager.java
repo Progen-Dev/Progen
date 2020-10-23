@@ -1,18 +1,21 @@
 package de.progen_bot.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+
 import de.mtorials.misc.Logger;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
-import de.progen_bot.db.entities.config.GuildConfigurationBuilder;
 import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.util.MessageGenerator;
 import de.progen_bot.util.Settings;
 import de.progen_bot.util.Statics;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
-import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * The Class CommandManager.
@@ -30,31 +33,18 @@ public class CommandManager extends ListenerAdapter {
             return;
         }
 
+        GuildConfiguration guildConfiguration = new ConfigDaoImpl().loadConfig(event.getGuild());
+
         // Universal info command
         if (event.getMessage().getContentRaw().equals(Settings.PREFIX + Statics.UNIVERSAL_INFO_CMD_WITHOUT_PREFIX)) {
             CommandHandler commandHandler = commandAssociations.get(Statics.UNIVERSAL_INFO_CMD_WITHOUT_PREFIX);
             Logger.info("Universal info command was invoked by " + event.getGuild().getName());
             ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), Settings.PREFIX);
-            commandHandler.execute(parsedMessage, event, new GuildConfigurationBuilder()
-                    .setLogChannelID(null)
-                    .setPrefix("pb!")
-                    .setTempChannelCategoryID(null)
-                    .build());
+            commandHandler.execute(parsedMessage, event, guildConfiguration);
             return;
         }
 
-        GuildConfiguration guildConfiguration = new ConfigDaoImpl().loadConfig(event.getGuild());
-
-        if (guildConfiguration == null) {
-            guildConfiguration = new GuildConfigurationBuilder()
-                    .setLogChannelID(null)
-                    .setPrefix("pb!")
-                    .setTempChannelCategoryID(null)
-                    .build();
-
-            new ConfigDaoImpl().writeConfig(guildConfiguration, event.getGuild());
-                }
-            ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.getPrefix());
+        ParsedCommandString parsedMessage = parse(event.getMessage().getContentRaw(), guildConfiguration.getPrefix());
 
         if (parsedMessage == null) return;
 
