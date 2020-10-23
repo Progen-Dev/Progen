@@ -27,6 +27,12 @@
         </repository>
     </repositories>
 
+      <repository>
+    <id>central</id>
+    <name>bintray</name>
+    <url>http://jcenter.bintray.com</url>
+  </repository>
+
     <dependencies>
 
         <dependency>
@@ -48,15 +54,17 @@
         </dependency>
 
         <dependency>
-            <groupId>org.discordbots</groupId>
-            <artifactId>DBL-Java-Library</artifactId>
-            <version>19abf19859</version>
+            <groupId>com.jagrosh</groupId>
+            <artifactId>jda-utilities</artifactId>
+            <version>3.0.4</version>
+            <scope>compile</scope>
+            <type>pom</type>
         </dependency>
 
         <dependency>
-            <groupId>fr.bmartel</groupId>
-            <artifactId>jspeedtest</artifactId>
-            <version>1.32.1</version>
+            <groupId>org.discordbots</groupId>
+            <artifactId>DBL-Java-Library</artifactId>
+            <version>19abf19859</version>
         </dependency>
 
         <dependency>
