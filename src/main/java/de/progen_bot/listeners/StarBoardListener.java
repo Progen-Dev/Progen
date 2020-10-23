@@ -71,7 +71,10 @@ public class StarBoardListener extends ListenerAdapter {
                             .setColor(Color.YELLOW)
                             .setAuthor(message.getAuthor().getAsTag(), null, message.getAuthor().getAvatarUrl())
                             .setTitle("Jump to message", message.getJumpUrl())
-                            .setDescription(message.getContentDisplay()).build();
+                            .setDescription(message.getContentDisplay())
+                            .setImage(message.getAttachments().isEmpty() ? null
+                                    : message.getAttachments().get(0).getUrl())
+                            .build();
 
                     final List<TextChannel> channelList = Main.getJda().getGuildById(guildId)
                             .getTextChannelsByName("starboard", true);
