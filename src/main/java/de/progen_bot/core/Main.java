@@ -39,8 +39,9 @@ public class Main {
     private static final String URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
             Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
 
-    private static OkHttpClient client;
     private static JDA jda;
+
+    private static final OkHttpClient okclient = new OkHttpClient();
 
     private static Connection sqlConnection;
 
@@ -68,8 +69,6 @@ public class Main {
         } catch (final SQLException ex) {
             throw new RuntimeException("Error connecting to the database", ex);
         }
-
-        client = new OkHttpClient();
 
         final API httpApi = new API(Integer.parseInt(Settings.API_PORT));
         httpApi.start();
@@ -131,7 +130,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandKick());
         commandManager.setupCommandHandlers(new CommandInfo());
         commandManager.setupCommandHandlers(new CommandBan());
-        commandManager.setupCommandHandlers(new CommandPlaylist());
+        //commandManager.setupCommandHandlers(new CommandPlaylist());
         commandManager.setupCommandHandlers(new UserVoted());
         commandManager.setupCommandHandlers(new CommandNotify());
         commandManager.setupCommandHandlers(new CommandTest());
@@ -202,9 +201,11 @@ public class Main {
         return musicManager;
     }
 
-    public static OkHttpClient getClient() {
-        return client;
+    //OKHTTPCLIENT
+    public static OkHttpClient geHttpClient(){
+        return okclient;
     }
+
 
     /**
      * The main method.
