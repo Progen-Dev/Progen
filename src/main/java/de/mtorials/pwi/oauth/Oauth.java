@@ -7,6 +7,8 @@ import de.progen_bot.core.Main;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import static io.javalin.apibuilder.ApiBuilder.*;
+
 
 public class Oauth {
 
@@ -23,23 +25,22 @@ public class Oauth {
         .build();
 
     public Oauth(){
-        Javalin.create(
-            settings -> settings.enableCorsForOrigin("https://pwi-canary.progen-bot.de")).routes(() -> {
-                before("/*")
-            });
-            path("/guilds", () -> {
-                before("/*", this::checkLogin);
-                get("/all", this::getGuilds);
-            });
+        Javalin.create(settings -> 
+        settings.enableCorsForOrigin("https://pwi-canary.progen-bot.de")).routes(() -> {
+		    get("/login", this::loginWithDiscord);
+        });
     }
 
     private void checkLogin(Context ctx) {
     }
 
-    private void loginWithDiscord(Context ctx)
+    private void loginWithDiscord(Context ctx){
+        var key = ctx.header("User_Authorization");
+        ctx.redirect(CLIENT.generateAuthorizationURL("https://pwi.canary.progen-bot.de", SCOPES));
+        return;
+    }
 
     private void getGuilds(Context ctx){
-
     }
 
 }
