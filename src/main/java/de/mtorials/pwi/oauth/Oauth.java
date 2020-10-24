@@ -2,7 +2,6 @@ package de.mtorials.pwi.oauth;
 
 import com.jagrosh.jdautilities.oauth2.OAuth2Client;
 import com.jagrosh.jdautilities.oauth2.Scope;
-import com.jagrosh.jdautilities.oauth2.session.SessionController;
 
 import de.progen_bot.core.Main;
 import io.javalin.Javalin;
