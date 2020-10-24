@@ -17,8 +17,8 @@ public class Oauth {
      */
     private static final Scope[] SCOPES = {Scope.IDENTIFY, Scope.GUILDS};
     private static final OAuth2Client CLIENT = new OAuth2Client.Builder()
-        .setClientId(51632730770374657L)
-        .setClientSecret("_9RG51caaVHWp0hPpLKG0OK3eqpdDV6h")
+        .setClientId(CLIENT_IDL)
+        .setClientSecret("CLIENT_SECRET")
         .setOkHttpClient(Main.geHttpClient())
         .build();
 
