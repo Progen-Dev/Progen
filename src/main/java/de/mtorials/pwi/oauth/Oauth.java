@@ -17,19 +17,29 @@ public class Oauth {
      */
     private static final Scope[] SCOPES = {Scope.IDENTIFY, Scope.GUILDS};
     private static final OAuth2Client CLIENT = new OAuth2Client.Builder()
-        .setClientId(CLIENT_IDL)
-        .setClientSecret("CLIENT_SECRET")
+        .setClientId(51632730770374657L)
+        .setClientSecret("_9RG51caaVHWp0hPpLKG0OK3eqpdDV6h")
         .setOkHttpClient(Main.geHttpClient())
         .build();
 
-    public Oauth(int port){
+    public Oauth(){
         Javalin.create(
             settings -> settings.enableCorsForOrigin("https://pwi-canary.progen-bot.de")).routes(() -> {
-                //get("/login", this::login);
+                before("/*")
+            });
+            path("/guilds", () -> {
+                before("/*", this::checkLogin);
+                get("/all", this::getGuilds);
             });
     }
 
-    public void login(Context context){
+    private void checkLogin(Context ctx) {
     }
-    
+
+    private void loginWithDiscord(Context ctx)
+
+    private void getGuilds(Context ctx){
+
+    }
+
 }
