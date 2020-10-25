@@ -77,13 +77,11 @@
     <version>3.0.4</version>
     <scope>compile</scope>
   </dependency>
-
   <dependency>
             <groupId>io.javalin</groupId>
             <artifactId>javalin</artifactId>
             <version>3.11.0</version>
         </dependency>
-  
     </dependencies>
 
     <build>
