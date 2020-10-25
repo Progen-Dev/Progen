@@ -3,11 +3,13 @@ package de.mtorials.pwi.oauth;
 import com.jagrosh.jdautilities.oauth2.OAuth2Client;
 import com.jagrosh.jdautilities.oauth2.Scope;
 
+
 import de.progen_bot.core.Main;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
+
 
 
 public class Oauth {
@@ -27,20 +29,43 @@ public class Oauth {
     public Oauth(){
         Javalin.create(settings -> 
         settings.enableCorsForOrigin("https://pwi-canary.progen-bot.de")).routes(() -> {
-		    get("/login", this::loginWithDiscord);
+            get("/login", this::loginWithDiscord);
+            get("/logout", this::logout);
+            get("/guilds", this::getGuilds);
         });
     }
 
     private void checkLogin(Context ctx) {
     }
 
+    /**
+     * User Authorization for your Login with your discord account.
+     * Context redirect to authurl
+     * CLIENT generate Authorization url with the base url https://pwi-canary.progen-bot.de for you
+     * @param ctx
+     */
     private void loginWithDiscord(Context ctx){
         var key = ctx.header("User_Authorization");
-        ctx.redirect(CLIENT.generateAuthorizationURL("https://pwi.canary.progen-bot.de", SCOPES));
+        if(key == null){
+        ctx.redirect(CLIENT.generateAuthorizationURL("https://pwi-canary.progen-bot.de", SCOPES));
         return;
+        } else{
+            ctx.redirect("https://pwi-canary.progen-bot.de");
+        }
     }
 
+
+    private void logout(Context ctx){
+
+    }
+
+    /**
+     * After login all guilds which you and Progen are listed on /guilds
+     * The information of the guilds is taken from the Scope IDENTIFY.
+     * @param ctx
+     */
     private void getGuilds(Context ctx){
+        var auth = ctx.header("Authorization");
     }
 
 }
