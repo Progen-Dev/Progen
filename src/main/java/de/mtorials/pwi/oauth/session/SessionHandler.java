@@ -8,5 +8,8 @@ public class SessionHandler{
     private static HashMap<String, Session> SESSION;
     private static HashMap<String, Boolean> USER;
 
-    
+ public void createSession(SessionManager session){
+     SESSION.put(session.getSessionKey(), session);
+     USER.put(session.getUserId(), true);
+ }   
 }
