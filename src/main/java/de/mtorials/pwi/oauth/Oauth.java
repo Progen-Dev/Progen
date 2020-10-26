@@ -2,11 +2,11 @@ package de.mtorials.pwi.oauth;
 
 import com.jagrosh.jdautilities.oauth2.OAuth2Client;
 import com.jagrosh.jdautilities.oauth2.Scope;
-
-
 import de.progen_bot.core.Main;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import net.dv8tion.jda.api.utils.data.DataArray;
+import net.dv8tion.jda.api.utils.data.DataObject;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
@@ -30,12 +30,8 @@ public class Oauth {
         Javalin.create(settings -> 
         settings.enableCorsForOrigin("https://pwi-canary.progen-bot.de")).routes(() -> {
             get("/login", this::loginWithDiscord);
-            get("/logout", this::logout);
             get("/guilds", this::getGuilds);
         });
-    }
-
-    private void checkLogin(Context ctx) {
     }
 
     /**
@@ -45,18 +41,12 @@ public class Oauth {
      * @param ctx
      */
     private void loginWithDiscord(Context ctx){
-        var key = ctx.header("User_Authorization");
+        var key = ctx.header("Authorization");
         if(key == null){
         ctx.redirect(CLIENT.generateAuthorizationURL("https://pwi-canary.progen-bot.de", SCOPES));
-        return;
         } else{
             ctx.redirect("https://pwi-canary.progen-bot.de");
         }
-    }
-
-
-    private void logout(Context ctx){
-
     }
 
     /**
@@ -66,6 +56,12 @@ public class Oauth {
      */
     private void getGuilds(Context ctx){
         var auth = ctx.header("Authorization");
+        var data = DataArray.empty();
+        Main.getJda().getGuildCache().forEach(guilds -> {
+            var obj = DataObject.empty().put("owner", guilds.getOwner()).put("name", guilds.getName()).put("id", guilds.getId()).put("icon", guilds.getIconUrl()).put("total member", guilds.getMemberCount()).put("booster", guilds.getBoostCount());
+           data.add(obj);
+            });
+        }
     }
 
-}
+
