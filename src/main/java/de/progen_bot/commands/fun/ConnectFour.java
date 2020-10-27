@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class ConnectFour extends CommandHandler {
     public ConnectFour() {
-        super("cf", "cf<width> <Name>",
+        super("cf", "cf 8 7 Progen",
                 "Progen's mini game. Play with a friend. Use this command with: cf <width> <Name>");
     }
 
@@ -24,7 +24,7 @@ public class ConnectFour extends CommandHandler {
         JDA jda = Main.getJda();
         String[] args = parsedCommand.getArgs();
 
-        if (args.length < 2) {
+        if (args.length < 1) {
 
             event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
