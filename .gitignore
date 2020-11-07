@@ -1,4 +1,5 @@
 ##Intellij##
+*.iml
 .resources/
 .out/
 .idea/
