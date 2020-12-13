@@ -8,10 +8,13 @@ assignees: ''
 ---
 ** Type of Bug**
 
-[ ] Minor
-[ ] Medium
-[ ] Important
-[ ] Critical
+- [ ] Minor
+
+- [ ] Medium
+
+- [ ] Important
+
+- [ ] Critical
 
 **Describe the bug**
 A clear and concise description of what the bug is.
