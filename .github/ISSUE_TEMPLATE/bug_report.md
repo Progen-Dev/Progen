@@ -9,11 +9,8 @@ assignees: ''
 ** Type of Bug**
 
 - [ ] Minor
-
 - [ ] Medium
-
 - [ ] Important
-
 - [ ] Critical
 
 **Describe the bug**
@@ -29,11 +26,6 @@ Steps to reproduce the behavior:
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Please complete the following information:**
- - Are you self hosting Progen, if yes:
-  - OS: [e.g. iOS]
-  - Java version:
-  - error log
 **Additional context**
 Add any other context about the problem here.
 
