@@ -1,5 +1,5 @@
 ---
-name: New COmmand
+name: New Command
 about: Explain what the Command should be able to do.
 title: '[Feature Request] '
 labels: enhancement
