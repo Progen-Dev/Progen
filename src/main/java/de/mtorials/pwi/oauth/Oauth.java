@@ -30,7 +30,7 @@ public class Oauth {
         Javalin.create(settings -> 
         settings.enableCorsForOrigin("https://pwi-canary.progen-bot.de")).routes(() -> {
             get("/login", this::loginWithDiscord);
-            
+            get("/guilds", this::listGuilds);
         });
     }
 
@@ -55,6 +55,9 @@ public class Oauth {
      * The information of the guilds is taken from the Scope IDENTIFY.
      * @param ctx
      */
+    private void listGuilds(Context ctx){
+        Main.getJda().getGuilds();
+    }
 }
  
 
