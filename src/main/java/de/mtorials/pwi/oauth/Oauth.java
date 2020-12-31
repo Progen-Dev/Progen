@@ -59,6 +59,3 @@ public class Oauth {
         Main.getJda().getGuilds();
     }
 }
- 
-
-
