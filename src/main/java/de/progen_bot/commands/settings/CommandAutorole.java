@@ -11,7 +11,7 @@ public class CommandAutorole extends CommandHandler
 {
     public CommandAutorole()
     {
-        super("autorole", "autorole @rolename | autorole deactive", "Set a roll that the user should get automatically when joining");
+        super("autorole", "active: autorole @rolename |deactive: autorole", "Set a roll that the user should get automatically when joining");
     }
 
     @Override
