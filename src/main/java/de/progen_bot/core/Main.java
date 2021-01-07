@@ -21,6 +21,8 @@ import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import okhttp3.OkHttpClient;
 
 import javax.security.auth.login.LoginException;
@@ -154,7 +156,13 @@ public class Main {
             GatewayIntent.GUILD_PRESENCES,
             GatewayIntent.GUILD_MESSAGE_REACTIONS,
             GatewayIntent.DIRECT_MESSAGE_REACTIONS,
-            GatewayIntent.DIRECT_MESSAGES);
+            GatewayIntent.DIRECT_MESSAGES
+        )
+            .enableCache(
+                    CacheFlag.ACTIVITY
+                    )
+                    .setMemberCachePolicy(MemberCachePolicy.ALL);
+                 
 
         BuildManager.addEventListeners(builder);
         try {
