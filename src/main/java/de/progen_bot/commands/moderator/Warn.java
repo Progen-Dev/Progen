@@ -22,6 +22,7 @@ public class Warn extends CommandHandler {
     private static final String EXECUTOR = "Executor";
     private static final String VICTIM = "Victim";
     private static final String REASON = "Reason";
+    private static final String CHANNEL = "Channel";
 
     public Warn() {
         super("warn", "warn <user> <reason>", "Warn a user");
@@ -35,6 +36,7 @@ public class Warn extends CommandHandler {
             .addField(EXECUTOR, event.getMember().getAsMention(), true)
             .setDescription(event.getMessageId())
             .addField(REASON, reason, false)
+            .addField(CHANNEL, event.getTextChannel().getAsMention(), false)
             .setTimestamp(Instant.now()).build();
     }
 
