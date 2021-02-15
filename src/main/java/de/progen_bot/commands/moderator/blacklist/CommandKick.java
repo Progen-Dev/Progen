@@ -24,6 +24,17 @@ public class CommandKick extends CommandHandler {
     public CommandKick() {
         super("kick", "kick <@user> <reason>", "Kick a user from this server");
     }
+    
+    private MessageEmbed getKickEmbed(MessageReceivedEvent event, String reason) {
+        if (event.getMember() == null)
+            return null;
+
+        return new EmbedBuilder().setColor(Color.MAGENTA).setTitle(KICK)
+                .addField(VICTIM, event.getMessage().getMentionedMembers().get(0).getAsMention(), true)
+                .addField(EXECUTOR, event.getMember().getAsMention(), true).setDescription(event.getMessageId())
+                .addField(CHANNEL, event.getTextChannel().getAsMention(), false)
+                .addField(REASON, reason, false).setTimestamp(Instant.now()).build();
+    }
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event,
@@ -57,16 +68,6 @@ public class CommandKick extends CommandHandler {
         } catch (InsufficientPermissionException e) {
             event.getChannel().sendMessage("Failed to kick user " + target.getUser().getAsTag()).queue();
         }
-    }
-
-    private MessageEmbed getKickEmbed(MessageReceivedEvent event, String reason) {
-        if (event.getMember() == null)
-            return null;
-
-        return new EmbedBuilder().setColor(Color.MAGENTA).setTitle(KICK)
-                .addField(VICTIM, event.getMessage().getMentionedMembers().get(0).getAsMention(), true)
-                .addField(EXECUTOR, event.getMember().getAsMention(), true).setDescription(event.getMessageId())
-                .addField(REASON, reason, false).setTimestamp(Instant.now()).build();
     }
 
     @Override
