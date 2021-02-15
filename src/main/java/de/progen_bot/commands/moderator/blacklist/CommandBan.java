@@ -21,6 +21,7 @@ public class CommandBan extends CommandHandler {
     private static final String EXECUTOR = "Executor";
     private static final String VICTIM = "Victim";
     private static final String REASON = "Reason";
+    private static final String CHANNEL = "Channel";
 
     public CommandBan() {
         super("ban", "ban <user> <reason>", "Ban a user from this Server");
@@ -30,6 +31,7 @@ public class CommandBan extends CommandHandler {
         return new EmbedBuilder().setColor(Color.red).setTitle(BAN)
                 .addField(VICTIM, event.getMessage().getMentionedUsers().get(0).getAsMention(), true)
                 .addField(EXECUTOR, event.getMember().getAsMention(), true).setDescription(event.getMessageId())
+                .addField(CHANNEL, event.getTextChannel().getAsMention(), false)
                 .addField(REASON, reason, false).setTimestamp(Instant.now()).build();
     }
 
