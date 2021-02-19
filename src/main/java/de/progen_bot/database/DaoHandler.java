@@ -13,9 +13,8 @@ public class DaoHandler
     // FIXME: 17.02.2021 extract
     public DaoHandler()
     {
-        final List<Dao> daoList = new ArrayList<>(){{
-            add(new ConfigDaoImpl());
-        }};
+        final List<Dao> daoList = new ArrayList<>();
+        daoList.add(new ConfigDaoImpl());
         
         daoList.stream().forEach(dao ->
         {
