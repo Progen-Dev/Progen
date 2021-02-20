@@ -71,11 +71,10 @@ public class TrackManager extends AudioEventAdapter
     @Override
     public void onTrackStart(AudioPlayer player, AudioTrack track)
     {
-        final VoiceChannel channel = this.voiceChannel;
-        if (channel == null)
+        if (this.voiceChannel == null)
             player.stopTrack();
         else
-            this.voiceChannel.getGuild().getAudioManager().openAudioConnection(channel);
+            this.voiceChannel.getGuild().getAudioManager().openAudioConnection(this.voiceChannel);
     }
 
     @Override

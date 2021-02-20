@@ -3,6 +3,7 @@ package de.progen_bot.core;
 import com.mysql.cj.jdbc.Driver;
 import de.progen_bot.core.music.MusicBotManager;
 import de.progen_bot.database.DaoHandler;
+import de.progen_bot.music.MusicManager;
 import de.progen_bot.utils.statics.Settings;
 import de.progen_bot.utils.topgg.TopGGIntegration;
 import net.dv8tion.jda.api.JDA;
@@ -34,6 +35,7 @@ public class Main
     private static DaoHandler daoHandler;
     private static TopGGIntegration topGGIntegration;
     private static MusicBotManager musicBotManager;
+    private static MusicManager musicManager;
 
     public Main()
     {
@@ -55,6 +57,7 @@ public class Main
         topGGIntegration = new TopGGIntegration(getJDA());
         daoHandler = new DaoHandler();
         musicBotManager = new MusicBotManager();
+        musicManager = new MusicManager();
 
         // FIXME: 17.02.2021 replace with scheduler
         new Timer().schedule(new TimerTask()
@@ -122,6 +125,11 @@ public class Main
     public static MusicBotManager getMusicBotManager()
     {
         return musicBotManager;
+    }
+
+    public static MusicManager getMusicManager()
+    {
+        return musicManager;
     }
 
     public static void main(String[] args)

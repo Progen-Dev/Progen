@@ -3,6 +3,8 @@ package de.progen_bot.utils.topgg;
 import net.dv8tion.jda.api.JDA;
 import org.discordbots.api.client.DiscordBotListAPI;
 
+import de.progen_bot.utils.statics.Settings;
+
 import java.util.function.Consumer;
 
 public class TopGGIntegration
@@ -19,8 +21,7 @@ public class TopGGIntegration
     {
         this.jda = jda;
         this.api = new DiscordBotListAPI.Builder()
-                // FIXME: 16.02.2021
-                .token("")
+                .token(Settings.TOP_GG_TOKEN)
                 .botId(jda.getSelfUser().getId())
                 .build();
     }
