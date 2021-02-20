@@ -3,6 +3,9 @@
  <h1>Progen</h1>
  <strong>Multi purpose discord bot with webinterface, music, administration, tools, games and more!</strong>
  <br><br>
+
+# THIS BRANCH IS UNDER ACTIVE DEVELOPMENT AND IS NOT COMPLETED NOR STABLE! RUN THE CODE AT YOU OWN RISK. THE REPOSITORY MAINTAINERS DO NOT TAKE ANY RESPONSIBILITY FOR BREAKING YOUR ENVIRONMENT!  
+
  <a href="https://top.gg/bot/495293590503817237" >
   <img src="https://top.gg/api/widget/495293590503817237.svg" alt="Progen" />
 </a>
