@@ -49,11 +49,10 @@ public class Settings
         try
         {
             json = new String(Files.readAllBytes(new File("config.json").toPath()));
-            config = GSON.fromJson(json, JsonObject.class);
         }
         catch (IOException e)
         {
-            System.err.println("Failed to read config file");
+            System.err.println("Failed to read config file, creating new one");
 
             final JsonObject object = new JsonObject();
 
@@ -96,6 +95,8 @@ public class Settings
                 ex.printStackTrace();
             }
         }
+
+        config = GSON.fromJson(json, JsonObject.class);
     }
 
     public static JsonElement get(String jsonObjectName, String property)
