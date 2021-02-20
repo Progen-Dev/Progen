@@ -8,7 +8,6 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-
 import de.progen_bot.core.Main;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
@@ -16,7 +15,8 @@ import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 
-public class Music {
+public class Music
+{
     private static final AudioPlayerManager MANAGER = new DefaultAudioPlayerManager();
 
     private final String ownerId;
@@ -26,7 +26,8 @@ public class Music {
     private AudioPlayer player;
     private TrackManager manager;
 
-    public Music(Member owner, JDA jda) {
+    public Music(Member owner, JDA jda)
+    {
         this.ownerId = owner.getId();
         this.guildId = owner.getGuild().getId();
         this.jda = jda;
@@ -46,7 +47,8 @@ public class Music {
         guild.getAudioManager().openAudioConnection(channel);
     }
 
-    private void createPlayer() {
+    private void createPlayer()
+    {
         final Guild guild = jda.getGuildById(this.guildId);
         if (guild == null)
             return;
@@ -69,7 +71,8 @@ public class Music {
         guild.getAudioManager().setSendingHandler(new PlayerSendHandler(player));
     }
 
-    public Member getOwner() {
+    public Member getOwner()
+    {
         final Guild guild = Main.getJDA().getGuildById(this.guildId);
         if (guild == null)
             throw new IllegalStateException("Guild is null");
@@ -81,41 +84,49 @@ public class Music {
         return owner;
     }
 
-    public JDA getBot() {
+    public JDA getBot()
+    {
         return jda;
     }
 
-    public VoiceChannel getChannel() {
+    public VoiceChannel getChannel()
+    {
         // Bot needs time to connect
         /* Null check already */
         final Member owner = getOwner();
         final Guild guild = owner.getGuild();
         final GuildVoiceState guildVoiceState = owner.getVoiceState();
 
-        if (!guild.getAudioManager().isConnected() && guildVoiceState != null && guildVoiceState.getChannel() != null) {
+        if (!guild.getAudioManager().isConnected() && guildVoiceState != null && guildVoiceState.getChannel() != null)
+        {
             return guildVoiceState.getChannel();
         }
 
         return guild.getAudioManager().getConnectedChannel();
     }
 
-    public boolean hasPlayer() {
+    public boolean hasPlayer()
+    {
         return this.player != null;
     }
 
-    public AudioPlayer getPlayer() {
+    public AudioPlayer getPlayer()
+    {
         return this.player;
     }
 
-    public TrackManager getManager() {
+    public TrackManager getManager()
+    {
         return this.manager;
     }
 
-    public boolean isIdle() {
+    public boolean isIdle()
+    {
         return !this.hasPlayer() || this.getPlayer().getPlayingTrack() == null;
     }
 
-    public void loadTrack(String identifier, Member author) {
+    public void loadTrack(String identifier, Member author)
+    {
         // Member#getJDA() of author? or author
         Member authorById = getOwner().getGuild().getMemberById(author.getId());
         if (authorById == null)
@@ -126,7 +137,8 @@ public class Music {
             input = "ytsearch: " + input;
 
         MANAGER.setFrameBufferDuration(1000);
-        MANAGER.loadItemOrdered(jda.getGuildById(this.guildId), input, new AudioLoadResultHandler() {
+        MANAGER.loadItemOrdered(jda.getGuildById(this.guildId), input, new AudioLoadResultHandler()
+        {
 
             @Override
             public void trackLoaded(AudioTrack track)

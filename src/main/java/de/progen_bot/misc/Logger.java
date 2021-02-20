@@ -23,4 +23,9 @@ public class Logger
         else
             LOGGER.log(LogType.QUESTION, message);
     }
+
+    public static void info(String message)
+    {
+        log(message, 0);
+    }
 }

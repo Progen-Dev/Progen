@@ -1,11 +1,10 @@
 package de.progen_bot.music;
 
-import java.nio.ByteBuffer;
-
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
-
 import net.dv8tion.jda.api.audio.AudioSendHandler;
+
+import java.nio.ByteBuffer;
 
 public class PlayerSendHandler implements AudioSendHandler
 {
@@ -31,7 +30,7 @@ public class PlayerSendHandler implements AudioSendHandler
     {
         if (this.lastFrame == null)
             this.lastFrame = this.player.provide();
-        
+
         final byte[] data = this.lastFrame != null ? this.lastFrame.getData() : null;
 
         return ByteBuffer.wrap(data);

@@ -1,6 +1,7 @@
 package de.progen_bot.core;
 
 import com.mysql.cj.jdbc.Driver;
+import de.progen_bot.api.API;
 import de.progen_bot.core.music.MusicBotManager;
 import de.progen_bot.database.DaoHandler;
 import de.progen_bot.music.MusicManager;
@@ -36,6 +37,7 @@ public class Main
     private static TopGGIntegration topGGIntegration;
     private static MusicBotManager musicBotManager;
     private static MusicManager musicManager;
+    private static API api;
 
     public Main()
     {
@@ -58,6 +60,7 @@ public class Main
         daoHandler = new DaoHandler();
         musicBotManager = new MusicBotManager();
         musicManager = new MusicManager();
+        api = new API(Integer.parseInt(Settings.API_PORT));
 
         // FIXME: 17.02.2021 replace with scheduler
         new Timer().schedule(new TimerTask()
@@ -130,6 +133,11 @@ public class Main
     public static MusicManager getMusicManager()
     {
         return musicManager;
+    }
+
+    public static API getAPI()
+    {
+        return api;
     }
 
     public static void main(String[] args)

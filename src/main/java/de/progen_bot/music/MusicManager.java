@@ -1,11 +1,11 @@
 package de.progen_bot.music;
 
-import java.util.Collection;
-import java.util.HashMap;
-
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
+
+import java.util.Collection;
+import java.util.HashMap;
 
 public class MusicManager
 {
@@ -17,7 +17,7 @@ public class MusicManager
             return null;
         if (this.musicByGuildIDByOwnerId.get(owner.getGuild().getId()).isEmpty())
             return null;
-        
+
         return this.musicByGuildIDByOwnerId.get(owner.getGuild().getId()).get(owner.getId());
     }
 
@@ -30,7 +30,7 @@ public class MusicManager
     {
         if (!this.musicByGuildIDByOwnerId.containsKey(channel.getGuild().getId()))
             return null;
-        
+
 
         for (Music m : musicByGuildIDByOwnerId.get(channel.getGuild().getId()).values())
         {
@@ -57,7 +57,8 @@ public class MusicManager
             return;
 
         if (getMusicByChannel(owner.getVoiceState().getChannel()) != null) throw new TooMuchMusicForChannelException();
-        if (!musicByGuildIDByOwnerId.containsKey(owner.getGuild().getId())) musicByGuildIDByOwnerId.put(owner.getGuild().getId(), new HashMap<>());
+        if (!musicByGuildIDByOwnerId.containsKey(owner.getGuild().getId()))
+            musicByGuildIDByOwnerId.put(owner.getGuild().getId(), new HashMap<>());
         musicByGuildIDByOwnerId.get(owner.getGuild().getId()).put(owner.getId(), music);
     }
 

@@ -1,20 +1,14 @@
 package de.progen_bot.music;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
-import java.util.concurrent.LinkedBlockingQueue;
-
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
-
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
+
+import java.util.*;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class TrackManager extends AudioEventAdapter
 {
@@ -33,7 +27,7 @@ public class TrackManager extends AudioEventAdapter
     {
         final AudioInfo info = new AudioInfo(track, author);
         this.queue.add(info);
-        
+
         if (this.player.getPlayingTrack() == null)
         {
             this.player.playTrack(this.queue.element().getTrack());
@@ -60,7 +54,7 @@ public class TrackManager extends AudioEventAdapter
     {
         final List<AudioInfo> cQueue = new ArrayList<>(this.getQueue());
         final AudioInfo current = cQueue.get(0);
-        
+
         cQueue.remove(0);
         Collections.shuffle(cQueue);
         cQueue.add(0, current);
