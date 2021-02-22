@@ -19,7 +19,7 @@ public class APIEPMemberInfo extends Endpoint
     @Override
     public APIResponseObject execute(Map<String, String> params, Member member, GuildConfiguration guildConfiguration)
     {
-        Logger.LOGGER.log(LogType.DEBUG, "Command member info");
+        Logger.ND_LOGGER.log(LogType.DEBUG, "Command member info");
 
         return new APIResponseObject(200, new MemberInfo(member));
     }

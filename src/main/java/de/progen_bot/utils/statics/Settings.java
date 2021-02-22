@@ -28,6 +28,8 @@ public class Settings
 
     public static final String TOP_GG_TOKEN     =   get(BOT_KEY, "topGGToken").getAsString();
 
+    public static final boolean DEBUG         =   get(BOT_KEY, "debug").getAsBoolean();
+
     //#region Database
     public static final String HOST             =   get(DATABASE_KEY, "host").getAsString();
     public static final String DATABASE         =   get(DATABASE_KEY, DATABASE_KEY).getAsString();
@@ -61,6 +63,7 @@ public class Settings
             bot.addProperty("token", "");
             bot.addProperty("apiPort", 8083);
             bot.addProperty("topGGToken", "");
+            bot.addProperty("debug", false);
 
             final JsonArray musicTokens = new JsonArray();
             bot.add("music", musicTokens);

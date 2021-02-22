@@ -61,15 +61,18 @@ public class Main
             throw new RuntimeException("Error connecting to database", e);
         }
 
+        final Reflections reflections = new Reflections("de.progen_bot");
+
         commandManager = new CommandManager();
 
-        initJDA();
+        initJDA(reflections);
 
         client = new OkHttpClient();
         topGGIntegration = new TopGGIntegration(getJDA());
-        daoHandler = new DaoHandler();
+        daoHandler = new DaoHandler(reflections);
         musicBotManager = new MusicBotManager();
         musicManager = new MusicManager();
+
         api = new API(Integer.parseInt(Settings.API_PORT));
         api.start();
 
@@ -93,8 +96,6 @@ public class Main
             {
                 final CommandHandler o = (CommandHandler) c.getDeclaredConstructors()[0].newInstance();
                 commandManager.setupCommandHandler(o);
-
-                System.out.println("cmd init");
             }
             catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
             {
@@ -103,7 +104,7 @@ public class Main
         });
     }
 
-    private static void initJDA()
+    private static void initJDA(Reflections reflections)
     {
         final JDABuilder builder = JDABuilder.createDefault(
                 Settings.TOKEN,
@@ -117,9 +118,6 @@ public class Main
                 GatewayIntent.DIRECT_MESSAGES)
                 .enableCache(CacheFlag.ACTIVITY)
                 .setMemberCachePolicy(MemberCachePolicy.ALL);
-
-
-        final Reflections reflections = new Reflections("de.progen_bot");
 
         addListeners(reflections, builder);
         initCommandHandlers(reflections);

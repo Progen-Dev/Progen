@@ -38,7 +38,7 @@ public class CommandManager extends ListenerAdapter
 
             handler.execute(commandString, event, configuration);
 
-            Logger.LOGGER.log(LogType.DEBUG, "Universal info command has been invoked by " + event.getAuthor().getAsTag() + " on guild" + String.format("%s (%s)", event.getGuild().getName(), event.getGuild().getId()));
+            Logger.ND_LOGGER.log(LogType.DEBUG, "Universal info command has been invoked by " + event.getAuthor().getAsTag() + " on guild" + String.format("%s (%s)", event.getGuild().getName(), event.getGuild().getId()));
 
             return;
         }
@@ -54,7 +54,7 @@ public class CommandManager extends ListenerAdapter
             return;
         }
 
-        Logger.LOGGER.log(LogType.DEBUG, "Command '" + handler.getInvoke() + "' has been invoked by " + event.getAuthor().getAsTag() + " on guild" + String.format("%s (%s)", event.getGuild().getName(), event.getGuild().getId()));
+        Logger.ND_LOGGER.log(LogType.DEBUG, "Command '" + handler.getInvoke() + "' has been invoked by " + event.getAuthor().getAsTag() + " on guild" + String.format("%s (%s)", event.getGuild().getName(), event.getGuild().getId()));
 
         if (AccessLevel.isAllowed(handler.getAccessLevel().getLevel(), event))
         {
