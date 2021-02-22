@@ -2,7 +2,7 @@ package de.progen_bot.api.endpoints;
 
 import de.progen_bot.api.entities.APIResponseObject;
 import de.progen_bot.core.Main;
-import de.progen_bot.database.DaoHandler;
+import de.progen_bot.database.dao.DaoHandler;
 import de.progen_bot.database.entities.config.GuildConfiguration;
 import net.dv8tion.jda.api.entities.Member;
 

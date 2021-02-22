@@ -5,7 +5,7 @@ import de.progen_bot.api.API;
 import de.progen_bot.core.command.CommandHandler;
 import de.progen_bot.core.command.CommandManager;
 import de.progen_bot.core.music.MusicBotManager;
-import de.progen_bot.database.DaoHandler;
+import de.progen_bot.database.dao.DaoHandler;
 import de.progen_bot.music.MusicManager;
 import de.progen_bot.utils.statics.Settings;
 import de.progen_bot.utils.topgg.TopGGIntegration;
@@ -92,6 +92,9 @@ public class Main
         final Set<Class<? extends CommandHandler>> commands = reflections.getSubTypesOf(CommandHandler.class);
         commands.forEach(c ->
         {
+            if (c.isAnnotationPresent(NoInject.class))
+                return;
+
             try
             {
                 final CommandHandler o = (CommandHandler) c.getDeclaredConstructors()[0].newInstance();
@@ -138,6 +141,9 @@ public class Main
 
         listeners.forEach(c ->
         {
+            if (c.isAnnotationPresent(NoInject.class))
+                return;
+
             try
             {
                 final ListenerAdapter o = (ListenerAdapter) c.getDeclaredConstructors()[0].newInstance();

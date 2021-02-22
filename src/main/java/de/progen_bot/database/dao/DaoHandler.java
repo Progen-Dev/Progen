@@ -1,7 +1,6 @@
-package de.progen_bot.database;
+package de.progen_bot.database.dao;
 
 import de.progen_bot.database.connection.ConnectionFactory;
-import de.progen_bot.database.dao.Dao;
 import de.progen_bot.misc.Logger;
 import org.reflections.Reflections;
 

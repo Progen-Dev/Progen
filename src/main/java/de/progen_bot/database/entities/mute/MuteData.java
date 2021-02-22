@@ -2,6 +2,7 @@ package de.progen_bot.database.entities.mute;
 
 import de.progen_bot.database.dao.mute.MuteDaoImpl;
 
+// FIXME: 22.02.2021 how about guild in get method?
 public class MuteData
 {
     private final String victimId;

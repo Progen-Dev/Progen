@@ -1,7 +1,7 @@
 package de.progen_bot.core.command;
 
 import de.progen_bot.core.Main;
-import de.progen_bot.database.DaoHandler;
+import de.progen_bot.database.dao.DaoHandler;
 import de.progen_bot.database.entities.config.GuildConfiguration;
 import de.progen_bot.utils.message.MessageGenerator;
 import de.progen_bot.utils.permission.AccessLevel;
