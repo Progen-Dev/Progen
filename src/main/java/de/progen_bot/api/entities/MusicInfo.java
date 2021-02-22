@@ -15,14 +15,14 @@ public class MusicInfo
     }
 
     @JsonGetter
-    public boolean hashPlayer()
+    public boolean hasPlayer()
     {
-        return this.music.hashPlayer();
+        return this.music.hasPlayer();
     }
 
     public TrackManager getManager()
     {
-        if (this.hashPlayer())
+        if (this.hasPlayer())
             return this.music.getManager();
 
         return null;
