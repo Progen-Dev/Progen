@@ -7,12 +7,50 @@ public class GuildConfiguration
     private long tempChannelCategoryId;
     private long autorole;
 
-    GuildConfiguration(String prefix, long logChannelId, long tempChannelCategoryId, long autorole)
+    private GuildConfiguration(String prefix, long logChannelId, long tempChannelCategoryId, long autorole)
     {
         this.prefix = prefix;
         this.logChannelId = logChannelId;
         this.tempChannelCategoryId = tempChannelCategoryId;
         this.autorole = autorole;
+    }
+
+    public static class Builder
+    {
+        private String prefix = "pb!";
+        private long logChannelId;
+        private long tempChannelCategoryId;
+        private long autorole;
+
+        public Builder setPrefix(String prefix)
+        {
+            this.prefix = prefix;
+            return this;
+        }
+
+        public Builder setLogChannelId(long logChannelId)
+        {
+            this.logChannelId = logChannelId;
+            return this;
+        }
+
+        public Builder setTempChannelCategoryId(long tempChannelCategoryId)
+        {
+            this.tempChannelCategoryId = tempChannelCategoryId;
+            return this;
+        }
+
+        public Builder setAutorole(long autorole)
+        {
+            this.autorole = autorole;
+
+            return this;
+        }
+
+        public GuildConfiguration build()
+        {
+            return new GuildConfiguration(this.prefix, this.logChannelId, this.tempChannelCategoryId, this.autorole);
+        }
     }
 
     public String getPrefix()

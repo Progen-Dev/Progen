@@ -2,7 +2,6 @@ package de.progen_bot.database.dao.config;
 
 import de.progen_bot.database.dao.Dao;
 import de.progen_bot.database.entities.config.GuildConfiguration;
-import de.progen_bot.database.entities.config.GuildConfigurationBuilder;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +51,7 @@ public class ConfigDaoImpl extends Dao implements ConfigDao
             final ResultSet rs = ps.executeQuery();
 
             if (rs.next())
-                return new GuildConfigurationBuilder()
+                return new GuildConfiguration.Builder()
                         .setPrefix(rs.getString("prefix"))
                         .setLogChannelId(Long.parseLong(rs.getString("logChannelId")))
                         .setTempChannelCategoryId(Long.parseLong(rs.getString("tempChannelCategoryId")))
@@ -60,7 +59,7 @@ public class ConfigDaoImpl extends Dao implements ConfigDao
                         .build();
             else
             {
-                final GuildConfiguration configuration = new GuildConfigurationBuilder().setPrefix("pb!").build();
+                final GuildConfiguration configuration = new GuildConfiguration.Builder().setPrefix("pb!").build();
 
                 this.writeConfig(configuration, guildId);
 
