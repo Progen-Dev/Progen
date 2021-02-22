@@ -2,6 +2,8 @@ package de.progen_bot.core;
 
 import com.mysql.cj.jdbc.Driver;
 import de.progen_bot.api.API;
+import de.progen_bot.core.command.CommandHandler;
+import de.progen_bot.core.command.CommandManager;
 import de.progen_bot.core.music.MusicBotManager;
 import de.progen_bot.database.DaoHandler;
 import de.progen_bot.music.MusicManager;
@@ -9,15 +11,19 @@ import de.progen_bot.utils.statics.Settings;
 import de.progen_bot.utils.topgg.TopGGIntegration;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import okhttp3.OkHttpClient;
+import org.reflections.Reflections;
 
 import javax.security.auth.login.LoginException;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,6 +35,8 @@ public class Main
             Settings.PORT,
             Settings.DATABASE
     );
+
+    private static CommandManager commandManager;
 
     private static OkHttpClient client;
     private static JDA jda;
@@ -53,6 +61,8 @@ public class Main
             throw new RuntimeException("Error connecting to database", e);
         }
 
+        commandManager = new CommandManager();
+
         initJDA();
 
         client = new OkHttpClient();
@@ -73,6 +83,25 @@ public class Main
         }, 0, 30 * 60 * 1000);
     }
 
+    private static void initCommandHandlers(Reflections reflections)
+    {
+        final Set<Class<? extends CommandHandler>> commands = reflections.getSubTypesOf(CommandHandler.class);
+        commands.forEach(c ->
+        {
+            try
+            {
+                final CommandHandler o = (CommandHandler) c.getDeclaredConstructors()[0].newInstance();
+                commandManager.setupCommandHandler(o);
+
+                System.out.println("cmd init");
+            }
+            catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
+            {
+                e.printStackTrace();
+            }
+        });
+    }
+
     private static void initJDA()
     {
         final JDABuilder builder = JDABuilder.createDefault(
@@ -89,7 +118,11 @@ public class Main
                 .setMemberCachePolicy(MemberCachePolicy.ALL);
 
 
-//        BuildManager.addEventListeners(builder);
+        final Reflections reflections = new Reflections("de.progen_bot");
+
+        addListeners(reflections, builder);
+        initCommandHandlers(reflections);
+
         try
         {
             jda = builder.build().awaitReady();
@@ -98,6 +131,24 @@ public class Main
         {
             e.printStackTrace();
         }
+    }
+
+    private static void addListeners(Reflections reflections, JDABuilder builder)
+    {
+        final Set<Class<? extends ListenerAdapter>> listeners = reflections.getSubTypesOf(ListenerAdapter.class);
+
+        listeners.forEach(c ->
+        {
+            try
+            {
+                final ListenerAdapter o = (ListenerAdapter) c.getDeclaredConstructors()[0].newInstance();
+                builder.addEventListeners(o);
+            }
+            catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
+            {
+                e.printStackTrace();
+            }
+        });
     }
 
     public static JDA getJDA()
@@ -138,6 +189,11 @@ public class Main
     public static API getAPI()
     {
         return api;
+    }
+
+    public static CommandManager getCommandManager()
+    {
+        return commandManager;
     }
 
     public static void main(String[] args)

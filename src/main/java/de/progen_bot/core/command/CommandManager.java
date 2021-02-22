@@ -47,7 +47,7 @@ public class CommandManager extends ListenerAdapter
         if (commandString == null)
             return;
 
-        final CommandHandler handler = this.commands.get(commandString.getCommand().toLowerCase());
+        final CommandHandler handler = this.getCommandHandler(commandString.getCommand().toLowerCase());
         if (handler == null)
         {
             event.getChannel().sendMessage(new MessageGenerator("", "").generateErrorMsg("This command is not registered. Use `" + configuration.getPrefix() + "help` for help.")).queue();
@@ -89,12 +89,12 @@ public class CommandManager extends ListenerAdapter
         if (this.commands.containsKey(invoke.toLowerCase()))
             return this.commands.get(invoke.toLowerCase());
 
-        throw new IllegalArgumentException(String.format("'%s' is not a registered command name", invoke));
+        return null;
     }
 
     public Map<String, CommandHandler> getCommands()
     {
-        return commands;
+        return this.commands;
     }
 
     public static final class ParsedCommandString
