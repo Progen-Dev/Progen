@@ -58,6 +58,14 @@ public class ConfigDaoImpl extends Dao implements ConfigDao
                         .setTempChannelCategoryId(Long.parseLong(rs.getString("tempChannelCategoryId")))
                         .setAutorole(Long.parseLong(rs.getString("autorole")))
                         .build();
+            else
+            {
+                final GuildConfiguration configuration = new GuildConfigurationBuilder().setPrefix("pb!").build();
+
+                this.writeConfig(configuration, guildId);
+
+                return configuration;
+            }
         }
         catch (SQLException e)
         {

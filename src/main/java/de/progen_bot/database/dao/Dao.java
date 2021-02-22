@@ -6,7 +6,7 @@ import java.sql.Connection;
 
 public abstract class Dao
 {
-    public final Connection connection = ConnectionFactory.getConnection();
+    protected final Connection connection = ConnectionFactory.getConnection();
 
     public abstract String generateTables();
 }
