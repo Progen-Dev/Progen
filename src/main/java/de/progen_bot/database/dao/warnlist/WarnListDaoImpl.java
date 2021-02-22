@@ -1,10 +1,8 @@
 package de.progen_bot.database.dao.warnlist;
 
-import de.progen_bot.database.connection.ConnectionFactory;
 import de.progen_bot.database.dao.Dao;
 import net.dv8tion.jda.api.entities.Member;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,8 +11,6 @@ import java.util.List;
 
 public class WarnListDaoImpl extends Dao implements WarnListDao
 {
-    private final Connection connection = ConnectionFactory.getConnection();
-    // TODO: 20.02.2021
     @Override
     public String generateTables()
     {

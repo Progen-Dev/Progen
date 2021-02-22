@@ -1,11 +1,9 @@
 package de.progen_bot.database.dao.config;
 
-import de.progen_bot.database.connection.ConnectionFactory;
 import de.progen_bot.database.dao.Dao;
 import de.progen_bot.database.entities.config.GuildConfiguration;
 import de.progen_bot.database.entities.config.GuildConfigurationBuilder;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,8 +21,6 @@ public class ConfigDaoImpl extends Dao implements ConfigDao
     @Override
     public void writeConfig(GuildConfiguration configuration, long guildId)
     {
-        final Connection connection = ConnectionFactory.getConnection();
-
         try
         {
             final PreparedStatement ps = connection.prepareStatement("REPLACE INTO `config` (`guildid`, `prefix`, " +
@@ -47,7 +43,6 @@ public class ConfigDaoImpl extends Dao implements ConfigDao
     @Override
     public GuildConfiguration loadConfig(long guildId)
     {
-        final Connection connection = ConnectionFactory.getConnection();
         try
         {
             final PreparedStatement ps = connection.prepareStatement("SELECT * FROM `config` WHERE `guildid` = ?;");

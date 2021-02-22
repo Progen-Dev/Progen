@@ -1,7 +1,7 @@
 package de.progen_bot.api;
 
 import de.progen_bot.api.exceptions.APIUserNotRegisteredException;
-import de.progen_bot.database.dao.tokenmanager.TokenManagerDao;
+import de.progen_bot.database.dao.tokenmanager.TokenManagerDaoImpl;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.sql.SQLException;
@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class APITokenManager
 {
-    private final TokenManagerDao dao = new TokenManagerDao();
+    private final TokenManagerDaoImpl dao = new TokenManagerDaoImpl();
 
     private static String generateRandomString()
     {
@@ -62,7 +62,7 @@ public class APITokenManager
         }
     }
 
-    public TokenManagerDao getDao()
+    public TokenManagerDaoImpl getDao()
     {
         return this.dao;
     }
