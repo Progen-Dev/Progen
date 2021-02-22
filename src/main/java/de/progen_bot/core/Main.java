@@ -71,6 +71,7 @@ public class Main
         musicBotManager = new MusicBotManager();
         musicManager = new MusicManager();
         api = new API(Integer.parseInt(Settings.API_PORT));
+        api.start();
 
         // FIXME: 17.02.2021 replace with scheduler
         new Timer().schedule(new TimerTask()

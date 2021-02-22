@@ -134,7 +134,7 @@ public class APICommandHandler implements HttpHandler
         public Builder addCommand(Endpoint endpoint)
         {
             if (this.commands.contains(endpoint) || this.commands.stream().map(Endpoint::getInvoke).anyMatch(invoke -> invoke.equalsIgnoreCase(endpoint.getInvoke())))
-                throw new IllegalArgumentException("Endpoints already registered");
+                throw new IllegalArgumentException("Endpoint already registered");
 
             this.commands.add(endpoint);
 
