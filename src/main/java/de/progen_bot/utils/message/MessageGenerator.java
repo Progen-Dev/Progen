@@ -47,6 +47,15 @@ public class MessageGenerator
                 .build();
     }
 
+    public MessageEmbed generateSuccessMsg(String message)
+    {
+        return new EmbedBuilder()
+                .setColor(Color.green)
+                .setTitle("Success")
+                .setDescription(message)
+                .build();
+    }
+
     /**
      * Success message
      *

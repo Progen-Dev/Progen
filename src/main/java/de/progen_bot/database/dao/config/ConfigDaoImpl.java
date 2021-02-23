@@ -59,7 +59,7 @@ public class ConfigDaoImpl extends Dao implements ConfigDao
                         .build();
             else
             {
-                final GuildConfiguration configuration = new GuildConfiguration.Builder().setPrefix("pb!").build();
+                final GuildConfiguration configuration = new GuildConfiguration.Builder().build();
 
                 this.writeConfig(configuration, guildId);
 
