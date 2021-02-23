@@ -32,7 +32,7 @@ public class ReadyListener extends ListenerAdapter
 
         ses.scheduleWithFixedDelay(() ->
         {
-            games[0] = Activity.playing("on " + event.getGuildTotalCount() + " guilds");
+            games[0] = Activity.playing("on " + event.getGuildTotalCount() + " guild(s)");
 
             event.getJDA().getPresence().setActivity(games[ThreadLocalRandom.current().nextInt(games.length)]);
         }, 0, 30*60*1000, TimeUnit.MILLISECONDS);
