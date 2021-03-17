@@ -6,21 +6,24 @@ import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.Color;
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.List;
 
 public class WarnDelete extends CommandHandler {
     private static final String DELETE = "Warn Delete";
     private static final String EXECUTOR = "Executor";
     private static final String PARDON = "Member";
     private static final String WARN = "Warn";
-
     public WarnDelete() {
         super("warndelete", "warndelete <user> <reason>", "Delete warn of a user");
     }
-    
+
     private MessageEmbed getDeleteEmbed(MessageReceivedEvent event, String reason){
         return new EmbedBuilder()
         .setColor(Color.green)
@@ -33,10 +36,10 @@ public class WarnDelete extends CommandHandler {
         .build();
     }
 
+
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event,
             GuildConfiguration configuration) {
-
         if (event.getMember() == null)
             return;
 
@@ -55,8 +58,7 @@ public class WarnDelete extends CommandHandler {
         String reason = String.join(" ", Arrays.copyOfRange(parsedCommand.getArgs(), 1, parsedCommand.getArgs().length));
 
         new WarnListDaoImpl().deleteWarn(event.getMember(), reason);
-        
-        event.getTextChannel().sendMessage(super.messageGenerators.generateSuccessfulMsg()).queue();
+
         final MessageEmbed eb = getDeleteEmbed(event, reason);
         if(eb == null)
         return;
