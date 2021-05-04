@@ -10,7 +10,7 @@ import de.progen_bot.api.exceptions.APICommandNotFoundException;
 import de.progen_bot.api.exceptions.APIException;
 import de.progen_bot.database.dao.config.ConfigDaoImpl;
 import de.progen_bot.database.entities.config.GuildConfiguration;
-import de.progen_bot.misc.Logger;
+import de.progen_bot.utils.logger.Logger;
 import net.dv8tion.jda.api.entities.Member;
 
 import java.io.IOException;

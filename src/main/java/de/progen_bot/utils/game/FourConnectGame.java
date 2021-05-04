@@ -1,4 +1,4 @@
-package de.progen_bot.misc;
+package de.progen_bot.utils.game;
 
 import de.progen_bot.core.Main;
 import de.progen_bot.database.dao.connectfour.ConnectFourDaoImpl;

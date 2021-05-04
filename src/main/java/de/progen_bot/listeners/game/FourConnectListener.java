@@ -5,7 +5,7 @@ import de.progen_bot.database.dao.connectfour.ConnectFourDaoImpl;
 import de.progen_bot.database.dao.connectfour.GameDataDaoImpl;
 import de.progen_bot.database.entities.connectfour.ConnectFourModel;
 import de.progen_bot.database.entities.connectfour.GameData;
-import de.progen_bot.misc.FourConnectGame;
+import de.progen_bot.utils.game.FourConnectGame;
 import de.progen_bot.utils.misc.Util;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;

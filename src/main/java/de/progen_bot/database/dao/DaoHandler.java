@@ -1,7 +1,7 @@
 package de.progen_bot.database.dao;
 
 import de.progen_bot.database.connection.ConnectionFactory;
-import de.progen_bot.misc.Logger;
+import de.progen_bot.utils.logger.Logger;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;

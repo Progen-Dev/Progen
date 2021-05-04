@@ -2,7 +2,7 @@ package de.progen_bot.core.command;
 
 import de.progen_bot.database.dao.config.ConfigDaoImpl;
 import de.progen_bot.database.entities.config.GuildConfiguration;
-import de.progen_bot.misc.Logger;
+import de.progen_bot.utils.logger.Logger;
 import de.progen_bot.utils.message.MessageGenerator;
 import de.progen_bot.utils.permission.AccessLevel;
 import de.progen_bot.utils.statics.Settings;

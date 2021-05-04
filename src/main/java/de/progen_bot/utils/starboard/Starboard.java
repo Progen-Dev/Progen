@@ -1,4 +1,4 @@
-package de.progen_bot.utils.startboard;
+package de.progen_bot.utils.starboard;
 
 public class Starboard
 {

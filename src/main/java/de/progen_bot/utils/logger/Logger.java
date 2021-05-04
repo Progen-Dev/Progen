@@ -1,4 +1,4 @@
-package de.progen_bot.misc;
+package de.progen_bot.utils.logger;
 
 import de.progen_bot.utils.statics.Settings;
 import io.github.jdiscordbots.nightdream.logging.LogType;

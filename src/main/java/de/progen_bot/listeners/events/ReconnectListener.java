@@ -1,6 +1,6 @@
 package de.progen_bot.listeners.events;
 
-import de.progen_bot.misc.Logger;
+import de.progen_bot.utils.logger.Logger;
 import de.progen_bot.utils.statics.Statics;
 import net.dv8tion.jda.api.events.ReconnectedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
