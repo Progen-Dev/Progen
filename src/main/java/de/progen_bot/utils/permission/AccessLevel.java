@@ -75,7 +75,7 @@ public enum AccessLevel
         if (level > getAccessLevel(member).getLevel())
         {
             event.getChannel().sendMessage(
-                    new EmbedBuilder().setColor(Color.red).setDescription("I'm sorry, bot you don't have permission to use this command! Use `help <command>` to see your and the required permission level.").build()
+                    new EmbedBuilder().setColor(Color.red).setDescription("I'm sorry, but you don't have permission to use this command! Use `help <command>` to see your and the required permission level.").build()
             ).queue(m -> m.delete().queueAfter(3, TimeUnit.SECONDS));
 
             return false;

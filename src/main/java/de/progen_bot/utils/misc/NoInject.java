@@ -1,4 +1,4 @@
-package de.progen_bot.core;
+package de.progen_bot.utils.misc;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

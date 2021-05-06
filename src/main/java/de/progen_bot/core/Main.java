@@ -7,6 +7,7 @@ import de.progen_bot.core.command.CommandManager;
 import de.progen_bot.core.music.MusicBotManager;
 import de.progen_bot.database.dao.DaoHandler;
 import de.progen_bot.music.MusicManager;
+import de.progen_bot.utils.misc.NoInject;
 import de.progen_bot.utils.statics.Settings;
 import de.progen_bot.utils.topgg.TopGGIntegration;
 import net.dv8tion.jda.api.JDA;

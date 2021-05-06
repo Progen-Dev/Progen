@@ -6,7 +6,6 @@ import de.progen_bot.utils.logger.Logger;
 import de.progen_bot.utils.message.MessageGenerator;
 import de.progen_bot.utils.permission.AccessLevel;
 import de.progen_bot.utils.statics.Settings;
-import io.github.jdiscordbots.nightdream.logging.LogType;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.RestAction;
@@ -38,7 +37,7 @@ public class CommandManager extends ListenerAdapter
 
             handler.execute(commandString, event, configuration);
 
-            Logger.ND_LOGGER.log(LogType.DEBUG, "Universal info command has been invoked by " + event.getAuthor().getAsTag() + " on guild" + String.format("%s (%s)", event.getGuild().getName(), event.getGuild().getId()));
+            Logger.debug("Universal info command has been invoked by " + event.getAuthor().getAsTag() + " on guild" + String.format("%s (%s)", event.getGuild().getName(), event.getGuild().getId()));
 
             return;
         }
@@ -54,7 +53,7 @@ public class CommandManager extends ListenerAdapter
             return;
         }
 
-        Logger.ND_LOGGER.log(LogType.DEBUG, "Command '" + handler.getInvoke() + "' has been invoked by " + event.getAuthor().getAsTag() + " on guild" + String.format("%s (%s)", event.getGuild().getName(), event.getGuild().getId()));
+        Logger.debug("Command '" + handler.getInvoke() + "' has been invoked by " + event.getAuthor().getAsTag() + " on guild" + String.format("%s (%s)", event.getGuild().getName(), event.getGuild().getId()));
 
         if (AccessLevel.isAllowed(handler.getAccessLevel().getLevel(), event))
         {
