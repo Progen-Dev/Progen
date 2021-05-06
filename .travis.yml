@@ -1,0 +1,16 @@
+language: java
+deploy:
+  provider: azure_web_apps
+after_success:
+  - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh success $WEBHOOK_URL
+after_failure:
+  - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL
+notifications:
+  webhooks: https://maker.ifttt.com/trigger/travis_trigger/with/key/mgTT-g4r3US9_gLwvmHwqH6nqBduvRfCMX2JzFCIXCe
+  email:
+    on_success: change
+    on_failure: change

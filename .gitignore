@@ -1,0 +1,25 @@
+##Intellij##
+*.iml
+.resources/
+.out/
+.idea/
+target/
+/POLL/
+
+## Java ##
+*.jar
+*.properties
+dependency-reduced-pom.xml
+*.json
+!config.sample.json
+*.class
+*.MF
+*.kotlin_module
+
+## Eclipse / VSC ##
+.project
+.classpath
+.settings/
+.vscode/
+config.sample.json
+.factorypath
