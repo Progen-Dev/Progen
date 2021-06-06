@@ -17,7 +17,7 @@ import java.time.Instant;
 import java.util.List;
 
 public class CommandBan extends CommandHandler {
-    private static final String BAN = "Ban";
+    private static final String BAN = "BAN";
     private static final String EXECUTOR = "Executor";
     private static final String VICTIM = "Victim";
     private static final String REASON = "Reason";
@@ -65,9 +65,14 @@ public class CommandBan extends CommandHandler {
                 return;
             }
 
+            if (user == null){
+                user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(eb).queue());
+            }else {
+                System.out.println("Cannot deliver message to user. The direct message function seems to be deactivated,");
+            }
+
             try {
                 event.getGuild().ban(user, 7, reason).queue(v -> {
-                    user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(eb).queue());
 
                     event.getChannel().sendMessage(eb).queue();
                     final List<TextChannel> channels = event.getGuild().getTextChannelsByName("progenlog", true);
@@ -79,7 +84,7 @@ public class CommandBan extends CommandHandler {
                     }
                 });
             } catch (InsufficientPermissionException e) {
-                event.getChannel().sendMessage("Failed to ban user " + user.getAsTag()).queue();
+                event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Failed to ban user " + event.getMember().getAsMention()));
             }
         }
     }
