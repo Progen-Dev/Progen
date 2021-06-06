@@ -6,6 +6,7 @@ public class GuildConfigurationBuilder {
     private String logChannelID;
     private String tempChannelCategoryID;
     private String autorole;
+    private String starBoardChannelID;
 
     public GuildConfigurationBuilder setPrefix(String prefix) {
         this.prefix = prefix;
@@ -28,7 +29,13 @@ public class GuildConfigurationBuilder {
         return this;
     }
 
+    public GuildConfigurationBuilder setStarBoardChannelID(String starBoardChannelID){
+        this.starBoardChannelID = starBoardChannelID;
+
+        return this;
+    }
+
     public GuildConfiguration build() {
-        return new GuildConfiguration(this.prefix, this.logChannelID, this.tempChannelCategoryID, this.autorole);
+        return new GuildConfiguration(this.prefix, this.logChannelID, this.tempChannelCategoryID, this.autorole, this.starBoardChannelID);
     }
 }

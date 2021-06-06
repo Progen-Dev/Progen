@@ -6,13 +6,15 @@ public class GuildConfiguration {
     private String logChannelID;
     private String tempChannelCategoryID;
     private String autoRole;
+    private String starBoardChannelID;
 
-    GuildConfiguration(String prefix, String logChannelID, String tempChannelCategoryID, String autoRole) {
+    GuildConfiguration(String prefix, String logChannelID, String tempChannelCategoryID, String autoRole, String starBoardChannelID) {
 
         this.prefix = prefix;
         this.logChannelID = logChannelID;
         this.tempChannelCategoryID = tempChannelCategoryID;
         this.autoRole = autoRole;
+        this.starBoardChannelID = starBoardChannelID;
     }
 
     public String getPrefix() {
@@ -45,5 +47,13 @@ public class GuildConfiguration {
 
     public void setAutoRole(String autoRole) {
         this.autoRole = autoRole;
+    }
+
+    public String getStarBoardChannelID(){
+        return starBoardChannelID;
+    }
+
+    public void setStarBoardChannelID(String starBoardChannelID){
+        this.starBoardChannelID = starBoardChannelID;
     }
 }
