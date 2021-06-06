@@ -24,7 +24,6 @@
  You can warn,mute,ban and kick users. <br>
  All this can also be displayed in a clearly arranged modlog. <br>
  The Progenlog.
- <img src="./images/README/moderation.png">
  
  <h2>Music</h2>
  Listen to any kind of music with Progen in a voice channel. <br>
