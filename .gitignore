@@ -1,8 +1,8 @@
 ##Intellij##
+*.iml
 .resources/
 .out/
 .idea/
-.images/
 target/
 /POLL/
 
@@ -23,3 +23,8 @@ dependency-reduced-pom.xml
 .vscode/
 config.sample.json
 .factorypath
+
+## Config files ##
+
+config.json
+config.properties

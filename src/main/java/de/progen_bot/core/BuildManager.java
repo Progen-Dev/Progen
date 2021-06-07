@@ -33,7 +33,9 @@ public class BuildManager
                 new GuildJoinReloadListener(),
                 new ReactionListener(),
                 new AutoroleListener(),
-                new StarBoardListener()
+                new SayListener(),
+                new StarBoardListener(),
+                new GuildJoinListener()
         );
     }
 }

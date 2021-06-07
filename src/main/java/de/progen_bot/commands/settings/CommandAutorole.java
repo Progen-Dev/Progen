@@ -7,28 +7,54 @@ import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class CommandAutorole extends CommandHandler{
-    public CommandAutorole() {
-        super("autorole", "autorole @rolename | autorole deactive", "Set a roll that the user should get automatically when joining");
+public class CommandAutorole extends CommandHandler
+{
+    public CommandAutorole()
+    {
+        super("autorole", "active: autorole @rolename |deactive: autorole", "Set a roll that the user should get automatically when joining");
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration)
+    {
 
         if (!event.isFromGuild())
             return;
 
-        if (!event.getMessage().getMentionedRoles().isEmpty()){
+        if (!event.getMessage().getMentionedRoles().isEmpty())
+        {
             configuration.setAutoRole(event.getMessage().getMentionedRoles().get(0).getId());
             event.getTextChannel().sendMessage(
-                    messageGenerators.generateRightMsg("Successfully set autorole to `" + event.getMessage().getMentionedRoles().get(0).getName() +  "`.")
+                    messageGenerators.generateRightMsg("Successfully set autorole to `" + event.getMessage().getMentionedRoles().get(0).getName() + "`.")
             ).queue();
-        }else if (parsedCommand.getArgs().length == 1){
-            configuration.setAutoRole(parsedCommand.getArgs()[0]);
+        }
+        else if (parsedCommand.getArgs().length == 1)
+        {
+            long id;
+            try
+            {
+                id = Long.parseLong(parsedCommand.getArgs()[0]);
+            }
+            catch (NumberFormatException ignored)
+            {
+                id = 0;
+            }
+
+            if (id == 0)
+            {
+                event.getChannel().sendMessage(
+                        messageGenerators.generateErrorMsg("Please provide a channel id. To disable autorole run `pb!autorole` with no arguments")
+                ).queue();
+
+                return;
+            }
+
             event.getTextChannel().sendMessage(
-                    messageGenerators.generateRightMsg("Successfully set autorole to `" + parsedCommand.getArgs()[0] + "`.")
+                    messageGenerators.generateRightMsg("Successfully set autorole to `" + id + "`.")
             ).queue();
-        } else {
+        }
+        else
+        {
             configuration.setAutoRole(null);
             event.getTextChannel().sendMessage(messageGenerators.generateRightMsg("Successfully deactivated autorole.")).queue();
         }
@@ -36,8 +62,10 @@ public class CommandAutorole extends CommandHandler{
         new ConfigDaoImpl().writeConfig(configuration, event.getGuild());
 
     }
+
     @Override
-    public AccessLevel getAccessLevel() {
+    public AccessLevel getAccessLevel()
+    {
         return AccessLevel.MODERATOR;
     }
 

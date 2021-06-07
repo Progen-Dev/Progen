@@ -2,9 +2,8 @@ package de.progen_bot.core;
 
 import com.mysql.cj.jdbc.Driver;
 
-import de.mtorials.commands.ChangePrefix;
-import de.mtorials.fortnite.core.Fortnite;
-import de.mtorials.pwi.httpapi.API;
+import de.progen_bot.commands.administrator.ChangePrefix;
+import de.pwi.api.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.moderator.*;
 import de.progen_bot.commands.moderator.blacklist.*;
@@ -21,7 +20,8 @@ import de.progen_bot.util.Settings;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import okhttp3.OkHttpClient;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import javax.security.auth.login.LoginException;
 import java.sql.Connection;
@@ -39,12 +39,9 @@ public class Main {
     private static final String URL = "jdbc:mysql://" + Settings.HOST + ":" + Settings.PORT + "/" +
             Settings.DATABASE + "?useUnicode=true&serverTimezone=UTC&autoReconnect=true";
 
-    private static OkHttpClient client;
     private static JDA jda;
 
     private static Connection sqlConnection;
-
-    private static Fortnite fortnite;
 
     private static CommandManager commandManager;
 
@@ -69,12 +66,8 @@ public class Main {
             throw new RuntimeException("Error connecting to the database", ex);
         }
 
-        client = new OkHttpClient();
-
         final API httpApi = new API(Integer.parseInt(Settings.API_PORT));
         httpApi.start();
-
-        fortnite = new Fortnite();
 
         initJDA();
 
@@ -87,7 +80,7 @@ public class Main {
             public void run() {
                 topGGIntegration.postServerCount();
             }
-        }, 0, 30*60*1000); //every 30 mins
+        }, 0, 30*60*1000); //every 30 minutes
 
         // DAO Handler
         daoHandler = new DaoHandler();
@@ -101,47 +94,46 @@ public class Main {
     }
 
     /**
-     * Inits the de.progen_bot.command handlers.
+     * Initial the de.progen_bot.command handlers.
      *
      * @param commandManager the de.progen_bot.command manager
      */
     private static void initCommandHandlers(final CommandManager commandManager) {
-        commandManager.setupCommandHandlers(new Clear());
-        commandManager.setupCommandHandlers(new GuildInfo());
+        commandManager.setupCommandHandlers(new CommandClear());
+        commandManager.setupCommandHandlers(new CommandGuildInfo());
         commandManager.setupCommandHandlers(new CommandStatus());
-        commandManager.setupCommandHandlers(new Say());
+        commandManager.setupCommandHandlers(new CommandSay());
         commandManager.setupCommandHandlers(new CommandUserInfo());
-        commandManager.setupCommandHandlers(new Warn());
-        commandManager.setupCommandHandlers(new Mute());
-        commandManager.setupCommandHandlers(new PrivateVoiceChannel());
-        commandManager.setupCommandHandlers(new Help());
-        commandManager.setupCommandHandlers(new ConnectFour());
-        commandManager.setupCommandHandlers(new XPrank());
-        commandManager.setupCommandHandlers(new XP());
-        commandManager.setupCommandHandlers(new XPNotify());
+        commandManager.setupCommandHandlers(new CommandWarn());
+        commandManager.setupCommandHandlers(new CommandMute());
+        commandManager.setupCommandHandlers(new CommandPrivateVoiceChannel());
+        commandManager.setupCommandHandlers(new CommandHelp());
+        commandManager.setupCommandHandlers(new GameConnectFour());
+        commandManager.setupCommandHandlers(new CommandXPrank());
+        commandManager.setupCommandHandlers(new CommandXP());
+        commandManager.setupCommandHandlers(new CommandXPNotify());
         commandManager.setupCommandHandlers(new CommandMusic());
         commandManager.setupCommandHandlers(new CommandRegisterAPI());
-        commandManager.setupCommandHandlers(new WarnList());
-        commandManager.setupCommandHandlers(new CmdTempChannel());
+        commandManager.setupCommandHandlers(new CommandWarnList());
+        commandManager.setupCommandHandlers(new CommandTempChannel());
         commandManager.setupCommandHandlers(new ChangePrefix());
-        commandManager.setupCommandHandlers(new WarnDelete());
+        commandManager.setupCommandHandlers(new CommandWarnDelete());
         commandManager.setupCommandHandlers(new CommandVote());
         commandManager.setupCommandHandlers(new CommandStop());
-        commandManager.setupCommandHandlers(new CommandRestart());
         commandManager.setupCommandHandlers(new CommandKick());
         commandManager.setupCommandHandlers(new CommandInfo());
         commandManager.setupCommandHandlers(new CommandBan());
         commandManager.setupCommandHandlers(new CommandPlaylist());
-        commandManager.setupCommandHandlers(new UserVoted());
+        commandManager.setupCommandHandlers(new CommandUserVoted());
         commandManager.setupCommandHandlers(new CommandNotify());
         commandManager.setupCommandHandlers(new CommandTest());
         commandManager.setupCommandHandlers(new CommandAutorole());
         commandManager.setupCommandHandlers(new CommandUpdate());
-        commandManager.setupCommandHandlers(new MuteList());
+        commandManager.setupCommandHandlers(new CommandMuteList());
     }
 
     /**
-     * Inits the JDA.
+     * Initial the JDA.
      */
     private static void initJDA() {
         final JDABuilder 
@@ -154,7 +146,13 @@ public class Main {
             GatewayIntent.GUILD_PRESENCES,
             GatewayIntent.GUILD_MESSAGE_REACTIONS,
             GatewayIntent.DIRECT_MESSAGE_REACTIONS,
-            GatewayIntent.DIRECT_MESSAGES);
+            GatewayIntent.DIRECT_MESSAGES
+        )
+            .enableCache(
+                    CacheFlag.ACTIVITY
+                    )
+                    .setMemberCachePolicy(MemberCachePolicy.ALL);
+                 
 
         BuildManager.addEventListeners(builder);
         try {
@@ -177,10 +175,6 @@ public class Main {
         return sqlConnection;
     }
 
-    public static Fortnite getFortnite() {
-        return fortnite;
-    }
-
     public static CommandManager getCommandManager() {
         return commandManager;
     }
@@ -200,10 +194,6 @@ public class Main {
 
     public static MusicManager getMusicManager() {
         return musicManager;
-    }
-
-    public static OkHttpClient getClient() {
-        return client;
     }
 
     /**

@@ -16,11 +16,11 @@ import java.time.format.DateTimeFormatter;
 public class CommandUserInfo extends CommandHandler {
 
     public CommandUserInfo() {
-        super("userinfo", "userinfo <user>", "get userinfos");
+        super("userinfo" , "userinfo <user>" , "get userinfos");
     }
 
     @Override
-    public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+    public void execute(ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
         Member memb;
 
         if (event.getMessage().getMentionedMembers().size() == 1) {
@@ -39,7 +39,6 @@ public class CommandUserInfo extends CommandHandler {
         final String id = memb.getUser().getId();
         final String status = memb.getOnlineStatus().name();
         final String avatarUrl = memb.getUser().getEffectiveAvatarUrl();
-        final String perm = new PermissionCore(event).getAccessLevel().name() + "";
         StringBuilder roles = new StringBuilder();
         String game;
 
@@ -53,7 +52,7 @@ public class CommandUserInfo extends CommandHandler {
             roles.append(r.getAsMention()).append(", ");
         }
         if (roles.length() > 0)
-            roles = new StringBuilder(roles.substring(0, roles.length() - 2));
+            roles = new StringBuilder(roles.substring(0 , roles.length() - 2));
         else
             roles = new StringBuilder("No role on this server");
 
@@ -63,15 +62,14 @@ public class CommandUserInfo extends CommandHandler {
         } else
             em.setDescription("**User Information for " + memb.getUser().getName() + ":**");
 
-        em.addField("Name / Nickname", name, false)
-                .addField("User Tag", tag, false)
-                .addField("id", id, false)
-                .addField("Current Status", status, false)
-                .addField("Current Game", game, false)
-                .addField("Roles", roles.toString(), false)
-                .addField("Permission level", "``" + perm + "``", false)
-                .addField("Server joined", guildJoinDate, false)
-                .addField("Discord joined", discordJoinedDate, false)
+        em.addField("Name / Nickname" , name , false)
+                .addField("User Tag" , tag , false)
+                .addField("id" , id , false)
+                .addField("Current Status" , status , false)
+                .addField("Current Game" , game , false)
+                .addField("Roles" , roles.toString() , false)
+                .addField("Server joined" , guildJoinDate , false)
+                .addField("Discord joined" , discordJoinedDate , false)
                 .setThumbnail(avatarUrl);
 
         event.getTextChannel().sendMessage(em.build()).queue();
@@ -82,5 +80,4 @@ public class CommandUserInfo extends CommandHandler {
     public AccessLevel getAccessLevel() {
         return AccessLevel.USER;
     }
-
 }

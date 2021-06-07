@@ -26,7 +26,4 @@ If this Pull Request Refers to anything, that should be documented here.
 <!--
 If there are some new Dependencies, they should be listed here.
 -->
-
-* List
-* of
-* Dependencies
+> List of Dependency
