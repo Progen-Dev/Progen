@@ -14,7 +14,7 @@ public class API
     private static APITokenManager tokenManager;
     private final HttpServer server;
 
-    public API(int port)
+    public API(int port )
     {
         tokenManager = new APITokenManager();
 

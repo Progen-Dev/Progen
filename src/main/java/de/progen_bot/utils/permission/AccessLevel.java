@@ -9,22 +9,57 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * {@link AccessLevel AccessLevel} enum for permission system
+ */
 public enum AccessLevel
 {
+    /**
+     * Normal user (default)
+     */
     USER(0),
+    /**
+     * Trusted user
+     */
     TRUSTED(1),
+    /**
+     * Guild moderator (user with {@link Permission#MANAGE_CHANNEL} permission)
+     */
     MODERATOR(2),
+    /**
+     * Guild administrator (user with {@link Permission#ADMINISTRATOR} permission)
+     */
     ADMINISTRATOR(3),
+    /**
+     * Guild owner
+     */
     OWNER(4),
+    /**
+     * Bot owner (set in config)
+     *
+     * @see Settings#BOT_OWNERS
+     */
     BOT_OWNER(5);
 
+    /**
+     * Integer value of level
+     */
     private final int level;
 
+    /**
+     * @param level value of level
+     */
     AccessLevel(int level)
     {
         this.level = level;
     }
 
+    /**
+     * Parse a given integer value into AccessLevel enum type
+     *
+     * @param level {@link AccessLevel#getLevel() AccessLevel#getLevel()}
+     * @return corresponding {@link AccessLevel AccessLevel}
+     */
     public static AccessLevel parse(int level)
     {
         for (AccessLevel accessLevel : AccessLevel.values())
@@ -36,6 +71,12 @@ public enum AccessLevel
         return null;
     }
 
+    /**
+     * Get AccessLevel enum type of given Member
+     *
+     * @param member {@link Member Member} to get level
+     * @return {@link AccessLevel AccessLevel}
+     */
     public static AccessLevel getAccessLevel(Member member)
     {
         if (member == null)
@@ -84,6 +125,11 @@ public enum AccessLevel
         return true;
     }
 
+    /**
+     * Get integer value of AccessLevel
+     *
+     * @return integer value of level
+     */
     public int getLevel()
     {
         return level;

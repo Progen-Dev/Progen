@@ -24,8 +24,8 @@ public class MuteHandler extends ListenerAdapter
             sender.openPrivateChannel().queue(pc -> pc.sendMessage(
                     new EmbedBuilder().setColor(Color.orange).setDescription(
                             "You can not write on this server, because you are muted in text channels!\n" +
-                                    "Please contact an Supporter, Moderator or Admin at `" + event.getGuild().getName() + "` to unmute.\n\n" +
-                                    "Mute Reason: `" + data.getReason() + "`"
+                             "Please contact an Supporter, Moderator or Admin at `" + event.getGuild().getName() + "` to unmute.\n\n" +
+                             "Mute Reason: `" + data.getReason() + "`"
                     ).build()
             ).queue(), err ->
             {
