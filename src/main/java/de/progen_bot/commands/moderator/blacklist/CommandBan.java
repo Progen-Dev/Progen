@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
+import org.w3c.dom.Text;
 
 import java.awt.*;
 import java.time.Instant;
@@ -39,11 +40,10 @@ public class CommandBan extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+        Member selfMember = event.getMember();
 
         JDA jda = Main.getJda();
         TextChannel banChannel = jda.getTextChannelById(configuration.getLogChannelID());
-
-        Member selfMember = event.getMember();
 
         if (selfMember == null)
             return;
@@ -73,12 +73,14 @@ public class CommandBan extends CommandHandler {
             if (user == null){
                 user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(eb).queue());
             }else {
-                System.out.println("Cannot deliver message to user. The direct message function seems to be deactivated,");
+                System.out.println("Cannot deliver message to user. The direct message function seems to be deactivated.");
             }
 
             try {
                 event.getGuild().ban(user, 7, reason).queue(v -> {
-                    banChannel.sendMessage(eb);
+
+                    banChannel.sendMessage(eb).queue();
+                    banChannel.sendMessage(eb).queue();
                 });
             } catch (InsufficientPermissionException e) {
                 event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Failed to ban user " + event.getMember().getAsMention()));

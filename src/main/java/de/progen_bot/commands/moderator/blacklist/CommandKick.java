@@ -8,11 +8,8 @@ import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.guild.invite.GuildInviteCreateEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.requests.restaction.InviteAction;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 import java.time.Instant;
 import java.util.List;
@@ -60,7 +57,7 @@ public class CommandKick extends CommandHandler {
             final MessageEmbed eb = this.getKickEmbed(event, reason);
             if (eb == null)
                 return;
-            kickChannel.sendMessage(eb);
+            kickChannel.sendMessage(eb).queue();
             event.getMessage().getMentionedUsers().get(0).openPrivateChannel().queue(
                     privateChannel -> privateChannel.sendMessage(eb).queue()
             );
