@@ -2,6 +2,7 @@ package de.progen_bot.commands.moderator.blacklist;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.core.Main;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -36,9 +37,9 @@ public class CommandBan extends CommandHandler {
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event,
-            GuildConfiguration configuration) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         Member selfMember = event.getMember();
+        TextChannel getBanChannel = Main.getJda().getTextChannelById(configuration.getLogChannelID());
 
         if (selfMember == null)
             return;
@@ -73,13 +74,12 @@ public class CommandBan extends CommandHandler {
 
             try {
                 event.getGuild().ban(user, 7, reason).queue(v -> {
-
-                    event.getChannel().sendMessage(eb).queue();
-                    final List<TextChannel> channels = event.getGuild().getTextChannelsByName("progenlog", true);
+                    final List<TextChannel> channels = null;
+                    event.getTextChannel().sendMessage(eb).queue();
                     if (channels.isEmpty()) {
                         System.out.println("progenlog is not available on the Guild " + event.getGuild());
                     } else {
-                        event.getTextChannel().sendMessage(eb).queue();
+                       getBanChannel.sendMessage(eb).queue();
                         channels.get(0).sendMessage(eb).queue();
                     }
                 });

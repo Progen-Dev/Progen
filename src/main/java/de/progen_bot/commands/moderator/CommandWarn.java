@@ -7,14 +7,17 @@ import java.util.Arrays;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
+import de.progen_bot.core.Main;
 import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.w3c.dom.Text;
 
 
 public class CommandWarn extends CommandHandler {
@@ -43,6 +46,8 @@ public class CommandWarn extends CommandHandler {
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
 
+        TextChannel getWarnChannel = Main.getJda().getTextChannelById(configuration.getLogChannelID());
+
         Member warned;
         if (event.getMessage().getMentionedUsers().size() == 1) {
             warned = event.getMessage().getMentionedMembers().get(0);
@@ -63,12 +68,8 @@ public class CommandWarn extends CommandHandler {
         final MessageEmbed eb = getWarnEmbed(event, reason);
             if(eb == null)
             return;
-        
-        event.getChannel().sendMessage(eb).queue();
-        final List<TextChannel> channel = event.getGuild().getTextChannelsByName("progenlog", true);
-        
-        if(!channel.isEmpty())
-            channel.get(0).sendMessage(eb).queue();
+
+            getWarnChannel.sendMessage(eb).queue();
 
         WarnListDaoImpl dao = new WarnListDaoImpl();
         dao.insertWarn(warned, reason);

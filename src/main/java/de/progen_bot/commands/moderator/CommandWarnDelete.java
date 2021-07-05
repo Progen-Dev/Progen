@@ -2,10 +2,12 @@ package de.progen_bot.commands.moderator;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.core.Main;
 import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -40,6 +42,9 @@ public class CommandWarnDelete extends CommandHandler {
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event,
             GuildConfiguration configuration) {
+
+        TextChannel getWarnDeleteChannel = Main.getJda().getTextChannelById(configuration.getLogChannelID());
+
         if (event.getMember() == null)
             return;
 
@@ -63,11 +68,7 @@ public class CommandWarnDelete extends CommandHandler {
         if(eb == null)
         return;
 
-        event.getChannel().sendMessage(eb).queue();
-        final List<TextChannel> channel = event.getGuild().getTextChannelsByName("progenlog", true);
-
-        if(!channel.isEmpty())
-            channel.get(0).sendMessage(eb).queue();
+        getWarnDeleteChannel.sendMessage(eb).queue();
     }
 
     @Override

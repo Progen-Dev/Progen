@@ -2,15 +2,15 @@ package de.progen_bot.commands.moderator.blacklist;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.core.Main;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.guild.invite.GuildInviteCreateEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.requests.restaction.InviteAction;
+import org.w3c.dom.Text;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 import java.time.Instant;
 import java.util.List;
@@ -27,9 +27,6 @@ public class CommandKick extends CommandHandler {
         super("kick" , "kick <@user> <reason>" , "Kick a user from this server");
     }
 
-    private void onGuildInviteCreate(@Nonnull GuildInviteCreateEvent event) {
-        InviteAction test = event.getChannel().createInvite();
-    }
     private MessageEmbed getKickEmbed(MessageReceivedEvent event, String reason) {
         if (event.getMember() == null)
             return null;
@@ -47,8 +44,10 @@ public class CommandKick extends CommandHandler {
 
         @Override
         public void execute(CommandManager.ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
-            final List<String> argsWithoutMention = parsedCommand.getArgsAsList().subList(1, parsedCommand.getArgsAsList().size());
 
+            TextChannel getKickChannel = Main.getJda().getTextChannelById(configuration.getLogChannelID());
+
+            final List<String> argsWithoutMention = parsedCommand.getArgsAsList().subList(1, parsedCommand.getArgsAsList().size());
 
             String reason;
             if (argsWithoutMention.isEmpty())
@@ -59,13 +58,7 @@ public class CommandKick extends CommandHandler {
             final MessageEmbed eb = this.getKickEmbed(event, reason);
             if (eb == null)
                 return;
-            final List<TextChannel> channels = event.getGuild().getTextChannelsByName("progenlog", true);
-            if (channels.isEmpty()){
-                System.out.println("progenlog is not available on the Guild " + event.getGuild());
-            }else {
-                event.getTextChannel().sendMessage(eb).queue();
-                channels.get(0).sendMessage(eb).queue();
-            }
+            getKickChannel.sendMessage(eb).queue();
             event.getMessage().getMentionedUsers().get(0).openPrivateChannel().queue(
                     privateChannel -> privateChannel.sendMessage(eb).queue()
             );
