@@ -46,7 +46,7 @@ public class ReadyListener extends ListenerAdapter {
 
             @Override
             public void run() {
-                games[0] = Activity.playing("Runs on: " + event.getGuildTotalCount() + " guilds");
+                games[0] = Activity.playing("pb!help");
 
                 event.getJDA().getPresence().setActivity(games[ThreadLocalRandom.current().nextInt(games.length)]);
             }
