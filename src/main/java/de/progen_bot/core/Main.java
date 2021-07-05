@@ -3,6 +3,7 @@ package de.progen_bot.core;
 import com.mysql.cj.jdbc.Driver;
 
 import de.progen_bot.commands.administrator.ChangePrefix;
+import de.progen_bot.commands.settings.CommandLog;
 import de.pwi.api.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.moderator.*;
@@ -130,6 +131,8 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandAutorole());
         commandManager.setupCommandHandlers(new CommandUpdate());
         commandManager.setupCommandHandlers(new CommandMuteList());
+        commandManager.setupCommandHandlers(new CommandLog());
+        commandManager.setupCommandHandlers(new CommandMessages());
     }
 
     /**
