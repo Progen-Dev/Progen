@@ -1,0 +1,1 @@
+Small push test destroyed my project .git directory
