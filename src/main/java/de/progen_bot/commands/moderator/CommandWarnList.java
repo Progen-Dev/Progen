@@ -23,7 +23,7 @@ public class CommandWarnList extends CommandHandler {
 
     @Override
     public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event,
-            GuildConfiguration configuration) {
+                        GuildConfiguration configuration) {
         if (event.getMessage().getMentionedMembers().size() == 1) {
             Member mentioned = event.getMessage().getMentionedMembers().get(0);
             List<String> warnTable = new WarnListDaoImpl().loadWarnList(mentioned);
