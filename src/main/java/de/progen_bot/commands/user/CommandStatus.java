@@ -6,10 +6,12 @@ import java.util.Date;
 
 import de.progen_bot.command.CommandHandler;
 import de.progen_bot.command.CommandManager.ParsedCommandString;
+import de.progen_bot.core.Main;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import de.progen_bot.util.Statics;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CommandStatus extends CommandHandler {
@@ -41,6 +43,7 @@ public class CommandStatus extends CommandHandler {
     
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+        JDA jda = Main.getJda();
         event.getTextChannel().sendMessage(
             new EmbedBuilder()
             .setTitle("Status")
@@ -48,6 +51,7 @@ public class CommandStatus extends CommandHandler {
             .setDescription("V" + Statics.VERSION)
             .addField("Uptime", getTimeDiff(new Date(), Statics.getLastRestart()), false)
             .addField("Ping", event.getJDA().getGatewayPing() + "ms", true)
+            .addField("Total Guilds", String.valueOf((long) jda.getGuilds().size()) , false)
             .addField("Reconnects", Statics.getReconnectCount() + "", false)
                         .build()
         ).queue();
