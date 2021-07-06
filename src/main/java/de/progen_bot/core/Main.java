@@ -132,7 +132,6 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandUpdate());
         commandManager.setupCommandHandlers(new CommandMuteList());
         commandManager.setupCommandHandlers(new CommandLog());
-        commandManager.setupCommandHandlers(new CommandMessages());
     }
 
     /**
