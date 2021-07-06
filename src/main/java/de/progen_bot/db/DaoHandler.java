@@ -3,7 +3,7 @@ package de.progen_bot.db;
 import java.util.ArrayList;
 
 import de.progen_bot.db.dao.Dao;
-import de.progen_bot.db.dao.Messages.MessageDaoImpl;
+import de.progen_bot.db.dao.messages.MessageDaoImpl;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.dao.connectfour.ConnectFourDaoImpl;
 import de.progen_bot.db.dao.mute.MuteDao;
