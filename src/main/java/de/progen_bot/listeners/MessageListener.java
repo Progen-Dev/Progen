@@ -1,6 +1,6 @@
 package de.progen_bot.listeners;
 
-import de.progen_bot.db.dao.Messages.MessageDaoImpl;
+import de.progen_bot.db.dao.messages.MessageDaoImpl;
 import de.progen_bot.db.entities.MessageBuilder;
 import de.progen_bot.db.entities.MessageData;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
