@@ -2,7 +2,6 @@ package de.progen_bot.commands.moderator;
 
 import java.awt.Color;
 import java.time.Instant;
-import java.util.List;
 import java.util.Arrays;
 
 import de.progen_bot.command.CommandHandler;
@@ -12,12 +11,10 @@ import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import org.w3c.dom.Text;
 
 
 public class CommandWarn extends CommandHandler {
