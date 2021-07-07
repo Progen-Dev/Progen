@@ -69,6 +69,8 @@ public class CommandWarn extends CommandHandler {
             if(eb == null)
             return;
 
+            event.getTextChannel().sendMessage(eb).queue();
+
             getWarnChannel.sendMessage(eb).queue();
 
         WarnListDaoImpl dao = new WarnListDaoImpl();

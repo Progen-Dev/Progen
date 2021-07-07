@@ -37,9 +37,9 @@ public class CommandBan extends CommandHandler {
     }
 
     @Override
-    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
+    public void execute(CommandManager.ParsedCommandString parsedCommand, MessageReceivedEvent event,
+                        GuildConfiguration configuration) {
         Member selfMember = event.getMember();
-        TextChannel getBanChannel = Main.getJda().getTextChannelById(configuration.getLogChannelID());
 
         if (selfMember == null)
             return;
@@ -66,25 +66,15 @@ public class CommandBan extends CommandHandler {
                 return;
             }
 
-            if (user == null){
-                user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(eb).queue());
-            }else {
-                System.out.println("Cannot deliver message to user. The direct message function seems to be deactivated,");
-            }
-
             try {
                 event.getGuild().ban(user, 7, reason).queue(v -> {
-                    final List<TextChannel> channels = null;
-                    event.getTextChannel().sendMessage(eb).queue();
-                    if (channels.isEmpty()) {
-                        System.out.println("progenlog is not available on the Guild " + event.getGuild());
-                    } else {
-                       getBanChannel.sendMessage(eb).queue();
-                        channels.get(0).sendMessage(eb).queue();
-                    }
+                    user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(eb).queue());
+
+                    event.getChannel().sendMessage(eb).queue();
+                    Main.getJda().getTextChannelById(configuration.getLogChannelID()).sendMessage(eb).queue();
                 });
             } catch (InsufficientPermissionException e) {
-                event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("Failed to ban user " + event.getMember().getAsMention()));
+                event.getChannel().sendMessage("Failed to ban user " + user.getAsTag()).queue();
             }
         }
     }
