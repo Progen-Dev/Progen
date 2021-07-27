@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import de.progen_bot.db.dao.Dao;
 import de.progen_bot.db.dao.channel.ChannelDaoImpl;
-import de.progen_bot.db.dao.messages.MessageDaoImpl;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.dao.connectfour.ConnectFourDaoImpl;
+import de.progen_bot.db.dao.message.MessageDaoImpl;
 import de.progen_bot.db.dao.mute.MuteDao;
 import de.progen_bot.db.dao.playlist.PlaylistDaoImpl;
 import de.progen_bot.db.dao.playlist.PlaylistSongDaoImpl;
