@@ -1,37 +1,35 @@
 package de.progen_bot.listeners;
 
-import de.progen_bot.db.dao.messages.MessageDaoImpl;
-import de.progen_bot.db.entities.MessageBuilder;
-import de.progen_bot.db.entities.MessageData;
-import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
+import de.progen_bot.core.Main;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
-import javax.annotation.Nonnull;
 
 public class MessageListener extends ListenerAdapter {
 
-    public void onGuildJoin(@Nonnull GuildJoinEvent event) {
-        final MessageDaoImpl messageDao = new MessageDaoImpl();
+    boolean setChannelMsg = false;
+    boolean setMessage = false;
 
-        MessageData messageData = messageDao.loadWelcomeConfig(event.getGuild());
+    @Override
+    public void onGuildMessageReceived(GuildMessageReceivedEvent event){
+        if (Main.getMessage().contains(event.getAuthor().getIdLong())){
+            if (!setChannelMsg){
+                event.getChannel().sendMessage("Please enter a valid Textchannel").queue();
+                setChannelMsg = true;
+                return;
+            }
 
-        if (messageData == null) {
-            messageData = new MessageBuilder().setWelcomeMessage(null).setWelcomeMessageChannel(null).build();
-            messageDao.addWelcomeMessage(messageData , event.getGuild());
-        }
+            if (!setMessage && setChannelMsg){
+                event.getChannel().sendMessage("They now write a text.").queue();
+                setMessage = true;
+                return;
+            }
 
-        String chatId = messageData.getWelcomeMessage();
-    }
-
-    public void onGuildLeave(@Nonnull GuildLeaveEvent event) {
-        final MessageDaoImpl messageDao = new MessageDaoImpl();
-
-        MessageData messageData = messageDao.loadLeaveConfig(event.getGuild());
-
-        if (messageData == null){
-            messageData = new MessageBuilder().setLeaveMessage(null).setLeaveMessageChannel(null).build();
-            messageDao.addLeaveMessage(messageData, event.getGuild());
+            if (setChannelMsg && setMessage){
+                event.getChannel().sendMessage("Successfully setuped").queue();
+                setMessage = false;
+                setChannelMsg = false;
+                Main.getMessage().remove(event.getAuthor().getIdLong());
+            }
         }
     }
 }
