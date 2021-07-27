@@ -69,3 +69,9 @@ ___
 
 *Messages: Is saved as text in the database. Currently this function is used for welcome and leave messages.
 *Reasons: If you execute a moderation command and enter a reason, this reason is also saved.
+
+___
+
+***Email: progenbot@gmail.com***
+
+***Website: https://progen-bot.de***
