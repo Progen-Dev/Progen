@@ -1,9 +1,10 @@
 package de.progen_bot.core;
 
+import com.jagrosh.jdautilities.command.Command;
 import com.mysql.cj.jdbc.Driver;
 
 import de.progen_bot.commands.administrator.ChangePrefix;
-import de.progen_bot.commands.settings.CommandLog;
+import de.progen_bot.listeners.MessageListener;
 import de.pwi.api.httpapi.API;
 import de.progen_bot.command.CommandManager;
 import de.progen_bot.commands.moderator.*;
@@ -28,6 +29,7 @@ import javax.security.auth.login.LoginException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,6 +54,8 @@ public class Main {
     private static MusicManager musicManager;
 
     private static TopGGIntegration topGGIntegration;
+
+    public static List<MessageListener> messageListener;
 
     /**
      * Instantiates a new main.
@@ -131,6 +135,7 @@ public class Main {
         commandManager.setupCommandHandlers(new CommandAutorole());
         commandManager.setupCommandHandlers(new CommandUpdate());
         commandManager.setupCommandHandlers(new CommandMuteList());
+        commandManager.setupCommandHandlers(new CommandMessage());
         commandManager.setupCommandHandlers(new CommandLog());
     }
 
@@ -188,6 +193,8 @@ public class Main {
     public static TopGGIntegration getTopGG() {
         return topGGIntegration;
     }
+
+    public static List<MessageListener> getMessage(){return messageListener;}
 
     // Music
     public static MusicBotManager getMusicBotManager() {
