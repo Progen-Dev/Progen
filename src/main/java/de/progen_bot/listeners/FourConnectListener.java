@@ -48,12 +48,12 @@ public class FourConnectListener extends ListenerAdapter {
 
             if (emoteName.equals("✅")) {
                 event.getChannel()
-                        .sendMessage(new EmbedBuilder().setColor(Color.DARK_GRAY)
+                        .sendMessageEmbeds(new EmbedBuilder().setColor(Color.DARK_GRAY)
                                 .setDescription("Spiel wird vorbereitet").build())
                         .queue(msg -> msg.delete().queueAfter(9, TimeUnit.SECONDS));
                 startGame(gameData);
             } else if (emoteName.equals("❌")) {
-                event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.HSBtoRGB(85, 1, 100))
+                event.getChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.HSBtoRGB(85, 1, 100))
                         .setDescription("Spielanfrage abgelehnt!").build()).queue();
                 closeGame(gameData);
             }

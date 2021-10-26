@@ -22,7 +22,7 @@ public class CommandStop extends CommandHandler {
 
         event.getMessage().delete().queue();
         Message msg = event.getTextChannel()
-                .sendMessage(super.messageGenerators.generateWarningMsg("Progen shuts down")).complete();
+                .sendMessageEmbeds(super.messageGenerators.generateWarningMsg("Progen shuts down")).complete();
 
 
         new Timer().schedule(new TimerTask() {

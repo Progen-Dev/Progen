@@ -48,7 +48,7 @@ public class CommandPlaylist extends CommandHandler {
             return;
 
         if (parsedCommand.getArgs().length < 1) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
 
@@ -57,14 +57,14 @@ public class CommandPlaylist extends CommandHandler {
         switch (parsedCommand.getArgsAsList().get(0)) {
             case "create": // Create new playlist
                 if (parsedCommand.getArgs().length < 2) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
                     return;
                 }
 
                 try {
                     new PlaylistDaoImpl().createPlaylist(member.getUser(), parsedCommand.getArgsAsList().get(1));
                 } catch (SQLIntegrityConstraintViolationException e1) {
-                    event.getTextChannel().sendMessage(super.messageGenerators
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators
                             .generateErrorMsg("A playlist with this name already exists. Please choose another name."))
                             .queue();
                     break;
@@ -73,7 +73,7 @@ public class CommandPlaylist extends CommandHandler {
                 }
 
                 event.getTextChannel()
-                        .sendMessage(super.messageGenerators.generateInfoMsg(
+                        .sendMessageEmbeds(super.messageGenerators.generateInfoMsg(
                                 "Successfully created the playlist `" + parsedCommand.getArgsAsList().get(1) + "`!"))
                         .queue();
                 break;
@@ -85,7 +85,7 @@ public class CommandPlaylist extends CommandHandler {
                 music = Main.getMusicManager().getMusicByChannel(member.getVoiceState().getChannel());
 
                 if (parsedCommand.getArgs().length < 2) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
                     return;
                 }
 
@@ -105,7 +105,7 @@ public class CommandPlaylist extends CommandHandler {
                 }
 
                 event.getTextChannel()
-                        .sendMessage(super.messageGenerators.generateInfoMsg("Successfully created the playlist `"
+                        .sendMessageEmbeds(super.messageGenerators.generateInfoMsg("Successfully created the playlist `"
                                 + parsedCommand.getArgsAsList().get(1) + "` from the current queue!"))
                         .queue();
                 break;
@@ -118,7 +118,7 @@ public class CommandPlaylist extends CommandHandler {
                 music = Main.getMusicManager().getMusicByChannel(member.getVoiceState().getChannel());
 
                 if (parsedCommand.getArgs().length < 2) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
                     return;
                 }
 
@@ -129,7 +129,7 @@ public class CommandPlaylist extends CommandHandler {
                     uris = new PlaylistSongDaoImpl().getSongsByPlaylist(playlistId);
                 } catch (SQLException e) {
                     event.getTextChannel()
-                            .sendMessage(super.messageGenerators.generateErrorMsg("Could not find playlist!")).queue();
+                            .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Could not find playlist!")).queue();
                     return;
                 }
                 music.getManager().purgeQueue();
@@ -138,14 +138,14 @@ public class CommandPlaylist extends CommandHandler {
                 }
 
                 event.getTextChannel()
-                        .sendMessage(
+                        .sendMessageEmbeds(
                                 super.messageGenerators.generateInfoMsg("Playlist is loaded in queue after this song!"))
                         .queue();
                 break;
 
             case "delete": // delete playlist
                 if (parsedCommand.getArgs().length < 2) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
                     return;
                 }
 
@@ -153,24 +153,24 @@ public class CommandPlaylist extends CommandHandler {
                     new PlaylistDaoImpl().getPlaylistByUserAndName(event.getAuthor(),
                             parsedCommand.getArgsAsList().get(1));
                     new PlaylistDaoImpl().deletePlaylist(event.getAuthor(), parsedCommand.getArgsAsList().get(1));
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg(
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateInfoMsg(
                             "Successfully removed the playlist `" + parsedCommand.getArgsAsList().get(1) + "`!"))
                             .queue();
                 } catch (SQLException e) {
                     e.printStackTrace();
                     event.getTextChannel()
-                            .sendMessage(super.messageGenerators.generateErrorMsg("Could not find playlist!")).queue();
+                            .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Could not find playlist!")).queue();
                 }
                 break;
             case "add": // Add a song
                 if (parsedCommand.getArgs().length < 3) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
                     return;
                 }
 
                 if (!isValidURL(parsedCommand.getArgsAsList().get(2))) {
                     event.getTextChannel()
-                            .sendMessage(super.messageGenerators.generateErrorMsg("Please enter a valid song url."))
+                            .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Please enter a valid song url."))
                             .queue();
                     return;
                 }
@@ -180,19 +180,19 @@ public class CommandPlaylist extends CommandHandler {
                             parsedCommand.getArgsAsList().get(1));
                     new PlaylistSongDaoImpl().addSong(playlistId, parsedCommand.getArgsAsList().get(2));
                     event.getTextChannel()
-                            .sendMessage(super.messageGenerators
+                            .sendMessageEmbeds(super.messageGenerators
                                     .generateInfoMsg("Successfully added `" + parsedCommand.getArgsAsList().get(2)
                                             + "` to `" + parsedCommand.getArgsAsList().get(1) + "`!"))
                             .queue();
                 } catch (SQLException e) {
                     e.printStackTrace();
                     event.getTextChannel()
-                            .sendMessage(super.messageGenerators.generateErrorMsg("Could not find playlist!")).queue();
+                            .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Could not find playlist!")).queue();
                 }
                 break;
             case "remove": // Remove a song
                 if (parsedCommand.getArgs().length < 3) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
                     return;
                 }
 
@@ -202,13 +202,13 @@ public class CommandPlaylist extends CommandHandler {
                             parsedCommand.getArgsAsList().get(1));
                     new PlaylistSongDaoImpl().removeSong(playlistId, parsedCommand.getArgsAsList().get(2));
                     event.getTextChannel()
-                            .sendMessage(super.messageGenerators
+                            .sendMessageEmbeds(super.messageGenerators
                                     .generateInfoMsg("Successfully removed `" + parsedCommand.getArgsAsList().get(2)
                                             + "` from `" + parsedCommand.getArgsAsList().get(1) + "`!"))
                             .queue();
                 } catch (SQLException e) {
                     event.getTextChannel()
-                            .sendMessage(super.messageGenerators.generateErrorMsg("Could not find playlist!")).queue();
+                            .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Could not find playlist!")).queue();
                 }
                 break;
 
@@ -226,16 +226,16 @@ public class CommandPlaylist extends CommandHandler {
                         msgListBuilder.appendDescription(
                                 ++playlistCounter + ". **" + playlist.getName() + "** (" + songCounter + " Songs)  \n");
                     }
-                    event.getTextChannel().sendMessage(msgListBuilder.build()).queue();
+                    event.getTextChannel().sendMessageEmbeds(msgListBuilder.build()).queue();
                 } catch (SQLException e) {
                     event.getTextChannel()
-                            .sendMessage(super.messageGenerators.generateErrorMsg("Could not find any playlist!"))
+                            .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Could not find any playlist!"))
                             .queue();
                 }
                 break;
             case "songs": // List all songs from a playlist
                 if (parsedCommand.getArgs().length < 2) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
                     return;
                 }
 
@@ -254,15 +254,15 @@ public class CommandPlaylist extends CommandHandler {
                     } else {
                         songBoardBuilder.setDescription(String.join("\n", songs));
                     }
-                    event.getTextChannel().sendMessage(songBoardBuilder.build()).queue();
+                    event.getTextChannel().sendMessageEmbeds(songBoardBuilder.build()).queue();
                 } catch (SQLException e) {
                     event.getTextChannel()
-                            .sendMessage(super.messageGenerators.generateErrorMsg("Could not find any playlist!"))
+                            .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Could not find any playlist!"))
                             .queue();
                 }
                 break;
             default:
-                event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
         }
     }
 
@@ -277,7 +277,7 @@ public class CommandPlaylist extends CommandHandler {
         // Is not in voice channel
         if (!member.getVoiceState().inVoiceChannel()) {
             event.getTextChannel()
-                    .sendMessage(super.messageGenerators.generateErrorMsg("You are not in a voice channel!")).queue();
+                    .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("You are not in a voice channel!")).queue();
             return true;
         }
 
@@ -292,7 +292,7 @@ public class CommandPlaylist extends CommandHandler {
 
             if (musicManager.isMusicOwner(event.getMember())) {
                 event.getTextChannel()
-                        .sendMessage(super.messageGenerators.generateErrorMsg(
+                        .sendMessageEmbeds(super.messageGenerators.generateErrorMsg(
                                 "You have already created an music player. Please go back to your channel to use it!"))
                         .queue();
                 return true;
@@ -301,7 +301,7 @@ public class CommandPlaylist extends CommandHandler {
             if (event.getGuild().getAfkChannel() != null && event.getMember().getVoiceState().getChannel() != null
                     && event.getMember().getVoiceState().getChannel().getId()
                             .equals(event.getGuild().getAfkChannel().getId())) {
-                event.getTextChannel().sendMessage(
+                event.getTextChannel().sendMessageEmbeds(
                         super.messageGenerators.generateErrorMsg("You can not listen to music in an afk channel!"))
                         .queue();
                 return true;
@@ -309,13 +309,13 @@ public class CommandPlaylist extends CommandHandler {
             // Check if bot available
             if (!Main.getMusicBotManager().botAvailable(event.getGuild())) {
                 event.getTextChannel()
-                        .sendMessage(super.messageGenerators.generateErrorMsg("There is no music bot available!"))
+                        .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("There is no music bot available!"))
                         .queue();
                 return true;
             }
             musicManager.registerMusicByMember(event.getMember(),
                     new Music(event.getMember(), Main.getMusicBotManager().getUnusedBot(event.getGuild())));
-            event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg(
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateInfoMsg(
                     "You have now a music instance in your voice chat! Check out the PWI (http://pwi.progen-bot.de/) to control your music more efficient!"))
                     .queue();
             music = musicManager.getMusicByChannel(event.getMember().getVoiceState().getChannel());
@@ -323,7 +323,7 @@ public class CommandPlaylist extends CommandHandler {
 
         if (music == null) {
             event.getTextChannel()
-                    .sendMessage(super.messageGenerators.generateErrorMsg("Execute the command `music start` first."))
+                    .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Execute the command `music start` first."))
                     .queue();
             return true;
         }

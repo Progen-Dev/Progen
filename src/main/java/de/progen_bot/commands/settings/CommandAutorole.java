@@ -24,7 +24,7 @@ public class CommandAutorole extends CommandHandler
         if (!event.getMessage().getMentionedRoles().isEmpty())
         {
             configuration.setAutoRole(event.getMessage().getMentionedRoles().get(0).getId());
-            event.getTextChannel().sendMessage(
+            event.getTextChannel().sendMessageEmbeds(
                     messageGenerators.generateRightMsg("Successfully set autorole to `" + event.getMessage().getMentionedRoles().get(0).getName() + "`.")
             ).queue();
         }
@@ -42,21 +42,21 @@ public class CommandAutorole extends CommandHandler
 
             if (id == 0)
             {
-                event.getChannel().sendMessage(
+                event.getChannel().sendMessageEmbeds(
                         messageGenerators.generateErrorMsg("Please provide a channel id. To disable autorole run `pb!autorole` with no arguments")
                 ).queue();
 
                 return;
             }
 
-            event.getTextChannel().sendMessage(
+            event.getTextChannel().sendMessageEmbeds(
                     messageGenerators.generateRightMsg("Successfully set autorole to `" + id + "`.")
             ).queue();
         }
         else
         {
             configuration.setAutoRole(null);
-            event.getTextChannel().sendMessage(messageGenerators.generateRightMsg("Successfully deactivated autorole.")).queue();
+            event.getTextChannel().sendMessageEmbeds(messageGenerators.generateRightMsg("Successfully deactivated autorole.")).queue();
         }
 
         new ConfigDaoImpl().writeConfig(configuration, event.getGuild());

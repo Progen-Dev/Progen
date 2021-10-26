@@ -38,7 +38,7 @@ public class PermissionCore {
             return false;
 
         if (level > getLevel(event.getMember())) {
-            event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.red).setDescription(
+            event.getTextChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.red).setDescription(
                     "I'm sorry, but you do not have permission to use this command"
             ).build()).queue();
             return true;

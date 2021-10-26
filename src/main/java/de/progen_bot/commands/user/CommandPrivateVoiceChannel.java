@@ -40,7 +40,7 @@ public class CommandPrivateVoiceChannel extends CommandHandler {
 
         // Check if user is specified
         if (event.getMessage().getMentionedMembers().size() != 1) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
 
@@ -51,7 +51,7 @@ public class CommandPrivateVoiceChannel extends CommandHandler {
         // Check if user is in voice channel
         if (!voiceState.inVoiceChannel()) {
             event.getTextChannel()
-                    .sendMessage(super.messageGenerators.generateErrorMsg("You are not in a voice channel!")).queue();
+                    .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("You are not in a voice channel!")).queue();
             return;
         }
 
@@ -62,14 +62,14 @@ public class CommandPrivateVoiceChannel extends CommandHandler {
         // Check if user is owner
         if (!checkOwnership(channel, member)) {
             event.getTextChannel()
-                    .sendMessage(super.messageGenerators.generateErrorMsg("This is not your voice channel!")).queue();
+                    .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("This is not your voice channel!")).queue();
             return;
         }
 
         channel.createPermissionOverride(event.getMessage().getMentionedMembers().get(0))
                 .setAllow(Permission.VOICE_CONNECT).queue();
 
-        event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg(
+        event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateInfoMsg(
                 event.getMessage().getMentionedMembers().get(0).getEffectiveName() + " can now join the voice channel"))
                 .queue();
 
@@ -93,7 +93,7 @@ public class CommandPrivateVoiceChannel extends CommandHandler {
 
         if (!member.getVoiceState().inVoiceChannel()) {
             event.getTextChannel()
-                    .sendMessage(super.messageGenerators
+                    .sendMessageEmbeds(super.messageGenerators
                             .generateErrorMsg("You are not in a voice channel! Please join any voice channel."))
                     .queue();
             return;
@@ -109,7 +109,7 @@ public class CommandPrivateVoiceChannel extends CommandHandler {
                     }
 
                     event.getGuild().moveVoiceMember(member, channel).queue();
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateSuccessfulMsg()).queue();
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateSuccessfulMsg()).queue();
                 });
     }
 
@@ -121,7 +121,7 @@ public class CommandPrivateVoiceChannel extends CommandHandler {
             return;
 
         if (parsedCommand.getArgsAsList().isEmpty()) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
 
@@ -138,7 +138,7 @@ public class CommandPrivateVoiceChannel extends CommandHandler {
             case "category":
                 // If not owner
                 if (!member.isOwner()) {
-                    event.getTextChannel().sendMessage(super.messageGenerators
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators
                             .generateErrorMsg("Sorry, you have to be the owner of the guild to create the category."))
                             .queue();
                     return;
@@ -146,7 +146,7 @@ public class CommandPrivateVoiceChannel extends CommandHandler {
 
                 // get length
                 if (parsedCommand.getArgsAsList().size() != 2) {
-                    event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                    event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
                     return;
                 }
 
@@ -158,7 +158,7 @@ public class CommandPrivateVoiceChannel extends CommandHandler {
                 break;
 
             default:
-                event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
         }
     }
 

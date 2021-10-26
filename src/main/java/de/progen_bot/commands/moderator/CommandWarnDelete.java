@@ -7,15 +7,13 @@ import de.progen_bot.db.dao.warnlist.WarnListDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import java.awt.Color;
+import java.awt.*;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.List;
 
 public class CommandWarnDelete extends CommandHandler {
     private static final String DELETE = "Warn Delete";
@@ -49,13 +47,13 @@ public class CommandWarnDelete extends CommandHandler {
             return;
 
         if (event.getMessage().getMentionedMembers().isEmpty()) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("No user found")).queue();
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsg("No user found")).queue();
             return;
         }
 
         if (parsedCommand.getArgs().length <= 1) {
             event.getChannel()
-                    .sendMessage(new EmbedBuilder().setColor(Color.red).setDescription("No reason found").build())
+                    .sendMessageEmbeds(new EmbedBuilder().setColor(Color.red).setDescription("No reason found").build())
                     .queue();
             return;
         }
@@ -68,7 +66,7 @@ public class CommandWarnDelete extends CommandHandler {
         if(eb == null)
         return;
 
-        getWarnDeleteChannel.sendMessage(eb).queue();
+        getWarnDeleteChannel.sendMessageEmbeds(eb).queue();
     }
 
     @Override

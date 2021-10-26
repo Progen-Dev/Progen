@@ -36,7 +36,7 @@ public class CommandVote extends CommandHandler implements Serializable {
 
     private static void message(String content) {
         EmbedBuilder eb = new EmbedBuilder().setDescription(content).setColor(Color.red);
-        channel.sendMessage(eb.build()).queue();
+        channel.sendMessageEmbeds(eb.build()).queue();
     }
 
     private static EmbedBuilder getParsedPoll(Poll poll, Guild guild) {
@@ -52,7 +52,7 @@ public class CommandVote extends CommandHandler implements Serializable {
 
         return new EmbedBuilder()
                 .setAuthor(poll.getCreator(guild).getEffectiveName(), null, poll.getCreator(guild).getUser().getAvatarUrl())
-                .setDescription(poll.heading + "\n\n" + sb.toString())
+                .setDescription(poll.heading + "\n\n" + sb)
                 .setColor(Color.cyan);
 
     }
@@ -61,7 +61,7 @@ public class CommandVote extends CommandHandler implements Serializable {
         Poll poll = POLLS.get(guild);
 
         if (poll.votes.containsKey(author.getUser().getId())) {
-            TEMP_MAP.get(guild).getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setDescription("Sorry, " + author.getAsMention() + ", you can only vote once!").build()).queue(m ->
+            TEMP_MAP.get(guild).getTextChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.orange).setDescription("Sorry, " + author.getAsMention() + ", you can only vote once!").build()).queue(m ->
                     new Timer().schedule(new TimerTask() {
                         @Override
                         public void run() {
@@ -74,7 +74,7 @@ public class CommandVote extends CommandHandler implements Serializable {
 
         poll.votes.put(author.getUser().getId(), voteIndex);
         POLLS.replace(guild, poll);
-        TEMP_MAP.get(guild).editMessage(getParsedPoll(poll, guild).build()).queue();
+        TEMP_MAP.get(guild).editMessageEmbeds(getParsedPoll(poll, guild).build()).queue();
 
 
         try {
@@ -180,7 +180,7 @@ public class CommandVote extends CommandHandler implements Serializable {
         List<String> content = Arrays.asList(sb.split("\\|"));
         String heading = content.get(0);
         List<String> answers = new ArrayList<>(content.subList(1, content.size()));
-        Message msg = channel.sendMessage(messageGenerators.generateInfoMsg("CREATING...")).complete();
+        Message msg = channel.sendMessageEmbeds(messageGenerators.generateInfoMsg("CREATING...")).complete();
         List<String> emotes = new ArrayList<>(Arrays.asList(EMOTES));
         List<String> toAddEmotes = new ArrayList<>();
         answers.forEach(a -> {
@@ -197,7 +197,7 @@ public class CommandVote extends CommandHandler implements Serializable {
 
         POLLS.put(event.getGuild(), poll);
 
-        channel.editMessageById(msg.getId(), getParsedPoll(poll, event.getGuild()).build()).queue();
+        channel.editMessageEmbedsById(msg.getId(), getParsedPoll(poll, event.getGuild()).build()).queue();
         toAddEmotes.forEach(s -> msg.addReaction(s).queue());
         channel.pinMessageById(msg.getId()).queue();
 
@@ -227,7 +227,7 @@ public class CommandVote extends CommandHandler implements Serializable {
             return;
         }
 
-        channel.sendMessage(getParsedPoll(poll, g).build()).queue();
+        channel.sendMessageEmbeds(getParsedPoll(poll, g).build()).queue();
 
     }
 
@@ -248,7 +248,7 @@ public class CommandVote extends CommandHandler implements Serializable {
         TEMP_MAP.get(event.getGuild()).delete().queue();
         POLLS.remove(g);
         TEMP_MAP.remove(g);
-        channel.sendMessage(getParsedPoll(poll, g).build()).queue();
+        channel.sendMessageEmbeds(getParsedPoll(poll, g).build()).queue();
         messageGenerators.generateRightMsg("Poll closed by " + event.getAuthor().getAsMention() + ".");
 
         try {

@@ -18,7 +18,7 @@ public class CommandUpdate extends CommandHandler {
     }
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
-        event.getTextChannel().sendMessage(
+        event.getTextChannel().sendMessageEmbeds(
             new EmbedBuilder()
             .setColor(Color.blue)
             .setTitle("Update")

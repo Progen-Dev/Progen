@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ReconnectListener extends ListenerAdapter {
     @Override
-    public void onReconnect(@NotNull ReconnectedEvent event){
+    public void onReconnected(@NotNull ReconnectedEvent event){
         System.out.println("[INFO] Reconnect");
 
         Statics.increaseReconnectCount();

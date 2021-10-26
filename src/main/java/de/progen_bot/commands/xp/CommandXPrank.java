@@ -35,7 +35,7 @@ public class CommandXPrank extends CommandHandler {
             }
         }
 
-        event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.cyan).setDescription(sb.toString()).build()).queue();
+        event.getTextChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.cyan).setDescription(sb.toString()).build()).queue();
     }
 
     @Override

@@ -40,7 +40,7 @@ public class CommandClear extends CommandHandler {
         String[] args = parsedCommand.getArgs();
 
         if (args.length < 1) {
-            event.getTextChannel().sendMessage(error
+            event.getTextChannel().sendMessageEmbeds(error
                     .setDescription("Please specify how many messages should be deleted.").build())
                     .queue();
             return;
@@ -67,7 +67,7 @@ public class CommandClear extends CommandHandler {
                 event.getTextChannel().deleteMessages(messages).queue();
             }
 
-            Message msg = event.getTextChannel().sendMessage(new EmbedBuilder().setColor(Color.GREEN)
+            Message msg = event.getTextChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.GREEN)
                     .setDescription(messages.size() + messagesTwoWeeksAgo.size() + " deleted messages").build()).complete();
 
             new Timer().schedule(new TimerTask() {
@@ -82,7 +82,7 @@ public class CommandClear extends CommandHandler {
 
         } else {
             event.getTextChannel()
-                    .sendMessage(error.setDescription("Please use a number between 2 and 100!").build()).queue();
+                    .sendMessageEmbeds(error.setDescription("Please use a number between 2 and 100!").build()).queue();
         }
    }
 

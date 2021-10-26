@@ -67,10 +67,10 @@ public class CommandBan extends CommandHandler {
 
             try {
                 event.getGuild().ban(user, 7, reason).queue(v -> {
-                    user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(eb).queue());
+                    user.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessageEmbeds(eb).queue());
 
-                    event.getChannel().sendMessage(eb).queue();
-                    Main.getJda().getTextChannelById(configuration.getLogChannelID()).sendMessage(eb).queue();
+                    event.getChannel().sendMessageEmbeds(eb).queue();
+                    Main.getJda().getTextChannelById(configuration.getLogChannelID()).sendMessageEmbeds(eb).queue();
                 });
             } catch (InsufficientPermissionException e) {
                 event.getChannel().sendMessage("Failed to ban user " + user.getAsTag()).queue();

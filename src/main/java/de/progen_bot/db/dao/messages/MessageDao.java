@@ -1,6 +1,5 @@
 package de.progen_bot.db.dao.messages;
 
-import de.progen_bot.db.entities.GameData;
 import de.progen_bot.db.entities.MessageData;
 import net.dv8tion.jda.api.entities.Guild;
 

@@ -18,7 +18,7 @@ public class CommandLog extends CommandHandler {
 
         if (!event.getMessage().getMentionedChannels().isEmpty()) {
             configuration.setLogChannelID(event.getMessage().getMentionedChannels().get(0).getId());
-            event.getTextChannel().sendMessage(super.messageGenerators.generateRightMsg("Sucessfully set the modchannel to `" + event.getMessage().getMentionedChannels().get(0).getName())
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateRightMsg("Sucessfully set the modchannel to `" + event.getMessage().getMentionedChannels().get(0).getName())
             ).queue();
         }else if(parsedCommand.getArgs().length == 1){
             long id;
@@ -31,15 +31,15 @@ public class CommandLog extends CommandHandler {
             }
 
             if (id == 0){
-                event.getChannel().sendMessage(super.messageGenerators.generateErrorMsg("Please provide a Textchannel id. To disable the logs run `pb!log channel` with no argument.")
+                event.getChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Please provide a Textchannel id. To disable the logs run `pb!log channel` with no argument.")
                 ).queue();
                 return;
             }
-            event.getTextChannel().sendMessage(messageGenerators.generateInfoMsg("Successfully set Logchannel to `" + id + "`." )
+            event.getTextChannel().sendMessageEmbeds(messageGenerators.generateInfoMsg("Successfully set Logchannel to `" + id + "`." )
             ).queue();
         }else {
             configuration.setLogChannelID(null);
-            event.getTextChannel().sendMessage(messageGenerators.generateInfoMsg("Successfully deactivated the logchannel")
+            event.getTextChannel().sendMessageEmbeds(messageGenerators.generateInfoMsg("Successfully deactivated the logchannel")
             ).queue();
         }
         new ConfigDaoImpl().writeConfig(configuration, event.getGuild());
@@ -51,7 +51,7 @@ public class CommandLog extends CommandHandler {
 
         if (!event.getMessage().getMentionedChannels().isEmpty()) {
             configuration.setStarBoardChannelID(event.getMessage().getMentionedChannels().get(0).getId());
-            event.getTextChannel().sendMessage(super.messageGenerators.generateRightMsg("Successfully set the starboard to `" + event.getMessage().getMentionedChannels().get(0).getName() + "`.")
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateRightMsg("Successfully set the starboard to `" + event.getMessage().getMentionedChannels().get(0).getName() + "`.")
             ).queue();
         }else if(parsedCommand.getArgs().length == 1){
             long id;
@@ -64,15 +64,15 @@ public class CommandLog extends CommandHandler {
             }
 
             if (id == 0){
-                event.getChannel().sendMessage(super.messageGenerators.generateErrorMsg("Please provide a Textchannel id. To disable the starboard run `pb!log starboard` with no arguments.")
+                event.getChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Please provide a Textchannel id. To disable the starboard run `pb!log starboard` with no arguments.")
                 ).queue();
                 return;
             }
-            event.getTextChannel().sendMessage(messageGenerators.generateInfoMsg("Successfully set the starboard to `" + id + "`." )
+            event.getTextChannel().sendMessageEmbeds(messageGenerators.generateInfoMsg("Successfully set the starboard to `" + id + "`." )
             ).queue();
         }else {
             configuration.setStarBoardChannelID(null);
-            event.getTextChannel().sendMessage(messageGenerators.generateInfoMsg("Successfully deactivated the starboard.")
+            event.getTextChannel().sendMessageEmbeds(messageGenerators.generateInfoMsg("Successfully deactivated the starboard.")
             ).queue();
         }
         new ConfigDaoImpl().writeConfig(configuration, event.getGuild());

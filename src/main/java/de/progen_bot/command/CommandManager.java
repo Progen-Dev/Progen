@@ -51,14 +51,14 @@ public class CommandManager extends ListenerAdapter {
         CommandHandler commandHandler = commandAssociations.get(parsedMessage.getCommand());
 
         if (commandHandler == null) {
-            event.getTextChannel().sendMessage(new MessageGenerator("", "").generateErrorMsg("This is not a command. Use the help command for help.")).queue();
+            event.getTextChannel().sendMessageEmbeds(new MessageGenerator("", "").generateErrorMsg("This is not a command. Use the help command for help.")).queue();
             return;
         }
 
         Logger.info("Command " + commandHandler.getInvokeString() + " was invoked by " + event.getGuild().getName());
 
         if (commandHandler.getAccessLevel().getLevel() > new PermissionCore(event).getAccessLevel().getLevel()) {
-            event.getTextChannel().sendMessage(new MessageGenerator("", "").generateErrorMsg("Your are not allowed to use this command!")).queue();
+            event.getTextChannel().sendMessageEmbeds(new MessageGenerator("", "").generateErrorMsg("Your are not allowed to use this command!")).queue();
             return;
         }
         commandHandler.execute(parsedMessage, event, guildConfiguration);

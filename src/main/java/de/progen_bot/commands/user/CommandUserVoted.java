@@ -21,7 +21,7 @@ public class CommandUserVoted extends CommandHandler {
         try {
             user = event.getMessage().getMentionedMembers().get(0).getUser();
         } catch (IndexOutOfBoundsException e) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
         Main.getTopGG().hasVoted(user, hasVoted -> {
