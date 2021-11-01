@@ -32,7 +32,7 @@ public class CommandMusic extends CommandHandler {
         MusicManager musicManager = Main.getMusicManager();
 
         if (parsedCommand.getArgs().length < 1) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
 
@@ -40,7 +40,7 @@ public class CommandMusic extends CommandHandler {
         // Is not in voice channel
         if (!event.getMember().getVoiceState().inVoiceChannel()) {
             event.getTextChannel()
-                    .sendMessage(super.messageGenerators.generateErrorMsg("You are not in a voice channel!")).queue();
+                    .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("You are not in a voice channel!")).queue();
             return;
         }
 
@@ -54,7 +54,7 @@ public class CommandMusic extends CommandHandler {
 
             if (musicManager.isMusicOwner(event.getMember())) {
                 event.getTextChannel()
-                        .sendMessage(super.messageGenerators.generateErrorMsg(
+                        .sendMessageEmbeds(super.messageGenerators.generateErrorMsg(
                                 "You have already created an music player. Please go back to your channel to use it!"))
                         .queue();
                 return;
@@ -63,7 +63,7 @@ public class CommandMusic extends CommandHandler {
             if (event.getGuild().getAfkChannel() != null && event.getMember().getVoiceState().getChannel() != null
                     && event.getMember().getVoiceState().getChannel().getId()
                             .equals(event.getGuild().getAfkChannel().getId())) {
-                event.getTextChannel().sendMessage(
+                event.getTextChannel().sendMessageEmbeds(
                         super.messageGenerators.generateErrorMsg("You can not listen to music in an afk channel!"))
                         .queue();
                 return;
@@ -71,13 +71,13 @@ public class CommandMusic extends CommandHandler {
             // Check if bot available
             if (!Main.getMusicBotManager().botAvailable(event.getGuild())) {
                 event.getTextChannel()
-                        .sendMessage(super.messageGenerators.generateErrorMsg("There is no music bot available!"))
+                        .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("There is no music bot available!"))
                         .queue();
                 return;
             }
             musicManager.registerMusicByMember(event.getMember(),
                     new Music(event.getMember(), Main.getMusicBotManager().getUnusedBot(event.getGuild())));
-            event.getTextChannel().sendMessage(super.messageGenerators.generateInfoMsg(
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateInfoMsg(
                     "You have now a music instance in your voice chat! Check out the PWI (http://pwi.progen-bot.de/) to control your music more efficient!"))
                     .queue();
             music = musicManager.getMusicByChannel(event.getMember().getVoiceState().getChannel());
@@ -92,7 +92,7 @@ public class CommandMusic extends CommandHandler {
 
                 if (parsedCommand.getArgs().length < 2) {
                     event.getTextChannel()
-                            .sendMessage(super.messageGenerators.generateErrorMsg("Please enter a valid source!"))
+                            .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("Please enter a valid source!"))
                             .queue();
                     return;
                 }
@@ -129,7 +129,7 @@ public class CommandMusic extends CommandHandler {
                     }
                 }
 
-                event.getTextChannel().sendMessage(msgQueueBuilder.build()).queue();
+                event.getTextChannel().sendMessageEmbeds(msgQueueBuilder.build()).queue();
                 break;
 
             case "info":
@@ -148,11 +148,11 @@ public class CommandMusic extends CommandHandler {
                                 false);
                 msgInfoBuilder.addField("URI", music.getPlayer().getPlayingTrack().getInfo().uri, false);
 
-                event.getTextChannel().sendMessage(msgInfoBuilder.build()).queue();
+                event.getTextChannel().sendMessageEmbeds(msgInfoBuilder.build()).queue();
                 break;
 
             default:
-                event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+                event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
         }
     }
 

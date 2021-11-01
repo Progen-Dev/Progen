@@ -49,7 +49,7 @@ public class CommandHelp extends CommandHandler {
                 msg.addField(group + "\n", s.toString(), true);
             }
 
-            event.getTextChannel().sendMessage(msg.build()).queue();
+            event.getTextChannel().sendMessageEmbeds(msg.build()).queue();
 
         } else {
             CommandHandler handler = Main.getCommandManager().getCommandHandler(parsedCommand.getArgs()[0]);
@@ -65,7 +65,7 @@ public class CommandHelp extends CommandHandler {
                         .setDescription(handler.getDescription())
                         .addField("Commands: ", '`' + handler.getCommandUsage() + '`', true);
             }
-            event.getChannel().sendMessage(builder.build()).queue();
+            event.getChannel().sendMessageEmbeds(builder.build()).queue();
         }
     }
 

@@ -24,7 +24,7 @@ public class CommandMute extends CommandHandler
     {
         if (parsedCommand.getArgs().length < 1)
         {
-            event.getChannel().sendMessage(messageGenerators.generateErrorMsg("Please provide a mention or a user id to toggle the mute state of the specific user")).queue();
+            event.getChannel().sendMessageEmbeds(messageGenerators.generateErrorMsg("Please provide a mention or a user id to toggle the mute state of the specific user")).queue();
             return;
         }
 
@@ -41,7 +41,7 @@ public class CommandMute extends CommandHandler
 
         if (victim[0] == null)
         {
-            event.getChannel().sendMessage(messageGenerators.generateErrorMsg("Please enter a valid mention or user ID!")).queue();
+            event.getChannel().sendMessageEmbeds(messageGenerators.generateErrorMsg("Please enter a valid mention or user ID!")).queue();
             return;
         }
 
@@ -56,13 +56,13 @@ public class CommandMute extends CommandHandler
             new MuteData(victimId, reason, event.getAuthor().getId(), event.getGuild().getId())
                     .save();
 
-            event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.orange).setDescription(String.format("%s muted %s.%n%nReason: `%s`", event.getAuthor().getAsMention(), victim[0].getAsMention(), reason)).build()).queue();
+            event.getChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.orange).setDescription(String.format("%s muted %s.%n%nReason: `%s`", event.getAuthor().getAsMention(), victim[0].getAsMention(), reason)).build()).queue();
         }
         else
         {
             data.delete();
 
-            event.getChannel().sendMessage(messageGenerators.generateRightMsg(String.format("%s unmuted %s.", event.getAuthor().getAsMention(), victim[0].getAsMention()))).queue();
+            event.getChannel().sendMessageEmbeds(messageGenerators.generateRightMsg(String.format("%s unmuted %s.", event.getAuthor().getAsMention(), victim[0].getAsMention()))).queue();
         }
     }
 

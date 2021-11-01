@@ -37,12 +37,12 @@ public class CommandWarnList extends CommandHandler {
                     sb.append(count).append('.').append(' ').append(reason).append('\n');
                     count++;
                 }
-                event.getTextChannel().sendMessage(eb.setDescription(sb.toString()).build()).queue();
+                event.getTextChannel().sendMessageEmbeds(eb.setDescription(sb.toString()).build()).queue();
             } else {
-                event.getChannel().sendMessage(super.messageGenerators.generateErrorMsg("No Warns")).queue();
+                event.getChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsg("No Warns")).queue();
             }
         } else {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("No user found")).queue();
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsg("No user found")).queue();
             return;
         }
     }

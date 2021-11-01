@@ -53,7 +53,7 @@ public class ReadyListener extends ListenerAdapter {
 
         }, 0, 30*60*1000);
 
-        System.out.println(out.toString());
+        System.out.println(out);
 
         // CommandPoll
         CommandVote.loadPolls(event.getJDA());

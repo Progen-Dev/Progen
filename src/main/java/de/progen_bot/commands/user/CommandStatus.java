@@ -44,7 +44,7 @@ public class CommandStatus extends CommandHandler {
     @Override
     public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         JDA jda = Main.getJda();
-        event.getTextChannel().sendMessage(
+        event.getTextChannel().sendMessageEmbeds(
             new EmbedBuilder()
             .setTitle("Status")
             .setColor(Color.GREEN)

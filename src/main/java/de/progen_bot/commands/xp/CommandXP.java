@@ -64,7 +64,7 @@ public class CommandXP extends CommandHandler {
         } else {
             eb.setTitle("Level: 0 (0/0)XP").setDescription("You have not sent a message yet");
         }
-        event.getTextChannel().sendMessage(eb.build()).queue();
+        event.getTextChannel().sendMessageEmbeds(eb.build()).queue();
 
     }
 

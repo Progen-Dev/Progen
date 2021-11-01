@@ -40,10 +40,10 @@ public class CommandMuteList extends CommandHandler {
                             .append(member.getAsMention() + " " + muteMap.get(member.getIdLong())).append('\n');
                     count[0]++;
                 });
-                event.getTextChannel().sendMessage(eb.setDescription(sb.toString()).build()).queue();
+                event.getTextChannel().sendMessageEmbeds(eb.setDescription(sb.toString()).build()).queue();
             });
         } else {
-            event.getChannel().sendMessage(super.messageGenerators.generateErrorMsg("No mutes found.")).queue();
+            event.getChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsg("No mutes found.")).queue();
         }
     }
 

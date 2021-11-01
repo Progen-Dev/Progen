@@ -32,7 +32,6 @@ public class CommandGuildInfo extends CommandHandler {
         int Invite = g.retrieveInvites().complete().size();
         String name = g.getName();
         String id = g.getId();
-        String region = g.getRegion().getName();
         String avatar = g.getIconUrl();
         int textChans = g.getTextChannels().size();
         int voiceChans = g.getVoiceChannels().size();
@@ -61,7 +60,6 @@ public class CommandGuildInfo extends CommandHandler {
         EmbedBuilder eb = new EmbedBuilder().setColor(Color.cyan).addField("Name:", name, false)
                 .addField("ID:", "``" + id + "``", false)
                 .addField("Owner:", owner.getUser().getName() + "#" + owner.getUser().getDiscriminator(), false)
-                .addField("Server Region:", region, false)
                 .addField("Channels:", "**TextChannels:**  " + textChans + "\n**VoiceChannels:**  " + voiceChans, false)
                 .addField("Members (" + all + "):", usersText, false)
                 .addField("Roles (" + rolesCount + "): ", roles, false)
@@ -74,7 +72,7 @@ public class CommandGuildInfo extends CommandHandler {
         if (avatar != null)
             eb.setThumbnail(avatar);
 
-        event.getTextChannel().sendMessage(eb.build()).queue();
+        event.getTextChannel().sendMessageEmbeds(eb.build()).queue();
     }
 
     @Override

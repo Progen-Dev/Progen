@@ -26,7 +26,7 @@ public class GameConnectFour extends CommandHandler {
 
         if (args.length < 1) {
 
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
 
@@ -36,11 +36,11 @@ public class GameConnectFour extends CommandHandler {
         String opponent = args[1];
 
         if (event.getGuild().getMembersByName(opponent, true).isEmpty()) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsgWrongInput()).queue();
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsgWrongInput()).queue();
             return;
         }
         if (event.getGuild().getMembersByName(opponent, true).get(0).getOnlineStatus() != OnlineStatus.ONLINE) {
-            event.getTextChannel().sendMessage(super.messageGenerators.generateErrorMsg("User not Online")).queue();
+            event.getTextChannel().sendMessageEmbeds(super.messageGenerators.generateErrorMsg("User not Online")).queue();
             return;
         }
 
@@ -66,11 +66,11 @@ public class GameConnectFour extends CommandHandler {
                                 }));
             } else {
                 event.getTextChannel()
-                        .sendMessage(super.messageGenerators.generateErrorMsg("You can't challenge yourself!")).queue();
+                        .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("You can't challenge yourself!")).queue();
             }
         } else {
             event.getTextChannel()
-                    .sendMessage(super.messageGenerators.generateErrorMsg("The width has to be between 7 and 8."))
+                    .sendMessageEmbeds(super.messageGenerators.generateErrorMsg("The width has to be between 7 and 8."))
                     .queue();
         }
     }

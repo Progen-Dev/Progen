@@ -86,7 +86,7 @@ public class PollDaoImpl extends Dao implements PollDao {
 
                     final TextChannel channel = Main.getJda().getTextChannelById(data.getChannelId());
                     if (channel != null) {
-                        channel.sendMessage(
+                        channel.sendMessageEmbeds(
                                 new EmbedBuilder().setColor(Color.blue).setDescription("Poll closed!").build()).queue();
                     }
                     data.saveToDb(data);

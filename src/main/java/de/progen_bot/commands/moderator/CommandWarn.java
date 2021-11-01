@@ -49,13 +49,13 @@ public class CommandWarn extends CommandHandler {
         if (event.getMessage().getMentionedUsers().size() == 1) {
             warned = event.getMessage().getMentionedMembers().get(0);
         } else {
-            event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.red).setDescription("No user found").build())
+            event.getChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.red).setDescription("No user found").build())
                     .queue();
             return;
         }
 
         if (parsedCommand.getArgs().length <= 1) {
-            event.getChannel().sendMessage(new EmbedBuilder().setColor(Color.red).setDescription("No reason found").build())
+            event.getChannel().sendMessageEmbeds(new EmbedBuilder().setColor(Color.red).setDescription("No reason found").build())
                     .queue();
             return;
         }
@@ -66,9 +66,9 @@ public class CommandWarn extends CommandHandler {
             if(eb == null)
             return;
 
-            event.getTextChannel().sendMessage(eb).queue();
+            event.getTextChannel().sendMessageEmbeds(eb).queue();
 
-            getWarnChannel.sendMessage(eb).queue();
+            getWarnChannel.sendMessageEmbeds(eb).queue();
 
         WarnListDaoImpl dao = new WarnListDaoImpl();
         dao.insertWarn(warned, reason);

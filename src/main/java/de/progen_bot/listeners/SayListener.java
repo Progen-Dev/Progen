@@ -54,7 +54,7 @@ public class SayListener extends ListenerAdapter {
                         mSayModel.setStage(7);
                         sayStorage.replace(userId, mSayModel);
                         event.getChannel().sendMessage("Preview: if you want to send this embed, send <y/n>")
-                                .embed(mSayModel.getEmbedBuilder().build()).queue();
+                                .setEmbeds(mSayModel.getEmbedBuilder().build()).queue();
                     }
                     break;
                 case 3: // Set TitleUrl
@@ -63,12 +63,12 @@ public class SayListener extends ListenerAdapter {
                     mSayModel.setStage(7);
                     sayStorage.replace(userId, mSayModel);
                     event.getChannel().sendMessage("Preview: if you want to send this embed, send <y/n>")
-                            .embed(mSayModel.getEmbedBuilder().build()).queue();
+                            .setEmbeds(mSayModel.getEmbedBuilder().build()).queue();
                     break;
                 case 7:
                     if (event.getMessage().getContentRaw().equals("y")) {
                         event.getJDA().getTextChannelById(mSayModel.getTextchannelId())
-                                .sendMessage(mSayModel.getEmbedBuilder().build()).queue();
+                                .sendMessageEmbeds(mSayModel.getEmbedBuilder().build()).queue();
                     } else {
                         sayStorage.remove(userId);
                     }

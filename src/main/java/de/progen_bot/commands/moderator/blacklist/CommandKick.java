@@ -53,15 +53,13 @@ public class CommandKick extends CommandHandler {
         if (eb == null)
             return;
 
-        event.getTextChannel().sendMessage(eb).queue();
-        Main.getJda().getTextChannelById(configuration.getLogChannelID()).sendMessage(eb).queue();
+        event.getTextChannel().sendMessageEmbeds(eb).queue();
+        Main.getJda().getTextChannelById(configuration.getLogChannelID()).sendMessageEmbeds(eb).queue();
 
         final Member target = event.getMessage().getMentionedMembers().get(0);
         try {
-            event.getGuild().kick(target).queue(v -> {
-                event.getMessage().getMentionedUsers().get(0).openPrivateChannel()
-                        .queue(privateChannel -> privateChannel.sendMessage(eb).queue());
-            });
+            event.getGuild().kick(target).queue(v -> event.getMessage().getMentionedUsers().get(0).openPrivateChannel()
+                    .queue(privateChannel -> privateChannel.sendMessageEmbeds(eb).queue()));
         } catch (InsufficientPermissionException e) {
             event.getChannel().sendMessage("Failed to kick user " + target.getUser().getAsTag()).queue();
         }
