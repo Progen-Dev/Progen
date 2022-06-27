@@ -6,22 +6,27 @@ import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.AccessLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class CommandUserInfo extends CommandHandler {
 
     public CommandUserInfo() {
-        super("userinfo" , "userinfo <user>" , "get userinfos");
+        super("userinfo", "userinfo <user>", "get userinfos");
     }
 
     @Override
-    public void execute(ParsedCommandString parsedCommand , MessageReceivedEvent event , GuildConfiguration configuration) {
+    public void execute(ParsedCommandString parsedCommand, MessageReceivedEvent event, GuildConfiguration configuration) {
         Member memb;
-
         if (event.getMessage().getMentionedMembers().size() == 1) {
             memb = event.getMessage().getMentionedMembers().get(0);
         } else {
@@ -31,6 +36,12 @@ public class CommandUserInfo extends CommandHandler {
         if (memb == null)
             return;
 
+        event.getTextChannel().sendMessageEmbeds(getEmbed(memb)).queue();
+
+    }
+
+    @Nullable
+    private MessageEmbed getEmbed(Member memb) {
         final String name = memb.getEffectiveName();
         final String tag = memb.getUser().getAsTag();
         final String guildJoinDate = memb.getTimeJoined().format(DateTimeFormatter.RFC_1123_DATE_TIME);
@@ -51,7 +62,7 @@ public class CommandUserInfo extends CommandHandler {
             roles.append(r.getAsMention()).append(", ");
         }
         if (roles.length() > 0)
-            roles = new StringBuilder(roles.substring(0 , roles.length() - 2));
+            roles = new StringBuilder(roles.substring(0, roles.length() - 2));
         else
             roles = new StringBuilder("No role on this server");
 
@@ -61,18 +72,32 @@ public class CommandUserInfo extends CommandHandler {
         } else
             em.setDescription("**User Information for " + memb.getUser().getName() + ":**");
 
-        em.addField("Name / Nickname" , name , false)
-                .addField("User Tag" , tag , false)
-                .addField("id" , id , false)
-                .addField("Current Status" , status , false)
-                .addField("Current Game" , game , false)
-                .addField("Roles" , roles.toString() , false)
-                .addField("Server joined" , guildJoinDate , false)
-                .addField("Discord joined" , discordJoinedDate , false)
+        em.addField("Name / Nickname", name, false)
+                .addField("User Tag", tag, false)
+                .addField("id", id, false)
+                .addField("Current Status", status, false)
+                .addField("Current Game", game, false)
+                .addField("Roles", roles.toString(), false)
+                .addField("Server joined", guildJoinDate, false)
+                .addField("Discord joined", discordJoinedDate, false)
                 .setThumbnail(avatarUrl);
+        return em.build();
+    }
 
-        event.getTextChannel().sendMessageEmbeds(em.build()).queue();
+    @Override
+    public void execute(SlashCommandEvent event, GuildConfiguration guildConfig) {
 
+        List<OptionMapping> members = event.getOptionsByType(OptionType.USER);
+
+        Member member = null;
+        if (!members.isEmpty()) {
+            member = members.get(0).getAsMember();
+        }
+
+        if (member == null)
+            member = event.getMember();
+
+        event.getHook().sendMessageEmbeds(getEmbed(member)).queue();
     }
 
     @Override

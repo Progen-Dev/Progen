@@ -1,23 +1,30 @@
 package de.progen_bot.core;
 
 import com.mysql.cj.jdbc.Driver;
-
-import de.progen_bot.commands.administrator.ChangePrefix;
-import de.progen_bot.commands.settings.CommandLog;
-import de.pwi.api.httpapi.API;
 import de.progen_bot.command.CommandManager;
+import de.progen_bot.commands.CommandHelp;
+import de.progen_bot.commands.administrator.ChangePrefix;
+import de.progen_bot.commands.fun.GameConnectFour;
 import de.progen_bot.commands.moderator.*;
-import de.progen_bot.commands.moderator.blacklist.*;
-import de.progen_bot.commands.music.*;
-import de.progen_bot.commands.owner.*;
-import de.progen_bot.commands.settings.*;
+import de.progen_bot.commands.moderator.blacklist.CommandBan;
+import de.progen_bot.commands.moderator.blacklist.CommandKick;
+import de.progen_bot.commands.music.CommandMusic;
+import de.progen_bot.commands.music.CommandPlaylist;
+import de.progen_bot.commands.owner.CommandStop;
+import de.progen_bot.commands.owner.CommandTest;
+import de.progen_bot.commands.owner.CommandUpdate;
+import de.progen_bot.commands.settings.CommandAutorole;
+import de.progen_bot.commands.settings.CommandLog;
+import de.progen_bot.commands.settings.CommandNotify;
+import de.progen_bot.commands.settings.CommandVote;
 import de.progen_bot.commands.user.*;
-import de.progen_bot.commands.xp.*;
-import de.progen_bot.commands.fun.*;
-import de.progen_bot.commands.*;
+import de.progen_bot.commands.xp.CommandXP;
+import de.progen_bot.commands.xp.CommandXPNotify;
+import de.progen_bot.commands.xp.CommandXPrank;
 import de.progen_bot.db.DaoHandler;
 import de.progen_bot.music.MusicManager;
 import de.progen_bot.util.Settings;
+import de.pwi.api.httpapi.API;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -81,7 +88,7 @@ public class Main {
             public void run() {
                 topGGIntegration.postServerCount();
             }
-        }, 0, 30*60*1000); //every 30 minutes
+        }, 0, 30 * 60 * 1000); //every 30 minutes
 
         // DAO Handler
         daoHandler = new DaoHandler();
@@ -138,27 +145,27 @@ public class Main {
      * Initial the JDA.
      */
     private static void initJDA() {
-        final JDABuilder 
-        builder = JDABuilder.createDefault(
-            Settings.TOKEN,
-            GatewayIntent.GUILD_BANS,            
-            GatewayIntent.GUILD_MESSAGES,
-            GatewayIntent.GUILD_MEMBERS,
-            GatewayIntent.GUILD_VOICE_STATES,
-            GatewayIntent.GUILD_PRESENCES,
-            GatewayIntent.GUILD_MESSAGE_REACTIONS,
-            GatewayIntent.DIRECT_MESSAGE_REACTIONS,
-            GatewayIntent.DIRECT_MESSAGES
-        )
-            .enableCache(
-                    CacheFlag.ACTIVITY
-                    )
-                    .setMemberCachePolicy(MemberCachePolicy.ALL);
-                 
+        final JDABuilder
+                builder = JDABuilder.createDefault(
+                        Settings.TOKEN,
+                        GatewayIntent.GUILD_BANS,
+                        GatewayIntent.GUILD_MESSAGES,
+                        GatewayIntent.GUILD_MEMBERS,
+                        GatewayIntent.GUILD_VOICE_STATES,
+                        GatewayIntent.GUILD_PRESENCES,
+                        GatewayIntent.GUILD_MESSAGE_REACTIONS,
+                        GatewayIntent.DIRECT_MESSAGE_REACTIONS,
+                        GatewayIntent.DIRECT_MESSAGES
+                )
+                .enableCache(
+                        CacheFlag.ACTIVITY
+                )
+                .setMemberCachePolicy(MemberCachePolicy.ALL);
 
         BuildManager.addEventListeners(builder);
         try {
             jda = builder.build().awaitReady();
+            jda.upsertCommand("userinfo", "userinfo").queue();
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }

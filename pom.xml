@@ -25,11 +25,11 @@
             <name>jcenter-bintray</name>
             <url>https://jcenter.bintray.com</url>
         </repository>
-            <repository>
-                <id>dv8tion</id>
-                <name>m2-dv8tion</name>
-                <url>https://m2.dv8tion.net/releases</url>
-            </repository>
+        <repository>
+            <id>dv8tion</id>
+            <name>m2-dv8tion</name>
+            <url>https://m2.dv8tion.net/releases</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -41,9 +41,9 @@
         </dependency>
 
         <dependency>
-            <groupId>net.dv8tion</groupId>
+            <groupId>com.github.DV8FromtheWorld</groupId>
             <artifactId>JDA</artifactId>
-            <version>4.3.0_289</version>
+            <version>v4.4.0</version>
         </dependency>
 
         <dependency>
@@ -71,7 +71,7 @@
             <artifactId>nightdream-logging</artifactId>
             <version>1.1.10</version>
         </dependency>
-   
+
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>

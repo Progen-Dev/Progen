@@ -1,21 +1,18 @@
 package de.progen_bot.command;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-
-import de.pwi.misc.Logger;
 import de.progen_bot.db.dao.config.ConfigDaoImpl;
 import de.progen_bot.db.entities.config.GuildConfiguration;
 import de.progen_bot.permissions.PermissionCore;
 import de.progen_bot.util.MessageGenerator;
 import de.progen_bot.util.Settings;
 import de.progen_bot.util.Statics;
+import de.pwi.misc.Logger;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * The Class CommandManager.
@@ -63,6 +60,30 @@ public class CommandManager extends ListenerAdapter {
         }
         commandHandler.execute(parsedMessage, event, guildConfiguration);
         event.getMessage().delete().queue();
+    }
+
+    @Override
+    public void onSlashCommand(SlashCommandEvent event) {
+        event.deferReply().queue();
+        if (event.getUser().isBot() || !event.getChannelType().isGuild()) {
+            return;
+        }
+
+        GuildConfiguration guildConfiguration = new ConfigDaoImpl().loadConfig(event.getGuild());
+        CommandHandler commandHandler = commandAssociations.get(event.getName());//event.getName());
+
+        if (commandHandler == null) {
+            event.getTextChannel().sendMessageEmbeds(new MessageGenerator("", "").generateErrorMsg("This is not a command. Use the help command for help.")).queue();
+            return;
+        }
+
+        Logger.info("SlashCommand " + commandHandler.getInvokeString() + " was invoked by " + event.getGuild().getName());
+
+        //  if (commandHandler.getAccessLevel().getLevel() > new PermissionCore(event).getAccessLevel().getLevel()) {
+        //     event.getTextChannel().sendMessageEmbeds(new MessageGenerator("", "").generateErrorMsg("Your are not allowed to use this command!")).queue();
+        //    return;
+        //}
+        commandHandler.execute(event, guildConfiguration);
     }
 
     /**
